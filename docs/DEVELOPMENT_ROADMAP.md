@@ -98,3 +98,8 @@ the whole observed ordinary positive-note attributes and assessed Pattern intege
 endpoints. Native writing may preserve reviewed ordinary attributes; Slide, crop
 replacement/resizing, unknown events, incomplete inventory and host/listening acceptance
 stay blocked. No private template/reference or backend is distributed.
+
+The [offline crop/flag regression slice](FL26_CLIP_OFFLINE.md) adds authored synthetic
+boundary tests and a private change-budget audit while host control is paused. Six
+experimental candidate files have no host-open/resave/reopen results; these stages
+remain pending. Runtime eligibility, crop writes and nonzero clip flags are unchanged.

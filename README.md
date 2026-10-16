@@ -119,6 +119,10 @@ ordinary positive-note attributes from Slide and read assessed Pattern crop endp
 as integer ticks. Reviewed ordinary attributes can be preserved by the restricted native
 writer; cropped/default-sentinel writes, unknown fields and host acceptance stay blocked.
 Private references remain local.
+
+[Offline crop/clip-flag regressions](docs/FL26_CLIP_OFFLINE.md) now cover raw-bit
+preservation, PPQ spans, output corruption and refusal before staging. Experimental
+candidate host reopening remains pending; these tests do not relax write eligibility.
 See [prerequisites, failure codes and tests](docs/TEMPLATE_INSPECTION.md).
 
 For a current-file, process-free dependency/compatibility evidence report:

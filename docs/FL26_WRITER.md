@@ -81,6 +81,10 @@ other combinations remain blocked. This is a joint predicate, not permission to 
 nonzero flags. Pattern sentinel/integer crop observations are read-only and relax no
 crop-write or clip-attribute gate.
 
+The [subsequent offline regression slice](FL26_CLIP_OFFLINE.md) tests these unchanged
+crop/flag restrictions and audits the private experimental candidates without host
+control or backend execution. Candidate host reopening/resizing remains pending.
+
 `Fl26WriteIntent` embeds independent copies of arrangement, inspection, bindings,
 policy and local binding evidence, canonical fingerprints, precise proposed notes and
 an event-edit budget. Status is ready only when every diagnostic gate passes. The

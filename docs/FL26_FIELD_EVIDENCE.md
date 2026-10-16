@@ -134,3 +134,12 @@ has `writer_note_attributes`, while `writer_crop`, incomplete inventory, clip at
 and other independent blockers remain. The original still has nonpositive note ranges.
 Original and baseline SHA/size/mtime and both backend fingerprints remain unchanged;
 no private input was encoded or staged.
+
+## Subsequent offline regression slice
+
+[Offline crop/flag coverage](FL26_CLIP_OFFLINE.md) adds regression tests and a private
+byte-budget/provenance audit of six separately created experimental candidates. Host
+control was interrupted before candidate results existed and is now paused at the
+user's request. Candidate opening/save/reopen/resize behavior remains pending; the
+earlier GUI observations are not promoted into acceptance of these byte-written files.
+Runtime code and all unverified crop/clip write gates remain unchanged.
