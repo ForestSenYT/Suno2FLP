@@ -1,7 +1,13 @@
 # Suno2FLP
 
-An AI-assisted pipeline foundation from official Suno MIDI and reference
-audio stems to editable FL Studio projects. Python 3.11+, Windows first.
+Target: a Windows GUI that converts a Suno audio file into a new editable FL Studio
+project with notes, stems, playback and measured quality. The
+[delivery target and roadmap](docs/DELIVERY_ROADMAP.zh-CN.md) define acceptance and the
+[branch/PR workflow](docs/GITHUB_WORKFLOW.zh-CN.md). This target is not complete.
+
+Current implementation is an AI-assisted pipeline foundation from official Suno MIDI
+and reference audio stems. Python 3.11+, Windows first. Audio-only inference, the GUI
+and the installable end-user product are not yet implemented.
 
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,

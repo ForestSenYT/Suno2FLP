@@ -1,5 +1,14 @@
 # Architecture
 
+## Delivery target
+
+The [audio-to-FLP product design](superpowers/specs/2026-10-16-deliverable-audio-to-flp-design.zh-CN.md)
+adds an audio-only inferred path and a shared persistent job service for GUI/CLI.
+It is a target, not implemented capability. Inferred notes/timing must remain distinct
+from the source-faithful MIDI path below; existing writer and source-preservation gates
+cannot be relaxed by changing the input label. Models and incompatible runtimes stay
+isolated. See the [delivery roadmap](DELIVERY_ROADMAP.zh-CN.md) for incremental acceptance.
+
 ## Current design — foundations, MIDI import/cleanup and faithful arrangements
 
 Official Suno MIDI is the primary musical source; stems provide future references
