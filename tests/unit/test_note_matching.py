@@ -158,3 +158,49 @@ def test_matching_timeout_and_mid_computation_cancellation_are_explicit(monkeypa
     checks = iter([False, False, True])
     with pytest.raises(OfflineError, match="cancel"):
         score_notes([note("c")], [note("r")], should_cancel=lambda: next(checks))
+
+
+@pytest.mark.parametrize("change", ["negative_duration", "oversized_rational"])
+def test_mutated_nested_times_are_revalidated_at_the_public_boundary(change):
+    candidate, reference = note("c", 100_000, 200_000), note("r", 100_000, 200_000)
+    for value in [candidate, reference]:
+        if change == "negative_duration":
+            value.offset_microseconds.numerator = 50_000
+        else:
+            value.onset_microseconds.numerator = 2**140
+            value.offset_microseconds.numerator = 2**140 + 1
+    with pytest.raises(ValueError):
+        score_notes([candidate], [reference])
+
+
+def test_cancellation_callback_cannot_mutate_the_scoring_snapshot():
+    candidate, reference = note("c"), note("r")
+    calls = 0
+
+    def callback():
+        nonlocal calls
+        calls += 1
+        # Valid models when called; later caller mutation must not alter the snapshot.
+        if calls == 2:
+            candidate.offset_microseconds.numerator = 0
+            reference.offset_microseconds.numerator = 0
+        return False
+
+    result = score_notes([candidate], [reference], should_cancel=callback)
+    assert result.true_positives == 1
+    assert result.matches[0].offset_error_microseconds.numerator == 0
+    assert result.f1.numerator == 1
+
+
+def test_callback_mutating_only_one_original_note_cannot_change_matching():
+    candidate, reference = note("c"), note("r")
+    calls = 0
+
+    def callback():
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            candidate.onset_microseconds.numerator = 500_000
+        return False
+
+    assert score_notes([candidate], [reference], should_cancel=callback).true_positives == 1

@@ -40,7 +40,7 @@
 
 ### Task 2: Source-bound file reports and replay
 
-**Files:** Extend core contracts; create `importer/note_annotations.py`, `validator/note_scoring.py`, `pipeline/note_scoring.py`, `tests/unit/test_note_scoring_files.py`.
+**Files:** Extend core contracts; create `importer/note_annotations.py`, `validator/note_scoring.py`, `validator/note_decode_evidence.py`, `pipeline/note_scoring.py`, `tests/unit/test_note_scoring_files.py`.
 
 **Interfaces:** `NoteAnnotation` contains role/origin, method, producer provenance FileIdentities, decode-report/source identities, rate/channels/frames and original notes. `collect_note_score(candidate_path, reference_path, *, should_cancel=None) -> NoteScoreReport` verifies all current inputs and existing decode proof. `score_note_files(candidate_path, reference_path, output, *, should_cancel=None) -> NoteScoreReport` exclusively publishes. `verify_note_score(report_path, *, should_cancel=None) -> NoteScoreReport` recomputes and compares, without writes.
 
@@ -64,3 +64,5 @@
 ## Self-review and remaining scope
 
 This is the first scoring slice, not all M2. Drum/category matching, beat metrics, separation SI-SDR, corpus licensing/splits, model audit/inference/calibration and actual song/host/listening/installer qualification remain independent work. The evaluator measures annotations conditional on their declaration; it does not certify annotation correctness or mislabel source MIDI as human audio truth. No policy threshold is changed.
+
+Final review regression scope: retain decoder runtime/attempt/adapter/payload identities until publication completes; revalidate and own pure-scorer note snapshots before caller callbacks. Both findings require failing reproductions before fixes and fresh final-head disposition.

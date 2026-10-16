@@ -5,7 +5,8 @@ from pathlib import Path
 
 from suno2flp.core.errors import OfflineError
 from suno2flp.core.note_scoring import REPORT_BYTES, NoteScoreReport
-from suno2flp.core.offline_files import new_report, verify_inputs
+from suno2flp.core.offline_files import new_report
+from suno2flp.validator.note_decode_evidence import verify_note_witnesses
 from suno2flp.validator.note_scoring import collect_note_score
 
 
@@ -22,7 +23,7 @@ def score_note_files(
         raise OfflineError("note_score_output_limit", "Complete score exceeds report budget")
     if should_cancel and should_cancel():
         raise OfflineError("note_score_cancelled", "Note scoring cancelled before publication")
-    verify_inputs(report.witnesses())
+    verify_note_witnesses(report)
     new_report(output, content, report.protected_paths())
-    verify_inputs(report.witnesses())
+    verify_note_witnesses(report)
     return report

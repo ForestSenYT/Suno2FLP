@@ -218,12 +218,15 @@ def test_linked_annotation_path_is_rejected(annotations):
     assert not output.exists()
 
 
-def test_compressed_dispatch_uses_independent_verifier_and_actual_clock(annotations, monkeypatch):
+@pytest.fixture
+def compressed_evidence(annotations, monkeypatch):
     # Only adapter dispatch is mocked here; actual codec replay is covered by its
     # existing opt-in integration tests. Never treat this as native qualification.
     from types import SimpleNamespace
 
     import suno2flp.validator.note_scoring as service
+    from suno2flp.core.codec_backend import CodecBackendRecord
+    from suno2flp.core.encoded_decode import EncodedDecodeReport, EncodedDecodeRequest
 
     candidate, reference, output, audio, *_ = annotations
     decode = candidate.parent / "compressed-decode.json"
@@ -237,19 +240,89 @@ def test_compressed_dispatch_uses_independent_verifier_and_actual_clock(annotati
         )
     calls = []
     pcm = capture_stream_input(candidate.parent / "decode/decoded.wav")
+    backend_root = candidate.parent / "synthetic-backend"
+    (backend_root / "packages").mkdir(parents=True)
+    names = ["backend.json", "adapter.py", "wheel.whl", "runtime.dll", "packages/native.dll"]
+    identities = []
+    for name in names:
+        file = backend_root / name
+        file.write_text("original synthetic decoder identity only")
+        identities.append(capture_stream_input(file))
+    manifest, adapter, wheel_file, runtime, native = identities
+    request = EncodedDecodeRequest(
+        source=capture_stream_input(audio),
+        output_directory=candidate.parent / "decode",
+        decoder_directory=backend_root,
+        app_python=runtime,
+        python_version="synthetic",
+        adapters=[adapter],
+    )
+    attempt = candidate.parent / "attempt.json"
+    attempt.write_text(request.model_dump_json(), encoding="utf-8")
+    # model_construct builds only the typed verifier boundary needed here; the
+    # native verifier itself is mocked, so this is NOT a qualified codec fixture.
+    backend = CodecBackendRecord.model_construct(
+        root=backend_root,
+        python=runtime,
+        python_runtime=[runtime],
+        wheels=[wheel_file],
+        adapter_files=[adapter],
+        payload={"native.dll": native.sha256},
+    )
+    verified_report = EncodedDecodeReport.model_construct(
+        inventory=SimpleNamespace(
+            source=capture_stream_input(audio), frames=16000, channels=1, sample_rate=8000
+        ),
+        pcm=pcm,
+        request=capture_stream_input(attempt),
+        backend_manifest=manifest,
+        backend=backend,
+    )
 
     def verified(path, *, should_cancel=None):
         calls.append(path)
-        return SimpleNamespace(
-            inventory=SimpleNamespace(
-                source=capture_stream_input(audio), frames=16000, channels=1, sample_rate=8000
-            ),
-            pcm=pcm,
-        )
+        return verified_report
 
     monkeypatch.setattr(service, "verify_encoded_decode", verified)
+    return {
+        "calls": calls,
+        "decode": decode,
+        "attempt": attempt,
+        "adapter": adapter.path,
+        "wheel": wheel_file.path,
+        "runtime": runtime.path,
+        "native": native.path,
+        "extra": backend_root / "packages/extra.pth",
+    }
+
+
+def test_compressed_dispatch_uses_independent_verifier_and_actual_clock(
+    annotations, compressed_evidence
+):
+    candidate, reference, output, *_ = annotations
     result = score_note_files(candidate, reference, output)
-    assert result.result.true_positives == 1 and calls == [decode]
+    assert result.result.true_positives == 1
+    assert compressed_evidence["calls"] == [compressed_evidence["decode"]]
+    for field in ["attempt", "adapter", "wheel", "runtime", "native"]:
+        assert compressed_evidence[field] in result.protected_paths()
+
+
+@pytest.mark.parametrize("field", ["attempt", "adapter", "wheel", "runtime", "native", "extra"])
+def test_compressed_dependency_changes_after_verification_fail_before_success(
+    annotations, compressed_evidence, monkeypatch, field
+):
+    import suno2flp.pipeline.note_scoring as publisher
+
+    candidate, reference, output, *_ = annotations
+    original = publisher.new_report
+
+    def changed(*args, **kwargs):
+        original(*args, **kwargs)
+        compressed_evidence[field].write_text("changed after publication")
+
+    monkeypatch.setattr(publisher, "new_report", changed)
+    with pytest.raises(OfflineError, match="changed"):
+        score_note_files(candidate, reference, output)
 
 
 def test_file_changes_during_bounded_read_are_detected(annotations, monkeypatch):
@@ -277,3 +350,50 @@ def test_file_changes_during_bounded_read_are_detected(annotations, monkeypatch)
     monkeypatch.setattr(Path, "open", lambda path, *args, **kwargs: ChangingReader())
     with pytest.raises(OfflineError, match="changed"):
         bounded_snapshot(candidate, 4 * 1024**2)
+
+
+@pytest.mark.parametrize("when", ["matching", "publication"])
+def test_verified_decoder_witnesses_remain_bound_through_publication(
+    annotations, monkeypatch, when
+):
+    import suno2flp.pipeline.note_scoring as publisher
+    import suno2flp.validator.note_scoring as service
+    import suno2flp.validator.pcm_decode as verifier
+
+    candidate, reference, output, *_ = annotations
+    decode = candidate.parent / "decode/decode.json"
+    witness = candidate.parent / "authored-decoder-witness.txt"
+    witness.write_text("original synthetic runtime witness")
+    runtime = verifier.verify_pcm_decode(decode).runtime.model_copy(
+        update={"decoder": capture_stream_input(witness)}
+    )
+    edit(decode, lambda data: data.update(runtime=runtime.model_dump(mode="json")))
+    for annotation in [candidate, reference]:
+        edit(
+            annotation,
+            lambda data: data.update(
+                decode_report=capture_stream_input(decode).model_dump(mode="json")
+            ),
+        )
+    # Preserve actual source/PCM inverse verification; only its synthetic runtime
+    # identity witness is substituted, avoiding any production-code mutation.
+    monkeypatch.setattr(verifier, "pcm_runtime", lambda: runtime)
+    if when == "matching":
+        original = service.score_notes
+
+        def changed(*args, **kwargs):
+            witness.write_text("changed during matching")
+            return original(*args, **kwargs)
+
+        monkeypatch.setattr(service, "score_notes", changed)
+    else:
+        original = publisher.new_report
+
+        def changed(*args, **kwargs):
+            original(*args, **kwargs)
+            witness.write_text("changed after publication")
+
+        monkeypatch.setattr(publisher, "new_report", changed)
+    with pytest.raises(OfflineError, match="changed"):
+        score_note_files(candidate, reference, output)
+    assert output.exists() == (when == "publication")

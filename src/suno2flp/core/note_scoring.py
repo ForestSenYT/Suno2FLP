@@ -162,6 +162,8 @@ class NoteScoreReport(Contract):
     candidate: AnnotationSnapshot
     reference: AnnotationSnapshot | None
     pcm: FileIdentity
+    decode_dependencies: list[FileIdentity]
+    decoder_payload_root: Path | None
     recipe: ScoringRecipe
     result: NoteScore
     annotation_truth_verified: Literal[False] = False
@@ -173,7 +175,12 @@ class NoteScoreReport(Contract):
     execution_allowed: Literal[False] = False
 
     def witnesses(self) -> list[FileIdentity]:
-        result = [self.pcm, self.recipe.python_executable, *self.recipe.files]
+        result = [
+            self.pcm,
+            self.recipe.python_executable,
+            *self.recipe.files,
+            *self.decode_dependencies,
+        ]
         for snapshot in (self.candidate, self.reference):
             if snapshot is not None:
                 annotation = snapshot.annotation

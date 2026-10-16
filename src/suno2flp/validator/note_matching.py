@@ -34,10 +34,19 @@ def score_notes(
         if time.monotonic() > deadline:
             raise OfflineError("note_score_timeout", "Note matching exceeded its time budget")
 
-    check()
     for notes in (candidate, reference or []):
         if len(notes) > MAX_NOTES:
             raise OfflineError("note_score_limit", "Too many notes for the fixed profile")
+    # A model's nested fields may have changed since construction. Revalidate into
+    # owned snapshots before invoking caller callbacks or using any coordinates.
+    candidate = [ScoredNote.model_validate(note.model_dump()) for note in candidate]
+    reference = (
+        [ScoredNote.model_validate(note.model_dump()) for note in reference]
+        if reference is not None
+        else None
+    )
+    check()
+    for notes in (candidate, reference or []):
         if len({note.id for note in notes}) != len(notes):
             raise ValueError("Note IDs must be unique within each annotation")
     refs = sorted(reference or [], key=lambda note: note.id)

@@ -14,6 +14,7 @@ from suno2flp.core.note_scoring import REPORT_BYTES, NoteScoreReport, ScoringRec
 from suno2flp.core.offline_files import capture_stream_input, load_unique_json, verify_inputs
 from suno2flp.importer.note_annotations import bounded_snapshot, read_note_annotation
 from suno2flp.validator.encoded_decode import verify_encoded_decode
+from suno2flp.validator.note_decode_evidence import decode_dependencies, verify_note_witnesses
 from suno2flp.validator.note_matching import score_notes
 from suno2flp.validator.pcm_decode import verify_pcm_decode
 
@@ -29,6 +30,7 @@ def scoring_recipe() -> ScoringRecipe:
         "core/errors.py",
         "importer/note_annotations.py",
         "validator/note_matching.py",
+        "validator/note_decode_evidence.py",
         "validator/note_scoring.py",
         "pipeline/note_scoring.py",
     )
@@ -67,12 +69,14 @@ def collect_note_score(
         pcm_report = verify_pcm_decode(annotation.decode_report.path, should_cancel=should_cancel)
         source = pcm_report.preflight
         pcm = pcm_report.pcm
+        dependencies, payload_root = decode_dependencies(pcm_report)
     elif profile == "qualified-compressed-to-float64-v1":
         compressed = verify_encoded_decode(
             annotation.decode_report.path, should_cancel=should_cancel
         )
         source = compressed.inventory
         pcm = compressed.pcm
+        dependencies, payload_root = decode_dependencies(compressed)
     else:
         raise OfflineError("note_score_decode_invalid", "Unsupported independent decode evidence")
     for snapshot in (candidate, reference):
@@ -99,10 +103,16 @@ def collect_note_score(
         should_cancel=should_cancel,
     )
     report = NoteScoreReport(
-        candidate=candidate, reference=reference, pcm=pcm, recipe=recipe, result=result
+        candidate=candidate,
+        reference=reference,
+        pcm=pcm,
+        recipe=recipe,
+        result=result,
+        decode_dependencies=dependencies,
+        decoder_payload_root=payload_root,
     )
     check()
-    verify_inputs(report.witnesses())
+    verify_note_witnesses(report)
     if recipe != scoring_recipe():
         raise OfflineError("note_score_recipe_changed", "Scoring runtime/recipe changed")
     return report
@@ -124,5 +134,6 @@ def verify_note_score(
         raise OfflineError(
             "note_score_replay_mismatch", "Complete current score disagrees with report"
         )
-    verify_inputs([identity, *current.witnesses()])
+    verify_inputs([identity])
+    verify_note_witnesses(current)
     return report
