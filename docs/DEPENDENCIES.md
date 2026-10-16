@@ -147,6 +147,12 @@ SHA-256 and `math`; no FFmpeg, DSP/ML download or additional Python dependency i
 It requires matching, already aligned uncompressed integer WAV inputs and provides
 numerical measurements only. See [format/tolerance limits](RENDER_COMPARISON.zh-CN.md).
 
+Decoded MIDI comparison uses the existing locked mido/Pydantic and standard-library
+Fraction, with no new dependency or lock changes. Authorized private FL26 routing probes
+used installed proprietary MIDI Out/Fruity LSD and Windows DirectMusic/GM resources;
+none of those presets, plugins, banks or experiment files are distributed. Local file
+presence does not establish redistribution rights. See [evidence and scope](MIDI_EVENT_COMPARISON.zh-CN.md).
+
 The [isolated MCP adoption audit](FLSTUDIO_MCP_AUDIT.zh-CN.md) separately builds the
 original Music2DAW MCP at the existing pin with SDK10.0.401/runtime10.0.12/MCP1.4.1,
 and installs live candidate e6eff37 with Python3.11.16/FastMCP2.14.5/MCP1.30.0 into a

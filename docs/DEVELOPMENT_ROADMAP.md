@@ -98,6 +98,13 @@ A separate local background-render experiment succeeded on existing reference co
 noninteractive MIDI import/save, full automation semantics and real-song acceptance
 remain unresolved. No writer gate is relaxed by a successful requirements report.
 
+The [MIDI round-trip evidence slice](MIDI_EVENT_COMPARISON.zh-CN.md) adds offline exact
+event/clock comparison and saved-report replay. Private background tests narrow selected
+MIDI Out/LSD port and volume behavior, but a one-tick timing compensation changes host
+MIDI event positions and cannot preserve the source. Complete exact-tempo/control song
+delivery remains blocked; program routing, old template gates and audible acceptance
+are still required.
+
 The [isolated FL26 backend adaptation](FL26_BACKEND_ADAPTATION.md) adds an explicit
 inspection-only build from the same upstream pin, with source/recipe/artifact hashes.
 It fixes demonstrated exact-build event-172 and event-233 stride parsing in a separate

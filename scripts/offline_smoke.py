@@ -146,6 +146,42 @@ def main():
     damaged_encoding = project / "intermediate/intentional-encoding-corruption.json"
     damaged_encoding.write_text(json.dumps(encoding), encoding="utf-8")
     cli("verify-midi-encoding", damaged_encoding, expected=1)
+    midi_comparison_path = project / "intermediate/midi-comparison.json"
+    midi_source = project / "input/song.mid"
+    midi_candidate = project / "intermediate/extra-control.mid"
+    candidate = mido.MidiFile(midi_source)
+    candidate.tracks[1].insert(-1, mido.Message("control_change", channel=2, control=7, value=100))
+    candidate.save(midi_candidate)
+    comparison_args = (
+        "compare-midi-events",
+        midi_source,
+        midi_candidate,
+        "--output",
+        midi_comparison_path,
+    )
+    cli(*comparison_args, expected=1)
+    comparison = json.loads(midi_comparison_path.read_text(encoding="utf-8"))
+    if (
+        comparison["equivalent"] is not False
+        or comparison["clock_equal"] is not True
+        or len(comparison["extra"]) != 1
+        or comparison["missing"]
+        or comparison["execution_allowed"] is not False
+    ):
+        raise RuntimeError("Extra MIDI control was lost or accepted as equivalent")
+    cli("verify-midi-comparison", midi_comparison_path)
+    cli(*comparison_args, expected=1)
+    cli(
+        "compare-midi-events",
+        midi_source,
+        midi_source,
+        "--output",
+        project / "intermediate/equal-midi.json",
+    )
+    comparison["extra"] = []
+    corrupted_comparison = project / "intermediate/intentional-midi-comparison-corruption.json"
+    corrupted_comparison.write_text(json.dumps(comparison), encoding="utf-8")
+    cli("verify-midi-comparison", corrupted_comparison, expected=1)
     measured = json.loads(
         cli(
             "compare-renders",
@@ -184,6 +220,7 @@ def main():
                 "performance_replay": "passed",
                 "performance_negative_checks": "passed",
                 "encoding_assessment_replay": "passed",
+                "midi_comparison_replay": "passed",
                 "installed_wheel": installed,
                 "package_path": str(module_path),
                 "original_inputs_unchanged": True,

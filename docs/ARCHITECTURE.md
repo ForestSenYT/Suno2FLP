@@ -38,6 +38,13 @@ replays current performance sources to quantify a hypothetical integer-scalar cl
 catalogue unresolved input/channel routes. Its saved verifier recomputes every field.
 Neither module has a process or writer path; see [control evidence](FL26_CONTROL_EVIDENCE.zh-CN.md).
 
+`core.midi_comparison` and `validator.midi_comparison` independently compare two current
+MIDI files: occurrence-preserving normalized event matching, separate ordered-track
+checks, and piecewise rational clocks with explicit conflict/horizon handling. Both full
+imports and file identities are retained. Saved reports replay against current sources;
+even equivalent decoded streams never attest a receiver or enable execution. See
+[MIDI round-trip evidence](MIDI_EVENT_COMPARISON.zh-CN.md).
+
 | Module | Responsibility | Current implementation |
 | --- | --- | --- |
 | core | Pydantic contracts, YAML configuration, errors, path guards, doctor | Implemented |

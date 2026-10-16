@@ -37,6 +37,7 @@ from suno2flp.pipeline.preparation import prepare_project, verify_preparation
 from suno2flp.validator import validate_project
 from suno2flp.validator.arrangement import verify_arrangement_file
 from suno2flp.validator.manual_records import check_manual_records, manual_record_summary
+from suno2flp.validator.midi_comparison import compare_midi_events, verify_midi_comparison
 from suno2flp.validator.renders import compare_renders
 
 app = typer.Typer(
@@ -207,6 +208,38 @@ def verify_midi_encoding(assessment_file: Path) -> None:
     try:
         verify_encoding_file(assessment_file)
         typer.echo("Encoding assessment replay passed; FLP execution blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
+@app.command("compare-midi-events")
+def compare_midi_events_command(
+    expected: Path,
+    candidate: Path,
+    output: Annotated[Path, typer.Option("--output", help="New decoded event/clock comparison")],
+) -> None:
+    """Compare all decoded events and exact clocks; no remapping or host execution."""
+    try:
+        result = compare_midi_events(expected, candidate)
+        content = result.model_dump_json(indent=2) + "\n"
+        verify_inputs(result.input_files)
+        new_report(output, content, result.referenced_paths)
+        verify_inputs(result.input_files)
+        status = "equivalent decoded streams" if result.equivalent else "different/unverified"
+        typer.echo(f"MIDI comparison: {output}; {status}; receiver unverified; writer blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+    if not result.equivalent:
+        raise typer.Exit(1)
+
+
+@app.command("verify-midi-comparison")
+def verify_midi_comparison_command(report_file: Path) -> None:
+    """Recompute saved evidence; successful replay does not mean the files are equivalent."""
+    try:
+        result = verify_midi_comparison(report_file)
+        status = "equivalent" if result.equivalent else "different/unverified"
+        typer.echo(f"MIDI comparison replay passed ({status}); receiver unverified; writer blocked")
     except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
         _fail(exc)
 

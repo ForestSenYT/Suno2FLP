@@ -36,6 +36,13 @@ The [FL26 control evidence](docs/FL26_CONTROL_EVIDENCE.zh-CN.md) adds read-only
 private background renders support selected integer REC fields, but reveal step-timing
 differences at 96/960 PPQ. Exact variable-tempo and MIDI control routing remain blocked.
 
+The next [MIDI round-trip evidence slice](docs/MIDI_EVENT_COMPARISON.zh-CN.md) adds
+`compare-midi-events` and `verify-midi-comparison`: complete duplicate-aware event
+comparison, ordered tracks, rational PPQ/tempo clocks and current-file replay. Private
+FL26 experiments establish selected internal port/volume responses, while demonstrating
+that a one-tick audio compensation changes exported MIDI positions. Full song generation
+remains blocked; these commands never run the host or write an FLP.
+
 The [noninteractive performance preparation](docs/NONINTERACTIVE_PERFORMANCE.zh-CN.md)
 adds `plan-midi-performance` and `verify-midi-performance`: current-source replay,
 every event in source order, exact rational PPQ/elapsed-time coordinates, and explicit

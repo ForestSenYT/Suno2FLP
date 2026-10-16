@@ -2,6 +2,9 @@
 
 | Risk | Impact | Mitigation / future gate | Current status |
 | --- | --- | --- | --- |
+| Audio compensation changes original MIDI events | Correct-looking onsets conceal moved tempo points | Compare independent MIDI event positions and exact clocks; never compensate source ticks from one render | Minus-one-tick audio probes align selected onsets but export the moved tick; writer blocked |
+| MIDI export treated as a receiver log | Extra transport controls or inferred channels/programs silently accepted | Preserve every occurrence, ordered tracks and current inputs; separate export and audio evidence | Selected port/volume audio response verified; full program/channel routes unverified |
+| Exit zero without output | Failed background run reported as success | Require fresh file, parse, hashes and before/after input identities | Sandbox and incorrect MIDI argv cases exposed; no-output attempts retained as failures |
 | FL26 REC structure confused with exact playback | Step timing differences or misrouted CC/program messages | Separate selected-field observations, source-replayed encoding analysis and unconditional writer block | 14 private renders: scalar/event PCM equality; stepped timing differs at 96/960 PPQ; MIDI destination unverified |
 | Noninteractive MIDI preservation mistaken for playable FLP | Lost tempo/control behavior despite retained JSON | Exact event-time/tempo-scalar checks, current-source replay and literal blocked execution; prove automation addressing/routing separately | Performance compilation implemented; faithful variable-tempo/control FLP remains blocked |
 | Background rendering mistaken for headless import/save | Stalled MIDI import or false host acceptance | Bound owned process lifetime; never send interface input; distinguish existing-FLP render from MIDI-to-new-FLP | Reference rendering verified locally; MIDI test timed out, import/save unverified |

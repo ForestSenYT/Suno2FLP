@@ -142,6 +142,13 @@ retain required copyright/license notices if code is later redistributed.
 
 ## PyFLP
 
+The subsequent [MIDI round-trip experiments](MIDI_EVENT_COMPARISON.zh-CN.md) use only the
+already installed, hash-pinned FL26 executable and factory MIDI Out/LSD states in new
+private copies. Joined single-file MIDI export, selected internal port matching and
+volume responses were observed. Exported MIDI contains additional transport controls;
+it is not a receiver log or fidelity oracle. The product adds only an original offline
+comparison validator, with no host launcher or adopted vendor code/state.
+
 The [noninteractive performance investigation](NONINTERACTIVE_PERFORMANCE.zh-CN.md)
 also examined this same pin's pattern/controller layouts. Unknown fields and uncertain
 position semantics do not establish an FL26 tempo/CC writer. Official Image-Line
