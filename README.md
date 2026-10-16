@@ -84,6 +84,12 @@ other maps. Cleaned inputs require `--note-view active`.
 See [faithful arrangements](docs/ARRANGEMENT.md) for provenance, units, conflict rules
 and limitations. Results are JSON.
 
+`verify-arrangement arrangement.json --output quality-new.json` independently reimports
+current original MIDI, replays declared cleanup/arrangement/roles and compares complete
+snapshots. It reports stale or altered music/provenance without a DAW or backend.
+Structural success retains host-unverified, writer-blocked status. See the
+[offline workflow guide](docs/OFFLINE_WORKFLOW.zh-CN.md).
+
 `map-instruments` applies a validated YAML role catalog and exact source selectors to
 an existing faithful arrangement. Alternatively, pass `--instruments mapping.yaml` to
 `arrange`. Role annotations preserve source channels/notes/events and retain the exact

@@ -71,3 +71,11 @@ class FlpWriteError(Suno2FLPError):
     def __init__(self, code: str, message: str):
         self.code = code
         super().__init__(f"[{code}] {message}")
+
+
+class OfflineError(Suno2FLPError):
+    """Offline evidence, preparation or comparison cannot preserve its contract."""
+
+    def __init__(self, code: str, message: str):
+        self.code = code
+        super().__init__(f"[{code}] {message}")

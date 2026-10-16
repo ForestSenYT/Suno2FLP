@@ -20,6 +20,7 @@ from suno2flp.core.errors import (
 )
 from suno2flp.core.instrument_config import load_instrument_mapping
 from suno2flp.core.models import Arrangement, ArrangementOptions, MusicalMetadata, ProcessedMidi
+from suno2flp.core.offline_files import new_report
 from suno2flp.core.workspace import init_project as create_project
 from suno2flp.flp_builder.assessment_files import assess_template_files
 from suno2flp.flp_builder.bundle_verification import verify_fl26_bundle_files
@@ -30,6 +31,7 @@ from suno2flp.integrations.music2daw import Music2DawInspector
 from suno2flp.integrations.music2daw_provision import provision_music2daw as provision_backend
 from suno2flp.midi_processor import DeterministicMidiProcessor
 from suno2flp.validator import validate_project
+from suno2flp.validator.arrangement import verify_arrangement_file
 from suno2flp.validator.manual_records import check_manual_records, manual_record_summary
 
 app = typer.Typer(
@@ -102,6 +104,28 @@ def check_host_records(
     except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
         _fail(exc)
     if not result.integrity_valid:
+        raise typer.Exit(1)
+
+
+@app.command("verify-arrangement")
+def verify_arrangement(
+    arrangement: Path,
+    output: Annotated[
+        Path | None, typer.Option("--output", help="New structural quality JSON")
+    ] = None,
+) -> None:
+    """Replay faithful music from current original MIDI; host/writer remain unverified."""
+    try:
+        result = verify_arrangement_file(arrangement)
+        content = result.model_dump_json(indent=2) + "\n"
+        if output is None:
+            typer.echo(content, nl=False)
+        else:
+            new_report(output, content, result.referenced_paths)
+            typer.echo(f"Structural quality report: {output}; host unverified; writer blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+    if not result.valid:
         raise typer.Exit(1)
 
 
