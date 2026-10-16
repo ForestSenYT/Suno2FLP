@@ -190,6 +190,12 @@ field gates remain. See [field evidence](FL26_FIELD_EVIDENCE.md).
 
 ## Safety and error handling
 
+`core/audio_quality.py` and `validator/renders.py` provide explicit aligned integer-PCM
+measurements with streaming input identities and bounded frame blocks. Reports separate
+valid format/measurements, optional user tolerance and permanently unverified audible
+acceptance. No source audio is rewritten or automatically rendered/aligned/resampled.
+See [render comparison](RENDER_COMPARISON.zh-CN.md).
+
 `core/mcp_models.py`, `daw_controller/discovery.py` and `integrations/mcp_stdio.py`
 separate observed protocol metadata, discovery state and opt-in process transport.
 Only initialization, ping and paginated tool listing are implemented; tool execution

@@ -34,6 +34,7 @@ from suno2flp.pipeline.preparation import prepare_project, verify_preparation
 from suno2flp.validator import validate_project
 from suno2flp.validator.arrangement import verify_arrangement_file
 from suno2flp.validator.manual_records import check_manual_records, manual_record_summary
+from suno2flp.validator.renders import compare_renders
 
 app = typer.Typer(
     help="Inspect Suno assets and prepare safe FL Studio workspaces.",
@@ -164,6 +165,28 @@ def verify_preparation_command(run_file: Path) -> None:
         typer.echo(verify_preparation(run_file).model_dump_json(indent=2))
     except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
         _fail(exc)
+
+
+@app.command("compare-renders")
+def compare_renders_command(
+    reference: Path,
+    candidate: Path,
+    max_rms_error: Annotated[float | None, typer.Option("--max-rms-error", min=0)] = None,
+    output: Annotated[Path | None, typer.Option("--output", help="New PCM comparison JSON")] = None,
+) -> None:
+    """Measure explicit aligned integer PCM WAVs; no rendering or audible acceptance."""
+    try:
+        result = compare_renders(reference, candidate, max_rms_error=max_rms_error)
+        content = result.model_dump_json(indent=2) + "\n"
+        if output is None:
+            typer.echo(content, nl=False)
+        else:
+            new_report(output, content, [reference.absolute(), candidate.absolute()])
+            typer.echo(f"PCM measurement report: {output}; audible acceptance unverified")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+    if not result.valid:
+        raise typer.Exit(1)
 
 
 @app.command("provision-music2daw")

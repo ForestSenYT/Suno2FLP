@@ -132,3 +132,8 @@ The original [MCP discovery client](MCP_DISCOVERY.md) uses the stdlib and existi
 Pydantic, without an MCP SDK or server dependency. Its explicit stdio transport requires
 an independently audited/authorized external startup argv; none is configured by default.
 No real backend/DAW startup or installation is part of its synthetic offline tests.
+
+Integer PCM render comparison uses standard-library `wave`, integer decoding, streaming
+SHA-256 and `math`; no FFmpeg, DSP/ML download or additional Python dependency is added.
+It requires matching, already aligned uncompressed integer WAV inputs and provides
+numerical measurements only. See [format/tolerance limits](RENDER_COMPARISON.zh-CN.md).

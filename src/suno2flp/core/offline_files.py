@@ -61,9 +61,30 @@ def capture_input(path: Path) -> tuple[FileIdentity, bytes]:
 
 def verify_inputs(identities: list[FileIdentity]) -> None:
     for expected in identities:
-        actual, _ = capture_input(expected.path)
+        actual = capture_stream_input(expected.path)
         if actual != expected:
             raise OfflineError("offline_input_changed", f"Input changed: {expected.path}")
+
+
+def capture_stream_input(path: Path) -> FileIdentity:
+    """Hash large audio without allocating the complete input byte sequence."""
+    resolved = guarded_path(path)
+    before = resolved.stat()
+    if not stat.S_ISREG(before.st_mode):
+        raise OfflineError("offline_input_invalid", "Expected a regular file")
+    with resolved.open("rb") as stream:
+        digest = hashlib.file_digest(stream, "sha256").hexdigest()
+    after = resolved.stat()
+    if (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns) != (
+        after.st_dev,
+        after.st_ino,
+        after.st_size,
+        after.st_mtime_ns,
+    ):
+        raise OfflineError("offline_input_changed", f"Input changed while hashing: {resolved}")
+    return FileIdentity(
+        path=resolved, sha256=digest, size_bytes=after.st_size, mtime_ns=after.st_mtime_ns
+    )
 
 
 def _unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:

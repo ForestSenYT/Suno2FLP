@@ -95,6 +95,11 @@ snapshots. It reports stale or altered music/provenance without a DAW or backend
 Structural success retains host-unverified, writer-blocked status. See the
 [offline workflow guide](docs/OFFLINE_WORKFLOW.zh-CN.md).
 
+`compare-renders REFERENCE.wav CANDIDATE.wav --output measurements-new.json` streams
+aligned integer PCM8/16/24/32 measurements without rendering/resampling or a DAW.
+Only an explicit `--max-rms-error` adds a numerical tolerance decision; audible/host
+acceptance remain unverified. See [PCM comparison limits](docs/RENDER_COMPARISON.zh-CN.md).
+
 `prepare-project PROJECT --output-dir PROJECT/intermediate/prepare-001` composes
 discovery, explicit configured cleanup, faithful arrangement, optional `--instruments`
 and quality replay into a new JSON-only bundle. `verify-preparation .../run.json`
