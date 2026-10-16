@@ -12,6 +12,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - name: Install Linux Qt runtime prerequisite
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends libegl1
+          dpkg-query --show libegl1 libglvnd0
       - uses: astral-sh/setup-uv@v6
         with:
           version: '0.12.21'
