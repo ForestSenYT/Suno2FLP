@@ -1,0 +1,12 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.ps1 text eol=crlf
+*.mid binary
+*.midi binary
+*.wav binary
+*.mp3 binary
+*.flp binary
+# Optional LFS recommendations are in docs/DEPENDENCIES.md; no filters enabled here.

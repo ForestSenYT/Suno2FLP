@@ -1,0 +1,17 @@
+# Deliberately blocked draft. Replace hashes from current evidence, then record actual
+# reference/prototype review; do not claim host/plugin checks that were not performed.
+schema_version: 1
+profile: fl26-26.1.7.5654-write-v1
+template_sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+inventory_snapshot_sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+bindings_snapshot_sha256: "0000000000000000000000000000000000000000000000000000000000000000"
+reference_kind: unverified
+reviewer: No review supplied
+reference_evidence: No host/dependency/instrument checks have been asserted
+dependency_review: unverified
+instrument_review: unverified
+local_use_review: unverified
+content_policy: replace_all_bound_notes_and_clips
+note_attribute_policy: preserve_reviewed_prototype
+clip_extension_policy: preserve_exact_reference_bytes
+targets: []

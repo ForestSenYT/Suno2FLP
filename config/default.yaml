@@ -1,0 +1,20 @@
+schema_version: 1
+name: my-song
+input_directories:
+  - input
+intermediate_directory: intermediate
+output_directory: output
+template_path: null
+midi:
+  preserve_timing: true
+  remove_duplicates: false
+  min_duration_ticks: 0
+  quantize: false
+  quantize_grid_ticks: null
+arrangement_mode: faithful
+integrations:
+  flp_backend: none
+  daw_backend: none
+  transcription_backend: none
+logging_level: INFO
+non_destructive: true

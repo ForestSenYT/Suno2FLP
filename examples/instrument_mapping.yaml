@@ -1,0 +1,25 @@
+# Illustrative indices: inspect your arrangement and adapt selectors before use.
+schema_version: 1
+roles:
+  piano:
+    general_midi_program: 1
+    plugin_hint: User-selected piano preset
+  bass:
+    general_midi_program: 33
+    plugin_hint: null
+  drums:
+    percussion: true
+    plugin_hint: null
+mappings:
+  - source_input: 0
+    source_track_position: 1
+    source_channel: 0
+    role: piano
+  - source_input: 0
+    source_track_position: 1
+    source_channel: 9
+    role: drums
+  - source_input: 0
+    source_track_position: 2
+    source_channel: 2
+    role: bass

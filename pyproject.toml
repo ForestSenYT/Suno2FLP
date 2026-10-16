@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "suno2flp"
+version = "0.1.0"
+description = "Safe foundations for reconstructing Suno exports in FL Studio"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["pydantic>=2.10,<3", "typer>=0.15,<1", "PyYAML>=6.0.2,<7", "mido>=1.3.3,<2"]
+
+[project.scripts]
+suno2flp = "suno2flp.cli:app"
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10", "ruff>=0.11,<1", "mypy>=1.15,<2", "types-PyYAML>=6.0"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/suno2flp"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["external: opt-in tests requiring separately installed integration backends"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+
+[[tool.mypy.overrides]]
+module = "mido.*"
+ignore_missing_imports = true
