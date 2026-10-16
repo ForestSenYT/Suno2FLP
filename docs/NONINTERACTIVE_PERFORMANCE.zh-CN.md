@@ -1,6 +1,8 @@
 # 非交互 MIDI → FLP：逐事件准备与尚未解决的写入条件
 
 本次新增的是**可验证的生成前准备**，尚未实现任意变速、控制事件的可播放 FLP 编码。
+后续[速度/控制后台实验](FL26_CONTROL_EVIDENCE.zh-CN.md)取得事件 223 的选定整数字段证据，
+并发现变速调度偏差；新增只读检查及编码精度/路由分析，写入仍然阻断。
 `plan-midi-performance` 不启动 FL Studio、调用 MCP 或写入 FLP。已有受限写入器
 保持原有规则；报告中的 `execution_allowed=false`、`writer_eligibility=blocked`
 不能通过修改 JSON 变成写入许可。

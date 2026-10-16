@@ -1,5 +1,11 @@
 # Integration evidence and strategy
 
+The [FL26 control evidence](FL26_CONTROL_EVIDENCE.zh-CN.md) adds original read-only
+event-223 inspection and encoding analysis. Private authorized CLI probes establish
+selected REC integer fields but reveal step-timing differences; they do not establish
+MIDI routing, an import/save API or a DAWController adapter. Existing isolated backends
+are unchanged; no new dependency or vendor code is bundled.
+
 Bootstrap source-audit date: 2026-10-15. README, package/build metadata, license notices and selected
 source files were read from GitHub. Commit IDs below were obtained from the GitHub
 API. This original audit was source verification, not a runtime test: none of these projects was

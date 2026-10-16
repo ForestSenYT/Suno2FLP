@@ -130,6 +130,22 @@ def main():
     damaged_performance = project / "intermediate/intentional-performance-corruption.json"
     damaged_performance.write_text(json.dumps(performance), encoding="utf-8")
     cli("verify-midi-performance", damaged_performance, expected=1)
+    encoding_path = project / "intermediate/encoding.json"
+    cli("assess-midi-encoding", performance_path, "--output", encoding_path)
+    cli("verify-midi-encoding", encoding_path)
+    encoding = json.loads(encoding_path.read_text(encoding="utf-8"))
+    if (
+        encoding["execution_allowed"] is not False
+        or len(encoding["routes"]) != 1
+        or len(encoding["routes"][0]["controls"]) != 2
+        or encoding["hypothetical_end_error_microseconds"] != {"numerator": 0, "denominator": 1}
+    ):
+        raise RuntimeError("Encoding analysis lost controls or changed exact scalar time")
+    cli("assess-midi-encoding", performance_path, "--output", encoding_path, expected=1)
+    encoding["routes"][0]["controls"].reverse()
+    damaged_encoding = project / "intermediate/intentional-encoding-corruption.json"
+    damaged_encoding.write_text(json.dumps(encoding), encoding="utf-8")
+    cli("verify-midi-encoding", damaged_encoding, expected=1)
     measured = json.loads(
         cli(
             "compare-renders",
@@ -167,6 +183,7 @@ def main():
                 "negative_checks": "passed",
                 "performance_replay": "passed",
                 "performance_negative_checks": "passed",
+                "encoding_assessment_replay": "passed",
                 "installed_wheel": installed,
                 "package_path": str(module_path),
                 "original_inputs_unchanged": True,

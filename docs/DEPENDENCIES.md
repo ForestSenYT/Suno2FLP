@@ -2,6 +2,11 @@
 
 ## Required foundation
 
+The [control evidence](FL26_CONTROL_EVIDENCE.zh-CN.md) adds no dependencies. It uses
+original struct/Fraction analysis and the installed, hash-pinned FL26 CLI only for
+private authorized probes. Vendor SDK/constants and factory templates were read
+locally; no vendor source, plugin state, MIDI/audio or private FLP is distributed.
+
 The exact [performance preparation](NONINTERACTIVE_PERFORMANCE.zh-CN.md) uses the
 existing Pydantic/Mido contracts plus standard-library `fractions`/`bisect`. It introduces
 no dependency, optional backend installation, host bridge or lockfile change.

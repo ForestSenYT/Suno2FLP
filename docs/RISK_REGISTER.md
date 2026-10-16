@@ -2,6 +2,7 @@
 
 | Risk | Impact | Mitigation / future gate | Current status |
 | --- | --- | --- | --- |
+| FL26 REC structure confused with exact playback | Step timing differences or misrouted CC/program messages | Separate selected-field observations, source-replayed encoding analysis and unconditional writer block | 14 private renders: scalar/event PCM equality; stepped timing differs at 96/960 PPQ; MIDI destination unverified |
 | Noninteractive MIDI preservation mistaken for playable FLP | Lost tempo/control behavior despite retained JSON | Exact event-time/tempo-scalar checks, current-source replay and literal blocked execution; prove automation addressing/routing separately | Performance compilation implemented; faithful variable-tempo/control FLP remains blocked |
 | Background rendering mistaken for headless import/save | Stalled MIDI import or false host acceptance | Bound owned process lifetime; never send interface input; distinguish existing-FLP render from MIDI-to-new-FLP | Reference rendering verified locally; MIDI test timed out, import/save unverified |
 | FLP format/version drift | Corrupt or subtly altered project | Pin backend and FL version; preserve unknown events; parse and open copied output | No FLP writes |

@@ -32,6 +32,12 @@ addresses. It reuses independent current-source replay and reconstructs saved re
 field by field. It has no process or FLP encoding path and never grants writer eligibility.
 See [noninteractive performance](NONINTERACTIVE_PERFORMANCE.zh-CN.md).
 
+`integrations.fl26_controls` supplies a separate read-only event-223 observation report;
+old inventory schemas and eligibility do not change. `flp_builder.encoding_assessment`
+replays current performance sources to quantify a hypothetical integer-scalar clock and
+catalogue unresolved input/channel routes. Its saved verifier recomputes every field.
+Neither module has a process or writer path; see [control evidence](FL26_CONTROL_EVIDENCE.zh-CN.md).
+
 | Module | Responsibility | Current implementation |
 | --- | --- | --- |
 | core | Pydantic contracts, YAML configuration, errors, path guards, doctor | Implemented |

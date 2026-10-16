@@ -1,5 +1,10 @@
 # Development roadmap
 
+Latest [control evidence slice](FL26_CONTROL_EVIDENCE.zh-CN.md): selected event-223
+integer/REC observations, 14 private background renders, source-replayed scalar error
+and route assessment, and synthetic regressions are implemented. Exact FL26 step timing
+and instrument/port routing remain blocked; real-song FLP delivery is not complete.
+
 | Phase | Deliverable | Acceptance gate |
 | --- | --- | --- |
 | 0 — Bootstrap (complete) | Package, contracts, config, CLI, local discovery, tests, CI, evidence | Offline tests and installed CLI pass; integration limits explicit |

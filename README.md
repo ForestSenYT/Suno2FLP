@@ -31,6 +31,11 @@ two fixed upstream servers and verified their 5/67-tool inventories without tool
 Actual host/bridge behavior remains unverified; live DAW actions and automatic startup
 stay disabled.
 
+The [FL26 control evidence](docs/FL26_CONTROL_EVIDENCE.zh-CN.md) adds read-only
+`inspect-fl26-controls`, `assess-midi-encoding` and `verify-midi-encoding`. Fourteen
+private background renders support selected integer REC fields, but reveal step-timing
+differences at 96/960 PPQ. Exact variable-tempo and MIDI control routing remain blocked.
+
 The [noninteractive performance preparation](docs/NONINTERACTIVE_PERFORMANCE.zh-CN.md)
 adds `plan-midi-performance` and `verify-midi-performance`: current-source replay,
 every event in source order, exact rational PPQ/elapsed-time coordinates, and explicit

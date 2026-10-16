@@ -24,10 +24,12 @@ from suno2flp.core.offline_files import new_report, verify_inputs
 from suno2flp.core.workspace import init_project as create_project
 from suno2flp.flp_builder.assessment_files import assess_template_files
 from suno2flp.flp_builder.bundle_verification import verify_fl26_bundle_files
+from suno2flp.flp_builder.encoding_assessment import assess_encoding_file, verify_encoding_file
 from suno2flp.flp_builder.performance import plan_performance_file, verify_performance_file
 from suno2flp.flp_builder.planning_files import plan_build_files
 from suno2flp.flp_builder.writer_files import build_fl26_files, plan_fl26_files
 from suno2flp.importer import LocalAssetImporter, MidiFileImporter
+from suno2flp.integrations.fl26_controls import inspect_controls_file
 from suno2flp.integrations.music2daw import Music2DawInspector
 from suno2flp.integrations.music2daw_provision import provision_music2daw as provision_backend
 from suno2flp.midi_processor import DeterministicMidiProcessor
@@ -150,12 +152,61 @@ def plan_midi_performance(
         _fail(exc)
 
 
+@app.command("inspect-fl26-controls")
+def inspect_fl26_controls(
+    template: Path,
+    output: Annotated[Path, typer.Option("--output", help="New read-only control evidence JSON")],
+) -> None:
+    """Inspect selected event-223 fields; no host actions or FLP writing."""
+    try:
+        result = inspect_controls_file(template)
+        assert result.source_file is not None
+        content = result.model_dump_json(indent=2) + "\n"
+        verify_inputs([result.source_file])
+        new_report(output, content, [result.source_file.path])
+        verify_inputs([result.source_file])
+        typer.echo(f"Control evidence: {output}; timing/routing unverified; FLP execution blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
 @app.command("verify-midi-performance")
 def verify_midi_performance(plan_file: Path) -> None:
     """Reconstruct every saved performance requirement; never authorize FLP writes."""
     try:
         verify_performance_file(plan_file)
         typer.echo("Performance replay passed; host unverified; FLP execution blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
+@app.command("assess-midi-encoding")
+def assess_midi_encoding(
+    performance_file: Path,
+    output: Annotated[
+        Path, typer.Option("--output", help="New exact precision and routing assessment")
+    ],
+) -> None:
+    """Analyze encoding blockers; hypothetical rounding is never applied to music."""
+    try:
+        result = assess_encoding_file(performance_file)
+        content = result.model_dump_json(indent=2) + "\n"
+        verify_inputs(result.input_files)
+        new_report(output, content, result.referenced_paths)
+        verify_inputs(result.input_files)
+        typer.echo(
+            f"Encoding assessment: {output}; routing/timing unverified; FLP execution blocked"
+        )
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
+@app.command("verify-midi-encoding")
+def verify_midi_encoding(assessment_file: Path) -> None:
+    """Replay all precision/routing evidence against current original inputs."""
+    try:
+        verify_encoding_file(assessment_file)
+        typer.echo("Encoding assessment replay passed; FLP execution blocked")
     except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
         _fail(exc)
 
