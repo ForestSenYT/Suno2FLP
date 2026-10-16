@@ -2,6 +2,10 @@
 
 ## Required foundation
 
+The exact [performance preparation](NONINTERACTIVE_PERFORMANCE.zh-CN.md) uses the
+existing Pydantic/Mido contracts plus standard-library `fractions`/`bisect`. It introduces
+no dependency, optional backend installation, host bridge or lockfile change.
+
 Python >=3.11; uv for local dependency/environment management; Git for development.
 `pyproject.toml` specifies compatible major-version ranges; `uv.lock` pins the resolved
 environment. Use `uv sync --locked` to reproduce it. Wheel packaging uses Hatchling.

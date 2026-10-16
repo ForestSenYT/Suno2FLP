@@ -136,6 +136,13 @@ retain required copyright/license notices if code is later redistributed.
 
 ## PyFLP
 
+The [noninteractive performance investigation](NONINTERACTIVE_PERFORMANCE.zh-CN.md)
+also examined this same pin's pattern/controller layouts. Unknown fields and uncertain
+position semantics do not establish an FL26 tempo/CC writer. Official Image-Line
+documentation and bounded local CLI tests establish background rendering of existing
+reference copies only; the synthetic MIDI invocation timed out without output. No new
+backend, scripting bridge, automation dependency or upstream code is adopted.
+
 Revision: `f937126b888ce94271bfea631b89166c74056530`.
 [Repository](https://github.com/demberto/PyFLP),
 [README](https://github.com/demberto/PyFLP/blob/f937126b888ce94271bfea631b89166c74056530/README.md).

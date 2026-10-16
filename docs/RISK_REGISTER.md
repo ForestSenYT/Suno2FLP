@@ -2,6 +2,8 @@
 
 | Risk | Impact | Mitigation / future gate | Current status |
 | --- | --- | --- | --- |
+| Noninteractive MIDI preservation mistaken for playable FLP | Lost tempo/control behavior despite retained JSON | Exact event-time/tempo-scalar checks, current-source replay and literal blocked execution; prove automation addressing/routing separately | Performance compilation implemented; faithful variable-tempo/control FLP remains blocked |
+| Background rendering mistaken for headless import/save | Stalled MIDI import or false host acceptance | Bound owned process lifetime; never send interface input; distinguish existing-FLP render from MIDI-to-new-FLP | Reference rendering verified locally; MIDI test timed out, import/save unverified |
 | FLP format/version drift | Corrupt or subtly altered project | Pin backend and FL version; preserve unknown events; parse and open copied output | No FLP writes |
 | MIDI transcription errors | Wrong pitch, rhythm or instruments | Prefer official MIDI; retain source timing; uncertain AI output reviewed separately | No inference |
 | Upstream instability | Tool/schema changes or broken installs | Pin commits, isolated adapters, capability discovery and contract fixtures | Pinned isolated inspection verified; writer remains blocked |

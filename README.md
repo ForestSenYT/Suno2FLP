@@ -31,6 +31,14 @@ two fixed upstream servers and verified their 5/67-tool inventories without tool
 Actual host/bridge behavior remains unverified; live DAW actions and automatic startup
 stay disabled.
 
+The [noninteractive performance preparation](docs/NONINTERACTIVE_PERFORMANCE.zh-CN.md)
+adds `plan-midi-performance` and `verify-midi-performance`: current-source replay,
+every event in source order, exact rational PPQ/elapsed-time coordinates, and explicit
+tempo precision/control-routing blockers. These produce JSON requirements, not a
+playable FLP; existing writer gates remain. A separately authorized local CLI experiment
+verified background rendering of existing reference copies, while automatic MIDI
+import/save and faithful variable-tempo/control encoding remain unresolved.
+
 Phase 3's [read-only backend/template assessment](docs/FLP_BACKEND_ASSESSMENT.md)
 recommends a pinned Music2DAW candidate and documents timing, licensing, runtime and
 output-safety limits. The next [read-only inspection slice](docs/TEMPLATE_INSPECTION.md)

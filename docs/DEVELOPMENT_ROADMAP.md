@@ -85,6 +85,14 @@ the separate real-reference and manual host observations still needed before Pha
 can be accepted. Phase 4 now has the separate offline discovery boundary described below;
 real backend/host adoption remains pending.
 
+The [noninteractive performance preparation](NONINTERACTIVE_PERFORMANCE.zh-CN.md)
+compiles/replays all source events and exact elapsed times before encoding, exposing
+PPQ loss, scalar tempo precision and untranslated control/routing requirements.
+This is an implemented prerequisite, not completion of variable-tempo FLP generation.
+A separate local background-render experiment succeeded on existing reference copies;
+noninteractive MIDI import/save, full automation semantics and real-song acceptance
+remain unresolved. No writer gate is relaxed by a successful requirements report.
+
 The [isolated FL26 backend adaptation](FL26_BACKEND_ADAPTATION.md) adds an explicit
 inspection-only build from the same upstream pin, with source/recipe/artifact hashes.
 It fixes demonstrated exact-build event-172 and event-233 stride parsing in a separate

@@ -57,13 +57,16 @@ def main():
         mido.MidiTrack(
             [
                 mido.MetaMessage("set_tempo", tempo=500000),
+                mido.MetaMessage("set_tempo", tempo=600000, time=240),
                 mido.MetaMessage("end_of_track"),
             ]
         ),
         mido.MidiTrack(
             [
+                mido.Message("program_change", channel=2, program=0),
                 mido.Message("note_on", channel=2, note=60, velocity=90, time=120),
                 mido.Message("note_off", channel=2, note=60, velocity=30, time=240),
+                mido.Message("control_change", channel=2, control=7, value=100, time=120),
                 mido.MetaMessage("end_of_track"),
             ]
         ),
@@ -102,6 +105,31 @@ def main():
     ):
         raise RuntimeError("Original musical timing/channel/pitch changed")
     cli("prepare-project", project, "--output-dir", output, expected=1)
+    performance_path = project / "intermediate/performance.json"
+    performance_args = (
+        "plan-midi-performance",
+        output / "arrangement.json",
+        "--target-ppq",
+        960,
+        "--output",
+        performance_path,
+    )
+    cli(*performance_args)
+    cli("verify-midi-performance", performance_path)
+    performance = json.loads(performance_path.read_text(encoding="utf-8"))
+    if (
+        performance["execution_allowed"] is not False
+        or len(performance["tempos"]) != 2
+        or len(performance["untranslated_events"]) != 2
+        or performance["notes"][0]["end"]["elapsed_microseconds"]
+        != {"numerator": 400000, "denominator": 1}
+    ):
+        raise RuntimeError("Exact performance preparation lost events or changed time")
+    cli(*performance_args, expected=1)
+    performance["tracks"][1]["events"].reverse()
+    damaged_performance = project / "intermediate/intentional-performance-corruption.json"
+    damaged_performance.write_text(json.dumps(performance), encoding="utf-8")
+    cli("verify-midi-performance", damaged_performance, expected=1)
     measured = json.loads(
         cli(
             "compare-renders",
@@ -137,6 +165,8 @@ def main():
             {
                 "workflow": "passed",
                 "negative_checks": "passed",
+                "performance_replay": "passed",
+                "performance_negative_checks": "passed",
                 "installed_wheel": installed,
                 "package_path": str(module_path),
                 "original_inputs_unchanged": True,

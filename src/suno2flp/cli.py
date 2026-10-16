@@ -20,10 +20,11 @@ from suno2flp.core.errors import (
 )
 from suno2flp.core.instrument_config import load_instrument_mapping
 from suno2flp.core.models import Arrangement, ArrangementOptions, MusicalMetadata, ProcessedMidi
-from suno2flp.core.offline_files import new_report
+from suno2flp.core.offline_files import new_report, verify_inputs
 from suno2flp.core.workspace import init_project as create_project
 from suno2flp.flp_builder.assessment_files import assess_template_files
 from suno2flp.flp_builder.bundle_verification import verify_fl26_bundle_files
+from suno2flp.flp_builder.performance import plan_performance_file, verify_performance_file
 from suno2flp.flp_builder.planning_files import plan_build_files
 from suno2flp.flp_builder.writer_files import build_fl26_files, plan_fl26_files
 from suno2flp.importer import LocalAssetImporter, MidiFileImporter
@@ -129,6 +130,34 @@ def verify_arrangement(
         _fail(exc)
     if not result.valid:
         raise typer.Exit(1)
+
+
+@app.command("plan-midi-performance")
+def plan_midi_performance(
+    arrangement: Path,
+    output: Annotated[Path, typer.Option("--output", help="New exact event-timing JSON report")],
+    target_ppq: Annotated[int | None, typer.Option("--target-ppq", min=1, max=65535)] = None,
+) -> None:
+    """Compile original events and exact times; FLP encoding remains blocked."""
+    try:
+        result = plan_performance_file(arrangement, target_ppq=target_ppq)
+        content = result.model_dump_json(indent=2) + "\n"
+        verify_inputs(result.input_files)
+        new_report(output, content, result.referenced_paths)
+        verify_inputs(result.input_files)
+        typer.echo(f"Performance requirements: {output}; source verified; FLP execution blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
+@app.command("verify-midi-performance")
+def verify_midi_performance(plan_file: Path) -> None:
+    """Reconstruct every saved performance requirement; never authorize FLP writes."""
+    try:
+        verify_performance_file(plan_file)
+        typer.echo("Performance replay passed; host unverified; FLP execution blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
 
 
 @app.command("prepare-project")

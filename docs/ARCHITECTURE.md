@@ -25,6 +25,13 @@ MIDI      -> MidiFileImporter   -> ProcessedMidi (original timing and events)
 
 ## Responsibilities and contracts
 
+The additive `flp_builder.performance` boundary compiles source-verified arrangements
+to `core.performance.PerformancePlan`. Exact rational event/note/end coordinates and
+tempo-scalar representability sit alongside complete snapshots and unresolved event
+addresses. It reuses independent current-source replay and reconstructs saved reports
+field by field. It has no process or FLP encoding path and never grants writer eligibility.
+See [noninteractive performance](NONINTERACTIVE_PERFORMANCE.zh-CN.md).
+
 | Module | Responsibility | Current implementation |
 | --- | --- | --- |
 | core | Pydantic contracts, YAML configuration, errors, path guards, doctor | Implemented |

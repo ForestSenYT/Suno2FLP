@@ -19,6 +19,8 @@ def test_smoke_script_exercises_workflow_and_refuses_reuse(tmp_path):
     report = json.loads(result.stdout)
     assert report["workflow"] == "passed" and report["negative_checks"] == "passed"
     assert report["original_inputs_unchanged"] and not report["flp_created"]
+    assert report["performance_replay"] == "passed"
+    assert report["performance_negative_checks"] == "passed"
     assert report["host_compatibility"] == "unverified"
     again = subprocess.run(
         args,
