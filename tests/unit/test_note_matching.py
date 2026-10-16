@@ -145,3 +145,16 @@ def test_duplicate_ids_oversized_notes_and_invalid_positions_are_rejected():
     ]:
         with pytest.raises((ValidationError, ValueError)):
             note("bad", **kwargs)
+
+
+def test_matching_timeout_and_mid_computation_cancellation_are_explicit(monkeypatch):
+    import suno2flp.validator.note_matching as matching
+
+    clock = iter([0.0, 0.0, 301.0])
+    monkeypatch.setattr(matching.time, "monotonic", lambda: next(clock))
+    with pytest.raises(OfflineError, match="time budget"):
+        score_notes([note("c")], [note("r")])
+    monkeypatch.undo()
+    checks = iter([False, False, True])
+    with pytest.raises(OfflineError, match="cancel"):
+        score_notes([note("c")], [note("r")], should_cancel=lambda: next(checks))

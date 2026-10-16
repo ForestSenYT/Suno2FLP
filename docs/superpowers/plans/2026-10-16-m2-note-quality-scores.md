@@ -34,9 +34,9 @@
 
 **Interfaces:** `ScoredNote(id, pitch, onset_microseconds, offset_microseconds)`; `score_notes(candidate: list[ScoredNote], reference: list[ScoredNote] | None, *, should_cancel: Callable[[], bool] | None = None) -> NoteScore`. Exact ratios and matched/unmatched IDs are explicit. Scoring returns measured/reference_unavailable/no_reference_notes; it never grants qualification.
 
-- [ ] Write tests for 50ms inclusive onset, exact fractional overrun, reference-relative offsets, duplicates, wrong pitch, empty/missing references, greedy counterexample and iteration beyond recursion limits.
-- [ ] Observe RED, then implement exact fractions and deterministic iterative augmenting paths over sorted-ID views. Use per-pitch onset buckets/bisect, bounded edges, cooperative cancellation/deadline.
-- [ ] Compare maximum cardinality against an independent exhaustive small-graph oracle; verify input order unchanged. Run focused tests and commit this task.
+- [x] Write tests for 50ms inclusive onset, exact fractional overrun, reference-relative offsets, duplicates, wrong pitch, empty/missing references, greedy counterexample and iteration beyond recursion limits.
+- [x] Observe RED, then implement exact fractions and deterministic iterative augmenting paths over sorted-ID views. Use per-pitch onset buckets/bisect, bounded edges, cooperative cancellation/deadline.
+- [x] Compare maximum cardinality against an independent exhaustive small-graph oracle; verify input order unchanged. Run focused tests and commit this task.
 
 ### Task 2: Source-bound file reports and replay
 
@@ -44,10 +44,10 @@
 
 **Interfaces:** `NoteAnnotation` contains role/origin, method, producer provenance FileIdentities, decode-report/source identities, rate/channels/frames and original notes. `collect_note_score(candidate_path, reference_path, *, should_cancel=None) -> NoteScoreReport` verifies all current inputs and existing decode proof. `score_note_files(candidate_path, reference_path, output, *, should_cancel=None) -> NoteScoreReport` exclusively publishes. `verify_note_score(report_path, *, should_cancel=None) -> NoteScoreReport` recomputes and compares, without writes.
 
-- [ ] Write failing tests using new authored PCM and independently verified decode: valid report/replay, unknown truth, clock/role/source mismatches, altered producer files, fabricated result, current recipe changes, oversized/duplicate JSON, cancellation and exclusive output protection.
-- [ ] Observe RED; implement bounded regular-file reads with before/after identity, without modifying existing decode modules or their bound helpers. Verify PCM/compressed decode using existing independent validators, then compare annotations to actual clock/source/report identity. Freeze scorer code identities and current Python executable/version in reports.
-- [ ] Recheck all witnesses before and after matching/publication. Publish only to a new JSON file outside inputs/backend trees; retain failed outputs as evidence if a late check fails, never claim success. Replay uses current inputs and recipe, not report assertions.
-- [ ] Run focused tests, full suite, lint/types; commit task.
+- [x] Write failing tests using new authored PCM and independently verified decode: valid report/replay, unknown truth, clock/role/source mismatches, altered producer files, fabricated result, current recipe changes, oversized/duplicate JSON, cancellation and exclusive output protection.
+- [x] Observe RED; implement bounded regular-file reads with before/after identity, without modifying existing decode modules or their bound helpers. Verify PCM/compressed decode using existing independent validators, then compare annotations to actual clock/source/report identity. Freeze scorer code identities and current Python executable/version in reports.
+- [x] Recheck all witnesses before and after matching/publication. Publish only to a new JSON file outside inputs/backend trees; retain failed outputs as evidence if a late check fails, never claim success. Replay uses current inputs and recipe, not report assertions.
+- [x] Run focused tests, full suite, lint/types; commit task.
 
 ### Task 3: CLI, installed behavior and documentation
 
@@ -55,9 +55,9 @@
 
 **Interfaces:** `score-pitched-notes CANDIDATE --reference REF --output NEW.json`; optional reference produces unavailable status. `verify-note-score REPORT`. Exit 0 means valid measured report, exit 3 means unscored, exit 1 means error. Below-target measurements remain measurements, not software release acceptance.
 
-- [ ] Add failing CLI status/report tests; implement thin commands. Explain exact-time units, schema, fixed algorithm, resource limits, conditional reference provenance and explicit outstanding drum/beat/separation/corpus/host gates.
-- [ ] Add installed-wheel synthetic smoke: actual new PCM decode, known duplicate-aware F1, replay, unknown truth and tamper refusal. Add it to all four existing CI matrices without renaming checks.
-- [ ] Run full offline tests, Ruff, mypy, offline build, installed CLI/GUI and scoring smoke. No redundant native codec rerun unless relevant implementation changes.
+- [x] Add failing CLI status/report tests; implement thin commands. Explain exact-time units, schema, fixed algorithm, resource limits, conditional reference provenance and explicit outstanding drum/beat/separation/corpus/host gates.
+- [x] Add installed-wheel synthetic smoke: actual new PCM decode, known duplicate-aware F1, replay, unknown truth and tamper refusal. Add it to all four existing CI matrices without renaming checks.
+- [x] Run full offline tests, Ruff, mypy, offline build, installed CLI/GUI and scoring smoke. No redundant native codec rerun unless relevant implementation changes.
 - [ ] Inspect public inventory/distributions; request one fresh strongest-model whole-branch review bound to full head. Fix real findings with RED→GREEN and bind final disposition to final head. Commit, push PR, attach and assign M2.
 - [ ] Merge only after exact-head independent approval, all eight CI checks, latest main, expected public files, resolved threads and branch protection. Verify merged tree/main CI and preserve private evidence. Keep overall goal active.
 

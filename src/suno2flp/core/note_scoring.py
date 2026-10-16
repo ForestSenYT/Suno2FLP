@@ -1,11 +1,13 @@
 """Conditional annotation metrics; declarations never certify musical truth."""
 
 from fractions import Fraction
+from pathlib import Path
 from typing import Literal, Self
 
 from pydantic import Field, field_validator, model_validator
 
 from suno2flp.core.models import Contract
+from suno2flp.core.offline_models import FileIdentity
 from suno2flp.core.performance import RationalTime
 
 MAX_NOTES = 10_000
@@ -106,3 +108,84 @@ class NoteScore(Contract):
         elif any(value is not None for value in (self.precision, self.recall, self.f1)):
             raise ValueError("Unavailable reference cannot have metrics")
         return self
+
+
+class NoteAnnotation(Contract):
+    schema_version: Literal[1] = 1
+    profile: Literal["pitched-note-annotation-v1"] = "pitched-note-annotation-v1"
+    role: Literal["candidate", "reference"]
+    origin: Literal["inferred_candidate", "declared_reference", "synthetic_fixture"]
+    method: str = Field(min_length=1, max_length=1024)
+    provenance_files: list[FileIdentity] = Field(min_length=1, max_length=32)
+    decode_report: FileIdentity
+    source_audio: FileIdentity
+    sample_rate: int = Field(ge=8000, le=192000, strict=True)
+    channels: int = Field(ge=1, le=2, strict=True)
+    frames: int = Field(gt=0, strict=True)
+    notes: list[ScoredNote] = Field(max_length=MAX_NOTES)
+
+    @model_validator(mode="after")
+    def declaration_consistency(self) -> Self:
+        if (self.role, self.origin) in {
+            ("reference", "inferred_candidate"),
+            ("candidate", "declared_reference"),
+        }:
+            raise ValueError("Annotation role and origin disagree")
+        if self.frames > 600 * self.sample_rate:
+            raise ValueError("Annotation clock exceeds the ten-minute profile")
+        if len({note.id for note in self.notes}) != len(self.notes):
+            raise ValueError("Annotation note IDs must be unique")
+        end = Fraction(self.frames * 1_000_000, self.sample_rate)
+        if any(time_fraction(note.offset_microseconds) > end for note in self.notes):
+            raise ValueError("Annotation note extends beyond the source clock")
+        paths = [identity.path for identity in self.provenance_files]
+        if len(set(paths)) != len(paths) or any(not path.is_absolute() for path in paths):
+            raise ValueError("Producer provenance requires unique absolute file paths")
+        return self
+
+
+class AnnotationSnapshot(Contract):
+    file: FileIdentity
+    annotation: NoteAnnotation
+
+
+class ScoringRecipe(Contract):
+    python_executable: FileIdentity
+    python_version: str
+    pydantic_version: str
+    files: list[FileIdentity]
+
+
+class NoteScoreReport(Contract):
+    schema_version: Literal[1] = 1
+    profile: Literal["source-bound-pitched-note-score-v1"] = "source-bound-pitched-note-score-v1"
+    candidate: AnnotationSnapshot
+    reference: AnnotationSnapshot | None
+    pcm: FileIdentity
+    recipe: ScoringRecipe
+    result: NoteScore
+    annotation_truth_verified: Literal[False] = False
+    musical_correctness: Literal["not_proven_per_song"] = "not_proven_per_song"
+    human_review: Literal["not_performed"] = "not_performed"
+    model_qualification: Literal["not_assessed"] = "not_assessed"
+    host_compatibility: Literal["unverified"] = "unverified"
+    writer_eligibility: Literal["blocked"] = "blocked"
+    execution_allowed: Literal[False] = False
+
+    def witnesses(self) -> list[FileIdentity]:
+        result = [self.pcm, self.recipe.python_executable, *self.recipe.files]
+        for snapshot in (self.candidate, self.reference):
+            if snapshot is not None:
+                annotation = snapshot.annotation
+                result.extend(
+                    [
+                        snapshot.file,
+                        annotation.decode_report,
+                        annotation.source_audio,
+                        *annotation.provenance_files,
+                    ]
+                )
+        return result
+
+    def protected_paths(self) -> list[Path]:
+        return [identity.path for identity in self.witnesses()]

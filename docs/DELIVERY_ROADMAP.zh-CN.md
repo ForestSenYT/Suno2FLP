@@ -22,7 +22,7 @@
 | --- | --- | --- |
 | M0 目标和治理 | 已完成：持续目标与设计获确认，PR #1/#2 已合入，保护／自动合并和六个 GitHub 里程碑生效 | 新成果从最新 main 新建分支 |
 | M1 作业服务与薄 GUI | 已完成本里程碑：PR #3/#4/#5 合入，GitHub M1 已关闭；原生交互与安装验收仍属 M5 | 后续转换使用同一真实作业服务 |
-| M2 音频推理与编排 | 进行中：整数 PCM WAV 的[保真解码](AUDIO_DECODE.zh-CN.md)和限定 [FLAC／MP3 固定解码](COMPRESSED_AUDIO.zh-CN.md)已实现；分离／转写／评分未完成 | 当前 `codex/m2-compressed-decoder`，再做基准评分和模型切片 |
+| M2 音频推理与编排 | 进行中：整数 PCM WAV 的[保真解码](AUDIO_DECODE.zh-CN.md)、限定 [FLAC／MP3 固定解码](COMPRESSED_AUDIO.zh-CN.md)及[有参考 pitched 音符评分](NOTE_SCORING.zh-CN.md)已实现；完整评分／曲库／模型分离转写未完成 | 当前 `codex/m2-note-quality-scores`，再做鼓／节拍／分轨基准评分和模型切片 |
 | M3 FLP 与后台宿主 | 已有受限实现，真实交付仍阻断 | `codex/m3-host-lifecycle`，之后是带新证据的时钟和接收路由切片 |
 | M4 端到端质量 | 未开始 | `codex/m4-real-song-delivery`，再做六曲和保留集回归 |
 | M5 GUI 与安装交付 | 未开始 | 完整交互、模型准备、安装版和干净环境验收切片 |

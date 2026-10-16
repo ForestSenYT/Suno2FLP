@@ -34,6 +34,7 @@ jobs:
       - run: uv build
       - run: uv export --locked --no-dev --no-hashes --no-emit-project --output-file runtime-smoke-requirements.tmp
       - run: uv run --no-project --python ${{ env.PYTHON_PIN }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/offline_smoke.py --require-installed --workspace .tools/ci-offline-smoke
+      - run: uv run --no-project --python ${{ env.PYTHON_PIN }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/note_score_smoke.py --require-installed --workspace .tools/ci-note-score-smoke
       - run: uv run --no-project --python ${{ env.PYTHON_PIN }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/codec_smoke.py --require-installed --workspace .tools/ci-codec-smoke
       - run: uv export --locked --no-dev --extra gui --no-hashes --no-emit-project --output-file gui-smoke-requirements.tmp
       - run: uv run --no-project --python ${{ env.PYTHON_PIN }} --with './dist/suno2flp-0.1.0-py3-none-any.whl[gui]' --with-requirements gui-smoke-requirements.tmp python scripts/gui_smoke.py --require-installed --workspace .tools/ci-gui-smoke
