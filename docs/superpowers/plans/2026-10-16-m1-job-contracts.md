@@ -49,12 +49,12 @@ and [current delivery roadmap](../../DELIVERY_ROADMAP.zh-CN.md).
 - Statuses are the approved `queued/running/blocked/failed/cancelled/succeeded`;
   stage pending uses `queued`. No declared stage is silently skipped.
 
-- [ ] Write failing tests for canonical ordering, unique stage names, bounded integer
+- [x] Write failing tests for canonical ordering, unique stage names, bounded integer
   progress, empty evidence on success, source identity preservation and illegal terminal states.
-- [ ] Run `.venv/Scripts/python.exe -m pytest tests/unit/test_jobs.py --basetemp .pytest_cache/m1-jobs-red`;
+- [x] Run `.venv/Scripts/python.exe -m pytest tests/unit/test_jobs.py --basetemp .pytest_cache/m1-jobs-red`;
   expect failure because contracts do not exist.
-- [ ] Implement strict contracts, copying evidence and validating cross-field consistency.
-- [ ] Run the targeted tests with a new basetemp; every case must pass.
+- [x] Implement strict contracts, copying evidence and validating cross-field consistency.
+- [x] Run the targeted tests with a new basetemp; every case must pass.
 
 ## Task 2: Pure transitions with evidence and recovery boundaries
 
@@ -73,21 +73,21 @@ and [current delivery roadmap](../../DELIVERY_ROADMAP.zh-CN.md).
 - Final `publish` completion remains blocked by this foundation: a future independent verifier
   must supply a separate proof contract. These helpers cannot set a job to `succeeded`.
 
-- [ ] Add failing behavioral tests for out-of-order starts, monotone progress, unchanged input
+- [x] Add failing behavioral tests for out-of-order starts, monotone progress, unchanged input
   objects, failed/cancelled state preservation, invalid resume after source/output change,
   no stage restart while running, and refusal to complete `publish` or claim final success.
-- [ ] Run targeted tests and observe the missing transition implementation failures.
-- [ ] Implement minimal pure transitions using deep copies; use current input identity checks
+- [x] Run targeted tests and observe the missing transition implementation failures.
+- [x] Implement minimal pure transitions using deep copies; use current input identity checks
   from `core.offline_files` for resume. Keep transition failures explicit.
-- [ ] Run targeted tests, then the complete required suite and installed CLI smoke via CI.
+- [x] Run targeted tests, then the complete required suite and installed CLI smoke via CI.
 
 ## Task 3: Review and integrate the slice
 
 **Files:** Update `docs/ARCHITECTURE.md`, `docs/DELIVERY_ROADMAP.zh-CN.md` and add a short
 `docs/JOBS.zh-CN.md` describing implemented contracts, evidence and next runner boundary.
 
-- [ ] Verify no dependency, CLI or GUI capability is advertised before implementation.
-- [ ] Run full pytest, Ruff, formatting, mypy and `git diff --check`; inspect all skips.
+- [x] Verify no dependency, CLI or GUI capability is advertised before implementation.
+- [x] Run full pytest, Ruff, formatting, mypy and `git diff --check`; inspect all skips.
 - [ ] Commit on a new `codex/m1-job-contracts` branch from merged current main.
 - [ ] Obtain one fresh independent review of the complete slice, fix findings and rebind to head.
 - [ ] Push, create/attach a small PR; inspect public file inventory and current-head CI.

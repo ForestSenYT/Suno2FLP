@@ -1,11 +1,11 @@
 """Job snapshots cannot invent stage completion or lose transition evidence."""
 
 import copy
+from pathlib import Path
 
 import pytest
 
 from suno2flp.core.offline_files import capture_stream_input
-
 
 STAGES = [
     "input",
@@ -118,5 +118,173 @@ def test_serialized_final_success_never_substitutes_for_publication_proof(docume
     document["status"] = "succeeded"
     document["execution_allowed"] = True
     document["writer_eligibility"] = "ready"
+    with pytest.raises(ValueError):
+        parse(document)
+
+
+def service():
+    from suno2flp.pipeline import jobs
+
+    return jobs
+
+
+@pytest.fixture
+def queued(document):
+    job = parse(document)
+    job.output_directory.mkdir()
+    return job
+
+
+def output(job, name):
+    path = job.output_directory / f"{name}.json"
+    path.write_text('{"evidence":"synthetic contract fixture"}', encoding="utf-8")
+    return capture_stream_input(path)
+
+
+def completed_input(job):
+    running = service().start_stage(job, "input")
+    return service().finish_stage(running, "input", [output(job, "input")])
+
+
+def test_new_job_does_not_create_or_modify_files(document):
+    source = parse(document).source
+    before = source.path.read_bytes()
+    job = service().new_job("job-one", source, Path(document["output_directory"]))
+    assert not job.output_directory.exists()
+    assert source.path.read_bytes() == before
+    assert job.source == source and job.source is not source
+
+
+def test_ordered_stage_transitions_keep_input_job_immutable(queued):
+    before = queued.model_dump()
+    running = service().start_stage(queued, "input")
+    progressed = service().report_progress(running, "input", 42)
+    evidence = output(queued, "input")
+    finished = service().finish_stage(progressed, "input", [evidence])
+    assert queued.model_dump() == before
+    assert running.stages[0].progress == 0
+    assert finished.status == "queued"
+    assert finished.stages[0].status == "succeeded" and finished.stages[0].progress == 100
+    assert finished.stages[0].outputs == [evidence]
+    assert finished.stages[1].status == "queued"
+    assert [e.kind for e in finished.history] == ["created", "started", "progress", "finished"]
+    assert [e.sequence for e in finished.history] == [0, 1, 2, 3]
+    assert finished.execution_allowed is False
+    evidence.sha256 = "0" * 64
+    assert finished.stages[0].outputs[0].sha256 != "0" * 64
+
+
+def test_start_requires_next_stage_and_no_active_worker(queued):
+    with pytest.raises(ValueError):
+        service().start_stage(queued, "decode")
+    running = service().start_stage(queued, "input")
+    with pytest.raises(ValueError):
+        service().start_stage(running, "input")
+    finished = completed_input(queued)
+    with pytest.raises(ValueError):
+        service().start_stage(finished, "input")
+
+
+@pytest.mark.parametrize("value", [-1, 100, True, "20", 20.5, float("nan")])
+def test_running_progress_cannot_claim_completion_or_coerce_values(queued, value):
+    running = service().start_stage(queued, "input")
+    with pytest.raises(ValueError):
+        service().report_progress(running, "input", value)
+
+
+def test_progress_cannot_move_backwards_or_target_other_stage(queued):
+    running = service().report_progress(service().start_stage(queued, "input"), "input", 80)
+    for stage, progress in (("input", 79), ("decode", 90)):
+        with pytest.raises(ValueError):
+            service().report_progress(running, stage, progress)
+
+
+def test_finish_needs_running_stage_and_current_unique_contained_evidence(queued):
+    evidence = output(queued, "input")
+    with pytest.raises(ValueError):
+        service().finish_stage(queued, "input", [evidence])
+    running = service().start_stage(queued, "input")
+    for evidence_list in ([], [evidence, evidence], [queued.source]):
+        with pytest.raises(ValueError):
+            service().finish_stage(running, "input", evidence_list)
+    finished = service().finish_stage(running, "input", [evidence])
+    decode = service().start_stage(finished, "decode")
+    with pytest.raises(ValueError):
+        service().finish_stage(decode, "decode", [evidence])
+
+
+@pytest.mark.parametrize("status", ["blocked", "failed", "cancelled"])
+def test_stop_and_resume_preserve_completed_evidence_and_attempt_history(queued, status):
+    completed = completed_input(queued)
+    running = service().report_progress(service().start_stage(completed, "decode"), "decode", 30)
+    stopped = service().stop_job(running, status, "synthetic_stop")
+    resumed = service().resume_job(stopped)
+    assert running.status == "running" and running.stages[1].progress == 30
+    assert stopped.status == status and stopped.stages[1].status == status
+    assert stopped.history[-1].code == "synthetic_stop"
+    assert resumed.status == "queued" and resumed.stages[1].status == "queued"
+    assert resumed.stages[1].progress == 0
+    assert resumed.stages[0] == completed.stages[0]
+    assert resumed.history[:-1] == stopped.history
+    assert resumed.history[-1].kind == "resumed"
+
+
+def test_cancel_before_start_is_recoverable_and_active_job_cannot_resume(queued):
+    stopped = service().stop_job(queued, "cancelled", "user_cancelled")
+    assert stopped.stages == queued.stages
+    assert service().resume_job(stopped).status == "queued"
+    with pytest.raises(ValueError):
+        service().resume_job(queued)
+
+
+@pytest.mark.parametrize("which", ["source", "output"])
+def test_resume_checks_current_source_and_completed_output_identity(queued, which):
+    from suno2flp.core.errors import OfflineError
+
+    completed = completed_input(queued)
+    stopped = service().stop_job(completed, "blocked", "backend_missing")
+    target = queued.source.path if which == "source" else completed.stages[0].outputs[0].path
+    target.write_bytes(b"changed")
+    with pytest.raises(OfflineError):
+        service().resume_job(stopped)
+
+
+def test_file_identity_changes_are_checked_at_stage_boundaries_but_cancellation_still_works(queued):
+    from suno2flp.core.errors import OfflineError
+
+    running = service().start_stage(queued, "input")
+    evidence = output(queued, "input")
+    queued.source.path.write_bytes(b"changed")
+    with pytest.raises(OfflineError):
+        service().start_stage(queued, "input")
+    with pytest.raises(OfflineError):
+        service().finish_stage(running, "input", [evidence])
+    assert service().stop_job(running, "cancelled", "user_cancelled").status == "cancelled"
+
+
+def test_mutated_snapshot_or_history_is_not_consumed_as_valid_progress(queued):
+    queued.stages[0].progress = 20
+    with pytest.raises(ValueError):
+        service().start_stage(queued, "input")
+
+
+def test_final_publication_cannot_be_completed_by_foundation_helpers(queued):
+    job = queued
+    for stage in STAGES[:-1]:
+        job = service().finish_stage(service().start_stage(job, stage), stage, [output(job, stage)])
+    publishing = service().start_stage(job, "publish")
+    with pytest.raises(ValueError, match="publication"):
+        service().finish_stage(publishing, "publish", [output(job, "publish")])
+    assert publishing.status == "running" and publishing.execution_allowed is False
+
+
+def test_new_job_refuses_existing_or_source_containing_output_directory(document):
+    source = parse(document).source
+    with pytest.raises(ValueError):
+        service().new_job("job-one", source, source.path.parent)
+
+
+def test_loaded_snapshot_cannot_reassign_output_to_original_input_tree(document):
+    document["output_directory"] = str(Path(document["source"]["path"]).parent)
     with pytest.raises(ValueError):
         parse(document)

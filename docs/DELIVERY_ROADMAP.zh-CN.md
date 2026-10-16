@@ -20,8 +20,8 @@
 
 | 里程碑 | 状态 | 下一个可独立审查的 PR |
 | --- | --- | --- |
-| M0 目标和治理 | 持续目标及完整设计已获用户确认；PR #1 已合入；保护与自动合并已启用；本批规划 PR 验证中 | `codex/delivery-v1-goal`：设计、路线和合并规则 |
-| M1 作业服务与薄 GUI | 未开始 | `codex/m1-job-contracts` → `codex/m1-job-runner` → `codex/m1-gui-shell` |
+| M0 目标和治理 | 已完成：持续目标与设计获确认，PR #1/#2 已合入，保护／自动合并和六个 GitHub 里程碑生效 | 新成果从最新 main 新建分支 |
+| M1 作业服务与薄 GUI | [作业契约及状态转换](JOBS.zh-CN.md)已实现，验证／独立审查中；持久 runner 和 GUI 未实现 | `codex/m1-job-contracts` → `codex/m1-job-runner` → `codex/m1-gui-shell` |
 | M2 音频推理与编排 | 未开始 | `codex/m2-audio-decode` → `codex/m2-benchmark-metrics` → 许可／版本固定后的模型切片 |
 | M3 FLP 与后台宿主 | 已有受限实现，真实交付仍阻断 | `codex/m3-host-lifecycle`，之后是带新证据的时钟和接收路由切片 |
 | M4 端到端质量 | 未开始 | `codex/m4-real-song-delivery`，再做六曲和保留集回归 |
