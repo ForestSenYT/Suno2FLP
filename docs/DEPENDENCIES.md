@@ -30,13 +30,21 @@ environment. Use `uv sync --locked` to reproduce it. Wheel packaging uses Hatchl
 | Ruff | Formatting and linting |
 | mypy / types-PyYAML | Strict source type checking |
 
-The dev group adds tooling only. No audio ML stack, MCP SDK or upstream DAW parser
-is imported by the foundation. New dependencies require a concrete use and review.
+The dev group adds tooling and the same pinned optional Qt runtime for real GUI tests
+and type checking; CLI-only end-user requirements do not include Qt. No audio ML stack,
+MCP SDK or upstream DAW parser is imported by the foundation. New dependencies require
+a concrete use and review.
 Track-aware import includes a local timing compatibility check for mido 1.3.3's
 unknown-metadata delta loss; see [MIDI import](MIDI_IMPORT.md). Regression fixtures
 must remain when changing mido versions.
 
 ## Optional prerequisites
+
+The [desktop workbench](GUI.zh-CN.md) adds optional `gui` extra
+`PySide6-Essentials==6.12.0` (and exact matching shiboken6 via the lock). Only
+QtCore/QtGui/QtWidgets are imported. CLI-only installation remains independent.
+Module licensing/third-party notices and standalone redistribution gates are recorded
+in that document; MIT does not relicense Qt, and no Qt binary is vendored.
 
 FFmpeg is checked but unnecessary for WAV header inspection. FL Studio is needed for
 future actual project compatibility/listening tests. Claude Code and Codex are agent

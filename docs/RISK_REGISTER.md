@@ -57,6 +57,14 @@ whole-song fidelity; all timing, host and writer restrictions remain in place.
 Owners: importer/validator maintainers for media/path risks; adapter maintainers for
 DAW/version risks; project maintainers for dependencies and redistribution decisions.
 Revisit before each roadmap phase and whenever upstream revisions change.
+
+GUI risks: the [desktop workbench](GUI.zh-CN.md) uses real stage snapshots and explicit
+blocked explanations. Long I/O stays off the UI thread; cancellation is cooperative and
+close waits for a boundary, without thread/process termination. Root changes are disabled
+while busy; corrupt selections clear previous action targets. Offscreen tests/rendering
+do not prove real user interaction, accessibility, host behavior or release quality.
+Optional Qt is exact-pinned, dynamically installed with upstream notices retained; an
+independent installer still needs its complete module/source/redistribution audit.
 Phase 3's [assessment and blockers](FLP_BACKEND_ASSESSMENT.md) distinguish source
 support from runtime and audible compatibility. The subsequent
 [read-only inspection slice](TEMPLATE_INSPECTION.md) passed isolated build and synthetic

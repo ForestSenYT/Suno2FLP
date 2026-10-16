@@ -12,6 +12,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+      - name: Install Linux Qt runtime prerequisite
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends libegl1
+          dpkg-query --show libegl1 libglvnd0
       - uses: astral-sh/setup-uv@v6
         with:
           version: '0.12.21'
@@ -25,3 +31,5 @@ jobs:
       - run: uv build
       - run: uv export --locked --no-dev --no-hashes --no-emit-project --output-file runtime-smoke-requirements.tmp
       - run: uv run --no-project --python ${{ matrix.python }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/offline_smoke.py --require-installed --workspace .tools/ci-offline-smoke
+      - run: uv export --locked --no-dev --extra gui --no-hashes --no-emit-project --output-file gui-smoke-requirements.tmp
+      - run: uv run --no-project --python ${{ matrix.python }} --with './dist/suno2flp-0.1.0-py3-none-any.whl[gui]' --with-requirements gui-smoke-requirements.tmp python scripts/gui_smoke.py --require-installed --workspace .tools/ci-gui-smoke

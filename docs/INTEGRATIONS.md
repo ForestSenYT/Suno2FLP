@@ -1,5 +1,10 @@
 # Integration evidence and strategy
 
+The optional [GUI runtime](GUI.zh-CN.md) is Qt for Python Essentials 6.12.0, using
+QtCore/QtGui/QtWidgets and the existing shared job service. It is not a DAW bridge.
+Official package/module license and runtime metadata were reviewed before local
+installation; exact import/offscreen/installed-wheel evidence is required separately.
+
 [Explicit source MIDI routes](FL26_EXPLICIT_ROUTING.zh-CN.md) are read-only declarations,
 not loaded plugins or live connections. Selected program changes have independent MIDI
 and audio observations, while full receiver/channel isolation and exact tempo scheduling
