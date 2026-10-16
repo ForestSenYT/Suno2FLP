@@ -86,9 +86,14 @@ def verify_arrangement_file(path: Path) -> ArrangementQualityReport:
         identity, raw = capture_input(path)
         files.append(identity)
         arrangement = Arrangement.model_validate(load_unique_json(raw))
+        # Protect the complete declaration even if reading its first source fails.
+        references.extend(source.midi.source.absolute() for source in arrangement.sources)
+        if arrangement.instrument_mapping is not None:
+            mapping_path = arrangement.instrument_mapping.document.source_path
+            if mapping_path is not None:
+                references.append(mapping_path.absolute())
         originals = []
         for source in arrangement.sources:
-            references.append(source.midi.source.absolute())
             source_identity, _ = capture_input(source.midi.source)
             files.append(source_identity)
             original = MidiFileImporter().import_file(source.midi.source)
@@ -98,7 +103,6 @@ def verify_arrangement_file(path: Path) -> ArrangementQualityReport:
         if arrangement.instrument_mapping is not None:
             document = arrangement.instrument_mapping.document
             if document.source_path is not None:
-                references.append(document.source_path.absolute())
                 mapping_identity, _ = capture_input(document.source_path)
                 files.append(mapping_identity)
                 if load_instrument_mapping(document.source_path) != document:

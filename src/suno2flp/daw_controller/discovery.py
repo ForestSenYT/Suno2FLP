@@ -1,4 +1,4 @@
-"""MCP discovery only: initialize, initialized notification, paginated tools/list."""
+"""MCP discovery only: lifecycle, paginated tools/list and tool-less peer ping."""
 
 from typing import Literal, Protocol
 
@@ -121,6 +121,11 @@ class DiscoveryController:
                     cursor = next_cursor
                 else:
                     raise ValueError("Tool inventory exceeds bounded pagination")
+            else:
+                reply = self._transport.request("ping", {})
+                if reply != {}:
+                    raise ValueError("Invalid ping response; empty result required")
+                exchanges.append(McpExchange(method="ping", params={}, result=reply))
             self._record.tools = tools
             self._record.transcript = exchanges
             return BackendCapabilities(

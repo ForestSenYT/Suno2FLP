@@ -39,9 +39,13 @@ for line in sys.stdin:
     if message["method"] == "initialize":
         result = {
             "protocolVersion": "2025-06-18",
-            "capabilities": {"tools": {}},
+            "capabilities": {} if mode == "no-tools-exit" else {"tools": {}},
             "serverInfo": {"name": "authored-stdio-peer", "version": "1"},
         }
+    elif message["method"] == "ping":
+        result = {}
     else:
         result = {"tools": [{"name": "fixture_only", "inputSchema": {"type": "object"}}]}
     print(json.dumps({"jsonrpc": "2.0", "id": message["id"], "result": result}), flush=True)
+    if mode == "no-tools-exit" and message["method"] == "ping":
+        break

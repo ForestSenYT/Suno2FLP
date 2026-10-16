@@ -223,6 +223,10 @@ No deep audio analysis is performed.
 
 ## Development
 
+The [Chinese acceptance matrix and installed-wheel walkthrough](docs/OFFLINE_ACCEPTANCE.zh-CN.md)
+distinguish usable offline preparation from pending real FLP/host/MCP acceptance.
+No current offline report can grant writer or DAW execution permission.
+
 ```powershell
 uv run pytest
 uv run ruff check .

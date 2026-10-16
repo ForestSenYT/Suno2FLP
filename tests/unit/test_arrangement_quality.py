@@ -131,3 +131,31 @@ def test_quality_cli_reports_and_refuses_overwrite(tmp_path):
         == 1
     )
     assert destination.read_bytes() == before
+
+
+@pytest.mark.parametrize("destination_name", ["later.mid", "roles.json"])
+def test_early_missing_source_still_protects_all_declared_inputs(tmp_path, destination_name):
+    from offline_fixtures import write_midi
+
+    from suno2flp.arrangement import ExplicitInstrumentMapper, FaithfulArrangementEngine
+    from suno2flp.core.instrument_config import load_instrument_mapping
+
+    path, arrangement, original = arrangement_file(tmp_path)
+    later = write_midi(tmp_path / "later.mid")
+    roles = tmp_path / "roles.json"
+    roles.write_text('{"roles": {}, "mappings": []}', encoding="utf-8")
+    arrangement = FaithfulArrangementEngine().arrange([original, later], arrangement.metadata)
+    arrangement = ExplicitInstrumentMapper().apply(arrangement, load_instrument_mapping(roles))
+    path.write_text(arrangement.model_dump_json(), encoding="utf-8")
+    assert verify(path).valid
+    original.source.unlink()
+    later.source.unlink()
+    roles.unlink()
+
+    destination = tmp_path / destination_name
+    result = CliRunner().invoke(
+        app, ["verify-arrangement", str(path), "--output", str(destination)]
+    )
+    assert result.exit_code == 1, result.output
+    assert not destination.exists(), "A failure report occupied a declared missing input"
+    assert set(verify(path).referenced_paths) == {path, original.source, later.source, roles}

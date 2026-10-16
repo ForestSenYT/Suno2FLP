@@ -1,6 +1,7 @@
 """Stream explicitly aligned PCM WAV comparisons without rendering or inference."""
 
 import math
+import struct
 import wave
 from collections.abc import Iterator
 from pathlib import Path
@@ -17,6 +18,60 @@ def _integers(raw: bytes, width: int) -> Iterator[int]:
             yield raw[offset] - 128  # WAV PCM8 is unsigned; other integer PCM is signed LE.
         else:
             yield int.from_bytes(raw[offset : offset + width], "little", signed=True)
+
+
+def _validate_pcm_layout(path: Path, audio: wave.Wave_read) -> None:
+    """Check declared extents independently of wave's floored frame count."""
+    frame_width = audio.getnchannels() * audio.getsampwidth()
+    format_chunks = data_chunks = 0
+    with path.open("rb") as stream:
+        header = stream.read(12)
+        if len(header) != 12 or header[:4] != b"RIFF" or header[8:] != b"WAVE":
+            raise OfflineError("pcm_format_unsupported", "Only little-endian RIFF/WAVE supported")
+        end = int.from_bytes(header[4:8], "little") + 8
+        if end != path.stat().st_size:
+            raise OfflineError("pcm_extent_invalid", "Declared RIFF size differs from file size")
+        position = 12
+        while position < end:
+            if end - position < 8:
+                raise OfflineError("pcm_truncated", "Incomplete RIFF chunk header")
+            stream.seek(position)
+            chunk = stream.read(8)
+            if len(chunk) != 8:
+                raise OfflineError("pcm_truncated", "Incomplete RIFF chunk header")
+            tag, size = chunk[:4], int.from_bytes(chunk[4:], "little")
+            payload_end = position + 8 + size
+            if payload_end > end:
+                raise OfflineError("pcm_truncated", "Chunk payload exceeds declared RIFF extent")
+            if tag == b"fmt ":
+                format_chunks += 1
+                if size < 16:
+                    raise OfflineError("pcm_format_unsupported", "Incomplete PCM format header")
+                fmt = stream.read(16)
+                expected = (
+                    1,
+                    audio.getnchannels(),
+                    audio.getframerate(),
+                    audio.getframerate() * frame_width,
+                    frame_width,
+                    audio.getsampwidth() * 8,
+                )
+                if len(fmt) != 16 or struct.unpack("<HHIIHH", fmt) != expected:
+                    raise OfflineError(
+                        "pcm_format_unsupported", "Classic integer PCM format fields must agree"
+                    )
+            elif tag == b"data":
+                data_chunks += 1
+                if size % frame_width or size != audio.getnframes() * frame_width:
+                    raise OfflineError("pcm_frame_invalid", "PCM data must contain whole frames")
+            position = payload_end + (size & 1)
+            # stdlib wave writes terminal odd PCM8 data without a pad; no next chunk is hidden.
+            if position == end + 1 and payload_end == end and tag == b"data":
+                position = end
+            if position > end:
+                raise OfflineError("pcm_truncated", "Missing RIFF chunk padding")
+        if format_chunks != 1 or data_chunks != 1:
+            raise OfflineError("pcm_layout_unsupported", "Exactly one fmt and data chunk required")
 
 
 def compare_renders(
@@ -68,6 +123,8 @@ def compare_renders(
                 )
             if not left.getnframes():
                 raise OfflineError("pcm_empty", "Empty audio cannot establish a comparison")
+            _validate_pcm_layout(files[0].path, left)
+            _validate_pcm_layout(files[1].path, right)
             denominator = 2 ** (8 * width - 1)
             reference_energy = candidate_energy = difference_energy = maximum = 0.0
             reference_full_scale = candidate_full_scale = samples = 0

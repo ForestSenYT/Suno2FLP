@@ -63,6 +63,7 @@ uv run suno2flp verify-arrangement arrangement.json --output quality-new.json
 
 缺失、变化、伪造或无法回放的证据返回 1，报告具体诊断；成功返回 0。省略 `--output`
 时输出 JSON；报告只能新建，不能占用任何已知输入位置，包括已缺失的输入。
+读取原始文件前先收集全部 MIDI/外部角色路径，即使第一份输入已缺失，也保护后续输入。
 源文件和报告都不允许链接/reparse 歧义路径。检查前后保留身份并再次核对。
 
 报告中的 `valid` 是结构和回放结果，指纹是当前快照一致性依据，不是签名或声音质量。

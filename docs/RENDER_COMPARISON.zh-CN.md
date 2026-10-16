@@ -13,6 +13,12 @@ uv run suno2flp compare-renders reference.wav candidate.wav --max-rms-error 0.00
 采样率、通道数、位深和帧数，且非空；压缩、浮点、损坏、截断、缺失或格式不一致时
 明确失败，不截取共同部分来掩盖长度差异。通道按原始交错顺序逐样本比较。
 
+支持范围限定为小端 RIFF/WAVE、经典 PCM 格式码 1，且只有一个 `fmt ` 和 `data`。
+独立核对 RIFF 总长度、所有块的声明范围与填充、格式字段和完整帧边界，不能只依赖
+标准库向下取整的帧数；半个样本、缺少通道数据或超出文件的声明一律失败。可跳过
+合法附属块；允许标准库输出的末尾奇数长度 PCM8 数据省略最后填充字节，不能隐藏
+后续块。块长度/填充规则参考 [Microsoft RIFF 说明](https://learn.microsoft.com/en-us/windows/win32/xaudio2/resource-interchange-file-format--riff-)。
+
 报告保留原始文件路径/SHA-256/大小/修改时间、采样率、通道、位深、帧数与比较样本数。
 数值按 `2^(bits-1)` 归一化，记录两份 RMS、差值 RMS、最大绝对差值和满量程样本数量。
 “满量程”只表示样本位于整数最小/最大值，**不证明已经发生可听削波**。

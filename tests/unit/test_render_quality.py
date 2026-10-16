@@ -1,5 +1,6 @@
 import json
 import math
+import struct
 import wave
 from pathlib import Path
 
@@ -141,3 +142,63 @@ def test_cli_measurement_and_threshold_failure_preserve_report(tmp_path):
         == 1
     )
     assert report.read_bytes() == original
+
+
+@pytest.mark.parametrize("channels,extra", [(1, 1), (2, 2)])
+@pytest.mark.parametrize("complete_payload", [False, True])
+def test_declared_partial_samples_or_multichannel_frames_never_pass(
+    tmp_path, channels, extra, complete_payload
+):
+    reference = wav(tmp_path / "ref.wav", [0] * (2 * channels), channels=channels)
+    candidate = wav(tmp_path / "candidate.wav", [0] * (2 * channels), channels=channels)
+    raw = bytearray(candidate.read_bytes())
+    struct.pack_into("<I", raw, 40, 4 * channels + extra)
+    if complete_payload:
+        raw.extend(b"\0" * extra)
+        struct.pack_into("<I", raw, 4, len(raw) - 8)
+    candidate.write_bytes(raw)
+    result = compare(reference, candidate, max_rms_error=0)
+    assert not result.valid, "A floored frame count hid incomplete PCM data"
+    assert result.samples_identical is None and result.within_tolerance is None
+    assert result.diagnostics
+
+
+@pytest.mark.parametrize("padded", [False, True])
+def test_complete_odd_pcm8_terminal_data_remains_supported(tmp_path, padded):
+    reference = wav(tmp_path / "ref.wav", [0], width=1)
+    candidate = wav(tmp_path / "candidate.wav", [0], width=1)
+    if padded:
+        raw = bytearray(candidate.read_bytes() + b"\0")
+        struct.pack_into("<I", raw, 4, len(raw) - 8)
+        candidate.write_bytes(raw)
+    result = compare(reference, candidate, max_rms_error=0)
+    assert result.valid and result.samples_identical and result.within_tolerance
+
+
+@pytest.mark.parametrize("kind", ["bits", "block_align", "riff_extent", "second_data", "tail"])
+def test_inconsistent_or_ambiguous_riff_layout_never_passes(tmp_path, kind):
+    reference = wav(tmp_path / "ref.wav", [0, 0])
+    candidate = wav(tmp_path / "candidate.wav", [0, 0])
+    raw = bytearray(candidate.read_bytes())
+    if kind == "bits":
+        struct.pack_into("<H", raw, 34, 15)
+    elif kind == "block_align":
+        struct.pack_into("<H", raw, 32, 1)
+    elif kind == "riff_extent":
+        struct.pack_into("<I", raw, 4, len(raw) - 9)
+    else:
+        raw.extend(b"data\0\0\0\0" if kind == "second_data" else b"cut")
+        struct.pack_into("<I", raw, 4, len(raw) - 8)
+    candidate.write_bytes(raw)
+    result = compare(reference, candidate, max_rms_error=0)
+    assert not result.valid and result.samples_identical is None
+
+
+def test_valid_padded_ancillary_chunk_does_not_change_pcm_measurements(tmp_path):
+    reference = wav(tmp_path / "ref.wav", [0, 0])
+    candidate = wav(tmp_path / "candidate.wav", [0, 0])
+    raw = bytearray(candidate.read_bytes() + b"JUNK\x01\0\0\0x\0")
+    struct.pack_into("<I", raw, 4, len(raw) - 8)
+    candidate.write_bytes(raw)
+    result = compare(reference, candidate, max_rms_error=0)
+    assert result.valid and result.samples_identical and result.within_tolerance

@@ -39,6 +39,21 @@ def test_stdio_peer_negotiates_without_any_daw_or_tool_calls(tmp_path):
     ]
 
 
+def test_toolless_stdio_peer_exit_invalidates_discovery(tmp_path):
+    from suno2flp.daw_controller.discovery import DiscoveryController
+
+    wire = transport(tmp_path, "no-tools-exit")
+    client = DiscoveryController(wire, evidence_kind="synthetic_test")
+    try:
+        assert client.connect().operations == []
+        assert client.record.transcript[-1].method == "ping"
+        with pytest.raises(IntegrationUnavailableError):
+            client.capabilities()
+        assert client.record is None and wire.closed
+    finally:
+        client.disconnect()
+
+
 @pytest.mark.parametrize("mode", ["malformed", "wrong-id", "error", "eof", "hang"])
 def test_stdio_failures_close_owned_process_and_never_report_connection(tmp_path, mode):
     from suno2flp.daw_controller.discovery import DiscoveryController

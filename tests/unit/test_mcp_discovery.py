@@ -142,17 +142,54 @@ def test_refresh_failure_invalidates_previous_success():
     assert client.record is None and peer.closed
 
 
-def test_no_tools_capability_does_not_fabricate_tool_inventory():
-    class NoTools(FixtureTransport):
-        def request(self, method, params):
-            assert method == "initialize"
-            result = super().request(method, params)
-            result["capabilities"] = {}
-            return result
+class NoToolsTransport(FixtureTransport):
+    def __init__(self):
+        super().__init__()
+        self.alive = True
+        self.ping_result = {}
+        self.requests = []
 
-    client = controller(NoTools())
+    def request(self, method, params):
+        self.requests.append(method)
+        if not self.alive:
+            raise IntegrationUnavailableError("Synthetic peer disconnected")
+        if method == "ping":
+            assert self.initialized and params == {}
+            return self.ping_result
+        assert method == "initialize"
+        result = super().request(method, params)
+        result["capabilities"] = {}
+        return result
+
+
+def test_no_tools_capability_does_not_fabricate_tool_inventory():
+    peer = NoToolsTransport()
+    client = controller(peer)
     assert client.connect().operations == []
     assert client.record.tools == [] and not client.record.execution_allowed
+    assert [item.method for item in client.record.transcript] == [
+        "initialize",
+        "notifications/initialized",
+        "ping",
+    ]
+    assert client.capabilities().operations == []
+    assert peer.requests == ["initialize", "ping", "ping"]
+
+
+@pytest.mark.parametrize("failure", ["disconnected", "malformed_ping"])
+def test_no_tools_refresh_invalidates_disconnected_or_invalid_peer(failure):
+    peer = NoToolsTransport()
+    client = controller(peer)
+    client.connect()
+    if failure == "disconnected":
+        peer.alive = False
+    else:
+        peer.ping_result = {"unexpected": True}
+    with pytest.raises(IntegrationUnavailableError):
+        client.capabilities()
+    assert client.record is None and peer.closed
+    with pytest.raises(IntegrationUnavailableError):
+        client.capabilities()
 
 
 def test_returned_record_cannot_mutate_the_connection_evidence():

@@ -26,7 +26,11 @@ any separately installed backend negotiates it; that actual adoption remains pen
 `DiscoveryController(transport, evidence_kind="live_protocol")` consumes a synchronous
 `McpTransport` with `request(method, params)`, `notify(method, params)` and `close()`.
 `connect()` negotiates and discovers; `capabilities()` refreshes the current complete
-tool list rather than reusing cached names; `disconnect()` clears evidence and closes.
+tool list rather than reusing cached names. For a server declaring no tools it instead
+requires a fresh bounded `ping` with an empty result, records that exchange and clears
+availability if the peer disconnects or replies incorrectly;
+[official ping behavior](https://modelcontextprotocol.io/specification/2025-06-18/basic/utilities/ping).
+`disconnect()` clears evidence and closes.
 Use a new controller/transport for a new process session. `record` returns a deep copy.
 Only successful protocol interaction produces `BackendCapabilities.status=available`.
 That means protocol availability, **not** a connected/compatible FL Studio host.
@@ -62,6 +66,8 @@ not hostile process-tree isolation or production-wide resource containment.
 
 Tests cover version/state/initialization, pagination, stale/invalidated inventories,
 metadata preservation, EOF, RPC error, malformed JSON, mismatched ID, timeout and close.
+A tool-less synthetic stdio peer exits after negotiation to verify stale availability
+cannot survive a failed ping. No actual backend is involved.
 A separately launched **original test peer** exercises actual stdio framing and logs
 that only lifecycle/discovery messages were received; it provides no FL Studio tools.
 This is transport evidence, not a genuine installed-backend or DAW handshake.

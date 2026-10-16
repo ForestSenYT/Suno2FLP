@@ -23,3 +23,5 @@ jobs:
       - run: uv run --no-sync pytest
       - run: uv run --no-sync suno2flp --help
       - run: uv build
+      - run: uv export --locked --no-dev --no-hashes --no-emit-project --output-file runtime-smoke-requirements.tmp
+      - run: uv run --no-project --python ${{ matrix.python }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/offline_smoke.py --require-installed --workspace .tools/ci-offline-smoke

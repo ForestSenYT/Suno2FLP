@@ -6,8 +6,8 @@
 | 1 — MIDI importing and cleanup (initial slices implemented) | Track-aware import and opt-in duplicate/short-note filtering and onset quantization | Synthetic multitrack/cleanup fixtures; originals and change history preserved |
 | 2 — Arrangement and mapping (faithful/mapping slices implemented) | Faithful arrangements with PPQ/map policy and explicit channel-preserving role hints; reinterpretation remains planned | Note/event/provenance preservation, precision/conflict and mapping fixtures verified |
 | 3 — FLP templates (restricted writer implemented; private real input blocked) | Inventories/readiness, explicit-policy native FL26 encoder, independent structural round trip and exclusive Windows output bundles | Eligible real reference/dependencies and independent FL Studio open/readback/listening still required |
-| 4 — MCP control | One negotiated backend with connection/capability checks | Actual handshake, tool inventory, readback and recoverable mutations |
-| 5 — Quality and automation | Timing/event comparison, rendered checks, reproducible orchestration | Audible review and deterministic acceptance reports |
+| 4 — MCP control (offline discovery implemented; real adoption pending) | Pinned protocol discovery and bounded stdio, with actual backend/host work still gated | Actual authorized backend handshake, tool inventory, readback and recoverable mutations |
+| 5 — Quality and automation (offline slices implemented) | Current-source replay, reproducible JSON preparation and explicit PCM numerical comparisons | Genuine host render/listening and final musical acceptance remain required |
 
 Implemented Phase 1 slice: `MidiFileImporter` and `import-midi`, including Type 0/1 PPQ
 tracks, tempo/meter provenance, source event order, original note ticks and diagnostics.
@@ -82,7 +82,8 @@ read-only `verify-flp-bundle` command, reconstructing all current originals and 
 the output independently after publication. It rejects stale/forged evidence without
 writing, launching a process or changing host compatibility. The same document records
 the separate real-reference and manual host observations still needed before Phase 3
-can be accepted; Phase 4 remains planned.
+can be accepted. Phase 4 now has the separate offline discovery boundary described below;
+real backend/host adoption remains pending.
 
 The [isolated FL26 backend adaptation](FL26_BACKEND_ADAPTATION.md) adds an explicit
 inspection-only build from the same upstream pin, with source/recipe/artifact hashes.
@@ -114,3 +115,10 @@ The [offline manual-record checker](FL26_RECORD_CHECKS.zh-CN.md) adds versioned 
 companions, pinned file/evidence checks and JSON/Markdown summaries for all six probes.
 Intact pending records differ from invalid claims; reported completion never verifies
 the host or authorizes writes. No backend/DAW invocation or FLP mutation is introduced.
+
+The [offline readiness batch](OFFLINE_ACCEPTANCE.zh-CN.md) adds independent current-source
+arrangement replay, new JSON preparation bundles and full saved-run reconstruction,
+discovery-only MCP lifecycle/stdio with original synthetic peers, and aligned integer
+PCM measurements with explicit numerical thresholds. CI also checks the installed
+wheel lifecycle against locked runtime dependencies. This completes these offline
+components, not real-template compatibility or whole-project host acceptance.
