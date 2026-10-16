@@ -299,7 +299,8 @@ it does not perform directory discovery. JSON outputs use exclusive creation.
 WAV metadata uses standard-library `wave`: PCM formats supported by the runtime,
 not every WAV codec. Headers alone cannot establish integrity of all sample data.
 MIDI uses mido; SMPTE timing is rejected by the positive PPQ metadata contract.
-No waveform decoding, tempo inference, transcription or MIDI binary writing is performed.
+Metadata discovery performs no waveform decoding, tempo inference, transcription or MIDI
+binary writing. The separate PCM decoder is described in the delivery architecture above.
 Very large/untrusted files are not resource-isolated; use trusted local exports.
 
 Domain failures inherit `Suno2FLPError`. Discovery reports per-file errors and continues.
