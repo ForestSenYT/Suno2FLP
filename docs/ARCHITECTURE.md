@@ -11,9 +11,14 @@ isolated. See the [delivery roadmap](DELIVERY_ROADMAP.zh-CN.md) for incremental 
 
 `core.jobs` and `pipeline.jobs` implement the first shared job-contract slice: canonical
 stages, history-reconstructed snapshots, copy-on-transition progress, identity-checked
-stage boundaries and cancellation/resume. Final publication and success remain refused;
-no persistence, worker, GUI or process execution is introduced. These states are never
-writer authorization. See [job contracts](JOBS.zh-CN.md).
+stage boundaries and cancellation/resume. `core.job_store` / `pipeline.job_store` add
+exclusive fsynced, hash-linked event records with exact-head appends and full replay.
+`importer.audio` streams and validates complete RIFF/PCM payloads; `pipeline.audio_jobs`
+owns the shared synchronous create/run/verify/cancel service consumed by thin CLI commands.
+Independent preflight replay checks completed input evidence. Unavailable later workers
+block explicitly; no GUI, process execution or inference is introduced. Final publication
+and success remain refused. These states never grant writer authorization. See
+[job service](JOBS.zh-CN.md) and [audio preflight](AUDIO_INPUT.zh-CN.md).
 
 ## Current design — foundations, MIDI import/cleanup and faithful arrangements
 

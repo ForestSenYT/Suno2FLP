@@ -10,6 +10,7 @@ import yaml
 from pydantic import ValidationError
 
 from suno2flp.arrangement import ExplicitInstrumentMapper, FaithfulArrangementEngine
+from suno2flp.cli_audio_jobs import register_audio_jobs
 from suno2flp.core.config import MidiPreferences, load_config
 from suno2flp.core.doctor import check_environment
 from suno2flp.core.errors import (
@@ -46,6 +47,7 @@ app = typer.Typer(
     no_args_is_help=True,
     pretty_exceptions_enable=False,
 )
+register_audio_jobs(app)
 
 
 @app.callback()
