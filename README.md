@@ -43,6 +43,12 @@ FL26 experiments establish selected internal port/volume responses, while demons
 that a one-tick audio compensation changes exported MIDI positions. Full song generation
 remains blocked; these commands never run the host or write an FLP.
 
+[Explicit MIDI routing](docs/FL26_EXPLICIT_ROUTING.zh-CN.md) adds `plan-midi-routing`
+and `verify-midi-routing`: complete source-group coverage, explicit receiver/port
+declarations, unchanged source channels, collision checks and current-input replay.
+Selected program changes have background audio evidence, but declarations and exports
+do not establish complete receiver delivery or precise tempo playback. All gates remain.
+
 The [noninteractive performance preparation](docs/NONINTERACTIVE_PERFORMANCE.zh-CN.md)
 adds `plan-midi-performance` and `verify-midi-performance`: current-source replay,
 every event in source order, exact rational PPQ/elapsed-time coordinates, and explicit

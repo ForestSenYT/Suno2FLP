@@ -1,5 +1,11 @@
 # Risk register
 
+The [explicit MIDI routing slice](FL26_EXPLICIT_ROUTING.zh-CN.md) rejects incomplete
+coverage, destination aliases, receiver/port namespace collisions and channel rewrites.
+Complete declarations do not attest actual receiver delivery. Exported program values,
+selected audio responses and inactive factory automation candidates cannot establish
+whole-song fidelity; all timing, host and writer restrictions remain in place.
+
 | Risk | Impact | Mitigation / future gate | Current status |
 | --- | --- | --- | --- |
 | Audio compensation changes original MIDI events | Correct-looking onsets conceal moved tempo points | Compare independent MIDI event positions and exact clocks; never compensate source ticks from one render | Minus-one-tick audio probes align selected onsets but export the moved tick; writer blocked |

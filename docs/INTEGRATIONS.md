@@ -1,5 +1,11 @@
 # Integration evidence and strategy
 
+[Explicit source MIDI routes](FL26_EXPLICIT_ROUTING.zh-CN.md) are read-only declarations,
+not loaded plugins or live connections. Selected program changes have independent MIDI
+and audio observations, while full receiver/channel isolation and exact tempo scheduling
+remain unverified. Factory automation candidates produced no established tempo response;
+no writer gate is relaxed and no factory state or private output is distributed.
+
 The [FL26 control evidence](FL26_CONTROL_EVIDENCE.zh-CN.md) adds original read-only
 event-223 inspection and encoding analysis. Private authorized CLI probes establish
 selected REC integer fields but reveal step-timing differences; they do not establish

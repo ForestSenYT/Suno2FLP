@@ -146,6 +146,42 @@ def main():
     damaged_encoding = project / "intermediate/intentional-encoding-corruption.json"
     damaged_encoding.write_text(json.dumps(encoding), encoding="utf-8")
     cli("verify-midi-encoding", damaged_encoding, expected=1)
+    bindings_path = project / "intermediate/midi-bindings.json"
+    bindings_path.write_text(
+        json.dumps(
+            {
+                "schema_version": 1,
+                "bindings": [
+                    {
+                        "source_input": 0,
+                        "source_channel": 2,
+                        "destination_port": 16,
+                        "destination_channel": 2,
+                        "receiver_id": "smoke-receiver",
+                    }
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+    routing_path = project / "intermediate/midi-routing.json"
+    routing_args = ("plan-midi-routing", performance_path, bindings_path, "--output", routing_path)
+    cli(*routing_args)
+    cli("verify-midi-routing", routing_path)
+    routing = json.loads(routing_path.read_text(encoding="utf-8"))
+    route = routing["routes"][0]
+    if (
+        route["binding"]["destination_channel"] != 2
+        or [c["source_tick"] for c in route["source"]["controls"]] != [0, 480]
+        or routing["receiver_delivery"] != "unverified"
+        or routing["execution_allowed"] is not False
+    ):
+        raise RuntimeError("Routing changed source controls or granted execution")
+    cli(*routing_args, expected=1)
+    route["source"]["controls"].pop()
+    damaged_routing = project / "intermediate/intentional-routing-corruption.json"
+    damaged_routing.write_text(json.dumps(routing), encoding="utf-8")
+    cli("verify-midi-routing", damaged_routing, expected=1)
     midi_comparison_path = project / "intermediate/midi-comparison.json"
     midi_source = project / "input/song.mid"
     midi_candidate = project / "intermediate/extra-control.mid"
@@ -221,6 +257,7 @@ def main():
                 "performance_negative_checks": "passed",
                 "encoding_assessment_replay": "passed",
                 "midi_comparison_replay": "passed",
+                "midi_routing_replay": "passed",
                 "installed_wheel": installed,
                 "package_path": str(module_path),
                 "original_inputs_unchanged": True,

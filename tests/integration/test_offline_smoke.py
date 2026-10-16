@@ -23,6 +23,7 @@ def test_smoke_script_exercises_workflow_and_refuses_reuse(tmp_path):
     assert report["performance_negative_checks"] == "passed"
     assert report["encoding_assessment_replay"] == "passed"
     assert report["midi_comparison_replay"] == "passed"
+    assert report["midi_routing_replay"] == "passed"
     assert report["host_compatibility"] == "unverified"
     again = subprocess.run(
         args,

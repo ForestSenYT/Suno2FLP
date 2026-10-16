@@ -45,6 +45,13 @@ imports and file identities are retained. Saved reports replay against current s
 even equivalent decoded streams never attest a receiver or enable execution. See
 [MIDI round-trip evidence](MIDI_EVENT_COMPARISON.zh-CN.md).
 
+`core.midi_routing` and `flp_builder.midi_routing` add explicit receiver/port declarations
+over a freshly replayed encoding assessment. Complete source coverage, unchanged channels,
+injective destination pairs and a one-to-one receiver/port namespace are required. The
+report preserves configuration order, source occurrences and current-file identities;
+verification reconstructs the complete report. This planning boundary has no process,
+MIDI dispatch or writer path; see [routing evidence](FL26_EXPLICIT_ROUTING.zh-CN.md).
+
 | Module | Responsibility | Current implementation |
 | --- | --- | --- |
 | core | Pydantic contracts, YAML configuration, errors, path guards, doctor | Implemented |

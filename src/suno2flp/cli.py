@@ -25,6 +25,7 @@ from suno2flp.core.workspace import init_project as create_project
 from suno2flp.flp_builder.assessment_files import assess_template_files
 from suno2flp.flp_builder.bundle_verification import verify_fl26_bundle_files
 from suno2flp.flp_builder.encoding_assessment import assess_encoding_file, verify_encoding_file
+from suno2flp.flp_builder.midi_routing import plan_midi_routing_file, verify_midi_routing_file
 from suno2flp.flp_builder.performance import plan_performance_file, verify_performance_file
 from suno2flp.flp_builder.planning_files import plan_build_files
 from suno2flp.flp_builder.writer_files import build_fl26_files, plan_fl26_files
@@ -208,6 +209,34 @@ def verify_midi_encoding(assessment_file: Path) -> None:
     try:
         verify_encoding_file(assessment_file)
         typer.echo("Encoding assessment replay passed; FLP execution blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
+@app.command("plan-midi-routing")
+def plan_midi_routing_command(
+    performance_file: Path,
+    bindings_file: Path,
+    output: Annotated[Path, typer.Option("--output", help="New source-preserving route plan")],
+) -> None:
+    """Validate explicit destinations; no plugin loading, MIDI dispatch or FLP writing."""
+    try:
+        result = plan_midi_routing_file(performance_file, bindings_file)
+        content = result.model_dump_json(indent=2) + "\n"
+        verify_inputs(result.input_files)
+        new_report(output, content, result.referenced_paths)
+        verify_inputs(result.input_files)
+        typer.echo(f"MIDI routing plan: {output}; receiver unverified; FLP execution blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
+@app.command("verify-midi-routing")
+def verify_midi_routing_command(report_file: Path) -> None:
+    """Replay current sources and bindings; success does not attest delivery."""
+    try:
+        verify_midi_routing_file(report_file)
+        typer.echo("MIDI routing replay passed; receiver unverified; FLP execution blocked")
     except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
         _fail(exc)
 

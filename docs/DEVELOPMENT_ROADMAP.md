@@ -1,5 +1,10 @@
 # Development roadmap
 
+Latest [explicit MIDI routing slice](FL26_EXPLICIT_ROUTING.zh-CN.md): source-preserving
+receiver/port declarations, complete coverage/collision checks and report replay are
+implemented. Selected program parameters affect exported MIDI and audio. Full receiver
+delivery, exact tempo representation/scheduling and whole-song delivery remain blocked.
+
 Latest [control evidence slice](FL26_CONTROL_EVIDENCE.zh-CN.md): selected event-223
 integer/REC observations, 14 private background renders, source-replayed scalar error
 and route assessment, and synthetic regressions are implemented. Exact FL26 step timing

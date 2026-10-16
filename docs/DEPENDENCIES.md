@@ -1,5 +1,10 @@
 # Dependencies
 
+The [explicit routing slice](FL26_EXPLICIT_ROUTING.zh-CN.md) adds no dependency or vendor
+implementation. Factory tempo-automation structures were examined only in private probes;
+their old declared version does not establish FL26 compatibility. Proprietary templates,
+plugin state, DLLs and audio remain local, outside Git and distributions.
+
 ## Required foundation
 
 The [control evidence](FL26_CONTROL_EVIDENCE.zh-CN.md) adds no dependencies. It uses
