@@ -53,6 +53,7 @@ class WorkbenchWindow(QMainWindow):
         self._worker: Worker | None = None
         self._close_after = False
         self._cancellable = False
+        self._loading_path: Path | None = None
         self._pool = QThreadPool(self)
         self._pool.setMaxThreadCount(1)
         self.setWindowTitle("Suno2FLP 音频工作台")
@@ -206,6 +207,10 @@ class WorkbenchWindow(QMainWindow):
             self.notice.setText(reason or "操作未完成。请查看诊断，核对文件路径及访问权限。")
             self.details.setPlainText(str(error))
             self.details_button.setChecked(True)
+            if self._loading_path is not None:
+                self.status.setText("记录不可读")
+                self.summary.setText("阶段状态无法核验")
+                self.explanation.setText("所选记录无法读取。已保留文件，不会继续操作之前的任务。")
         elif isinstance(result, ActionResult):
             if result.stored is not None:
                 self.selected = result.stored
@@ -228,6 +233,7 @@ class WorkbenchWindow(QMainWindow):
             if result.diagnostics is not None:
                 self.details.setPlainText(result.diagnostics)
                 self.details_button.setChecked(True)
+        self._loading_path = None
         self._controls()
         if self._close_after:
             self.close()
@@ -243,7 +249,19 @@ class WorkbenchWindow(QMainWindow):
 
         self._submit(create, cancellable=True)
 
-    def load_snapshot(self, path: Path) -> None:
+    def load_snapshot(self, path: Path, *, title: str | None = None) -> None:
+        if self.busy:
+            return
+        self.selected = None
+        self._loading_path = path
+        self.task_title.setText(title or "所选历史任务")
+        self.task_title.setToolTip(str(path))
+        self.status.setText("正在读取记录")
+        self.summary.setText("阶段状态等待核验")
+        self.explanation.setText("读取所选任务的完整记录，当前没有可操作的任务。")
+        self.details.setPlainText(str(path))
+        for row in range(len(STAGES)):
+            self.stages.setItem(row, 2, QTableWidgetItem("无法核验"))
         actions = self.job_actions
         self._submit(lambda _: ActionResult(stored=actions.load(path)))
 
@@ -326,6 +344,7 @@ class WorkbenchWindow(QMainWindow):
         for row in range(len(STAGES)):
             self.stages.setItem(row, 2, QTableWidgetItem("待执行"))
         self.history_list.clear()
+        self._controls()
         if refresh:
             self.refresh_history()
         return True
@@ -356,10 +375,12 @@ class WorkbenchWindow(QMainWindow):
         self.create_job(Path(self.source_edit.text()))
 
     def _history_selected(self, item: QListWidgetItem) -> None:
+        if self.busy:
+            return
         entry = item.data(Qt.ItemDataRole.UserRole)
         if isinstance(entry, HistoryEntry):
             if entry.snapshot is not None:
-                self.load_snapshot(entry.snapshot)
+                self.load_snapshot(entry.snapshot, title=entry.title)
             else:
                 self.selected = None
                 self.task_title.setText(entry.title)

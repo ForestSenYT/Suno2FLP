@@ -225,3 +225,47 @@ def test_editing_root_then_creating_does_not_start_competing_refresh(application
     assert bench.selected is not None
     assert bench.selected.job.output_directory.parent == tmp_path / "edited-root"
     bench.close()
+
+
+def test_history_corruption_after_enumeration_cannot_target_previous_job(application, tmp_path):
+    bench = window(tmp_path)
+    bench.create_job(source(tmp_path))
+    finish(application, bench)
+    alpha = bench.selected
+    beta_source = tmp_path / "Beta.wav"
+    beta_source.write_bytes(alpha.job.source.path.read_bytes())
+    bench.create_job(beta_source)
+    finish(application, bench)
+    beta = bench.selected
+    beta_item = next(
+        bench.history_list.item(index)
+        for index in range(bench.history_list.count())
+        if bench.history_list.item(index).data(256).snapshot == beta.record.path
+    )
+    bench.load_snapshot(alpha.record.path)
+    finish(application, bench)
+    beta.record.path.write_bytes(b"{")
+    bench.history_list.setCurrentItem(beta_item)
+    bench._history_selected(beta_item)
+    finish(application, bench)
+    assert bench.selected is None
+    assert "Beta" in bench.task_title.text() and "不可读" in bench.status.text()
+    assert not bench.run_button.isEnabled() and not bench.cancel_button.isEnabled()
+    bench.cancel_selected()
+    finish(application, bench)
+    assert bench.job_actions.load(alpha.record.path).job.status == "queued"
+    bench.close()
+
+
+def test_manual_workspace_change_disables_previous_task_controls(application, tmp_path):
+    bench = window(tmp_path)
+    bench.create_job(source(tmp_path))
+    finish(application, bench)
+    assert bench.cancel_button.isEnabled()
+    assert bench.set_workspace(tmp_path / "empty-workspace", refresh=False)
+    assert bench.selected is None and not bench.busy
+    assert not any(
+        button.isEnabled()
+        for button in (bench.run_button, bench.verify_button, bench.cancel_button)
+    )
+    bench.close()
