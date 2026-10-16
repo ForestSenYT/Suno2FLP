@@ -123,6 +123,10 @@ Private references remain local.
 [Offline crop/clip-flag regressions](docs/FL26_CLIP_OFFLINE.md) now cover raw-bit
 preservation, PPQ spans, output corruption and refusal before staging. Experimental
 candidate host reopening remains pending; these tests do not relax write eligibility.
+The [manual six-candidate checklist in Chinese](docs/FL26_MANUAL_VALIDATION.zh-CN.md)
+and [blank result form](docs/templates/FL26_HOST_RESULT.zh-CN.md) separate view zoom,
+right-edge resizing, fresh-session host reopen and byte readback. Preparing these
+forms performs no host actions and changes no writer gates; filled records stay private.
 See [prerequisites, failure codes and tests](docs/TEMPLATE_INSPECTION.md).
 
 For a current-file, process-free dependency/compatibility evidence report:

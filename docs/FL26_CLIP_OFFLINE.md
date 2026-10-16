@@ -103,6 +103,13 @@ errors/warnings, a separately named new host save, reopened readback and field c
 Any such work stays deferred while computer control is paused. No reopening, resizing,
 normalization or audible-compatibility claim is added by this offline slice.
 
+The follow-up [manual checklist in Chinese](FL26_MANUAL_VALIDATION.zh-CN.md) and
+[blank per-candidate form](templates/FL26_HOST_RESULT.zh-CN.md) prepare explicit input,
+no-musical-edit save A, fresh-session reopen, right-edge length experiment B and
+fresh-session reopen/readback stages. View zoom is checked separately. Six locally
+prepared forms retain input identities and proposed values only; all host observations
+remain pending. No candidate/reference is rewritten, and filled forms stay ignored.
+
 ## Verified results for this offline slice
 
 The new file adds **49 synthetic cases**. Local Python 3.11 and 3.14 each passed

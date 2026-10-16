@@ -103,3 +103,9 @@ The [offline crop/flag regression slice](FL26_CLIP_OFFLINE.md) adds authored syn
 boundary tests and a private change-budget audit while host control is paused. Six
 experimental candidate files have no host-open/resave/reopen results; these stages
 remain pending. Runtime eligibility, crop writes and nonzero clip flags are unchanged.
+
+The [manual host-validation preparation](FL26_MANUAL_VALIDATION.zh-CN.md) supplies a
+six-candidate checklist and blank result form, separating view zoom from a fixed-left
+right-edge length experiment and requiring new A/B saves plus fresh-session reopens.
+Local prepared forms contain provenance/planned values only. No host actions or FLP
+writes occur in this documentation slice; all pending results and writer gates remain.
