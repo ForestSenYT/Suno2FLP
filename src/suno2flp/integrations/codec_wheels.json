@@ -1,0 +1,195 @@
+{
+  "schema_version": 1,
+  "python_versions": {
+    "cp311": "3.11.16",
+    "cp314": "3.14.7"
+  },
+  "soundfile_revision": "3162358d0315be769b97f3e4c12545fe18a676bc",
+  "native_revision": "a3e6f9769d0c7e91d2d036cf0fdbe5b4bbf18b87",
+  "platforms": {
+    "windows-x86_64-cp311": {
+      "native_filename": "libsndfile_x64.dll",
+      "native_sha256": "22518c16f9d13eda5ae5adf999c4740d7d16cc2d6b178b36dd4ac2f759a38559",
+      "wheels": [
+        {
+          "distribution": "soundfile",
+          "version": "0.14.0",
+          "filename": "soundfile-0.14.0-py2.py3-none-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/ed/97/b39c18ac1df45e755ca22b8b00e872929da5d107998a207a5e4ac831bfda/soundfile-0.14.0-py2.py3-none-win_amd64.whl",
+          "sha256": "299491d3499460fb1b74bb4bd78b57ffc2d243a5fafa7b6ec1b264875c78453e",
+          "size_bytes": 1021480
+        },
+        {
+          "distribution": "cffi",
+          "version": "2.0.0",
+          "filename": "cffi-2.0.0-cp311-cp311-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/ae/8f/dc5531155e7070361eb1b7e4c1a9d896d0cb21c49f807a6c03fd63fc877e/cffi-2.0.0-cp311-cp311-win_amd64.whl",
+          "sha256": "66f011380d0e49ed280c789fbd08ff0d40968ee7b665575489afa95c98196ab5",
+          "size_bytes": 182820
+        },
+        {
+          "distribution": "numpy",
+          "version": "2.3.5",
+          "filename": "numpy-2.3.5-cp311-cp311-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/aa/44/9fe81ae1dcc29c531843852e2874080dc441338574ccc4306b39e2ff6e59/numpy-2.3.5-cp311-cp311-win_amd64.whl",
+          "sha256": "a414504bef8945eae5f2d7cb7be2d4af77c5d1cb5e20b296c2c25b61dff2900c",
+          "size_bytes": 13078442
+        },
+        {
+          "distribution": "pycparser",
+          "version": "2.23",
+          "filename": "pycparser-2.23-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/a0/e3/59cd50310fc9b59512193629e1984c1f95e5c8ae6e5d8c69532ccc65a7fe/pycparser-2.23-py3-none-any.whl",
+          "sha256": "e5c6e8d3fbad53479cab09ac03729e0a9faf2bee3db8208a550daf5af81a5934",
+          "size_bytes": 118140
+        },
+        {
+          "distribution": "typing_extensions",
+          "version": "4.16.0",
+          "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "size_bytes": 45571
+        }
+      ]
+    },
+    "windows-x86_64-cp314": {
+      "native_filename": "libsndfile_x64.dll",
+      "native_sha256": "22518c16f9d13eda5ae5adf999c4740d7d16cc2d6b178b36dd4ac2f759a38559",
+      "wheels": [
+        {
+          "distribution": "soundfile",
+          "version": "0.14.0",
+          "filename": "soundfile-0.14.0-py2.py3-none-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/ed/97/b39c18ac1df45e755ca22b8b00e872929da5d107998a207a5e4ac831bfda/soundfile-0.14.0-py2.py3-none-win_amd64.whl",
+          "sha256": "299491d3499460fb1b74bb4bd78b57ffc2d243a5fafa7b6ec1b264875c78453e",
+          "size_bytes": 1021480
+        },
+        {
+          "distribution": "cffi",
+          "version": "2.0.0",
+          "filename": "cffi-2.0.0-cp314-cp314-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/bb/92/882c2d30831744296ce713f0feb4c1cd30f346ef747b530b5318715cc367/cffi-2.0.0-cp314-cp314-win_amd64.whl",
+          "sha256": "203a48d1fb583fc7d78a4c6655692963b860a417c0528492a6bc21f1aaefab25",
+          "size_bytes": 185650
+        },
+        {
+          "distribution": "numpy",
+          "version": "2.3.5",
+          "filename": "numpy-2.3.5-cp314-cp314-win_amd64.whl",
+          "url": "https://files.pythonhosted.org/packages/a3/2e/235b4d96619931192c91660805e5e49242389742a7a82c27665021db690c/numpy-2.3.5-cp314-cp314-win_amd64.whl",
+          "sha256": "e6a0bc88393d65807d751a614207b7129a310ca4fe76a74e5c7da5fa5671417e",
+          "size_bytes": 12919388
+        },
+        {
+          "distribution": "pycparser",
+          "version": "2.23",
+          "filename": "pycparser-2.23-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/a0/e3/59cd50310fc9b59512193629e1984c1f95e5c8ae6e5d8c69532ccc65a7fe/pycparser-2.23-py3-none-any.whl",
+          "sha256": "e5c6e8d3fbad53479cab09ac03729e0a9faf2bee3db8208a550daf5af81a5934",
+          "size_bytes": 118140
+        },
+        {
+          "distribution": "typing_extensions",
+          "version": "4.16.0",
+          "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "size_bytes": 45571
+        }
+      ]
+    },
+    "linux-x86_64-cp311": {
+      "native_filename": "libsndfile_x86_64.so",
+      "native_sha256": "c872fb84af2afc0e96b603e0000f0f407af86c49ad1126f2785e5722c7bb27d7",
+      "wheels": [
+        {
+          "distribution": "soundfile",
+          "version": "0.14.0",
+          "filename": "soundfile-0.14.0-py2.py3-none-manylinux_2_28_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/7b/a2/70fd4432b924684c372df8b0a45708c36c057ef3596c9eb53e0a806b980b/soundfile-0.14.0-py2.py3-none-manylinux_2_28_x86_64.whl",
+          "sha256": "1e38bac1853412871318e82a1ba69a8be677619b56025bbfcccdb41b6cafe82d",
+          "size_bytes": 1315963
+        },
+        {
+          "distribution": "cffi",
+          "version": "2.0.0",
+          "filename": "cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/d7/91/500d892b2bf36529a75b77958edfcd5ad8e2ce4064ce2ecfeab2125d72d1/cffi-2.0.0-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "sha256": "8941aaadaf67246224cee8c3803777eed332a19d909b47e29c9842ef1e79ac26",
+          "size_bytes": 215574
+        },
+        {
+          "distribution": "numpy",
+          "version": "2.3.5",
+          "filename": "numpy-2.3.5-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/65/fb/2b23769462b34398d9326081fad5655198fcf18966fcb1f1e49db44fbf31/numpy-2.3.5-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+          "sha256": "8cba086a43d54ca804ce711b2a940b16e452807acebe7852ff327f1ecd49b0d4",
+          "size_bytes": 16897903
+        },
+        {
+          "distribution": "pycparser",
+          "version": "2.23",
+          "filename": "pycparser-2.23-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/a0/e3/59cd50310fc9b59512193629e1984c1f95e5c8ae6e5d8c69532ccc65a7fe/pycparser-2.23-py3-none-any.whl",
+          "sha256": "e5c6e8d3fbad53479cab09ac03729e0a9faf2bee3db8208a550daf5af81a5934",
+          "size_bytes": 118140
+        },
+        {
+          "distribution": "typing_extensions",
+          "version": "4.16.0",
+          "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "size_bytes": 45571
+        }
+      ]
+    },
+    "linux-x86_64-cp314": {
+      "native_filename": "libsndfile_x86_64.so",
+      "native_sha256": "c872fb84af2afc0e96b603e0000f0f407af86c49ad1126f2785e5722c7bb27d7",
+      "wheels": [
+        {
+          "distribution": "soundfile",
+          "version": "0.14.0",
+          "filename": "soundfile-0.14.0-py2.py3-none-manylinux_2_28_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/7b/a2/70fd4432b924684c372df8b0a45708c36c057ef3596c9eb53e0a806b980b/soundfile-0.14.0-py2.py3-none-manylinux_2_28_x86_64.whl",
+          "sha256": "1e38bac1853412871318e82a1ba69a8be677619b56025bbfcccdb41b6cafe82d",
+          "size_bytes": 1315963
+        },
+        {
+          "distribution": "cffi",
+          "version": "2.0.0",
+          "filename": "cffi-2.0.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/47/d9/d83e293854571c877a92da46fdec39158f8d7e68da75bf73581225d28e90/cffi-2.0.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.whl",
+          "sha256": "afb8db5439b81cf9c9d0c80404b60c3cc9c3add93e114dcae767f1477cb53775",
+          "size_bytes": 219244
+        },
+        {
+          "distribution": "numpy",
+          "version": "2.3.5",
+          "filename": "numpy-2.3.5-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+          "url": "https://files.pythonhosted.org/packages/c8/f6/07ec185b90ec9d7217a00eeeed7383b73d7e709dae2a9a021b051542a708/numpy-2.3.5-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl",
+          "sha256": "fffe29a1ef00883599d1dc2c51aa2e5d80afe49523c261a74933df395c15c520",
+          "size_bytes": 16597350
+        },
+        {
+          "distribution": "pycparser",
+          "version": "2.23",
+          "filename": "pycparser-2.23-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/a0/e3/59cd50310fc9b59512193629e1984c1f95e5c8ae6e5d8c69532ccc65a7fe/pycparser-2.23-py3-none-any.whl",
+          "sha256": "e5c6e8d3fbad53479cab09ac03729e0a9faf2bee3db8208a550daf5af81a5934",
+          "size_bytes": 118140
+        },
+        {
+          "distribution": "typing_extensions",
+          "version": "4.16.0",
+          "filename": "typing_extensions-4.16.0-py3-none-any.whl",
+          "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+          "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+          "size_bytes": 45571
+        }
+      ]
+    }
+  }
+}

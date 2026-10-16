@@ -1,5 +1,15 @@
 # Integration evidence and strategy
 
+The [qualified compressed-audio adapter](COMPRESSED_AUDIO.zh-CN.md) uses explicit
+private fixed-wheel preparation, trusted current app Python and a bounded `-I -S -B`
+worker. Its public pin metadata maps SoundFile0.14.0 to libsndfile1.2.2 native payloads
+at fixed upstream revisions. Full source-frame scanning precedes native decode;
+independent current-source replay follows it. FLAC adds source PCM MD5; MP3 accepts
+only qualified complete LAME gapless timing, never an inferred source origin.
+All attempts preserve recipe/runtime/source identities and failures. No model, FLP,
+host operation, core native import or automatic GUI download is introduced. This is
+dependency/process isolation, not an OS security sandbox or end-user release approval.
+
 [PCM decoding](AUDIO_DECODE.zh-CN.md) uses original standard-library code, not a new
 external integration. Current interpreter/adapter identities and independent inverse
 sample verification qualify only integer PCM WAV. The SoundFile/libsndfile research

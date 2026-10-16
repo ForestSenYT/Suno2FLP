@@ -1,5 +1,17 @@
 # Dependencies
 
+The [compressed-audio integration](COMPRESSED_AUDIO.zh-CN.md) explicitly provisions
+SoundFile 0.14.0 / libsndfile 1.2.2, NumPy 2.3.5, CFFI 2.0.0, pycparser 2.23 and
+typing_extensions 4.16.0 into a private wheel tree, never the core environment.
+`codec_wheels.json` pins all twelve official wheels for Windows/Linux x86_64 and
+CPython 3.11.16/cp311 or 3.14.7/cp314, plus upstream revisions/native payload hashes.
+No project dependency or lock changes. All wheel notices remain in the isolated tree;
+BSD/MIT/PSF wrapper licenses do not replace libsndfile/codec LGPL obligations or
+NumPy's bundled-library notices. No native binary or upstream source is distributed
+in this repository/package; installer redistribution/source/replacement acceptance
+remains pending. Actual runtime verification includes complete payload and real native
+path/version/capability handshake; file presence alone never grants readiness.
+
 The [first M2 decoder](AUDIO_DECODE.zh-CN.md) adds no dependency, native library or
 process launch. Original Python `struct`/integer code preserves PCM samples, with current
 interpreter and adapter file identities in each report. SoundFile 0.13.1/libsndfile was

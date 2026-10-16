@@ -5,6 +5,12 @@ M1 已实现 `core.jobs`／`pipeline.jobs` 状态契约，以及独占持久化�
 它们属于[已批准交付路线](DELIVERY_ROADMAP.zh-CN.md)的基础部分；薄 GUI 已接入，
 分离、转写、完整转换和宿主 worker 尚未接入。
 
+M2 还接入限定 [FLAC／MP3](COMPRESSED_AUDIO.zh-CN.md)。压缩源的 input 是完整容器扫描，
+decode 必须显式指定固定运行时、实际解码并通过只读重放；缺少前提保存新尝试后阻断。
+压缩解码完成产物为 PCM、报告、attempt 请求三个身份，整数 WAV 的两个产物和旧历史
+语义保持不变。`run-audio-job --decoder-directory <已准备目录>` 指定本次运行时；完成
+产物中记录的运行时不能被参数静默替换。核验重放不会修改请求、报告或任务历史。
+
 ## 已实现的行为
 
 `new_job(job_id, source_identity, output_directory)` 只读核对源身份并返回新任务。

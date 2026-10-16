@@ -1,5 +1,21 @@
 # Risk register
 
+Recomputed MP3 CRCs do not prove valid reservoir references: the pinned decoder can
+silently replace unavailable main data with silence while preserving frame count and
+reporting zero error. Complete side-info/main-data extent checks now run before native
+execution, preserve legitimate nonzero reservoirs and hash audio side-info in source
+order. Synthetic protected/unprotected and real native adversarial regressions cover
+this concealment case; arbitrary Huffman semantics remain outside that structural proof.
+
+Compressed-audio risks and mitigation are detailed in
+[fixed codec qualification](COMPRESSED_AUDIO.zh-CN.md): native success can hide
+truncated MP3 and appended/concatenated FLAC, so complete source-frame/CRC coverage
+is required first. Unproven MP3 delay/padding blocks; qualified native replay is not
+an uncompressed MP3 truth oracle. Current payload, trusted executable, library path
+and versions are rechecked before/after work; malicious/native-library vulnerabilities
+are not contained by an OS sandbox. LGPL/codec/NumPy redistribution requirements and
+future installer library replacement/source notices remain explicit M5 gates.
+
 The [explicit MIDI routing slice](FL26_EXPLICIT_ROUTING.zh-CN.md) rejects incomplete
 coverage, destination aliases, receiver/port namespace collisions and channel rewrites.
 Complete declarations do not attest actual receiver delivery. Exported program values,

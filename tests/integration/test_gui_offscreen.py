@@ -269,3 +269,29 @@ def test_manual_workspace_change_disables_previous_task_controls(application, tm
         for button in (bench.run_button, bench.verify_button, bench.cancel_button)
     )
     bench.close()
+
+
+def test_compressed_prerequisite_and_workspace_change_keep_explicit_runtime(application, tmp_path):
+    from suno2flp.gui.model import JobActions
+    from suno2flp.gui.window import WorkbenchWindow
+
+    missing = tmp_path / "missing-decoder"
+    bench = WorkbenchWindow(JobActions(tmp_path / "jobs", missing))
+    assert bench.set_workspace(tmp_path / "other-jobs", refresh=False)
+    assert bench.job_actions.decoder_directory == missing
+    path = tmp_path / "原创.flac"
+    path.write_bytes(
+        bytes.fromhex(
+            "664c6143800000220010001000000000000001f400f000000010"
+            "70bc8f4b72a86921468bf8e8441dce51fff86008000f96000000ae85"
+        )
+    )
+    bench.create_job(path)
+    finish(application, bench)
+    bench.run_selected()
+    finish(application, bench)
+    assert bench.selected.job.status == "blocked"
+    assert bench.selected.job.history[-1].code == "audio_backend_unavailable"
+    assert "运行时" in bench.explanation.text() and "1 / 11" in bench.summary.text()
+    assert not missing.exists()
+    bench.close()

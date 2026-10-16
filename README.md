@@ -20,6 +20,12 @@ valid PCM completes input validation and [sample-preserving float64 decoding](do
 then blocks at unavailable separation
 (exit 3); it does not produce a playable project or attest musical quality.
 
+Qualified [FLAC/MP3 decoding](docs/COMPRESSED_AUDIO.zh-CN.md) now uses an explicitly
+provisioned pinned private runtime, complete source-frame checks and current-source
+sample replay. FLAC retains an independent PCM MD5 oracle; MP3 needs verified LAME
+gapless timing and makes no claim of original uncompressed sample equality. No native
+codec is bundled or imported into the core process; later conversion remains blocked.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2
