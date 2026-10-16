@@ -58,10 +58,16 @@ def doctor() -> None:
 
 
 @app.command("provision-music2daw")
-def provision_music2daw(backend_directory: Path) -> None:
+def provision_music2daw(
+    backend_directory: Path,
+    fl26_read_only: Annotated[
+        bool,
+        typer.Option("--fl26-read-only", help="New isolated exact-build inspection adaptation"),
+    ] = False,
+) -> None:
     """Explicitly fetch/build the reviewed CLI pin in a new isolated directory."""
     try:
-        result = provision_backend(backend_directory)
+        result = provision_backend(backend_directory, fl26_read_only=fl26_read_only)
         typer.echo(
             f"Provisioned {result.revision}; record: {backend_directory.resolve() / 'backend.json'}"
         )

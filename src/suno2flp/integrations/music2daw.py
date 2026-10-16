@@ -47,6 +47,22 @@ class Music2DawInspector:
             raise TemplateInspectionError("template_invalid", str(exc)) from exc
         before = hashlib.sha256(raw).hexdigest()
         inventory = scan_template_inventory(raw)
+        if record.adaptation is not None:
+            version_events = [e for e in inventory.events if e.event_id == 199]
+            if (
+                inventory.profile_id != FL26_READ_PROFILE.identifier
+                or len(version_events) != 1
+                or raw[
+                    version_events[0].payload_offset : version_events[0].payload_offset
+                    + version_events[0].payload_size
+                ]
+                != b"26.1.7.5654\0"
+                or any(e.event_id == 233 and e.payload_size % 88 for e in inventory.events)
+            ):
+                raise TemplateInspectionError(
+                    "backend_profile_unsupported",
+                    "Adapted inspection requires the exact FL26 build and aligned 88-byte playlist",
+                )
         dotnet = shutil.which("dotnet")
         if not dotnet:
             raise TemplateInspectionError("dotnet_missing", ".NET 10 runtime was not found on PATH")
@@ -114,6 +130,15 @@ class Music2DawInspector:
             raise TemplateInspectionError("backend_output_invalid", str(exc)) from exc
         local, summary_status, mismatches = compare_backend_summary(inventory, project)
         extra_diagnostics = []
+        if record.adaptation is not None:
+            extra_diagnostics.append(
+                Diagnostic(
+                    code="backend_fl26_read_adaptation",
+                    severity="info",
+                    message="Separate source-hashed exact-build parser adaptation; "
+                    "selected summary agreement is not full field/host/writer compatibility",
+                )
+            )
         if summary_status == "inconsistent":
             extra_diagnostics.append(
                 Diagnostic(

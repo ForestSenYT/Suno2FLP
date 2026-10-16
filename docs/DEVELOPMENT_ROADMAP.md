@@ -83,3 +83,11 @@ the output independently after publication. It rejects stale/forged evidence wit
 writing, launching a process or changing host compatibility. The same document records
 the separate real-reference and manual host observations still needed before Phase 3
 can be accepted; Phase 4 remains planned.
+
+The [isolated FL26 backend adaptation](FL26_BACKEND_ADAPTATION.md) adds an explicit
+inspection-only build from the same upstream pin, with source/recipe/artifact hashes.
+It fixes demonstrated exact-build event-172 and event-233 stride parsing in a separate
+private installation, preserving the old result and writer restrictions. The actual
+adapted process agrees on the private input's selected summary facts; unknown field/
+host semantics remain open. Follow the [Chinese reference guide](FL26_REFERENCE.zh-CN.md)
+to create the next independent host observation input.

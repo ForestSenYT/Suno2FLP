@@ -51,6 +51,14 @@ backend installation, blocks its unresolved FL26 disagreement and validates orig
 synthetic output bytes independently. The private real template remains ineligible;
 no host open/playback claim or automated instrument substitution is introduced.
 
+The [isolated FL26 inspection adaptation](FL26_BACKEND_ADAPTATION.md) now builds a
+separate private derived installation from that same pin, using an original recipe
+guarded by exact upstream/source/recipe hashes. Only exact-build event-172 framing and
+explicit event-233 stride selection change. Genuine process output now matches the
+private source's selected tempo/count facts. The unmodified backend/report is retained;
+no third-party source/binary is distributed, and upstream editor/MCP/host compatibility
+is not upgraded. Unknown crops/attributes/routing and native-writer gates remain open.
+
 ## suno-to-ableton
 
 Revision: `b74e345c0ea166a5be09b5293c5aad4d6cd676e4`.

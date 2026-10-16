@@ -2,9 +2,16 @@
 
 import math
 from pathlib import Path, PurePosixPath
-from typing import Annotated, Final, Literal
+from typing import Annotated, Any, Final, Literal
 
-from pydantic import ConfigDict, Field, JsonValue, model_validator
+from pydantic import (
+    ConfigDict,
+    Field,
+    JsonValue,
+    SerializerFunctionWrapHandler,
+    model_serializer,
+    model_validator,
+)
 from pydantic.alias_generators import to_camel
 
 from suno2flp.core.models import Contract, Diagnostic
@@ -32,6 +39,16 @@ REQUIRED_BACKEND_FILES = frozenset(
 )
 
 
+class BackendReadAdaptation(Contract):
+    profile: Literal["fl26-26.1.7.5654-inspect-v1"]
+    scope: Literal["inspection_only_not_writer_compatibility"] = (
+        "inspection_only_not_writer_compatibility"
+    )
+    upstream_source_sha256: SHA256
+    adapted_source_sha256: SHA256
+    recipe_sha256: SHA256
+
+
 class BackendProvisionRecord(Contract):
     schema_version: Literal[1]
     backend: Literal["music2daw"]
@@ -41,6 +58,14 @@ class BackendProvisionRecord(Contract):
     sdk_version: str = Field(pattern=r"^10\.\d+\.\d+$")
     packages: dict[str, str]
     files: dict[str, SHA256]
+    adaptation: BackendReadAdaptation | None = None
+
+    @model_serializer(mode="wrap")
+    def preserve_legacy_shape(self, handler: SerializerFunctionWrapHandler) -> dict[str, Any]:
+        data: dict[str, Any] = handler(self)
+        if self.adaptation is None:
+            data.pop("adaptation", None)
+        return data
 
     @model_validator(mode="after")
     def complete_portable_inventory(self) -> "BackendProvisionRecord":

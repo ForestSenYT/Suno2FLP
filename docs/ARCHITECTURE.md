@@ -172,6 +172,15 @@ the output, then rechecks originals/backend and bundle identities/bytes. It neve
 encodes, publishes, repairs or launches a process. `verify-flp-bundle` returns only
 structural verification; [host acceptance](FL26_BUNDLE_VERIFICATION.md) remains external.
 
+`core/backend_adaptation.py` owns an original source-hash-guarded two-edit recipe.
+`integrations/music2daw_adaptation.py` applies it only in a new external checkout and
+verifies original/adapted source, recipe and notice fingerprints. The optional backend
+manifest adaptation declaration preserves legacy serialization when absent. Explicit
+`--fl26-read-only` provisioning changes only that checkout's parser; inspection restricts
+inputs to the exact assessed build and aligned event-233 records. Actual process output
+is still compared independently with local inventory; no summary substitution occurs.
+See [scope and remaining semantics](FL26_BACKEND_ADAPTATION.md).
+
 ## Safety and error handling
 
 Workspace names are portable simple names; Windows device names are rejected.

@@ -106,6 +106,13 @@ implicitly or writes FLP. JSON output requires a new path outside the backend di
 Successful parsing leaves FL Studio/plugin compatibility and template rights unverified.
 The report keeps the backend's `project` separate from a scope-limited `local_summary`.
 Check `backend_summary_status`: inconsistent successful backend results are not trusted.
+
+For exact FL Studio 26.1.7 build 5654, explicit `provision-music2daw NEW_DIRECTORY
+--fl26-read-only` builds a separate source-hashed inspection adaptation from the same
+pin. It fixes event-172 framing and event-233 88-byte strides; the original installation
+and reports remain intact. See [adaptation limits](docs/FL26_BACKEND_ADAPTATION.md) and
+[中文：创建独立参考工程](docs/FL26_REFERENCE.zh-CN.md). Selected summary agreement does not
+remove unresolved note/crop/plugin/host gates or enable the upstream editor.
 See [prerequisites, failure codes and tests](docs/TEMPLATE_INSPECTION.md).
 
 For a current-file, process-free dependency/compatibility evidence report:

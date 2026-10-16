@@ -117,3 +117,10 @@ comparison use Python integer, `math.lcm` and `fractions.Fraction` arithmetic.
 Arrangement options belong to the explicit API/CLI; `arrange` does not load project
 YAML or apply cleanup itself.
 Store credentials only in the operator's environment/secret store; no key fields exist.
+
+The optional `--fl26-read-only` Music2DAW provision variant uses the same upstream SHA,
+SDK 10 and resolved DryWetMidi 8.0.3, in another private directory. It adds no Python
+dependency or lock change. Original/adapted parser and modification notice hashes join
+the artifact manifest; upstream GPL notices stay with that local derived installation.
+Only the original Python adaptation recipe is included in this package; backend C#
+files, binaries and private reports are excluded. See [adaptation evidence](FL26_BACKEND_ADAPTATION.md).

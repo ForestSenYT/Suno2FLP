@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 import shutil
+import stat
 import subprocess
 from pathlib import Path
 
@@ -16,6 +17,11 @@ from suno2flp.core.backend_models import (
     BackendProvisionRecord,
 )
 from suno2flp.core.errors import BackendProvisionError, TemplateInspectionError
+from suno2flp.integrations.music2daw_adaptation import (
+    ADAPTATION_FILES,
+    apply_read_adaptation,
+    verify_read_adaptation,
+)
 
 
 def file_sha256(path: Path) -> str:
@@ -56,15 +62,46 @@ def verify_backend(directory: Path) -> tuple[BackendProvisionRecord, str]:
             target = root / name
             if not target.resolve().is_relative_to(root) or file_sha256(target) != expected:
                 raise ValueError(f"Backend file changed or escapes installation: {name}")
+        verify_read_adaptation(root, record)
     except (OSError, ValueError, RuntimeError) as exc:
         raise TemplateInspectionError("backend_integrity_failed", str(exc)) from exc
     return record, hashlib.sha256(raw).hexdigest()
 
 
-def provision_music2daw(directory: Path) -> BackendProvisionRecord:
+def provision_music2daw(directory: Path, *, fl26_read_only: bool = False) -> BackendProvisionRecord:
     """Build the exact reviewed source into a new private directory; preserve failures."""
     if directory.exists() or directory.is_symlink():
         raise BackendProvisionError("destination_exists", "Use a new installation directory")
+    if fl26_read_only:
+        reserved = {
+            "CON",
+            "PRN",
+            "AUX",
+            "NUL",
+            *(f"COM{i}" for i in range(1, 10)),
+            *(f"LPT{i}" for i in range(1, 10)),
+        }
+        for part in directory.absolute().parts:
+            if part != directory.absolute().anchor and (
+                ":" in part
+                or part.endswith((".", " "))
+                or part == ".."
+                or part.split(".")[0].upper() in reserved
+            ):
+                raise BackendProvisionError(
+                    "destination_unsafe", "Use an unambiguous new directory"
+                )
+        for path in (directory.absolute(), *directory.absolute().parents):
+            if (path / "backend.json").exists():
+                raise BackendProvisionError(
+                    "destination_unsafe", "Do not nest backend installations"
+                )
+            if path.exists():
+                info = path.lstat()
+                if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & 0x400:
+                    raise BackendProvisionError(
+                        "destination_unsafe", "Reparse parents are forbidden"
+                    )
     git, dotnet = shutil.which("git"), shutil.which("dotnet")
     if not git or not dotnet:
         raise BackendProvisionError("prerequisite_missing", "Git and .NET SDK 10 are required")
@@ -113,6 +150,7 @@ def provision_music2daw(directory: Path) -> BackendProvisionRecord:
             raise BackendProvisionError(
                 "source_revision_mismatch", "Checkout is not the reviewed pin"
             )
+        adaptation = apply_read_adaptation(root) if fl26_read_only else None
         project = str(source / "src/Music2Daw.Cli/Music2Daw.Cli.csproj")
         run(
             [
@@ -142,9 +180,11 @@ def provision_music2daw(directory: Path) -> BackendProvisionRecord:
             ],
             "build_failed",
         )
-        if run(
+        changes = run(
             [*prefix, "status", "--porcelain", "--untracked-files=no"], "source_checkout_failed"
-        ):
+        )
+        expected_changes = "M src/Monad.FLParser/ProjectParser.cs" if fl26_read_only else ""
+        if changes != expected_changes:
             raise BackendProvisionError(
                 "source_changed", "Tracked upstream source changed during build"
             )
@@ -157,6 +197,8 @@ def provision_music2daw(directory: Path) -> BackendProvisionRecord:
             if item["type"] == "package"
         }
         names = set(REQUIRED_BACKEND_FILES)
+        if fl26_read_only:
+            names.update(ADAPTATION_FILES)
         names.update(
             p.relative_to(root).as_posix() for p in (root / "publish").rglob("*") if p.is_file()
         )
@@ -170,7 +212,9 @@ def provision_music2daw(directory: Path) -> BackendProvisionRecord:
             sdk_version=sdk,
             packages=packages,
             files={name: file_sha256(root / name) for name in sorted(names)},
+            adaptation=adaptation,
         )
+        verify_read_adaptation(root, record)
         with (root / "backend.json").open("x", encoding="utf-8") as stream:
             stream.write(record.model_dump_json(indent=2) + "\n")
         return record

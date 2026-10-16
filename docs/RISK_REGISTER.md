@@ -40,6 +40,7 @@
 | Restricted writer mistaken for real FL26 compatibility | Unresolved user content or dependencies silently serialized | Separate policy/intent, strict events/prototypes/maps, backend agreement, source replay, byte-budget and independent output checks | Synthetic positive output only; actual private template explicitly blocked |
 | Output publication races or incomplete sidecars | Existing files overwritten or orphan FLP treated as successful | Windows no-replace whole-bundle publication, exclusive new files, staged/final identity/hash checks, failure reports and retained new artifacts | Trusted local filesystem only; no hostile same-user/crash-durability guarantee |
 | Prior arrangement rounding hidden by final PPQ | Original timing loss promoted to exact output | Reject rounding-enabled arrangements before encoding; check converted endpoints and original source replay | Independent review repro covered by regression |
+| Adapted parser mistaken for complete FL26 support | Correct counts conceal wrong crops/lanes or editor assumptions | Separate inspection-only profile/source/recipe hashes, retain old report and raw records, exact-build preflight; leave field/host/writer gates unchanged | Selected tempo/count agreement verified with genuine runtime; opaque semantics and upstream editor remain unverified |
 
 Owners: importer/validator maintainers for media/path risks; adapter maintainers for
 DAW/version risks; project maintainers for dependencies and redistribution decisions.
