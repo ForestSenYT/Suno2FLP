@@ -113,6 +113,12 @@ pin. It fixes event-172 framing and event-233 88-byte strides; the original inst
 and reports remain intact. See [adaptation limits](docs/FL26_BACKEND_ADAPTATION.md) and
 [中文：创建独立参考工程](docs/FL26_REFERENCE.zh-CN.md). Selected summary agreement does not
 remove unresolved note/crop/plugin/host gates or enable the upstream editor.
+
+[Independent FL26 field observations](docs/FL26_FIELD_EVIDENCE.md) distinguish the exact
+ordinary positive-note attributes from Slide and read assessed Pattern crop endpoints
+as integer ticks. Reviewed ordinary attributes can be preserved by the restricted native
+writer; cropped/default-sentinel writes, unknown fields and host acceptance stay blocked.
+Private references remain local.
 See [prerequisites, failure codes and tests](docs/TEMPLATE_INSPECTION.md).
 
 For a current-file, process-free dependency/compatibility evidence report:

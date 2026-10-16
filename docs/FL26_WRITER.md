@@ -3,11 +3,12 @@
 This batch implements an original **26.1.7.5654** encoder, independent output verifier
 and Windows-only exclusive bundle publisher. It is a narrow structural implementation,
 not complete FL26 compatibility. The current `templates/user-minimal.flp` remains
-ineligible: its unresolved content/dependencies and backend disagreement still block
+ineligible: its unresolved content/dependencies and partial inventory still block
 before encoding/staging. No FLP derived from that private original is generated.
 
-The pinned Music2DAW installation is unchanged and never invoked for writing. Its
-incomplete FL26 summary remains evidence, not a source of fabricated local targets.
+The pinned Music2DAW installations are unchanged and never invoked for writing. The
+original incomplete summary and separate adapted selected-summary agreement stay
+distinct evidence, not sources of fabricated local targets.
 Old `plan-build` and `assess-template` reports remain non-executable; no flag promotes
 them to a build. Defaults still select `flp_backend: none`.
 
@@ -65,11 +66,20 @@ Every active binding requires one reviewed target. The only implemented policies
 - Replace **all** explicitly bound note sets and clips; reject unbound inherited notes
   or clips. No implicit merge, retain, clear or additional Pattern/channel creation.
 - Preserve the reviewed prototype's untouched note attributes. Flags/groups and extra
-  unassessed note bytes must be zero; positive original note length/ranges are required.
+  unassessed note bytes must be zero, or match the complete independently observed
+  ordinary form below; positive original note length/ranges are required.
 - Preserve every byte of the reviewed 88-byte clip outside position and length,
   including its full eight-byte extension. This does not assign meaning to that tail.
   Nonzero/nonfinite/negative-zero crop bits, clip flags/groups/mute and invalid ranges
   still block, regardless of policy or all-zero extension bytes.
+
+The later [independent field-evidence slice](FL26_FIELD_EVIDENCE.md) permits one additional
+note attribute combination: exact positive-duration ordinary Piano roll attributes
+with flags `0x4000`, group/reserved bytes zero, fine-pitch 120, release/pan 64 and tail
+`8080`. Reviewed attributes are preserved outside musical edits; Slide (`0x4008`) and
+other combinations remain blocked. This is a joint predicate, not permission to ignore
+nonzero flags. Pattern sentinel/integer crop observations are read-only and relax no
+crop-write or clip-attribute gate.
 
 `Fl26WriteIntent` embeds independent copies of arrangement, inspection, bindings,
 policy and local binding evidence, canonical fingerprints, precise proposed notes and
@@ -160,9 +170,10 @@ synthetic MIDI negative probe. It requires `SUNO2FLP_FL26_TEMPLATE` and
 `SUNO2FLP_MUSIC2DAW_DIR`, verifies the real source and backend, then checks that building
 is blocked before output/staging. It does not copy, encode, save or open that FLP.
 
-`user-minimal.flp` still has zero note lengths, `0x4000` note attributes, `ffffffff`
-crop bits, opaque families and misleading backend results. None is repaired or
-interpreted into an eligible state. A suitable independently evidenced reference,
+`user-minimal.flp` still has zero note lengths, unresolved note attributes, `ffffffff`
+crop bits and opaque families. The adapted backend resolves selected count/tempo
+differences only. Neither original nor positive reference is repaired or interpreted
+into an eligible state. A suitable independently evidenced reference,
 resolved dependency/instrument intent and actual FL Studio open/readback/listen checks
 remain necessary before claiming a usable musical output.
 

@@ -7,6 +7,10 @@ or DAW action. The subsequently authorized [restricted writer](FL26_WRITER.md) u
 separate policy/intent contracts; this report always stays non-executable.
 See [byte reader](FL26_READ_ONLY.md) and [writer design](FL26_WRITER_DESIGN.md).
 
+Later [independent host field evidence](FL26_FIELD_EVIDENCE.md) narrows note-attribute
+and Pattern-crop findings for exact matching forms. Unknown forms remain unresolved;
+this report and its writer gates remain non-executable.
+
 ## Usage and result meaning
 
 Start with a current `inspect-template` JSON, then:

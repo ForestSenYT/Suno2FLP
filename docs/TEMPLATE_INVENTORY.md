@@ -37,6 +37,10 @@ loading JSON. Curve points must agree with the retained count/payload and cannot
 dropped or relocated silently. Reports round-trip without rewriting any template data.
 
 Crop floats retain their encoded values; they are never truncated to integer ticks.
+These are legacy float projections, not a universal unit declaration. A later
+[exact-build Pattern observation](FL26_FIELD_EVIDENCE.md) reads assessed FL26 crop bytes
+as signed endpoints in a separate helper/assessment finding, leaving all inventory
+JSON, raw bytes, nonfinite-projection diagnostics and fingerprints intact.
 Automation retains `encoded_time` rather than claiming an absolute or cumulative
 timeline. The pinned Music2DAW parser and alternative PyFLP source interpret those
 curve times differently. All automation blocks planning, so no interpretation is used

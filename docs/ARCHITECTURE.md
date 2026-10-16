@@ -181,6 +181,13 @@ inputs to the exact assessed build and aligned event-233 records. Actual process
 is still compared independently with local inventory; no summary substitution occurs.
 See [scope and remaining semantics](FL26_BACKEND_ADAPTATION.md).
 
+`core/fl26_fields.py` adds exact-profile pure observations from independent host
+references. Readiness findings distinguish the whole ordinary/Slide note form and
+Pattern integer crop endpoints without changing legacy inventory JSON/float projections.
+The restricted writer permits preserving only complete ordinary positive-note attributes,
+with existing prototype hashes and independent byte checks; crop-write, Slide and unknown
+field gates remain. See [field evidence](FL26_FIELD_EVIDENCE.md).
+
 ## Safety and error handling
 
 Workspace names are portable simple names; Windows device names are rejected.

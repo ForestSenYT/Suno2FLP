@@ -91,3 +91,10 @@ private installation, preserving the old result and writer restrictions. The act
 adapted process agrees on the private input's selected summary facts; unknown field/
 host semantics remain open. Follow the [Chinese reference guide](FL26_REFERENCE.zh-CN.md)
 to create the next independent host observation input.
+
+The [independent field-evidence slice](FL26_FIELD_EVIDENCE.md) uses a new GUI-created
+positive reference and separately saved one-change crop/Slide probes. It distinguishes
+the whole observed ordinary positive-note attributes and assessed Pattern integer crop
+endpoints. Native writing may preserve reviewed ordinary attributes; Slide, crop
+replacement/resizing, unknown events, incomplete inventory and host/listening acceptance
+stay blocked. No private template/reference or backend is distributed.

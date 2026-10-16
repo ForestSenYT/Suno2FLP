@@ -7,6 +7,7 @@ from suno2flp.core.backend_models import TemplateInspectionReport
 from suno2flp.core.build_models import TemplateBindingDocument
 from suno2flp.core.errors import FlpWriteError
 from suno2flp.core.evidence import snapshot_sha256
+from suno2flp.core.fl26_fields import note_attribute_form
 from suno2flp.core.models import Arrangement, Diagnostic
 from suno2flp.core.writer_models import Fl26WriteIntent, WriterPolicyDocument
 from suno2flp.flp_builder.assessment import assess_template
@@ -202,10 +203,13 @@ def prepare_fl26_write(
             error(
                 "writer_note_range", "Template note range/duration is unresolved", note.event_index
             )
-        if note.flags or note.group or any(original[13:16]) or any(original[22:24]):
+        if (
+            note.flags or note.group or any(original[13:16]) or any(original[22:24])
+        ) and note_attribute_form(note, inventory.profile_id) != "ordinary":
             error(
                 "writer_note_attributes",
-                "Unknown note flags/groups/extra attributes are not approved prototypes",
+                "Only zeroed or exact observed ordinary positive-note attributes may be preserved; "
+                "slide and unobserved combinations remain unsupported",
                 note.event_index,
             )
     for clip in inventory.clips:
@@ -217,7 +221,10 @@ def prepare_fl26_write(
             )
         if clip.start_offset.raw_hex != "00000000" or clip.end_offset.raw_hex != "00000000":
             error(
-                "writer_crop", "Only exact positive-zero crop bits are supported", clip.event_index
+                "writer_crop",
+                "Only exact positive-zero crop bits are writable; observed Pattern sentinels/tick "
+                "endpoints do not establish safe replacement or resize behavior",
+                clip.event_index,
             )
         if (
             clip.flags

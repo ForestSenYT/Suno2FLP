@@ -71,6 +71,11 @@ crop, routing, opaque attribute or plugin semantics. The upstream crop conversio
 insert-route heuristic remain unchanged; local raw float bits/extensions remain the
 evidence for unresolved cases. No backend writer support is added.
 
+Later [independent GUI field probes](FL26_FIELD_EVIDENCE.md) demonstrate integer Pattern
+crop endpoints for assessed forms. They do not change this backend's float crop
+conversion or expand its editor/MIDI-export guarantees. Native observations and selected
+backend summaries remain separate.
+
 Read-only native-writer planning with the new inspection remains blocked by the real
 template's partial inventory, zero note lengths/flags, crops, attributes and unreviewed
 instrument/prototype policy. The `writer_backend_inconsistent` diagnostic is no longer
