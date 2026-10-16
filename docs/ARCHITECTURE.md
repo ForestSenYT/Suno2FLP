@@ -9,6 +9,12 @@ from the source-faithful MIDI path below; existing writer and source-preservatio
 cannot be relaxed by changing the input label. Models and incompatible runtimes stay
 isolated. See the [delivery roadmap](DELIVERY_ROADMAP.zh-CN.md) for incremental acceptance.
 
+`core.jobs` and `pipeline.jobs` implement the first shared job-contract slice: canonical
+stages, history-reconstructed snapshots, copy-on-transition progress, identity-checked
+stage boundaries and cancellation/resume. Final publication and success remain refused;
+no persistence, worker, GUI or process execution is introduced. These states are never
+writer authorization. See [job contracts](JOBS.zh-CN.md).
+
 ## Current design — foundations, MIDI import/cleanup and faithful arrangements
 
 Official Suno MIDI is the primary musical source; stems provide future references
