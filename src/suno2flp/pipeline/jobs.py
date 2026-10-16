@@ -21,7 +21,7 @@ def _checked(job: ConversionJob) -> ConversionJob:
 
 def _append(job: ConversionJob, event: JobEvent) -> ConversionJob:
     history = [*job.history, event.model_copy(deep=True)]
-    status, stages = replay_job_events(history, job.output_directory)
+    status, stages = replay_job_events(history, job.output_directory, job.source)
     data = job.model_dump()
     data.update(status=status, stages=stages, history=history)
     return ConversionJob.model_validate(data).model_copy(deep=True)
@@ -42,7 +42,7 @@ def new_job(job_id: str, source: FileIdentity, output_directory: Path) -> Conver
         output_directory=destination,
         status="queued",
         stages=[JobStage(stage=stage) for stage in CONVERSION_STAGES],
-        history=[JobEvent(sequence=0, kind="created")],
+        history=[JobEvent(sequence=0, kind="created", source=source.model_copy(deep=True))],
     )
 
 

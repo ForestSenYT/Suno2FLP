@@ -35,7 +35,7 @@ def document(tmp_path):
         "stages": [
             {"stage": stage, "status": "queued", "progress": 0, "outputs": []} for stage in STAGES
         ],
-        "history": [{"sequence": 0, "kind": "created"}],
+        "history": [{"sequence": 0, "kind": "created", "source": identity.model_dump(mode="json")}],
     }
 
 
@@ -53,6 +53,7 @@ def test_valid_job_keeps_source_and_pending_stages_without_writer_permission(doc
     assert job.execution_allowed is False and job.writer_eligibility == "blocked"
     assert job.host_compatibility == "unverified"
     assert job.history[0].kind == "created"
+    assert job.history[0].source == job.source
 
 
 @pytest.mark.parametrize("change", ["reorder", "duplicate", "omit"])
@@ -153,6 +154,7 @@ def test_new_job_does_not_create_or_modify_files(document):
     assert not job.output_directory.exists()
     assert source.path.read_bytes() == before
     assert job.source == source and job.source is not source
+    assert job.history[0].source == source and job.history[0].source is not job.source
 
 
 def test_ordered_stage_transitions_keep_input_job_immutable(queued):
@@ -288,3 +290,17 @@ def test_loaded_snapshot_cannot_reassign_output_to_original_input_tree(document)
     document["output_directory"] = str(Path(document["source"]["path"]).parent)
     with pytest.raises(ValueError):
         parse(document)
+
+
+@pytest.mark.parametrize("replacement", ["changed_content", "different_file"])
+def test_replacing_source_identity_cannot_reuse_completed_stages(queued, replacement):
+    stopped = service().stop_job(completed_input(queued), "blocked", "backend_missing")
+    if replacement == "changed_content":
+        path = stopped.source.path
+    else:
+        path = stopped.source.path.with_name("other-source.wav")
+    path.write_bytes(b"replacement source")
+    changed = capture_stream_input(path)
+    forged = stopped.model_copy(deep=True, update={"source": changed})
+    with pytest.raises(ValueError):
+        service().resume_job(forged)

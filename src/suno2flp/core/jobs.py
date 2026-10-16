@@ -49,6 +49,7 @@ class JobStage(Contract):
 class JobEvent(Contract):
     sequence: int = Field(ge=0, strict=True)
     kind: Literal["created", "started", "progress", "finished", "stopped", "resumed"]
+    source: FileIdentity | None = None
     stage: ConversionStage | None = None
     progress: int | None = Field(default=None, ge=0, le=99, strict=True)
     outputs: list[FileIdentity] = Field(default_factory=list)
@@ -57,11 +58,11 @@ class JobEvent(Contract):
 
 
 def replay_job_events(
-    history: list[JobEvent], output_directory: Path
+    history: list[JobEvent], output_directory: Path, source: FileIdentity
 ) -> tuple[JobStatus, list[JobStage]]:
     """Reconstruct structural progress only; never attest a worker or authorize writes."""
-    if not history or history[0] != JobEvent(sequence=0, kind="created"):
-        raise ValueError("Job history must begin with creation")
+    if not history or history[0] != JobEvent(sequence=0, kind="created", source=source):
+        raise ValueError("Job creation must retain the original source identity")
     status: JobStatus = "queued"
     stages = [JobStage(stage=stage) for stage in CONVERSION_STAGES]
     seen_outputs: set[str] = set()
@@ -174,7 +175,9 @@ class ConversionJob(Contract):
             raise ValueError("Job source and output paths must be absolute")
         if self.source.path.is_relative_to(self.output_directory):
             raise ValueError("Job output must be distinct from the original input tree")
-        expected_status, expected_stages = replay_job_events(self.history, self.output_directory)
+        expected_status, expected_stages = replay_job_events(
+            self.history, self.output_directory, self.source
+        )
         if self.status != expected_status or self.stages != expected_stages:
             raise ValueError("Job snapshot must match its recorded transition history")
         return self
