@@ -6,7 +6,7 @@
 | 1 — MIDI importing and cleanup (initial slices implemented) | Track-aware import and opt-in duplicate/short-note filtering and onset quantization | Synthetic multitrack/cleanup fixtures; originals and change history preserved |
 | 2 — Arrangement and mapping (faithful/mapping slices implemented) | Faithful arrangements with PPQ/map policy and explicit channel-preserving role hints; reinterpretation remains planned | Note/event/provenance preservation, precision/conflict and mapping fixtures verified |
 | 3 — FLP templates (restricted writer implemented; private real input blocked) | Inventories/readiness, explicit-policy native FL26 encoder, independent structural round trip and exclusive Windows output bundles | Eligible real reference/dependencies and independent FL Studio open/readback/listening still required |
-| 4 — MCP control (offline discovery implemented; real adoption pending) | Pinned protocol discovery and bounded stdio, with actual backend/host work still gated | Actual authorized backend handshake, tool inventory, readback and recoverable mutations |
+| 4 — MCP control (real server discovery audited; host adoption pending) | Pinned protocol discovery and bounded stdio, with actual backend/host work still gated | Actual authorized backend handshake, tool inventory, readback and recoverable mutations |
 | 5 — Quality and automation (offline slices implemented) | Current-source replay, reproducible JSON preparation and explicit PCM numerical comparisons | Genuine host render/listening and final musical acceptance remain required |
 
 Implemented Phase 1 slice: `MidiFileImporter` and `import-midi`, including Type 0/1 PPQ

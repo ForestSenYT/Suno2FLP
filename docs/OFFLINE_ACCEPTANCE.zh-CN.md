@@ -10,7 +10,7 @@
 | 1 MIDI | Type 0/1 PPQ 多轨导入、事件/节拍来源、可选清理与完整审计 | 导入/清理合成测试、当前原始文件重导入 | Type 2/SMPTE 明确不支持，AI 转写不是本轮必需功能 |
 | 2 编排/角色 | faithful、精确 PPQ、时间图冲突策略、显式角色、完整来源回放 | `verify-arrangement`、`prepare-project` / `verify-preparation` | 音色可用性和听感；reinterpretation/自动配器保留未来可选范围 |
 | 3 FLP | 固定隔离后端只读检查、库存/绑定/资格、受限新 bundle、独立结构验证、手动记录检查 | 原创合成 writer/verifier、`check-host-records` | 六副本真实打开/缩放/另存/重开/试听；裁剪/标记、未知事件、依赖和乐器意图仍阻断 |
-| 4 MCP | 原创 discovery-only 客户端、版本协商、完整工具清单、受限 stdio 生命周期 | 原创内存/stdio 模拟 peer；无 tools/call | 真实后端启动授权与版本、实际握手、桥接、宿主读回及可恢复变更；均未验证 |
+| 4 MCP | 原创发现客户端及两份固定上游服务的真实握手/工具清单，仍无 tools/call | [隔离接入审计](FLSTUDIO_MCP_AUDIT.zh-CN.md)：5/67 工具、刷新、协议 ping 与正常退出 | 实际 FL26 桥接、宿主读回和可恢复变更；服务连通不授予工具执行 |
 | 5 质量/自动化 | 一键离线 JSON 准备及重放、流式整数 PCM 比较、显式数值阈值、安装产物集成检查 | `compare-renders`、独立准备验证、CI wheel smoke | 真正宿主渲染、人工试听、乐器/混音及最终音乐验收 |
 
 ## 可以实际使用的离线路径

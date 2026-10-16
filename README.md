@@ -21,13 +21,15 @@ declarations, unresolved-semantic findings and local binding/PPQ checks. A separ
 clip/tempo encoding, structural round-trip checks and exclusive new Windows bundles.
 The current private FL26 template remains blocked by unresolved evidence. Host/playback
 compatibility is unverified; synthetic byte fixtures do not establish audible results.
-Transcription, reinterpretation and MCP connections remain planned. No music/model/
+Transcription, reinterpretation and live DAW control remain planned. No music/model/
 template or optional backend binary is bundled; project defaults remain disabled.
 
 An original [discovery-only MCP component](docs/MCP_DISCOVERY.md) now supports pinned
 initialization and current paginated inventories through an opt-in stdio transport.
-Only authored synthetic peers have been exercised; actual backend/host adoption stays
-pending. No tool calls, live DAW actions or automatic server startup are enabled.
+The subsequent [isolated MCP audit](docs/FLSTUDIO_MCP_AUDIT.zh-CN.md) genuinely negotiated
+two fixed upstream servers and verified their 5/67-tool inventories without tool calls.
+Actual host/bridge behavior remains unverified; live DAW actions and automatic startup
+stay disabled.
 
 Phase 3's [read-only backend/template assessment](docs/FLP_BACKEND_ASSESSMENT.md)
 recommends a pinned Music2DAW candidate and documents timing, licensing, runtime and

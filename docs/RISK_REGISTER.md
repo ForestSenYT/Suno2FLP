@@ -51,3 +51,10 @@ support from runtime and audible compatibility. The subsequent
 parse checks; real template, plugin and audible compatibility gates remain open.
 The [binding/dry-run slice](BUILD_PLANNING.md) adds deterministic preview checks and
 current-file fingerprints without changing those gates or invoking a writer.
+
+The [genuine MCP audit](FLSTUDIO_MCP_AUDIT.zh-CN.md) separates protocol availability
+(5/67 tools) from host readiness. Untrusted tool annotations, the live candidate
+package1.0.0/module0.3.0 discrepancy, missing open/save/zoom/crop/reopen coverage,
+Python audit-hook/native-FFI limits and incomplete redistribution notices remain
+explicit blockers for broader adoption. No tools/resources/bridge calls occurred;
+all host and writer gates remain unchanged.

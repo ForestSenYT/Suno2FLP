@@ -199,7 +199,9 @@ See [render comparison](RENDER_COMPARISON.zh-CN.md).
 `core/mcp_models.py`, `daw_controller/discovery.py` and `integrations/mcp_stdio.py`
 separate observed protocol metadata, discovery state and opt-in process transport.
 Only initialization, ping and paginated tool listing are implemented; tool execution
-is absent. Original in-memory/stdio peers validate transport without a real host.
+is absent. Original in-memory/stdio peers validate transport without a real host. The separate
+[isolated adoption audit](FLSTUDIO_MCP_AUDIT.zh-CN.md) now validates two genuine server
+handshakes/tool inventories without connecting to a host or exposing tool execution.
 Protocol availability never grants writer or DAW permission. See [MCP scope](MCP_DISCOVERY.md).
 
 `core/offline_models.py` and `core/offline_files.py` provide current file identities,

@@ -137,3 +137,12 @@ Integer PCM render comparison uses standard-library `wave`, integer decoding, st
 SHA-256 and `math`; no FFmpeg, DSP/ML download or additional Python dependency is added.
 It requires matching, already aligned uncompressed integer WAV inputs and provides
 numerical measurements only. See [format/tolerance limits](RENDER_COMPARISON.zh-CN.md).
+
+The [isolated MCP adoption audit](FLSTUDIO_MCP_AUDIT.zh-CN.md) separately builds the
+original Music2DAW MCP at the existing pin with SDK10.0.401/runtime10.0.12/MCP1.4.1,
+and installs live candidate e6eff37 with Python3.11.16/FastMCP2.14.5/MCP1.30.0 into a
+new private locked environment. No core dependency/lock change, optional ML stack,
+virtual MIDI driver or FL controller installation occurs. Actual resolved notices,
+locks and runtime/artifact identities remain local; genuine discovery does not grant
+host/tool execution. See the audit for the package/module version discrepancy and
+redistribution-notice limitations.

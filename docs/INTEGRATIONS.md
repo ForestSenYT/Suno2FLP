@@ -59,12 +59,13 @@ private source's selected tempo/count facts. The unmodified backend/report is re
 no third-party source/binary is distributed, and upstream editor/MCP/host compatibility
 is not upgraded. Unknown crops/attributes/routing and native-writer gates remain open.
 
-## suno-to-ableton
-
 The later [discovery-only MCP boundary](MCP_DISCOVERY.md) implements original pinned
 protocol negotiation, bounded stdio and fresh paginated inventory with synthetic peers.
-No actual installed MCP server or DAW was started; upstream startup, live host control
-and backend-version adoption remain unverified. No tool execution surface is exposed.
+The later [isolated adoption audit](FLSTUDIO_MCP_AUDIT.zh-CN.md) genuinely initialized
+two fixed servers and verified 5/67-tool inventories, fresh lists, ping and clean exit.
+No tool execution surface is exposed; actual host/bridge adoption remains unverified.
+
+## suno-to-ableton
 
 Revision: `b74e345c0ea166a5be09b5293c5aad4d6cd676e4`.
 [Repository](https://github.com/steven-ahfu/suno-to-ableton),

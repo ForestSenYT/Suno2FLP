@@ -44,8 +44,9 @@ Failures invalidate the previous record; disconnected sessions have no cached cl
 `StdioMcpTransport(argv, timeout=10, cwd=None)` is explicitly opt-in and starts the
 caller-selected local child process. **Use only a startup command whose behavior has
 already been audited and authorized.** This is not an operating-system sandbox and
-cannot make arbitrary server startup safe. No such real command is configured or run
-in this slice; under the user's computer-control pause, only authored test peers run.
+cannot make arbitrary server startup safe. The initial slice ran only authored test peers. A later explicitly authorized
+[isolated audit](FLSTUDIO_MCP_AUDIT.zh-CN.md) genuinely discovered two fixed servers
+without host operations; no global configuration or automatic startup is enabled.
 No CLI command launches a real MCP backend.
 
 The transport uses argv without a shell, hides the Windows child console, separates
