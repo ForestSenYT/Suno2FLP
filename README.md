@@ -26,6 +26,11 @@ sample replay. FLAC retains an independent PCM MD5 oracle; MP3 needs verified LA
 gapless timing and makes no claim of original uncompressed sample equality. No native
 codec is bundled or imported into the core process; later conversion remains blocked.
 
+[Source-bound pitched-note scoring](docs/NOTE_SCORING.zh-CN.md) now measures exact-time,
+duplicate-aware one-to-one F1 against declared reference annotations, with independent
+decode verification and current-input replay. Missing/empty truth is explicitly unscored.
+This is a benchmark tool; it does not certify truth, qualify models or advance job/writer gates.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2

@@ -36,6 +36,13 @@ FLAC PCM MD5 oracle. The shared service routes qualified compressed sources sepa
 without weakening integer-WAV verification. See [limits/provenance](COMPRESSED_AUDIO.zh-CN.md).
 Native packages never enter the core process; no inference or host acceptance is claimed.
 
+`core.note_scoring` defines declared audio-clock annotations and conditional exact ratios.
+`validator.note_matching` owns deterministic iterative maximum-cardinality matching;
+`importer.note_annotations` bounds snapshots, and `validator.note_scoring` verifies the
+current decoder/source/producer/recipe before replay. `pipeline.note_scoring` exclusively
+publishes reports through thin CLI commands. This benchmark surface has no authority
+to complete quality jobs or grant writer/model qualification. See [note scoring](NOTE_SCORING.zh-CN.md).
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service
