@@ -318,3 +318,34 @@ def test_protected_mpeg_frame_crcs_are_checked_including_lame_metadata_frame(tmp
     damaged.write_bytes(data)
     with pytest.raises(OfflineError, match="protected header/side-info CRC"):
         inspect(damaged)
+
+
+@pytest.mark.parametrize("rate", [8000, 16000, 44100])
+@pytest.mark.parametrize("channels", [1, 2])
+@pytest.mark.parametrize("protected", [False, True])
+def test_complete_crcs_cannot_hide_unavailable_audio_reservoir(tmp_path, rate, channels, protected):
+    raw, _, lame = mp3_file(rate, channels)
+    data = bytearray(raw)
+    size = len(raw) // 3
+    samples = 1152 if rate == 44100 else 576
+    side = (17 if channels == 1 else 32) if samples == 1152 else (9 if channels == 1 else 17)
+    side_start = size + 4 + (2 if protected else 0)
+    if samples == 1152:
+        data[side_start : side_start + 2] = b"\xff\x80"
+    else:
+        data[side_start] = 255
+    if protected:
+        for start in (0, size, size * 2):
+            data[start + 1] &= 254
+            value = 65535
+            for byte in data[start + 2 : start + 4] + data[start + 6 : start + 6 + side]:
+                value ^= byte << 8
+                for _ in range(8):
+                    value = ((value << 1) ^ (0x8005 if value & 32768 else 0)) & 65535
+            data[start + 4 : start + 6] = value.to_bytes(2, "big")
+    data[lame + 32 : lame + 34] = struct.pack(">H", crc(data[size:], reflected=True))
+    data[lame + 34 : lame + 36] = struct.pack(">H", crc(data[: lame + 34], reflected=True))
+    path = tmp_path / "unavailable-reservoir.mp3"
+    path.write_bytes(data)
+    with pytest.raises(OfflineError, match="reservoir"):
+        inspect(path)

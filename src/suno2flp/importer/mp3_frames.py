@@ -11,6 +11,7 @@ from suno2flp.core.encoded_audio import EncodedAudioInventory, EncodedRegion, Mp
 from suno2flp.core.offline_models import FileIdentity
 from suno2flp.core.performance import RationalTime
 from suno2flp.importer.encoded_checksums import lame_crc16, mpeg_crc16
+from suno2flp.importer.mpeg_side_info import MpegMainDataExtent
 
 
 def _invalid(message: str) -> NoReturn:
@@ -140,6 +141,8 @@ def scan_mp3(raw: bytes, source: FileIdentity, check: Callable[[], None]) -> Enc
             "audio_limits_exceeded", "Audio exceeds ten minutes", blocked=True
         )
     digest = hashlib.sha256()
+    side_digest = hashlib.sha256()
+    reservoir = MpegMainDataExtent()
     music_crc, count = 0, 0
     metadata.append(_region(raw, "xing-lame-frame", start, start + first.size))
     while offset < end:
@@ -149,6 +152,16 @@ def scan_mp3(raw: bytes, source: FileIdentity, check: Callable[[], None]) -> Enc
             _invalid("Changing MPEG sample rate/channel/version configuration")
         digest.update(struct.pack("<QQ", offset, header.size) + raw[offset : offset + 4])
         if count:
+            crc_bytes = 0 if raw[offset + 1] & 1 else 2
+            side_start = offset + 4 + crc_bytes
+            side = raw[side_start : side_start + header.side]
+            reservoir.consume(
+                side,
+                channels=header.channels,
+                samples=header.samples,
+                payload_bytes=header.size - 4 - crc_bytes - header.side,
+            )
+            side_digest.update(struct.pack("<QQ", offset, header.size) + side)
             music_crc = lame_crc16(raw[offset : offset + header.size], music_crc)
         count += 1
         offset += header.size
@@ -171,6 +184,7 @@ def scan_mp3(raw: bytes, source: FileIdentity, check: Callable[[], None]) -> Enc
         frame_headers_sha256=digest.hexdigest(),
         metadata=metadata,
         mp3=Mp3GaplessInfo(
+            side_info_sha256=side_digest.hexdigest(),
             raw_tag_hex=raw[xing : lame + 36].hex(),
             tag_offset=xing,
             encoder_hex=raw[lame : lame + 9].hex(),

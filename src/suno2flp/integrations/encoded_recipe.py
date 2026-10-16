@@ -22,6 +22,7 @@ def encoded_adapters() -> list[FileIdentity]:
         "importer/encoded_audio.py",
         "importer/flac_frames.py",
         "importer/mp3_frames.py",
+        "importer/mpeg_side_info.py",
         "importer/encoded_checksums.py",
         "pipeline/encoded_decode.py",
         "validator/encoded_decode.py",

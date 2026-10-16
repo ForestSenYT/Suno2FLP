@@ -26,6 +26,10 @@ class FlacStreamInfo(Contract):
 
 
 class Mp3GaplessInfo(Contract):
+    reservoir_validation: Literal["layer-iii-audio-main-data-extents-v1"] = (
+        "layer-iii-audio-main-data-extents-v1"
+    )
+    side_info_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     raw_tag_hex: str = Field(pattern=r"^(?:[0-9a-f]{2})+$")
     tag_offset: int = Field(ge=0, strict=True)
     encoder_hex: str = Field(pattern=r"^[0-9a-f]{18}$")

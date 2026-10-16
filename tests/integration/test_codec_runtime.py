@@ -269,3 +269,43 @@ def test_gui_model_uses_same_compressed_service_and_preserves_runtime_on_workspa
     assert present_job(result).completed == 2
     assert "没有生成 FLP" in present_job(result).explanation
     assert actions.verify(result.record.path) == result
+
+
+def test_invalid_reservoir_with_valid_complete_crcs_fails_before_native(
+    backend, source_files, tmp_path
+):
+    from suno2flp.importer.encoded_audio import inspect_encoded_audio
+    from suno2flp.importer.encoded_checksums import lame_crc16
+    from suno2flp.pipeline.audio_jobs import create_audio_job, run_audio_job
+
+    source = source_files / "source.mp3"
+    before = capture_stream_input(source)
+    inventory = inspect_encoded_audio(source)
+    data = bytearray(source.read_bytes())
+    metadata = next(x for x in inventory.metadata if x.kind == "xing-lame-frame")
+    audio = inventory.data_offset + metadata.size_bytes
+    crc_bytes = 0 if data[audio + 1] & 1 else 2
+    data[audio + 4 + crc_bytes] = 255
+    data[audio + 5 + crc_bytes] |= 128
+    if crc_bytes:
+        from suno2flp.importer.encoded_checksums import mpeg_crc16
+
+        data[audio + 4 : audio + 6] = mpeg_crc16(
+            data[audio + 2 : audio + 4] + data[audio + 6 : audio + 38]
+        ).to_bytes(2, "big")
+    lame = inventory.mp3.tag_offset + len(bytes.fromhex(inventory.mp3.raw_tag_hex)) - 36
+    data[lame + 32 : lame + 34] = lame_crc16(data[audio : inventory.data_end]).to_bytes(2, "big")
+    data[lame + 34 : lame + 36] = lame_crc16(data[inventory.data_offset : lame + 34]).to_bytes(
+        2, "big"
+    )
+    path = tmp_path / "invalid-reservoir.mp3"
+    path.write_bytes(data)
+    with pytest.raises(OfflineError, match="reservoir"):
+        inspect_encoded_audio(path)
+    created = create_audio_job(path, tmp_path / "job", "invalid-reservoir-v1")
+    rejected = run_audio_job(created.record.path, decoder_directory=backend.root)
+    assert rejected.job.status == "failed" and rejected.job.history[-1].code == "audio_invalid"
+    assert rejected.job.stages[1].status == "queued" and not list(
+        rejected.job.output_directory.glob("decode-*")
+    )
+    assert capture_stream_input(source) == before

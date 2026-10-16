@@ -148,6 +148,44 @@ print(json.dumps(results))
             pass
         else:
             raise RuntimeError("Incomplete native-success source escaped structural checks")
+    inventory = inspect_encoded_audio(root / "source.mp3")
+    encoded = bytearray((root / "source.mp3").read_bytes())
+    first = next(region for region in inventory.metadata if region.kind == "xing-lame-frame")
+    audio = inventory.data_offset + first.size_bytes
+    if not encoded[audio + 1] & 1:
+        raise RuntimeError("Authored reservoir fixture unexpectedly uses protected MPEG frames")
+    encoded[audio + 4] = 255
+    encoded[audio + 5] |= 128
+    lame = inventory.mp3.tag_offset + len(bytes.fromhex(inventory.mp3.raw_tag_hex)) - 36
+
+    def original_crc(data):
+        value = 0
+        for byte in data:
+            value ^= byte
+            for _ in range(8):
+                value = (value >> 1) ^ (0xA001 if value & 1 else 0)
+        return value.to_bytes(2, "big")
+
+    encoded[lame + 32 : lame + 34] = original_crc(encoded[audio : inventory.data_end])
+    encoded[lame + 34 : lame + 36] = original_crc(encoded[inventory.data_offset : lame + 34])
+    damaged = root / "invalid-reservoir.mp3"
+    damaged.write_bytes(encoded)
+    try:
+        inspect_encoded_audio(damaged)
+    except OfflineError as error:
+        if "reservoir" not in str(error):
+            raise RuntimeError(
+                "Authored adversarial source failed for an unrelated reason"
+            ) from error
+    else:
+        raise RuntimeError("Native silence concealment escaped the reservoir gate")
+    rejected = actions.run(actions.create(damaged).record.path, Event())
+    if (
+        rejected.job.status != "failed"
+        or rejected.job.history[-1].code != "audio_invalid"
+        or rejected.job.stages[1].status != "queued"
+    ):
+        raise RuntimeError("Unavailable reservoir reached native decode stage")
     verify_inputs([manifest, *originals])
     if any(name in sys.modules for name in ("soundfile", "numpy", "cffi")):
         raise RuntimeError("Native dependencies leaked into the core application")
@@ -157,6 +195,7 @@ print(json.dumps(results))
         "timing_qualification": qualification,
         "jobs": reports,
         "forged_candidates_refused": True,
+        "invalid_reservoir_refused_before_decode": True,
         "later_workers": "blocked",
         "host_compatibility": "unverified",
         "musical_correctness": "not_assessed",

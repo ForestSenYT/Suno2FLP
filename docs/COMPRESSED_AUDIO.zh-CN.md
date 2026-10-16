@@ -21,6 +21,18 @@ MP3 支持 8／11.025／12／16／22.05／24／32／44.1／48 kHz，单／双声
 3000 帧，呈现帧数严格等于音频 MPEG 帧数乘每帧样本数，再减去 delay 和 padding。
 不将第一帧 Xing 元数据计作音频帧，也不对解码样本再次裁剪。
 
+MP3 还核对每个音频帧的 side information：在排除头、可选 CRC、side information 和
+Xing 的音频载荷坐标上，检查 `main_data_begin` 指向已存在的数据，所有 granule／声道
+的 `part2_3_length` 总和不读取未来帧，也不重用之前已消耗的位。保留合法的非零回指
+和未用 ancillary 数据；音频 side-info 的原始字节按源顺序加入独立摘要。
+这是结构范围检查，不是 Huffman 语义验证。
+
+独立审查复现过一种原生假成功：只把第一音频帧回指改为 511 并重新计算完整 CRC，
+解码器仍报告原帧数和零错误，但起始 240 帧被静默补零。当前门槛在 input 阶段拒绝
+该情形，不让相同解码器的重放掩盖丢段。布局及载荷坐标依据
+[Sieler／Sperschneider 的 Layer3 语法说明](https://mp3guessenc.sourceforge.io/MPEG%20Layer3%20Bitstream%20Syntax%20and%20Decoding.pdf)
+§4.1.4／4.2.4；静音补偿行为另见 [mpg123 Layer III 解码器](https://raw.githubusercontent.com/madebr/mpg123/master/src/libmpg123/layer3.c)。
+
 完整扫描最多一百万帧；FLAC 单帧解析预算 4 MiB。合法但超出支持预算的文件明确阻断，
 不声称它们已经损坏。结构扫描不验证每个 MPEG 熵编码语义，也不证明音乐正确；随后
 必须由固定 native decoder 实际读取完整帧数、无错误、全部有限样本并通过重放。
