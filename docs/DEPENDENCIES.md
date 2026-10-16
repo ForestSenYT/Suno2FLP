@@ -1,5 +1,12 @@
 # Dependencies
 
+The [first M2 decoder](AUDIO_DECODE.zh-CN.md) adds no dependency, native library or
+process launch. Original Python `struct`/integer code preserves PCM samples, with current
+interpreter and adapter file identities in each report. SoundFile 0.13.1/libsndfile was
+researched only; it is not installed, selected or included in the lock/distribution.
+Native licensing/notices, exact platform runtime and compressed timing qualification
+remain prerequisites for a future compressed-input slice.
+
 The [explicit routing slice](FL26_EXPLICIT_ROUTING.zh-CN.md) adds no dependency or vendor
 implementation. Factory tempo-automation structures were examined only in private probes;
 their old declared version does not establish FL26 compatibility. Proprietary templates,

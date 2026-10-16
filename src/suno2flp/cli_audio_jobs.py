@@ -41,7 +41,7 @@ def register_audio_jobs(app: typer.Typer) -> None:
 
     @app.command("run-audio-job")
     def run(snapshot: Path) -> None:
-        """Run real audio preflight; unavailable conversion workers block with exit 3."""
+        """Preflight and losslessly decode integer PCM WAV; separation blocks with exit 3."""
         emit(lambda: run_audio_job(snapshot), run=True)
 
     @app.command("verify-audio-job")

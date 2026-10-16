@@ -1,9 +1,10 @@
-"""Shared synchronous application service for real preflight and durable job state."""
+"""Shared real PCM preflight/decoding and durable job state; later workers stay blocked."""
 
 import os
 from collections.abc import Callable
 from pathlib import Path
 
+from suno2flp.core.audio_decode import DecodeCancelled
 from suno2flp.core.audio_input import MAX_AUDIO_BYTES, AudioPreflightError, AudioPreflightReport
 from suno2flp.core.errors import OfflineError
 from suno2flp.core.job_store import StoredJob
@@ -15,8 +16,10 @@ from suno2flp.core.offline_files import (
     verify_inputs,
 )
 from suno2flp.importer.audio import inspect_audio
+from suno2flp.importer.pcm_decode import decode_pcm_wave
 from suno2flp.pipeline.job_store import latest_job, load_job, save_job
 from suno2flp.pipeline.jobs import finish_stage, new_job, resume_job, start_stage, stop_job
+from suno2flp.validator.pcm_decode import verify_pcm_decode
 
 
 def create_audio_job(source: Path, output_directory: Path, job_id: str) -> StoredJob:
@@ -42,11 +45,13 @@ def _current(snapshot: Path) -> StoredJob:
     return stored
 
 
-def _verify_supported(stored: StoredJob) -> None:
+def _verify_supported(stored: StoredJob, should_cancel: Callable[[], bool] | None = None) -> None:
     job = stored.job
-    if any(stage.status != "queued" for stage in job.stages[1:]):
-        raise OfflineError("job_worker_unqualified", "This runner only qualifies the input stage")
-    if any(event.stage not in (None, "input") for event in job.history):
+    if any(stage.status != "queued" for stage in job.stages[2:]):
+        raise OfflineError(
+            "job_worker_unqualified", "This runner only qualifies the input and PCM decode stages"
+        )
+    if any(event.stage not in (None, "input", "decode") for event in job.history):
         raise OfflineError("job_worker_unqualified", "Later worker activity has not been qualified")
     verify_inputs([job.source, *(output for stage in job.stages for output in stage.outputs)])
     stage = job.stages[0]
@@ -60,6 +65,17 @@ def _verify_supported(stored: StoredJob) -> None:
         if report.source != job.source or report != inspect_audio(job.source.path):
             raise OfflineError("job_input_evidence_invalid", "Report disagrees with current audio")
         verify_inputs([stage.outputs[0]])
+        decoded = job.stages[1]
+        if decoded.status == "succeeded":
+            if len(decoded.outputs) != 2:
+                raise OfflineError("job_decode_evidence_invalid", "Expected PCM and decode report")
+            evidence = verify_pcm_decode(decoded.outputs[1].path, should_cancel=should_cancel)
+            if evidence.preflight != report or evidence.pcm != decoded.outputs[0]:
+                raise OfflineError(
+                    "job_decode_evidence_invalid",
+                    "Decoded evidence disagrees with job inputs/outputs",
+                )
+            verify_inputs(decoded.outputs)
 
 
 def verify_audio_job(snapshot: Path) -> StoredJob:
@@ -70,6 +86,8 @@ def verify_audio_job(snapshot: Path) -> StoredJob:
 
 
 def _save_stop(stored: StoredJob, error: AudioPreflightError | OfflineError | OSError) -> StoredJob:
+    if isinstance(error, DecodeCancelled):
+        return save_job(stop_job(stored.job, "cancelled", error.code), stored.record.path)
     blocked = isinstance(error, AudioPreflightError) and error.blocked
     code = error.code if isinstance(error, OfflineError) else "audio_io_failed"
     job = stop_job(stored.job, "blocked" if blocked else "failed", code)
@@ -80,7 +98,10 @@ def run_audio_job(snapshot: Path, *, should_cancel: Callable[[], bool] | None = 
     stored = _current(snapshot)
     if should_cancel is not None and should_cancel():
         return cancel_audio_job(stored.record.path)
-    _verify_supported(stored)
+    try:
+        _verify_supported(stored, should_cancel)
+    except DecodeCancelled:
+        return cancel_audio_job(stored.record.path)
     if should_cancel is not None and should_cancel():
         return cancel_audio_job(stored.record.path)
     if stored.job.status == "running":
@@ -106,6 +127,24 @@ def run_audio_job(snapshot: Path, *, should_cancel: Callable[[], bool] | None = 
         stored = save_job(job, stored.record.path)
     if should_cancel is not None and should_cancel():
         return cancel_audio_job(stored.record.path)
+    if stored.job.stages[1].status != "succeeded":
+        stored = save_job(start_stage(stored.job, "decode"), stored.record.path)
+        try:
+            root = guarded_path(
+                stored.job.output_directory / f"decode-{len(stored.job.history) - 1:08d}"
+            )
+            report_path = root / "decode.json"
+            evidence = decode_pcm_wave(stored.job.source.path, root, should_cancel=should_cancel)
+            if evidence != verify_pcm_decode(report_path, should_cancel=should_cancel):
+                raise OfflineError("job_decode_evidence_invalid", "Decode verification disagrees")
+            if should_cancel is not None and should_cancel():
+                return cancel_audio_job(stored.record.path)
+            job = finish_stage(
+                stored.job, "decode", [evidence.pcm, capture_stream_input(report_path)]
+            )
+        except (OfflineError, OSError) as error:
+            return _save_stop(stored, error)
+        stored = save_job(job, stored.record.path)
     return save_job(stop_job(stored.job, "blocked", "worker_unavailable"), stored.record.path)
 
 

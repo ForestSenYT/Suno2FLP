@@ -25,6 +25,12 @@ def test_cli_create_run_verify_and_cancel_are_explicit(tmp_path):
     assert run.exit_code == 3, run.output
     result = json.loads(run.stdout)
     assert result["job"]["status"] == "blocked"
+    assert [stage["status"] for stage in result["job"]["stages"][:3]] == [
+        "succeeded",
+        "succeeded",
+        "queued",
+    ]
+    assert len(result["job"]["stages"][1]["outputs"]) == 2
     verify = runner.invoke(app, ["verify-audio-job", result["record"]["path"]])
     assert verify.exit_code == 0, verify.output
     another = runner.invoke(

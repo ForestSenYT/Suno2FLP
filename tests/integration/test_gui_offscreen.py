@@ -57,7 +57,7 @@ def test_real_gui_lifecycle_history_and_render(application, tmp_path):
     finish(application, bench)
     assert bench.selected.job.status == "blocked"
     assert "尚未接入" in bench.explanation.text()
-    assert "1 / 11" in bench.summary.text()
+    assert "2 / 11" in bench.summary.text()
     assert not bench.cancel_button.isEnabled() and bench.run_button.isEnabled()
     bench.verify_selected()
     finish(application, bench)

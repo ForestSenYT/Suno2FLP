@@ -39,13 +39,18 @@ STAGES = (
     "交付结果",
 )
 REASONS = {
-    "worker_unavailable": "音频检查已完成。后续转换尚未接入，当前没有生成 FLP。",
+    "worker_unavailable": "已接通音频检查与整数 WAV 解码。分轨分离尚未接入，当前没有生成 FLP。",
     "audio_format_unavailable": "此音频格式尚未接入。当前可检查普通整数 PCM WAV。",
     "audio_codec_unavailable": "此 WAV 编码尚不支持。请保留原文件，另选整数 PCM WAV。",
     "audio_invalid": "音频文件损坏或结构不完整。请重新导出完整文件，并创建新任务。",
     "audio_limits_exceeded": "音频超出当前支持范围。请查看格式、声道、时长和大小限制。",
     "offline_input_changed": "输入文件发生变化。为保留来源，请使用当前素材创建新任务。",
     "audio_io_failed": "无法读取音频或保存检查结果。请检查路径及文件权限。",
+    "audio_decode_timeout": "音频解码或逐样本复核超时，候选文件已保留，未标记完成。",
+    "audio_runtime_changed": "解码运行环境发生变化。旧结果无法复用，请创建新任务。",
+    "audio_runtime_unavailable": "当前环境不支持已验证的音频解码表示。请查看环境诊断。",
+    "audio_decode_sample_mismatch": "解码样本与原始音频不一致，结果不能继续使用。",
+    "audio_decode_evidence_invalid": "解码证据不完整或与当前文件不一致，结果不能继续使用。",
     "user_cancelled": "检查已取消。已有记录保留，可在文件身份一致时恢复检查。",
     "interrupted": "上次检查中断。已有记录保留，可重新检查。",
 }
