@@ -74,5 +74,15 @@
 - [x] Publish a phase-by-phase acceptance matrix and Chinese quickstart distinguishing implemented offline features, host-blocked gates and optional future AI/reinterpretation work.
 - [x] Fresh 3.11/3.14 tests, Ruff, format, mypy, source/wheel builds, archive privacy audit and installed CLI end-to-end checks including negative cases.
 - [x] Recheck original/reference/probe/manual/backend identities using the existing private manifest; write only new local receipts.
-- [ ] One independent read-only review, repair important findings with failing-first tests; update PR #1 and fix latest-commit CI until all eight jobs pass.
+- [x] One independent read-only review, repair important findings with failing-first tests; update PR #1 and fix latest-commit CI until all eight jobs pass.
 - [x] Final checkpoint records exact implementation/host boundaries; no whole-project-ready claim without genuine host acceptance.
+
+## Completion checkpoint
+
+All five offline tasks completed. Python 3.11/3.14 each passed 742 tests (19 explicitly skipped);
+Ruff/format/mypy, both isolated installed-wheel workflows, package privacy checks and protected-input
+integrity passed. All eight CI jobs passed at implementation commit `9498f48`; PR #1 was updated.
+The final documentation checkpoint is also subject to the same latest-head CI before handoff.
+All three Important final-review findings were fixed with failing-first regressions; no Minor findings
+remain. Real-host/listening/backend adoption and documented hostile-concurrency/process-tree/power-loss
+properties were not verified. Host/write eligibility remains unchanged and blocked.
