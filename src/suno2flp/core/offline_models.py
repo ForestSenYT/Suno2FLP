@@ -5,7 +5,7 @@ from typing import Literal
 
 from pydantic import Field
 
-from suno2flp.core.models import Contract, Diagnostic
+from suno2flp.core.models import ArrangementOptions, Contract, Diagnostic
 
 
 class FileIdentity(Contract):
@@ -27,6 +27,21 @@ class ArrangementQualityReport(Contract):
     input_files: list[FileIdentity] = Field(default_factory=list)
     referenced_paths: list[Path] = Field(default_factory=list)
     diagnostics: list[Diagnostic] = Field(default_factory=list)
+    host_compatibility: Literal["unverified"] = "unverified"
+    writer_eligibility: Literal["blocked"] = "blocked"
+    execution_allowed: Literal[False] = False
+
+
+class PreparationRun(Contract):
+    schema_version: Literal[1] = 1
+    algorithm_version: Literal[1] = 1
+    project_root: Path
+    destination: Path
+    options: ArrangementOptions
+    mapping_file: Path | None = None
+    input_files: list[FileIdentity]
+    artifacts: dict[str, FileIdentity]
+    status: Literal["offline_ready"] = "offline_ready"
     host_compatibility: Literal["unverified"] = "unverified"
     writer_eligibility: Literal["blocked"] = "blocked"
     execution_allowed: Literal[False] = False

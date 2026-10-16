@@ -30,6 +30,7 @@ from suno2flp.importer import LocalAssetImporter, MidiFileImporter
 from suno2flp.integrations.music2daw import Music2DawInspector
 from suno2flp.integrations.music2daw_provision import provision_music2daw as provision_backend
 from suno2flp.midi_processor import DeterministicMidiProcessor
+from suno2flp.pipeline.preparation import prepare_project, verify_preparation
 from suno2flp.validator import validate_project
 from suno2flp.validator.arrangement import verify_arrangement_file
 from suno2flp.validator.manual_records import check_manual_records, manual_record_summary
@@ -127,6 +128,42 @@ def verify_arrangement(
         _fail(exc)
     if not result.valid:
         raise typer.Exit(1)
+
+
+@app.command("prepare-project")
+def prepare_project_command(
+    project: Path,
+    output_directory: Annotated[Path, typer.Option("--output-dir", help="New intermediate bundle")],
+    target_ppq: Annotated[int | None, typer.Option("--target-ppq", min=1)] = None,
+    timing_source: Annotated[int | None, typer.Option("--timing-source", min=0)] = None,
+    instruments: Annotated[Path | None, typer.Option("--instruments")] = None,
+) -> None:
+    """Prepare deterministic JSON assets/music/quality; no FLP or DAW execution."""
+    try:
+        run = prepare_project(
+            project,
+            output_directory,
+            options=ArrangementOptions(
+                target_ppq=target_ppq,
+                timing_source=timing_source,
+                note_view="active",
+            ),
+            mapping_file=instruments,
+        )
+        typer.echo(
+            f"Offline preparation: {run.destination / 'run.json'}; host unverified; writer blocked"
+        )
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+
+
+@app.command("verify-preparation")
+def verify_preparation_command(run_file: Path) -> None:
+    """Reconstruct a saved preparation from current originals; never repair it."""
+    try:
+        typer.echo(verify_preparation(run_file).model_dump_json(indent=2))
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
 
 
 @app.command("provision-music2daw")

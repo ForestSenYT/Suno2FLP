@@ -190,6 +190,14 @@ field gates remain. See [field evidence](FL26_FIELD_EVIDENCE.md).
 
 ## Safety and error handling
 
+`core/offline_models.py` and `core/offline_files.py` provide current file identities,
+new-report protection and permanently non-executable offline evidence. The independent
+`validator/arrangement.py` reimports current original MIDI, replays declared cleanup,
+arrangement and roles, comparing complete snapshots. `pipeline/preparation.py` composes
+existing deterministic stages into a new JSON bundle with a last-written manifest;
+its verifier reconstructs all artifacts from current inputs. This is separate from
+FLP output, MCP control and audible acceptance. See [offline workflow](OFFLINE_WORKFLOW.zh-CN.md).
+
 `core/manual_records.py` defines separate operator-record contracts; these are not
 writer policy or host attestations consumed by the builder. The process-free
 `validator/manual_records.py` checks explicit contained files, hashes and completeness

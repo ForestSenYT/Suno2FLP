@@ -112,6 +112,9 @@ Cleanup preferences are consumed only by the explicit cleanup API/command; impor
 inspection and validation do not apply them implicitly. `quantize: true` now requires
 positive `quantize_grid_ticks`; configurations using the former placeholder boolean
 alone must supply that grid. Backend selections still do not enable integrations.
+The explicit `prepare-project` offline workflow also consumes those configured cleanup
+preferences and records the selected active views; it requires disabled backends and
+adds no dependency. `verify-preparation` replays the same declared choices from originals.
 Faithful arrangement requires no additional dependencies: PPQ and effective-map
 comparison use Python integer, `math.lcm` and `fractions.Fraction` arithmetic.
 Arrangement options belong to the explicit API/CLI; `arrange` does not load project

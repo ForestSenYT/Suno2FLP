@@ -90,6 +90,12 @@ snapshots. It reports stale or altered music/provenance without a DAW or backend
 Structural success retains host-unverified, writer-blocked status. See the
 [offline workflow guide](docs/OFFLINE_WORKFLOW.zh-CN.md).
 
+`prepare-project PROJECT --output-dir PROJECT/intermediate/prepare-001` composes
+discovery, explicit configured cleanup, faithful arrangement, optional `--instruments`
+and quality replay into a new JSON-only bundle. `verify-preparation .../run.json`
+reconstructs every artifact against current originals, rejecting stale/altered or
+incomplete bundles. It never invokes a backend, creates FLP or grants write eligibility.
+
 `map-instruments` applies a validated YAML role catalog and exact source selectors to
 an existing faithful arrangement. Alternatively, pass `--instruments mapping.yaml` to
 `arrange`. Role annotations preserve source channels/notes/events and retain the exact
