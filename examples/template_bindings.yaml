@@ -1,0 +1,12 @@
+# Matches the original synthetic template in tests/integration/test_template_external.py.
+# Replace the template hash and all selectors/targets for your own inspected assets.
+schema_version: 1
+backend_revision: 6def9463d6fa8636bbc81010581318a39c47d3c4
+template_sha256: 110d4b9b97874e647f80e7af777c8267ceb16b8a4c1f429736ec22434bc55be2
+bindings:
+  - source_input: 0
+    source_track_position: 0
+    source_channel: 2
+    template_channel_id: 0
+    template_pattern_id: 0
+    template_playlist_track: 0

@@ -1,0 +1,27 @@
+name: Python checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  checks:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.12.21'
+      - run: uv python install ${{ matrix.python }}
+      - run: uv sync --locked --python ${{ matrix.python }}
+      - run: uv run --no-sync ruff check .
+      - run: uv run --no-sync ruff format --check .
+      - run: uv run --no-sync mypy src
+      - run: uv run --no-sync pytest
+      - run: uv run --no-sync suno2flp --help
+      - run: uv build
+      - run: uv export --locked --no-dev --no-hashes --no-emit-project --output-file runtime-smoke-requirements.tmp
+      - run: uv run --no-project --python ${{ matrix.python }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/offline_smoke.py --require-installed --workspace .tools/ci-offline-smoke

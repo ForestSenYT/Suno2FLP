@@ -1,0 +1,16 @@
+# Explicit role catalog. Empty mappings apply no assignments and infer no roles.
+# general_midi_program is a 1-based hint (1..128), never a MIDI program-change write.
+schema_version: 1
+roles:
+  bass:
+    general_midi_program: 33
+    plugin_hint: null
+  piano:
+    general_midi_program: 1
+    plugin_hint: null
+  drums:
+    percussion: true
+    plugin_hint: null
+mappings: []
+# Mapping selectors use zero-based source_input, source_track_position and source_channel.
+# Roles do not define a destination channel. Source channels are never changed.
