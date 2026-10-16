@@ -1,5 +1,10 @@
 # Integration evidence and strategy
 
+[PCM decoding](AUDIO_DECODE.zh-CN.md) uses original standard-library code, not a new
+external integration. Current interpreter/adapter identities and independent inverse
+sample verification qualify only integer PCM WAV. The SoundFile/libsndfile research
+does not establish a selected, installed or qualified compressed decoder.
+
 The optional [GUI runtime](GUI.zh-CN.md) is Qt for Python Essentials 6.12.0, using
 QtCore/QtGui/QtWidgets and the existing shared job service. It is not a DAW bridge.
 Official package/module license and runtime metadata were reviewed before local

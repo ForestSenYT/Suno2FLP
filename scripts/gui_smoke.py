@@ -76,8 +76,10 @@ def main():
         raise RuntimeError("GUI did not create a queued job")
     bench.run_selected()
     finish()
-    if bench.selected.job.status != "blocked" or bench.selected.job.stages[0].status != "succeeded":
-        raise RuntimeError("GUI did not show real input completion and unavailable workers")
+    if bench.selected.job.status != "blocked" or [
+        stage.status for stage in bench.selected.job.stages[:3]
+    ] != ["succeeded", "succeeded", "queued"]:
+        raise RuntimeError("GUI did not show real preflight/decode and unavailable separation")
     snapshot = bench.selected.record.path
     bench.verify_selected()
     finish()
@@ -116,6 +118,7 @@ def main():
                 "installed_wheel": installed,
                 "qt_platform": "offscreen",
                 "create_run_block_verify_history_cancel": "passed",
+                "completed_stages": ["input", "decode"],
                 "evidence_tamper_refused": True,
                 "original_unchanged": True,
                 "flp_created": False,

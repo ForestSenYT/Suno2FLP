@@ -105,9 +105,12 @@ def main():
         checked_job != audio_job
         or audio_job["job"]["status"] != "blocked"
         or audio_job["job"]["stages"][0]["status"] != "succeeded"
+        or audio_job["job"]["stages"][1]["status"] != "succeeded"
+        or len(audio_job["job"]["stages"][1]["outputs"]) != 2
+        or audio_job["job"]["stages"][2]["status"] != "queued"
         or audio_job["job"]["history"][-1]["code"] != "worker_unavailable"
     ):
-        raise RuntimeError("Persistent audio preflight did not block at unavailable workers")
+        raise RuntimeError("Persistent PCM decode did not block at unavailable separation")
     cli("run-audio-job", created_job["record"]["path"], expected=1)
     cli(
         "create-audio-job",

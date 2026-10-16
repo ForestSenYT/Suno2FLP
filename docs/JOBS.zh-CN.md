@@ -1,8 +1,9 @@
 # GUI／CLI 共用的转换作业基础
 
 M1 已实现 `core.jobs`／`pipeline.jobs` 状态契约，以及独占持久化、真实 PCM 音频
-预检和 GUI／CLI 共用的同步作业服务。它们属于[已批准交付路线](DELIVERY_ROADMAP.zh-CN.md)
-的基础部分；分离、转写、完整转换、GUI 和宿主 worker 尚未接入。
+预检和 GUI／CLI 共用的同步作业服务。M2 新增[逐样本保真的 PCM 解码](AUDIO_DECODE.zh-CN.md)。
+它们属于[已批准交付路线](DELIVERY_ROADMAP.zh-CN.md)的基础部分；薄 GUI 已接入，
+分离、转写、完整转换和宿主 worker 尚未接入。
 
 ## 已实现的行为
 
@@ -57,18 +58,20 @@ publish 十一个阶段，按顺序开始。这里的阶段名称是作业协议
 ```powershell
 suno2flp create-audio-job "C:\Music\song.wav" --output "D:\Jobs\song-v1" --job-id song-v1
 suno2flp run-audio-job "D:\Jobs\song-v1\states\00000000.json"
-suno2flp verify-audio-job "D:\Jobs\song-v1\states\00000003.json"
+suno2flp verify-audio-job "D:\Jobs\song-v1\states\00000005.json"
 ```
 
 每条命令输出 JSON，包含 `record.path` 和实际 `job`。后续变更命令应传上一次返回的
-最新 `record.path`；示例 00000003 是首次有效 PCM 预检后的阻断记录，重试会追加编号。
+最新 `record.path`；示例 00000005 是首次有效 PCM 预检／解码后的阻断记录，重试会追加编号。
 创建／核验／取消返回 0；运行因缺少能力阻断返回 3，输入损坏失败返回 1。
 创建返回 0 只表示任务记录已保存，核验返回 0 只表示相应证据一致。
 
 `run-audio-job` 实际核对[音频结构](AUDIO_INPUT.zh-CN.md)，独占保存预检报告并完成
-input，随后以 `worker_unavailable` 阻断，decode 及之后保持待执行。报告完整性核验
-还会从当前音频独立重算，不能仅通过替换报告及其哈希宣称预检成功。
-发生中断的 input 会先记为 `interrupted`，再记录恢复和新尝试；已经生成的旧报告保留。
+input，再将整数样本无损换算到新的 float64 PCM，并独立恢复／比较全部源整数样本。
+通过后完成 decode，随后以 `worker_unavailable` 阻断，separate 及之后保持待执行。
+报告完整性核验从当前音频独立重算，不能仅通过替换报告及哈希宣称成功。
+发生中断的 input／decode 会先记为 `interrupted`，再记录恢复和新尝试；旧候选及报告保留。
+解码每次使用新的子目录；旧 M1 历史可以追加这个阶段，已完成产物只在独立复核后复用。
 源身份或完成产物改变则拒绝运行／恢复，需建立新任务。
 
 `cancel-audio-job <最新记录>` 可在源文件丢失时取消待执行／运行中的状态。
@@ -77,6 +80,6 @@ input，随后以 `worker_unavailable` 阻断，decode 及之后保持待执行�
 文件拒绝过期写入。只读历史载入不要求源文件存在，核验和恢复则要求当前证据一致。
 
 [GUI](GUI.zh-CN.md) 在单工作线程中调用同一服务；可选 `should_cancel` 回调在安全边界
-请求取消，不需要桌面输入或强杀线程。检查前和实际预检后响应请求，保留历史；中途
-读取仍可能先完成，未完成产物不会宣称完成。音频模型和 FLP／后台宿主适配器仍分别
+请求取消，不需要桌面输入或强杀线程。检查前、预检后、解码及逐样本验证块边界响应请求，
+保留历史；当前 I/O／身份哈希仍可能先完成，未完成产物不会宣称完成。音频模型和 FLP／后台宿主适配器仍分别
 接受许可、固定版本、质量及宿主证据的门槛约束。

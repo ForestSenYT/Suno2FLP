@@ -16,7 +16,8 @@ The shared [audio job service](docs/JOBS.zh-CN.md) now creates exclusive persist
 event histories, performs [real integer PCM-WAVE preflight](docs/AUDIO_INPUT.zh-CN.md),
 verifies current evidence and supports cancellation/recovery. `create-audio-job`,
 `run-audio-job`, `verify-audio-job` and `cancel-audio-job` expose this service. Running
-valid PCM completes input validation and blocks at unavailable conversion workers
+valid PCM completes input validation and [sample-preserving float64 decoding](docs/AUDIO_DECODE.zh-CN.md),
+then blocks at unavailable separation
 (exit 3); it does not produce a playable project or attest musical quality.
 
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV

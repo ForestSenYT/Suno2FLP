@@ -37,11 +37,12 @@ def test_actions_and_view_follow_real_state_with_exact_details(tmp_path):
     assert created.job.source.sha256 in view.diagnostics
     result = actions.run(created.record.path, Event())
     view = model.present_job(result)
-    assert view.status == "已阻断" and view.completed == 1
+    assert view.status == "已阻断" and view.completed == 2
     assert "尚未接入" in view.explanation and "FLP" in view.explanation
     assert not view.can_cancel and view.can_run
     assert view.stages[0] == ("音频检查", "已完成")
-    assert all(status == "待执行" for _, status in view.stages[1:])
+    assert view.stages[1] == ("音频解码", "已完成")
+    assert all(status == "待执行" for _, status in view.stages[2:])
     assert actions.verify(result.record.path) == result
     history = model.JobActions(actions.root).history()
     assert len(history) == 1 and history[0].snapshot == result.record.path

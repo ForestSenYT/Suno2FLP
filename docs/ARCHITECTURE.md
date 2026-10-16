@@ -20,6 +20,13 @@ block explicitly; no host execution or inference is introduced. Final publicatio
 and success remain refused. These states never grant writer authorization. See
 [job service](JOBS.zh-CN.md) and [audio preflight](AUDIO_INPUT.zh-CN.md).
 
+`importer.pcm_decode` now converts integer PCM into new float64 WAV intermediates without
+resampling or changing frame origin/order. `validator.pcm_decode` independently parses
+the output, recovers every source integer sample and compares current evidence. The job
+service qualifies input/decode only, then blocks at separation; it rejects structurally
+declared later workers. See [PCM decoding](AUDIO_DECODE.zh-CN.md). No native codec or
+model runtime is installed by this slice.
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service

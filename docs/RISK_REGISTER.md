@@ -8,6 +8,9 @@ whole-song fidelity; all timing, host and writer restrictions remain in place.
 
 | Risk | Impact | Mitigation / future gate | Current status |
 | --- | --- | --- | --- |
+| PCM conversion loses low bits or shifts channels/time | Analysis begins from altered music | Binary64 exact power-of-two normalization, unchanged frame clock/order and independent inverse integer-byte comparison | All integer widths/extrema and boundary impulses tested; no music/host qualification |
+| Rehashed decoded evidence mistaken for sample fidelity | Changed audio reused on resume | Reconstruct current source preflight and all original integers, verify runtime/code/output identities before/after | Decode verifier rejects forged sample data; old completed evidence cannot be silently refreshed |
+| Cancelled/partial decoded WAV reused | Missing tail or invalid container promoted to completion | New attempt directory, independent whole-file validation, durable completion only after verification; retain failed candidates | Cooperative block-boundary cancellation; current I/O may finish first; compressed formats remain blocked |
 | Audio compensation changes original MIDI events | Correct-looking onsets conceal moved tempo points | Compare independent MIDI event positions and exact clocks; never compensate source ticks from one render | Minus-one-tick audio probes align selected onsets but export the moved tick; writer blocked |
 | MIDI export treated as a receiver log | Extra transport controls or inferred channels/programs silently accepted | Preserve every occurrence, ordered tracks and current inputs; separate export and audio evidence | Selected port/volume audio response verified; full program/channel routes unverified |
 | Exit zero without output | Failed background run reported as success | Require fresh file, parse, hashes and before/after input identities | Sandbox and incorrect MIDI argv cases exposed; no-output attempts retained as failures |
