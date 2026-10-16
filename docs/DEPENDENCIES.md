@@ -127,3 +127,8 @@ dependency or lock change. Original/adapted parser and modification notice hashe
 the artifact manifest; upstream GPL notices stay with that local derived installation.
 Only the original Python adaptation recipe is included in this package; backend C#
 files, binaries and private reports are excluded. See [adaptation evidence](FL26_BACKEND_ADAPTATION.md).
+
+The original [MCP discovery client](MCP_DISCOVERY.md) uses the stdlib and existing
+Pydantic, without an MCP SDK or server dependency. Its explicit stdio transport requires
+an independently audited/authorized external startup argv; none is configured by default.
+No real backend/DAW startup or installation is part of its synthetic offline tests.

@@ -190,6 +190,12 @@ field gates remain. See [field evidence](FL26_FIELD_EVIDENCE.md).
 
 ## Safety and error handling
 
+`core/mcp_models.py`, `daw_controller/discovery.py` and `integrations/mcp_stdio.py`
+separate observed protocol metadata, discovery state and opt-in process transport.
+Only initialization, ping and paginated tool listing are implemented; tool execution
+is absent. Original in-memory/stdio peers validate transport without a real host.
+Protocol availability never grants writer or DAW permission. See [MCP scope](MCP_DISCOVERY.md).
+
 `core/offline_models.py` and `core/offline_files.py` provide current file identities,
 new-report protection and permanently non-executable offline evidence. The independent
 `validator/arrangement.py` reimports current original MIDI, replays declared cleanup,

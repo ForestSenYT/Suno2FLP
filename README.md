@@ -24,6 +24,11 @@ compatibility is unverified; synthetic byte fixtures do not establish audible re
 Transcription, reinterpretation and MCP connections remain planned. No music/model/
 template or optional backend binary is bundled; project defaults remain disabled.
 
+An original [discovery-only MCP component](docs/MCP_DISCOVERY.md) now supports pinned
+initialization and current paginated inventories through an opt-in stdio transport.
+Only authored synthetic peers have been exercised; actual backend/host adoption stays
+pending. No tool calls, live DAW actions or automatic server startup are enabled.
+
 Phase 3's [read-only backend/template assessment](docs/FLP_BACKEND_ASSESSMENT.md)
 recommends a pinned Music2DAW candidate and documents timing, licensing, runtime and
 output-safety limits. The next [read-only inspection slice](docs/TEMPLATE_INSPECTION.md)
