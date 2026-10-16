@@ -1,5 +1,12 @@
 # Development roadmap
 
+The active product target now requires **audio-only input, editable notes/stems and a
+Windows GUI**, with musical quality and real-host release acceptance. Track the six
+delivery milestones in [the Chinese delivery roadmap](DELIVERY_ROADMAP.zh-CN.md) and
+use [short branches with gated automatic PR merging](GITHUB_WORKFLOW.zh-CN.md).
+The numbered phases below describe the existing implementation history; they do not
+mean audio transcription, GUI or whole-song delivery is complete.
+
 Latest [explicit MIDI routing slice](FL26_EXPLICIT_ROUTING.zh-CN.md): source-preserving
 receiver/port declarations, complete coverage/collision checks and report replay are
 implemented. Selected program parameters affect exported MIDI and audio. Full receiver

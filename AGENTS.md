@@ -2,6 +2,13 @@
 
 ## Purpose and boundaries
 
+For delivery scope, quality acceptance or GUI/audio-only work, read
+docs/DELIVERY_ROADMAP.zh-CN.md and its linked product design first; distinguish the
+active delivery target from implemented capabilities and preserve the design's status.
+Before creating a development branch, publishing or merging a PR, follow
+docs/GITHUB_WORKFLOW.zh-CN.md: use a new slice from current main, bind review to the
+actual head, verify current CI and merge only that reviewed head.
+
 Suno2FLP reconstructs official Suno MIDI and reference stems into editable FL Studio
 projects. Implemented scope: foundations, Phase 1 MIDI import/cleanup, and Phase 2
 faithful arrangement construction plus explicit role mapping, and Phase 3 isolated
