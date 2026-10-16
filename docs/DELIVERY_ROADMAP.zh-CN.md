@@ -20,7 +20,7 @@
 
 | 里程碑 | 状态 | 下一个可独立审查的 PR |
 | --- | --- | --- |
-| M0 目标和治理 | 持续目标已建立；PR #1 已合入；保护与自动合并已启用；完整产品设计待核对 | `codex/delivery-v1-goal`：设计、路线和合并规则 |
+| M0 目标和治理 | 持续目标及完整设计已获用户确认；PR #1 已合入；保护与自动合并已启用；本批规划 PR 验证中 | `codex/delivery-v1-goal`：设计、路线和合并规则 |
 | M1 作业服务与薄 GUI | 未开始 | `codex/m1-job-contracts` → `codex/m1-job-runner` → `codex/m1-gui-shell` |
 | M2 音频推理与编排 | 未开始 | `codex/m2-audio-decode` → `codex/m2-benchmark-metrics` → 许可／版本固定后的模型切片 |
 | M3 FLP 与后台宿主 | 已有受限实现，真实交付仍阻断 | `codex/m3-host-lifecycle`，之后是带新证据的时钟和接收路由切片 |
