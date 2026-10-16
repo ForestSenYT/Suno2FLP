@@ -76,3 +76,10 @@ readback/listen acceptance remains required. Unsupported cases fail explicitly.
 Reinterpretation and automatic instrument selection remain future work. AI transcription remains
 an opt-in fallback for absent/unreliable MIDI and must record uncertainty/provenance.
 No audio reconstruction, instrument loading or DAW control is implemented.
+
+The next [saved-bundle verification slice](FL26_BUNDLE_VERIFICATION.md) provides a
+read-only `verify-flp-bundle` command, reconstructing all current originals and checking
+the output independently after publication. It rejects stale/forged evidence without
+writing, launching a process or changing host compatibility. The same document records
+the separate real-reference and manual host observations still needed before Phase 3
+can be accepted; Phase 4 remains planned.

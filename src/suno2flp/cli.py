@@ -22,6 +22,7 @@ from suno2flp.core.instrument_config import load_instrument_mapping
 from suno2flp.core.models import Arrangement, ArrangementOptions, MusicalMetadata, ProcessedMidi
 from suno2flp.core.workspace import init_project as create_project
 from suno2flp.flp_builder.assessment_files import assess_template_files
+from suno2flp.flp_builder.bundle_verification import verify_fl26_bundle_files
 from suno2flp.flp_builder.planning_files import plan_build_files
 from suno2flp.flp_builder.writer_files import build_fl26_files, plan_fl26_files
 from suno2flp.importer import LocalAssetImporter, MidiFileImporter
@@ -262,6 +263,19 @@ def build_flp(
         typer.echo(
             f"Created structurally verified {result.output_path}; FL Studio playback unverified"
         )
+    except (Suno2FLPError, OSError, RuntimeError, ValueError, yaml.YAMLError) as exc:
+        _fail(exc)
+
+
+@app.command("verify-flp-bundle")
+def verify_flp_bundle(
+    bundle_directory: Path,
+    backend_directory: Annotated[Path, typer.Option("--backend-dir")],
+) -> None:
+    """Read-only revalidation of a saved bundle and current originals; host unverified."""
+    try:
+        proof = verify_fl26_bundle_files(bundle_directory, backend_directory)
+        typer.echo(proof.model_dump_json(indent=2) + "\n", nl=False)
     except (Suno2FLPError, OSError, RuntimeError, ValueError, yaml.YAMLError) as exc:
         _fail(exc)
 

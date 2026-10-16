@@ -143,6 +143,7 @@ Restricted FLP output requires a new hash-pinned policy and eligible reference e
 ```powershell
 uv run suno2flp plan-flp-write arrangement.json --inspection inspection.json --bindings bindings.yaml --policy writer-policy.yaml --backend-dir .tools/music2daw-6def9463d6fa-inspect --output write-plan.json
 uv run suno2flp build-flp arrangement.json --inspection inspection.json --bindings bindings.yaml --policy writer-policy.yaml --backend-dir .tools/music2daw-6def9463d6fa-inspect --output-dir output/new-build-001
+uv run suno2flp verify-flp-bundle output/new-build-001 --backend-dir .tools/music2daw-6def9463d6fa-inspect
 ```
 
 The [policy draft](examples/fl26_writer_policy.yaml) deliberately blocks. `build-flp`
@@ -151,6 +152,11 @@ containing FLP/provenance/verification, and never overwrites or invokes the old 
 Unresolved notes/crops/attributes, unknown events, backend disagreement, inexact timing,
 previously rounded arrangements or unverified reviews block before staging. See
 [limits, policy and output protection](docs/FL26_WRITER.md).
+
+`verify-flp-bundle` independently rechecks an existing bundle against every current
+original input and the pinned backend, without writing files or launching a process.
+It rejects damaged/stale/forged evidence and retains structural-only, host-unverified
+status. See [saved-bundle verification and remaining host gates](docs/FL26_BUNDLE_VERIFICATION.md).
 
 ## Architecture and scope
 

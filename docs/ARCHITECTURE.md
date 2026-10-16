@@ -166,6 +166,12 @@ cleanup, checks all inputs/backend and verifies staged/final bundles. New CLI co
 are `plan-flp-write` and `build-flp`; old preview eligibility is never widened. See
 [restricted writer](FL26_WRITER.md). No host compatibility is asserted.
 
+`bundle_verification.py` adds a read-only saved-bundle entry point. It checks canonical
+sidecars, reconstructs complete current-file intent/provenance, independently reparses
+the output, then rechecks originals/backend and bundle identities/bytes. It never
+encodes, publishes, repairs or launches a process. `verify-flp-bundle` returns only
+structural verification; [host acceptance](FL26_BUNDLE_VERIFICATION.md) remains external.
+
 ## Safety and error handling
 
 Workspace names are portable simple names; Windows device names are rejected.

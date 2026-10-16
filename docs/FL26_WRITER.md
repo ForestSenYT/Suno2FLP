@@ -36,6 +36,11 @@ real `BuildResult` only after structural reparse, input checks and final bundle 
 Host opening/playback remains explicitly unverified. No command opens FL Studio,
 loads plugins, expands sample references or runs upstream `edit`/`export`/`launch`.
 
+After publication, use the separate read-only `verify-flp-bundle` command to reconstruct
+current input evidence and independently recheck the saved bundle. See
+[verification and remaining host acceptance](FL26_BUNDLE_VERIFICATION.md); it does not
+repair outputs or promote structural checks into host compatibility.
+
 ## New policy and intent contracts
 
 `Fl26WriterPolicy` / `WriterPolicyDocument` are separate from old read-only plans.
