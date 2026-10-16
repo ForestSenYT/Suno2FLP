@@ -167,3 +167,37 @@ def test_cancel_of_stopped_job_preserves_reason_even_without_source(tmp_path):
     blocked = api().run_audio_job(created.record.path)
     path.unlink()
     assert api().cancel_audio_job(blocked.record.path) == blocked
+
+
+def test_cooperative_cancel_before_work_does_not_need_missing_source(tmp_path):
+    path = source(tmp_path)
+    created = api().create_audio_job(path, tmp_path / "job", "song-v1")
+    path.unlink()
+    cancelled = api().run_audio_job(created.record.path, should_cancel=lambda: True)
+    assert cancelled.job.status == "cancelled"
+    assert [event.kind for event in cancelled.job.history] == ["created", "stopped"]
+    assert cancelled.job.stages[0].outputs == []
+
+
+def test_cancel_requested_during_preflight_records_stop_without_completion(tmp_path, monkeypatch):
+    from threading import Event
+
+    module = api()
+    original = module.inspect_audio
+    request = Event()
+    path = source(tmp_path)
+    before = capture_stream_input(path)
+    created = module.create_audio_job(path, tmp_path / "job", "song-v1")
+
+    def inspect_then_cancel(path):
+        report = original(path)
+        request.set()
+        return report
+
+    monkeypatch.setattr(module, "inspect_audio", inspect_then_cancel)
+    cancelled = module.run_audio_job(created.record.path, should_cancel=request.is_set)
+    assert cancelled.job.status == "cancelled"
+    assert cancelled.job.history[-1].code == "user_cancelled"
+    assert cancelled.job.stages[0].outputs == []
+    assert not list(created.job.output_directory.glob("input-preflight-*.json"))
+    assert capture_stream_input(path) == before

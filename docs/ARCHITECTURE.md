@@ -16,9 +16,17 @@ exclusive fsynced, hash-linked event records with exact-head appends and full re
 `importer.audio` streams and validates complete RIFF/PCM payloads; `pipeline.audio_jobs`
 owns the shared synchronous create/run/verify/cancel service consumed by thin CLI commands.
 Independent preflight replay checks completed input evidence. Unavailable later workers
-block explicitly; no GUI, process execution or inference is introduced. Final publication
+block explicitly; no host execution or inference is introduced. Final publication
 and success remain refused. These states never grant writer authorization. See
 [job service](JOBS.zh-CN.md) and [audio preflight](AUDIO_INPUT.zh-CN.md).
+
+The optional `gui` package presents that same service using Qt Essentials 6.12.0.
+`gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
+and queued signals update `gui.window`. Cooperative cancellation is checked at service
+boundaries; close defers until the operation returns, never terminates a worker. History
+inspection preserves broken records; significant I/O and environment probes run off the
+UI thread. `gui.app` imports Qt lazily and never automatically converts on startup.
+Offscreen rendering/controller tests do not establish real desktop or release acceptance.
 
 ## Current design — foundations, MIDI import/cleanup and faithful arrangements
 

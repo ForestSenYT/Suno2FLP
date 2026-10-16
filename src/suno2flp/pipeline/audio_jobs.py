@@ -1,6 +1,7 @@
 """Shared synchronous application service for real preflight and durable job state."""
 
 import os
+from collections.abc import Callable
 from pathlib import Path
 
 from suno2flp.core.audio_input import MAX_AUDIO_BYTES, AudioPreflightError, AudioPreflightReport
@@ -75,9 +76,13 @@ def _save_stop(stored: StoredJob, error: AudioPreflightError | OfflineError | OS
     return save_job(job, stored.record.path)
 
 
-def run_audio_job(snapshot: Path) -> StoredJob:
+def run_audio_job(snapshot: Path, *, should_cancel: Callable[[], bool] | None = None) -> StoredJob:
     stored = _current(snapshot)
+    if should_cancel is not None and should_cancel():
+        return cancel_audio_job(stored.record.path)
     _verify_supported(stored)
+    if should_cancel is not None and should_cancel():
+        return cancel_audio_job(stored.record.path)
     if stored.job.status == "running":
         stored = save_job(stop_job(stored.job, "failed", "interrupted"), stored.record.path)
     if stored.job.status in ("blocked", "failed", "cancelled"):
@@ -86,6 +91,8 @@ def run_audio_job(snapshot: Path) -> StoredJob:
         stored = save_job(start_stage(stored.job, "input"), stored.record.path)
         try:
             report = inspect_audio(stored.job.source.path)
+            if should_cancel is not None and should_cancel():
+                return cancel_audio_job(stored.record.path)
             destination = guarded_path(
                 stored.job.output_directory / f"input-preflight-{len(stored.job.history):08d}.json"
             )
@@ -97,6 +104,8 @@ def run_audio_job(snapshot: Path) -> StoredJob:
         except (OfflineError, OSError) as error:
             return _save_stop(stored, error)
         stored = save_job(job, stored.record.path)
+    if should_cancel is not None and should_cancel():
+        return cancel_audio_job(stored.record.path)
     return save_job(stop_job(stored.job, "blocked", "worker_unavailable"), stored.record.path)
 
 

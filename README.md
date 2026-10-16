@@ -6,8 +6,11 @@ project with notes, stems, playback and measured quality. The
 [branch/PR workflow](docs/GITHUB_WORKFLOW.zh-CN.md). This target is not complete.
 
 Current implementation is an AI-assisted pipeline foundation from official Suno MIDI
-and reference audio stems. Python 3.11+, Windows first. Audio-only inference, the GUI
-and the installable end-user product are not yet implemented.
+and reference audio stems. Python 3.11+, Windows first. Audio-only inference and the
+installable end-user product are not yet implemented. The optional
+[Chinese desktop workbench](docs/GUI.zh-CN.md) now presents real jobs, input checks,
+cancellation/recovery, history and diagnostics. It is a development preview: later
+conversion stages remain blocked, without simulated progress or playable-project claims.
 
 The shared [audio job service](docs/JOBS.zh-CN.md) now creates exclusive persistent
 event histories, performs [real integer PCM-WAVE preflight](docs/AUDIO_INPUT.zh-CN.md),
