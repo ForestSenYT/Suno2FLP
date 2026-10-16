@@ -109,3 +109,8 @@ six-candidate checklist and blank result form, separating view zoom from a fixed
 right-edge length experiment and requiring new A/B saves plus fresh-session reopens.
 Local prepared forms contain provenance/planned values only. No host actions or FLP
 writes occur in this documentation slice; all pending results and writer gates remain.
+
+The [offline manual-record checker](FL26_RECORD_CHECKS.zh-CN.md) adds versioned JSON
+companions, pinned file/evidence checks and JSON/Markdown summaries for all six probes.
+Intact pending records differ from invalid claims; reported completion never verifies
+the host or authorizes writes. No backend/DAW invocation or FLP mutation is introduced.

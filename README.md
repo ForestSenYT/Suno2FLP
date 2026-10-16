@@ -127,6 +127,10 @@ The [manual six-candidate checklist in Chinese](docs/FL26_MANUAL_VALIDATION.zh-C
 and [blank result form](docs/templates/FL26_HOST_RESULT.zh-CN.md) separate view zoom,
 right-edge resizing, fresh-session host reopen and byte readback. Preparing these
 forms performs no host actions and changes no writer gates; filled records stay private.
+The [offline record checker](docs/FL26_RECORD_CHECKS.zh-CN.md), `check-host-records`,
+checks six hash-pinned JSON companions, required evidence and explicit pending states.
+Its JSON/Markdown summaries retain host-unverified, writer-blocked status even for
+complete operator claims; no DAW/backend process or evidence repair occurs.
 See [prerequisites, failure codes and tests](docs/TEMPLATE_INSPECTION.md).
 
 For a current-file, process-free dependency/compatibility evidence report:

@@ -30,6 +30,7 @@ from suno2flp.integrations.music2daw import Music2DawInspector
 from suno2flp.integrations.music2daw_provision import provision_music2daw as provision_backend
 from suno2flp.midi_processor import DeterministicMidiProcessor
 from suno2flp.validator import validate_project
+from suno2flp.validator.manual_records import check_manual_records, manual_record_summary
 
 app = typer.Typer(
     help="Inspect Suno assets and prepare safe FL Studio workspaces.",
@@ -54,6 +55,53 @@ def doctor() -> None:
     for check in check_environment():
         typer.echo(f"{check.component}: {check.status} - {check.detail}")
     if sys.version_info < (3, 11):  # noqa: UP036 - doctor explicitly reports this requirement.
+        raise typer.Exit(1)
+
+
+@app.command("check-host-records")
+def check_host_records(
+    manifest: Path,
+    root: Annotated[
+        Path, typer.Option("--root", help="Explicit root for contained evidence files")
+    ],
+    output: Annotated[Path | None, typer.Option("--output", help="New offline report file")] = None,
+    markdown: Annotated[bool, typer.Option("--markdown", help="Render a Markdown summary")] = False,
+) -> None:
+    """Check local manual records/hashes; no DAW/backend, repairs or writer authorization."""
+    try:
+        destination = None
+        if output is not None:
+            destination = output.resolve()
+            suffix = ".md" if markdown else ".json"
+            if (
+                output.exists()
+                or output.is_symlink()
+                or destination == manifest.resolve()
+                or destination.suffix.lower() != suffix
+                or not destination.parent.is_dir()
+                or any(":" in part for part in output.parts if part != output.anchor)
+                or any((parent / "backend.json").is_file() for parent in destination.parents)
+            ):
+                raise UnsafePathError(
+                    "Use a new report with matching format outside backend directories"
+                )
+        result = check_manual_records(manifest, root)
+        if destination is not None and any(
+            destination == (root.resolve() / item.expected.path).resolve() for item in result.files
+        ):
+            raise UnsafePathError("Report destination must be distinct from all input references")
+        content = (
+            manual_record_summary(result) if markdown else result.model_dump_json(indent=2) + "\n"
+        )
+        if destination is None:
+            typer.echo(content, nl=False)
+        else:
+            with destination.open("x", encoding="utf-8") as stream:
+                stream.write(content)
+            typer.echo(f"Offline record report: {destination}; host unverified; writer blocked")
+    except (Suno2FLPError, OSError, RuntimeError, ValueError) as exc:
+        _fail(exc)
+    if not result.integrity_valid:
         raise typer.Exit(1)
 
 

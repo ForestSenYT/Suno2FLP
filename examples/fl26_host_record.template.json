@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "probe": "default-grow",
+  "operator": null,
+  "actual_version": null,
+  "stages": {
+    "identity": {"status": "pending_not_performed"},
+    "open": {"status": "pending_not_performed"},
+    "view_zoom": {"status": "pending_not_performed"},
+    "save_a": {"status": "pending_not_performed"},
+    "reopen_a": {"status": "pending_not_performed"},
+    "resize_b": {"status": "pending_not_performed"},
+    "reopen_b": {"status": "pending_not_performed"},
+    "readback": {"status": "pending_not_performed"},
+    "protection": {"status": "pending_not_performed"}
+  },
+  "outputs": {"A": null, "B": null},
+  "listening": {"A": "not_listened", "B": "not_listened"},
+  "writer_eligibility": "blocked",
+  "execution_allowed": false,
+  "host_compatibility": "unverified"
+}

@@ -190,6 +190,14 @@ field gates remain. See [field evidence](FL26_FIELD_EVIDENCE.md).
 
 ## Safety and error handling
 
+`core/manual_records.py` defines separate operator-record contracts; these are not
+writer policy or host attestations consumed by the builder. The process-free
+`validator/manual_records.py` checks explicit contained files, hashes and completeness
+of nine stages for each of six probes. It keeps operator claims, integrity and unknown
+states separate, rechecks inputs after reading and renders a Markdown summary.
+`check-host-records` publishes only new JSON/Markdown reports. All summaries remain
+host-unverified and writer-blocked; see [record checks](FL26_RECORD_CHECKS.zh-CN.md).
+
 Workspace names are portable simple names; Windows device names are rejected.
 `init-project` exclusively creates a new root and never reuses an existing directory.
 If creation fails halfway, partial files remain for inspection; no recursive cleanup
