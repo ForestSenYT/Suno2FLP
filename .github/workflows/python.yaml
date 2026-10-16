@@ -4,6 +4,9 @@ permissions:
   contents: read
 jobs:
   checks:
+    name: checks (${{ matrix.os }}, ${{ matrix.python }})
+    env:
+      PYTHON_PIN: ${{ matrix.python == '3.11' && '3.11.16' || '3.14.7' }}
     strategy:
       fail-fast: false
       matrix:
@@ -21,8 +24,8 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           version: '0.12.21'
-      - run: uv python install ${{ matrix.python }}
-      - run: uv sync --locked --python ${{ matrix.python }}
+      - run: uv python install ${{ env.PYTHON_PIN }}
+      - run: uv sync --locked --python ${{ env.PYTHON_PIN }}
       - run: uv run --no-sync ruff check .
       - run: uv run --no-sync ruff format --check .
       - run: uv run --no-sync mypy src
@@ -30,6 +33,7 @@ jobs:
       - run: uv run --no-sync suno2flp --help
       - run: uv build
       - run: uv export --locked --no-dev --no-hashes --no-emit-project --output-file runtime-smoke-requirements.tmp
-      - run: uv run --no-project --python ${{ matrix.python }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/offline_smoke.py --require-installed --workspace .tools/ci-offline-smoke
+      - run: uv run --no-project --python ${{ env.PYTHON_PIN }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/offline_smoke.py --require-installed --workspace .tools/ci-offline-smoke
+      - run: uv run --no-project --python ${{ env.PYTHON_PIN }} --with ./dist/suno2flp-0.1.0-py3-none-any.whl --with-requirements runtime-smoke-requirements.tmp python scripts/codec_smoke.py --require-installed --workspace .tools/ci-codec-smoke
       - run: uv export --locked --no-dev --extra gui --no-hashes --no-emit-project --output-file gui-smoke-requirements.tmp
-      - run: uv run --no-project --python ${{ matrix.python }} --with './dist/suno2flp-0.1.0-py3-none-any.whl[gui]' --with-requirements gui-smoke-requirements.tmp python scripts/gui_smoke.py --require-installed --workspace .tools/ci-gui-smoke
+      - run: uv run --no-project --python ${{ env.PYTHON_PIN }} --with './dist/suno2flp-0.1.0-py3-none-any.whl[gui]' --with-requirements gui-smoke-requirements.tmp python scripts/gui_smoke.py --require-installed --workspace .tools/ci-gui-smoke

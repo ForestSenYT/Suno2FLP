@@ -98,7 +98,7 @@ class WorkbenchWindow(QMainWindow):
         right.setContentsMargins(28, 22, 28, 18)
         right.setSpacing(10)
         right.addWidget(label("音频工作台", "Title"))
-        right.addWidget(label("研发预览：当前可检查 PCM WAV，完整转换仍在开发。", "Muted"))
+        right.addWidget(label("研发预览：已接通音频解码，完整转换仍在开发。", "Muted"))
         inputs = QHBoxLayout()
         self.source_edit = QLineEdit()
         self.source_edit.setPlaceholderText("选择一首音频，原文件会保持不变")
@@ -328,7 +328,7 @@ class WorkbenchWindow(QMainWindow):
         if self.busy:
             return False
         try:
-            actions = JobActions(path)
+            actions = JobActions(path, self.job_actions.decoder_directory)
         except (OfflineError, OSError, ValueError) as error:
             self.notice.setText(f"任务目录不可用：{error}")
             return False

@@ -42,6 +42,7 @@ def configure_font() -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Suno2FLP 本地音频工作台（研发预览）")
     parser.add_argument("--jobs-root", type=Path, default=Path.cwd() / "workspaces/audio-jobs")
+    parser.add_argument("--audio-runtime", type=Path, help="已显式准备的固定压缩音频解码器目录")
     args = parser.parse_args(argv)
     try:
         from PySide6.QtCore import qVersion
@@ -60,7 +61,7 @@ def main(argv: list[str] | None = None) -> int:
     from suno2flp.gui.window import WorkbenchWindow
 
     try:
-        actions = JobActions(args.jobs_root)
+        actions = JobActions(args.jobs_root, args.audio_runtime)
     except (OfflineError, OSError, ValueError) as error:
         print(f"任务目录不可用：{error}", file=sys.stderr)
         return 2

@@ -39,9 +39,22 @@ STAGES = (
     "交付结果",
 )
 REASONS = {
-    "worker_unavailable": "已接通音频检查与整数 WAV 解码。分轨分离尚未接入，当前没有生成 FLP。",
-    "audio_format_unavailable": "此音频格式尚未接入。当前可检查普通整数 PCM WAV。",
-    "audio_codec_unavailable": "此 WAV 编码尚不支持。请保留原文件，另选整数 PCM WAV。",
+    "worker_unavailable": "音频已解码并复核。分轨分离尚未接入，当前没有生成 FLP。",
+    "audio_format_unavailable": "此音频格式尚未接入。当前支持整数 PCM WAV 和限定的 FLAC、MP3。",
+    "audio_codec_unavailable": "此编码不在已验证范围内。请查看音频格式限制，并保留原文件。",
+    "audio_backend_unavailable": "压缩音频解码器尚未准备或未指定。请先完成固定运行时准备。",
+    "audio_python_unavailable": "当前应用运行环境不在压缩解码器的固定版本范围内。",
+    "audio_platform_unavailable": "当前系统不在已验证的压缩音频解码范围内。",
+    "audio_backend_integrity_failed": "解码器文件与固定清单不一致。请在新目录重新准备运行时。",
+    "audio_timing_unavailable": "此 MP3 缺少已验证的起点和尾部时序证据，暂不能保持原始时序。",
+    "audio_worker_unavailable": "隔离解码进程无法启动，候选结果不能继续使用。",
+    "audio_worker_failed": "隔离解码未通过，失败记录已保留。",
+    "audio_worker_timeout": "隔离解码进程超时，候选结果未标记完成。",
+    "audio_worker_output_limit": "解码诊断超出上限，候选结果未标记完成。",
+    "audio_wheel_missing": "缺少固定版本的离线安装包，请先准备完整的解码器依赖。",
+    "audio_wheel_integrity_failed": "安装包与固定哈希不符，不能加载该解码器。",
+    "audio_worker_diagnostic": "原生解码器报告了未确认的诊断，候选结果已阻断。",
+    "audio_worker_cleanup_failed": "解码进程未能确认退出，不能把此次尝试视为完成。",
     "audio_invalid": "音频文件损坏或结构不完整。请重新导出完整文件，并创建新任务。",
     "audio_limits_exceeded": "音频超出当前支持范围。请查看格式、声道、时长和大小限制。",
     "offline_input_changed": "输入文件发生变化。为保留来源，请使用当前素材创建新任务。",
@@ -102,8 +115,11 @@ def present_job(stored: StoredJob) -> JobView:
 
 
 class JobActions:
-    def __init__(self, root: Path) -> None:
+    def __init__(self, root: Path, decoder_directory: Path | None = None) -> None:
         self.root = guarded_path(root)
+        self.decoder_directory = (
+            guarded_path(decoder_directory) if decoder_directory is not None else None
+        )
 
     def create(self, source: Path) -> StoredJob:
         if any((parent / "backend.json").exists() for parent in (self.root, *self.root.parents)):
@@ -139,7 +155,9 @@ class JobActions:
 
     def run(self, snapshot: Path, cancel: Event) -> StoredJob:
         self._owned(snapshot)
-        return run_audio_job(snapshot, should_cancel=cancel.is_set)
+        return run_audio_job(
+            snapshot, should_cancel=cancel.is_set, decoder_directory=self.decoder_directory
+        )
 
     def verify(self, snapshot: Path) -> StoredJob:
         self._owned(snapshot)

@@ -27,6 +27,15 @@ service qualifies input/decode only, then blocks at separation; it rejects struc
 declared later workers. See [PCM decoding](AUDIO_DECODE.zh-CN.md). No native codec or
 model runtime is installed by this slice.
 
+`importer.encoded_audio` adds complete bounded FLAC/MPEG frame inventories;
+`integrations.codec_backend` explicitly provisions official fixed wheels and verifies
+the current payload plus a real `-I -S -B` worker handshake using the trusted app Python.
+`pipeline.encoded_decode` saves exclusive attempts/candidates; `validator.encoded_decode`
+rechecks current source, runtime, full PCM and native replay, with an additional independent
+FLAC PCM MD5 oracle. The shared service routes qualified compressed sources separately
+without weakening integer-WAV verification. See [limits/provenance](COMPRESSED_AUDIO.zh-CN.md).
+Native packages never enter the core process; no inference or host acceptance is claimed.
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service

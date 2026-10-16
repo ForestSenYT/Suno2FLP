@@ -81,7 +81,8 @@ def test_cancel_during_real_decode_retains_partial_and_resumes_to_new_directory(
     "name,data,status,code",
     [
         ("bad.wav", b"bad", "failed", "audio_invalid"),
-        ("unknown.mp3", b"unknown", "blocked", "audio_format_unavailable"),
+        ("unknown.mp3", b"unknown", "failed", "audio_invalid"),
+        ("unknown.aiff", b"unknown", "blocked", "audio_format_unavailable"),
     ],
 )
 def test_failures_and_unsupported_inputs_are_durable(tmp_path, name, data, status, code):
