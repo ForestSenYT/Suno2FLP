@@ -9,6 +9,13 @@ Current implementation is an AI-assisted pipeline foundation from official Suno 
 and reference audio stems. Python 3.11+, Windows first. Audio-only inference, the GUI
 and the installable end-user product are not yet implemented.
 
+The shared [audio job service](docs/JOBS.zh-CN.md) now creates exclusive persistent
+event histories, performs [real integer PCM-WAVE preflight](docs/AUDIO_INPUT.zh-CN.md),
+verifies current evidence and supports cancellation/recovery. `create-audio-job`,
+`run-audio-job`, `verify-audio-job` and `cancel-audio-job` expose this service. Running
+valid PCM completes input validation and blocks at unavailable conversion workers
+(exit 3); it does not produce a playable project or attest musical quality.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2

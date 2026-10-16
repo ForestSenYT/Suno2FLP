@@ -89,6 +89,54 @@ def main():
         }
 
     originals = fingerprints()
+    created_job = json.loads(
+        cli(
+            "create-audio-job",
+            project / "input/song.wav",
+            "--output",
+            root / "audio-job",
+            "--job-id",
+            "smoke-v1",
+        )
+    )
+    audio_job = json.loads(cli("run-audio-job", created_job["record"]["path"], expected=3))
+    checked_job = json.loads(cli("verify-audio-job", audio_job["record"]["path"]))
+    if (
+        checked_job != audio_job
+        or audio_job["job"]["status"] != "blocked"
+        or audio_job["job"]["stages"][0]["status"] != "succeeded"
+        or audio_job["job"]["history"][-1]["code"] != "worker_unavailable"
+    ):
+        raise RuntimeError("Persistent audio preflight did not block at unavailable workers")
+    cli("run-audio-job", created_job["record"]["path"], expected=1)
+    cli(
+        "create-audio-job",
+        project / "input/song.wav",
+        "--output",
+        root / "audio-job",
+        "--job-id",
+        "reuse-v1",
+        expected=1,
+    )
+    report_path = Path(audio_job["job"]["stages"][0]["outputs"][0]["path"])
+    report_path.write_bytes(report_path.read_bytes() + b" ")
+    cli("verify-audio-job", audio_job["record"]["path"], expected=1)
+    cancel_source = root / "cancel-source.wav"
+    cancel_source.write_bytes((project / "input/song.wav").read_bytes())
+    cancellable = json.loads(
+        cli(
+            "create-audio-job",
+            cancel_source,
+            "--output",
+            root / "cancel-job",
+            "--job-id",
+            "cancel-v1",
+        )
+    )
+    cancel_source.unlink()  # Only this disposable synthetic copy, never an original.
+    cancelled = json.loads(cli("cancel-audio-job", cancellable["record"]["path"]))
+    if cancelled["job"]["status"] != "cancelled":
+        raise RuntimeError("Persistent cancellation requires the vanished source")
     output = project / "intermediate/ready"
     cli("prepare-project", project, "--output-dir", output)
     prepared = json.loads(cli("verify-preparation", output / "run.json"))
@@ -258,6 +306,7 @@ def main():
                 "encoding_assessment_replay": "passed",
                 "midi_comparison_replay": "passed",
                 "midi_routing_replay": "passed",
+                "persistent_audio_jobs": "passed",
                 "installed_wheel": installed,
                 "package_path": str(module_path),
                 "original_inputs_unchanged": True,
