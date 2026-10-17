@@ -1,0 +1,4 @@
+Suno2FLP integrations/drum_activations.py contains a modified activation helper derived from idm/utils.py in bernardo-torres/inverse-drum-machine, revision456656868538205ef756912c7cf5b0fd936de8af, under Apache-2.0.
+Source: https://github.com/bernardo-torres/inverse-drum-machine/tree/456656868538205ef756912c7cf5b0fd936de8af
+Changes: typed signatures, only the selected relu/identity/exp_sigmoid interface; original float32 exp_sigmoid operations retained. Full Apache license accompanies this application file. Other application code remains under its stated license.
+Selected upstream model/source and third-party native runtime are not bundled with the application. Explicit local backend preparation retains upstream Apache and supplementary ConvNeXt MIT notices separately. This notice does not establish rights in training audio or downstream music.

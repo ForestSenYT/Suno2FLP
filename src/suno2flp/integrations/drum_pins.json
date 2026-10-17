@@ -1,0 +1,2509 @@
+{
+  "profile": "idm-encoder-only-cpu-windows-cp311-v1",
+  "revision": "456656868538205ef756912c7cf5b0fd936de8af",
+  "python_version": "3.11.16",
+  "artifacts": [
+    {
+      "distribution": "einops",
+      "version": "0.8.0",
+      "filename": "einops-0.8.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/44/5a/f0b9ad6c0a9017e62d4735daaeb11ba3b6c009d69a26141b258cd37b5588/einops-0.8.0-py3-none-any.whl",
+      "size_bytes": 43223,
+      "sha256": "9572fb63046264a862693b0a87088af3bdc8c068fde03de63453cbbde245465f",
+      "notices": {
+        "einops-0.8.0.dist-info/licenses/LICENSE": "30d984364296f51ffaecad4b01ee127e95250c5068918d4b66fc96206723e434"
+      },
+      "license": "MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "filelock",
+      "version": "4.2.0",
+      "filename": "filelock-4.2.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/8e/a3/9bc26acff301fe1aaea1cc3d82a1d57e0a34df3e1cadbfa91ac2dbcdde5c/filelock-4.2.0-py3-none-any.whl",
+      "size_bytes": 135032,
+      "sha256": "2ff5690882e8cdb00ef31fb3d01a3094c29f30985426c59495afb1733f3b7238",
+      "notices": {
+        "filelock-4.2.0.dist-info/licenses/LICENSE": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
+      },
+      "license": "MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "fsspec",
+      "version": "2026.9.0",
+      "filename": "fsspec-2026.9.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/6c/c0/a98505f18594f1bce828bb159cec0fcf9860562f1a2c85913409fc8f3d9e/fsspec-2026.9.0-py3-none-any.whl",
+      "size_bytes": 221738,
+      "sha256": "8dd6e646e99ea382bd85f97a45e6b526a442d79423a7dc673f1e2756d05fcb5f",
+      "notices": {
+        "fsspec-2026.9.0.dist-info/licenses/LICENSE": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "jinja2",
+      "version": "3.1.6",
+      "filename": "jinja2-3.1.6-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl",
+      "size_bytes": 134899,
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "notices": {
+        "jinja2-3.1.6.dist-info/licenses/LICENSE.txt": "3b49dcee4105eb37bac10faf1be260408fe85d252b8e9df2e0979fc1e094437b"
+      },
+      "license": "License :: OSI Approved :: BSD License",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "markupsafe",
+      "version": "3.0.4",
+      "filename": "markupsafe-3.0.4-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/91/89/f2b509f7bf79352e40117824c1070dbeafd4df67031d3fa98165a3134228/markupsafe-3.0.4-cp311-cp311-win_amd64.whl",
+      "size_bytes": 14328,
+      "sha256": "fdb4ca07ab75ffadab4a8b135ad59cdbb3156b99310f3d565370da74a15d6bd3",
+      "notices": {
+        "markupsafe-3.0.4.dist-info/licenses/LICENSE.txt": "4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "mpmath",
+      "version": "1.3.0",
+      "filename": "mpmath-1.3.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl",
+      "size_bytes": 536198,
+      "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+      "notices": {
+        "mpmath-1.3.0.dist-info/LICENSE": "c26cae81da4508e5e249985777a33821f183223ebb74d7f8cfbf90fe7eef2fb7"
+      },
+      "license": "BSD",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "networkx",
+      "version": "3.6.1",
+      "filename": "networkx-3.6.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/9e/c9/b2622292ea83fbb4ec318f5b9ab867d0a28ab43c5717bb85b0a5f6b3b0a4/networkx-3.6.1-py3-none-any.whl",
+      "size_bytes": 2068504,
+      "sha256": "d47fbf302e7d9cbbb9e2555a0d267983d2aa476bac30e90dfbe5669bd57f3762",
+      "notices": {
+        "networkx-3.6.1.dist-info/licenses/LICENSE.txt": "3cf7c3a179d817b23b8b8568211769fefdf93797d207d984b8b2fa24d0220b33"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "numpy",
+      "version": "1.26.4",
+      "filename": "numpy-1.26.4-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/3f/6b/5610004206cf7f8e7ad91c5a85a8c71b2f2f8051a0c0c4d5916b76d6cbb2/numpy-1.26.4-cp311-cp311-win_amd64.whl",
+      "size_bytes": 15811913,
+      "sha256": "cd25bcecc4974d09257ffcd1f098ee778f7834c3ad767fe5db785be9a4aa9cb2",
+      "notices": {
+        "numpy/core/include/numpy/random/LICENSE.txt": "d544761558b510866c21f7e8a2d5716fca76e0b98117e3b6b86314db7244d150",
+        "numpy/ma/LICENSE": "d78dbb208b80d92b4d333e41a4baae50d12444f46e53199fa7726a91de6e2da7",
+        "numpy/random/LICENSE.md": "b4bc2f4fa1c95778f1ed3dd8f14706bece399475b978f9f34b5d3cd72521b48a",
+        "numpy-1.26.4.dist-info/LICENSE.txt": "e261222a74adff28f88160dac1c5cb302d93b67e9ca989eb83bf311e11a9970a"
+      },
+      "license": "BSD-3-Clause; bundled component notices retained",
+      "omitted_members": {
+        "numpy/distutils/__pycache__/conv_template.cpython-311.pyc": "4851f990b1ff1df195b09cce8304beaba4056aceed5614909b8ab78df70afa4b"
+      }
+    },
+    {
+      "distribution": "setuptools",
+      "version": "81.0.0",
+      "filename": "setuptools-81.0.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/e1/e3/c164c88b2e5ce7b24d667b9bd83589cf4f3520d97cad01534cd3c4f55fdb/setuptools-81.0.0-py3-none-any.whl",
+      "size_bytes": 1062021,
+      "sha256": "fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6",
+      "notices": {
+        "setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04",
+        "setuptools/_vendor/jaraco_context-6.1.0.dist-info/licenses/LICENSE": "9755a18519666e5f0f4cae3daad3d7012bcae48a600b31237d75e9fe134e6683",
+        "setuptools/_vendor/jaraco_functools-4.4.0.dist-info/licenses/LICENSE": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d",
+        "setuptools/_vendor/more_itertools-10.8.0.dist-info/licenses/LICENSE": "09f1c8c9e941af3e584d59641ea9b87d83c0cb0fd007eb5ef391a7e2643c1a46",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.APACHE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.BSD": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5",
+        "setuptools/_vendor/platformdirs-4.4.0.dist-info/licenses/LICENSE": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6",
+        "setuptools/_vendor/tomli-2.4.0.dist-info/licenses/LICENSE": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
+        "setuptools/_vendor/wheel-0.46.3.dist-info/licenses/LICENSE.txt": "30c23618679108f3e8ea1d2a658c7ca417bdfc891c98ef1a89fa4ff0c9828654",
+        "setuptools/_vendor/zipp-3.23.0.dist-info/licenses/LICENSE": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d",
+        "setuptools/config/NOTICE": "2dddf08818297a3b89d43d95ff659d8da85741108c9136dfa3a4d856c0623bd8",
+        "setuptools/config/_validate_pyproject/NOTICE": "5d300dbfa643138b013b75ac9caeee591f951b8b0ee24288c34ccd926c4780c8",
+        "setuptools-81.0.0.dist-info/licenses/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+        "setuptools/_vendor/autocommand-2.2.2.dist-info/LICENSE": "ade78d04982d69972d444a8e14a94f87a2334dd3855cc80348ea8e240aa0df2d",
+        "setuptools/_vendor/backports.tarfile-1.2.0.dist-info/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+        "setuptools/_vendor/jaraco.text-4.0.0.dist-info/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
+      },
+      "license": "MIT",
+      "omitted_members": {
+        "distutils-precedence.pth": "2638ce9e2500e572a5e0de7faed6661eb569d1b696fcba07b0dd223da5f5d224"
+      }
+    },
+    {
+      "distribution": "sympy",
+      "version": "1.14.0",
+      "filename": "sympy-1.14.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl",
+      "size_bytes": 6299353,
+      "sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+      "notices": {
+        "sympy/parsing/latex/LICENSE.txt": "007bc30a58fa40a996e772047120de4eaf31f5110e4f9c3b5f93fcdfbe2eaca1",
+        "sympy-1.14.0.dist-info/licenses/LICENSE": "07a5e9819f727b4986ad2829c7a29a6320d42575f720eb24d71b7fef573a0286"
+      },
+      "license": "BSD",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "torch",
+      "version": "2.11.0+cpu",
+      "filename": "torch-2.11.0+cpu-cp311-cp311-win_amd64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cpu/torch-2.11.0%2Bcpu-cp311-cp311-win_amd64.whl",
+      "size_bytes": 114432833,
+      "sha256": "51a221769d4a316f4b47a786c12e67c3f4807db8ed13c7b8817ebe73786acbbc",
+      "notices": {
+        "torch-2.11.0+cpu.dist-info/LICENSE": "cf5ec789ea8e9fcaba4766fcde2d6804312a1295e55b176a31c7a2982efc6090",
+        "torch-2.11.0+cpu.dist-info/NOTICE": "1c3dec6c0342c7ed9e12af59b296c7bb1d394af5cf881db74191cc8299efce5c"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "torchaudio",
+      "version": "2.11.0+cpu",
+      "filename": "torchaudio-2.11.0+cpu-cp311-cp311-win_amd64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cpu/torchaudio-2.11.0%2Bcpu-cp311-cp311-win_amd64.whl",
+      "size_bytes": 326399,
+      "sha256": "abbff04127caf6e16e3a7c3e1ca2739b68899e14926d7cbec4bd8b40f72375d5",
+      "notices": {
+        "torchaudio-2.11.0+cpu.dist-info/licenses/LICENSE": "32638e179931bfe551eabf67b0e67a13b483e166b58dd7263634ab7f89f396f5"
+      },
+      "license": "License :: OSI Approved :: BSD License",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "typing-extensions",
+      "version": "4.15.0",
+      "filename": "typing_extensions-4.15.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl",
+      "size_bytes": 44614,
+      "sha256": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
+      "notices": {
+        "typing_extensions-4.15.0.dist-info/licenses/LICENSE": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      },
+      "license": "PSF-2.0",
+      "omitted_members": {}
+    }
+  ],
+  "source": {
+    "distribution": "inverse-drum-machine-selected-encoder",
+    "version": "456656868538205ef756912c7cf5b0fd936de8af",
+    "filename": "inverse-drum-machine-456656868538205ef756912c7cf5b0fd936de8af.tar.gz",
+    "url": "https://api.github.com/repos/bernardo-torres/inverse-drum-machine/tarball/456656868538205ef756912c7cf5b0fd936de8af",
+    "size_bytes": 6758668,
+    "sha256": "7ed64f8cc064055e80a694bba1013c15a23dc6d962b8a91b08fadb1e47b95bef",
+    "license": "Apache-2.0",
+    "notices": {
+      "bernardo-torres-inverse-drum-machine-4566568/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    "source_inventory": [
+      "bernardo-torres-inverse-drum-machine-4566568/.preetierrc",
+      "bernardo-torres-inverse-drum-machine-4566568/.project-root",
+      "bernardo-torres-inverse-drum-machine-4566568/LICENSE",
+      "bernardo-torres-inverse-drum-machine-4566568/README.md",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/NMFD/nmfd_amen_case1a.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/NMFD/nmfd_amen_case1b.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/NMFD/nmfd_amen_case2.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/NMFD/nmfd_amen_case3.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/NMFD/nmfd_amen_case4.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/larsnet/config.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/larsnet/eval_larsnet_44kHz.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/baselines/larsnet/eval_larsnet_44kHz_mono.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/callbacks/default.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/data/multitrack-stem-gmd.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/hydra/default.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/local.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/logger/custom.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/model/idm.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/paths/default.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/train.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/tuner/batch_size_finder.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/configs/tuner/none.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/demo/demo.ipynb",
+      "bernardo-torres-inverse-drum-machine-4566568/demo/detail.png",
+      "bernardo-torres-inverse-drum-machine-4566568/demo/mix.wav",
+      "bernardo-torres-inverse-drum-machine-4566568/demo/overview.png",
+      "bernardo-torres-inverse-drum-machine-4566568/demo/separate.ipynb",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/larsnet/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/larsnet/helpers.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/larsnet/larsnet.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/larsnet/unet.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/nmf/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/nmf/nmfd.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/baselines/nmf/utils.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/callbacks/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/callbacks/audio.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/callbacks/base.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/components.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/config_resolvers.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/data/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/data/datamodule.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/data/dataset.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/decoder/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/decoder/decoder.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/decoder/film.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/decoder/one_shot_synth.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/decoder/sequencer.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/decoder/synth.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/feature_extractor/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/feature_extractor/convnext.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/feature_extractor/encoder.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/feature_extractor/mel.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/feature_extractor/stft.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/idm.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/inference.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/logger.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/losses.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/metrics.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/run.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/run_utils.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/synthesis_conditioning/__init__.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/synthesis_conditioning/embedding.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/synthesis_conditioning/params_decoder.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/synthesis_conditioning/peak_picking.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/synthesis_conditioning/transcription.py",
+      "bernardo-torres-inverse-drum-machine-4566568/idm/utils.py",
+      "bernardo-torres-inverse-drum-machine-4566568/pretrained/idm-44-train-kits/.hydra/config_resolved.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/pretrained/idm-44-train-kits/checkpoints/model.yaml",
+      "bernardo-torres-inverse-drum-machine-4566568/pretrained/idm-44-train-kits/checkpoints/val-epoch=518-global_step=0.ckpt",
+      "bernardo-torres-inverse-drum-machine-4566568/pretrained/idm-44-train-kits/hash.txt",
+      "bernardo-torres-inverse-drum-machine-4566568/pyproject.toml"
+    ]
+  },
+  "notices": [
+    {
+      "filename": "ConvNeXt-MIT.txt",
+      "url": "https://api.github.com/repos/facebookresearch/ConvNeXt/git/blobs/b93be90515ccd0b9daedaa589e42bf5929693f1f",
+      "size_bytes": 1088,
+      "sha256": "da6d3703ed11cbe42bd212c725957c98da23cbff1998c05fa4b3d976d1a58e93",
+      "target": "licenses/ConvNeXt-MIT.txt"
+    }
+  ],
+  "source_files": {
+    "idm/__init__.py": "4b76bdbd858696c5833befe8f73d8d337d9e369f69f8d65d5611c1af66679979",
+    "idm/feature_extractor/encoder.py": "bf99269e2b819aee55de06acd87f31e6e4f5da6dd184af2e9a2bcb6d612042e9",
+    "idm/feature_extractor/convnext.py": "1ed033b8f49a28b0e19e274e410890062e856627b5a2066d2c2ba915e1e87157",
+    "idm/feature_extractor/mel.py": "b90ad6b3b47265f35dee9dc310f40db6e778f3d788db49cf9fe3b56cbb23028c",
+    "idm/feature_extractor/stft.py": "afb6d58387e7c6d2ec6783dbd010840a2c8ef713221a5c0c3a8796d05f33c7db",
+    "idm/synthesis_conditioning/embedding.py": "8c02fd17b9ebbababd5c2f243b87a1a8833a3dee3c675b5553e784cadf1188f6",
+    "idm/synthesis_conditioning/transcription.py": "88aa9167fb6247c6446e89ab8499d5443abfb2573634180bb66c2f81cf497955",
+    "idm/utils.py": "04cb357bab826755e894eae46a9e6b0486a8a05479180c93b9704a376a5fd001",
+    "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "pretrained/idm-44-train-kits/checkpoints/val-epoch=518-global_step=0.ckpt": "5856a9bee7c6d503842795756d238dc8470f6f3e010e9e4f33ede0362850cb4c",
+    "pretrained/idm-44-train-kits/checkpoints/model.yaml": "2300e60bfaa8c4c4756568d8ede8992d2e56231b2a519acf30fda1d1bb36f2e6"
+  },
+  "source_prefix": "bernardo-torres-inverse-drum-machine-4566568/",
+  "checkpoint_path": "pretrained/idm-44-train-kits/checkpoints/val-epoch=518-global_step=0.ckpt",
+  "config_path": "pretrained/idm-44-train-kits/checkpoints/model.yaml",
+  "checkpoint_sha256": "5856a9bee7c6d503842795756d238dc8470f6f3e010e9e4f33ede0362850cb4c",
+  "helper_sha256": "af8387aa65ee357ab496b567c4bdc1432f7c1d4d31299a56acd68d7448f05826",
+  "patched_transcription_sha256": "6c54a403db8632d2795511d6633b61c205b75a5bae29d021d7006c603e358dec",
+  "state": {
+    "conditioning_vector": {
+      "shape": [
+        15
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transform.mel_transform.spectrogram.window": {
+      "shape": [
+        1024
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transform.mel_transform.mel_scale.fb": {
+      "shape": [
+        513,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.0.0.weight": {
+      "shape": [
+        4,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.0.0.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.0.1.weight": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.0.1.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.1.0.weight": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.1.0.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.1.1.weight": {
+      "shape": [
+        8,
+        4,
+        3,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.1.1.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.2.0.weight": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.2.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.2.1.weight": {
+      "shape": [
+        16,
+        8,
+        3,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.2.1.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.3.0.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.3.0.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.3.1.weight": {
+      "shape": [
+        32,
+        16,
+        3,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.downsample_layers.3.1.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.gamma": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.dwconv.weight": {
+      "shape": [
+        4,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.dwconv.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.norm.weight": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.norm.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.pwconv1.weight": {
+      "shape": [
+        16,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.pwconv1.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.pwconv2.weight": {
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.0.pwconv2.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.gamma": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.dwconv.weight": {
+      "shape": [
+        4,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.dwconv.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.norm.weight": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.norm.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.pwconv1.weight": {
+      "shape": [
+        16,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.pwconv1.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.pwconv2.weight": {
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.1.pwconv2.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.gamma": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.dwconv.weight": {
+      "shape": [
+        4,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.dwconv.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.norm.weight": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.norm.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.pwconv1.weight": {
+      "shape": [
+        16,
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.pwconv1.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.pwconv2.weight": {
+      "shape": [
+        4,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.0.2.pwconv2.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.gamma": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.dwconv.weight": {
+      "shape": [
+        8,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.dwconv.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.norm.weight": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.norm.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.pwconv1.weight": {
+      "shape": [
+        32,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.pwconv1.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.pwconv2.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.0.pwconv2.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.gamma": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.dwconv.weight": {
+      "shape": [
+        8,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.dwconv.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.norm.weight": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.norm.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.pwconv1.weight": {
+      "shape": [
+        32,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.pwconv1.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.pwconv2.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.1.pwconv2.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.gamma": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.dwconv.weight": {
+      "shape": [
+        8,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.dwconv.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.norm.weight": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.norm.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.pwconv1.weight": {
+      "shape": [
+        32,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.pwconv1.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.pwconv2.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.1.2.pwconv2.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.0.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.1.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.2.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.3.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.4.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.5.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.6.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.7.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.gamma": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.dwconv.weight": {
+      "shape": [
+        16,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.dwconv.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.norm.weight": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.norm.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.pwconv1.weight": {
+      "shape": [
+        64,
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.pwconv1.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.pwconv2.weight": {
+      "shape": [
+        16,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.2.8.pwconv2.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.gamma": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.dwconv.weight": {
+      "shape": [
+        32,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.dwconv.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.norm.weight": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.norm.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.pwconv1.weight": {
+      "shape": [
+        128,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.pwconv1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.pwconv2.weight": {
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.0.pwconv2.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.gamma": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.dwconv.weight": {
+      "shape": [
+        32,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.dwconv.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.norm.weight": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.norm.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.pwconv1.weight": {
+      "shape": [
+        128,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.pwconv1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.pwconv2.weight": {
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.1.pwconv2.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.gamma": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.dwconv.weight": {
+      "shape": [
+        32,
+        1,
+        7,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.dwconv.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.norm.weight": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.norm.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.pwconv1.weight": {
+      "shape": [
+        128,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.pwconv1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.pwconv2.weight": {
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.stages.3.2.pwconv2.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.norm.weight": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.backbone.norm.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.pooling.norm.weight": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.pooling.norm.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.pooling.classifier.0.weight": {
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.pooling.classifier.0.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.pooling.classifier.2.weight": {
+      "shape": [
+        6,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.pooling.classifier.2.bias": {
+      "shape": [
+        6
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transcription_head.conv.weight": {
+      "shape": [
+        32,
+        32,
+        7
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transcription_head.conv.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transcription_head.onset_mlp.weight": {
+      "shape": [
+        9,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transcription_head.onset_mlp.bias": {
+      "shape": [
+        9
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transcription_head.velocity_mlp.weight": {
+      "shape": [
+        9,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "encoder.transcription_head.velocity_mlp.bias": {
+      "shape": [
+        9
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.scale": {
+      "shape": [],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.in_projection.weight": {
+      "shape": [
+        48,
+        1,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.in_projection.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.out_projection.weight": {
+      "shape": [
+        1,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.out_projection.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.0.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.0.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.0.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.0.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.0.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.0.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.1.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.1.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.1.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.1.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.1.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.1.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.2.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.2.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.2.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.2.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.2.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.2.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.3.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.3.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.3.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.3.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.3.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.3.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.4.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.4.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.4.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.4.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.4.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.4.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.5.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.5.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.5.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.5.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.5.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.5.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.6.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.6.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.6.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.6.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.6.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.6.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.7.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.7.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.7.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.7.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.7.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.7.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.8.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.8.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.8.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.8.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.8.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.8.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.9.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.9.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.9.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.9.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.9.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.9.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.10.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.10.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.10.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.10.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.10.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.10.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.11.net.2.weight": {
+      "shape": [
+        48,
+        48,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.11.net.2.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.11.film.net.weight": {
+      "shape": [
+        96,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.11.film.net.bias": {
+      "shape": [
+        96
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.11.residual.weight": {
+      "shape": [
+        48,
+        48,
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.tcn.net.11.residual.bias": {
+      "shape": [
+        48
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.emb_to_gain_latent.0.weight": {
+      "shape": [
+        15,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.emb_to_gain_latent.0.bias": {
+      "shape": [
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.emb_to_gain_latent.2.weight": {
+      "shape": [
+        1,
+        15
+      ],
+      "dtype": "float32"
+    },
+    "decoder.sample_synth.emb_to_gain_latent.2.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.0.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.0.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.0.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.0.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.0.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.0.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.1.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.1.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.1.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.1.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.1.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.1.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.2.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.2.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.2.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.2.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.2.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.2.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.3.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.3.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.3.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.3.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.3.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.3.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.4.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.4.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.4.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.4.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.4.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.4.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.5.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.5.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.5.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.5.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.5.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.5.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.6.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.6.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.6.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.6.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.6.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.6.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.7.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.7.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.7.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.7.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.7.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.7.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.8.0.0.weight": {
+      "shape": [
+        8,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.8.0.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.8.1.0.weight": {
+      "shape": [
+        8,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.8.1.0.bias": {
+      "shape": [
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.8.2.0.weight": {
+      "shape": [
+        1,
+        8
+      ],
+      "dtype": "float32"
+    },
+    "decoder.processors.latent_to_params.latent_mlps.gain.8.2.0.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    }
+  },
+  "classes": [
+    "CY_CR",
+    "CY_RD",
+    "HH_CHH",
+    "HH_OHH",
+    "KD",
+    "SD",
+    "TT_HFT",
+    "TT_HMT",
+    "TT_LMT"
+  ]
+}

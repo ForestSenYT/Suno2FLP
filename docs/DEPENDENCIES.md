@@ -22,7 +22,8 @@ Estimator2.12.0 and TensorBoard data-server0.7.2 (its own data-server tag). Sple
 and model MIT attribution follows the authors' published JOSS statement, with the
 README/question ambiguity preserved. Main distribution labels do not replace bundled
 GCC/LLVM/OpenBLAS/other notices or future installer obligations. No wheels, weights,
-private signals or vendor code are shipped in Git or either application distribution.
+private signals or Spleeter vendor code are shipped in Git or either application distribution.
+The separately documented drum activation helper is the explicit source-code exception below.
 See [primary evidence and fixed notice links](research/2026-10-16-spleeter-runtime.zh-CN.md).
 
 The [Basic Pitch candidate adapter](BASIC_PITCH.zh-CN.md) uses an explicitly prepared
@@ -30,7 +31,8 @@ private Windows x64/CPython3.11.16 CPU runtime: Basic Pitch0.4.0 at
 `9991303bba609a3b93089d13ec80d1d495083596`, ONNX Runtime1.23.2 and 40 other fixed PyPI
 archives, plus a separately pinned official FlatBuffers license. Full URLs, sizes,
 SHA-256s, notices and source-to-wheel hashes are in `integrations/basic_pitch_pins.json`.
-There is no core dependency/lock change or vendor/model content in distributions.
+That isolated runtime adds no core dependency/lock change or Basic Pitch vendor/model
+content in distributions.
 This curated no-TensorFlow recipe deliberately differs from upstream Python3.11 defaults.
 Actual import failure established the undeclared `pkg_resources` dependency of resampy;
 setuptools80.9.0 is fixed for that runtime, without running a build/setup entry point.
@@ -257,3 +259,23 @@ virtual MIDI driver or FL controller installation occurs. Actual resolved notice
 locks and runtime/artifact identities remain local; genuine discovery does not grant
 host/tool execution. See the audit for the package/module version discrepancy and
 redistribution-notice limitations.
+
+## Drum encoder and distribution notices
+
+The [selected encoder-only drum runtime](DRUM_INFERENCE.zh-CN.md) reuses13 exact official
+wheels from the prior audited rhythm dependency set, without core ML dependencies:
+einops0.8.0, filelock4.2.0, fsspec2026.9.0, Jinja2 3.1.6, MarkupSafe3.0.4,
+mpmath1.3.0, networkx3.6.1, NumPy1.26.4, setuptools81.0.0, sympy1.14.0,
+Torch/Torchaudio2.11.0+cpu, typing-extensions4.15.0. Actual wheel notices/omissions,
+source/config/checkpoint/member hashes, full330tensor geometry and exact import-only
+activation patch are pinned in integrations/drum_pins.json. Selected source is Apache-2.0;
+ConvNeXt's separate Meta MIT blob is explicitly required. The source and model remain
+local, with no automatic download or weights/native dependency distribution.
+
+The application does distribute integrations/drum_activations.py derived under Apache-2.0.
+It includes full grant and change attribution in integrations/notices and distribution
+license-files, so packaged SPDX is MIT AND Apache-2.0; the original root MIT grant for
+first-party files is unchanged. Installed-wheel smoke verifies the actual metadata and
+complete license bytes. This does not relicense external dependencies/training music or
+complete the independent installer/model redistribution audit. New artifact preparation,
+actual native handshake and all musical/job/writer qualifications remain distinct.

@@ -406,3 +406,21 @@ or incompatible dependencies. MCP adapters must handshake and list actual tools;
 tool names are backend-specific. Future mutations require snapshots, exclusive output,
 source/template hash checks, parse/readback, then FL Studio listening verification.
 No complete MIDI-to-FLP backend has been established.
+
+## Source-bound inferred drums
+
+core.drum_runtime/drum_native and integrations.drum_source/drum_backend describe a new
+exclusive fixed encoder-only payload; drum_worker loads complete audited tensor keys
+and emits all class-major float32 arrays through an isolated bounded CPU process.
+Actual source/config/patch/notice correspondence and strict model state stay separate
+from musical qualification. core.drum_clock includes the graph's signed padding centers;
+core.drum_peaks and validator.drum_postprocessing preserve all native data and explicit
+source-domain rejection audits without MIDI velocity/GM/confidence invention.
+
+validator.drum_source fully validates existing separation numerics/lineage before an
+immutable invocation-local InferenceSnapshot; no serialized receipt grants authority.
+core.drum_transcription retains both complete source snapshots and all raw evidence;
+pipeline/validator.drum_transcription exclusively publish candidates, independently
+recompute current raw derivations and run complete native replays in new directories.
+Thin CLI adds separate inferred annotation export for conditional scoring. No arrangement,
+job, writer, host or release gate is promoted. See DRUM_INFERENCE.zh-CN.md.
