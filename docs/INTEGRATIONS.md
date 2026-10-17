@@ -1,5 +1,13 @@
 # Integration evidence and strategy
 
+The current Spleeter graph policy requires
+`graph_profile=spleeter4-cpu-no-remapping-v1`: TensorFlow remapping is disabled and
+the actual Session configuration is checked, retaining eight compute threads.
+This changes the adapter identity and execution contract, not pinned upstream
+packages, weights or licensing. Historical reports must remain unchanged and cannot
+supply missing policy evidence; prepare a new private backend and collect fresh
+separation/transcription replay. See [current limitations](STEM_TRANSCRIPTION.zh-CN.md).
+
 The [Spleeter runtime slice](SPLEETER_RUNTIME.zh-CN.md) introduces explicit private
 preparation and original signal probes, not full-song separation. It audits code/model
 license evidence and exact source-to-wheel correspondence, safely installs the fixed

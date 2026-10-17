@@ -83,3 +83,17 @@ run before changing implementation; preserve all failures and source snapshots.
   full native proof in new outputs on the fixed head. Reuse only currently valid unchanged
   model/source prerequisites, never mutate partial or old evidence. Rebind the same reviewer
   and current CI before merging PR12.
+
+### Task 5: Explicit CPU graph policy after observed native drift
+
+Two new full separation replays rejected unequal float bytes. Preserve those failures;
+do not retry full songs until controlled short diagnostics support a concrete change.
+
+- [ ] Retain source/weight/graph comparisons and short cross-context experiments.
+  Disable only TensorFlow remapping, retaining eight threads and exact comparisons.
+- [ ] RED/GREEN: reject missing/foreign graph-policy evidence. Require the explicit
+  `spleeter4-cpu-no-remapping-v1` execution profile, checked against actual Session config.
+- [ ] Reprovision a new backend from unchanged pinned archives; never patch older
+  backend/reports. Collect new whole-song evidence on the reviewed fixed head.
+- [ ] Repeat affected/full checks, package audit and exact-head review/CI. The observed
+  mitigation does not grant model, music, host, performance or writer qualification.

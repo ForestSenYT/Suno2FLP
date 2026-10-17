@@ -166,6 +166,7 @@ def protocol(recipe, tmp_path, monkeypatch, request):
                 file_hash(tail),
             )
         proof = dict(
+            graph_profile="spleeter4-cpu-no-remapping-v1",
             device_types=["CPU"],
             intra_op_threads=8,
             inter_op_threads=1,

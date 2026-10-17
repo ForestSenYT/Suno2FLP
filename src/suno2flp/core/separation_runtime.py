@@ -73,6 +73,7 @@ class SeparationFixtureResult(Contract):
 
 
 class SpleeterExecution(Contract):
+    graph_profile: Literal["spleeter4-cpu-no-remapping-v1"]
     device_types: list[Literal["CPU"]] = Field(min_length=1, max_length=1)
     intra_op_threads: Literal[8]
     inter_op_threads: Literal[1]
