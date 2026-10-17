@@ -43,6 +43,19 @@ current decoder/source/producer/recipe before replay. `pipeline.note_scoring` ex
 publishes reports through thin CLI commands. This benchmark surface has no authority
 to complete quality jobs or grant writer/model qualification. See [note scoring](NOTE_SCORING.zh-CN.md).
 
+`core.transcription` and `core.transcription_clock` define source-bound estimated model
+frames and explicit window ownership, separate from faithful MIDI. The fixed private
+`integrations.basic_pitch_backend` provisions audited archives and verifies an actual
+CPU `basic_pitch_worker` model; native packages never enter core. `core.file_tree`
+captures bounded current file identities with directory-change checks, without repeated
+ancestor scans. `validator.transcription_source` reuses fresh decoder evidence;
+`pipeline.transcription` exclusively publishes full raw candidates and retains decoder,
+model and recipe witnesses through publication. `validator.transcription` checks numeric
+artifacts and freshly re-runs complete inference in new files. Thin commands expose this
+development surface while canonical separation/analyze/transcribe stages remain blocked.
+There is no model-metadata shortcut to job/quality/writer success. See [model recipe,
+clock and limits](BASIC_PITCH.zh-CN.md).
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service

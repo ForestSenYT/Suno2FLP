@@ -1,5 +1,18 @@
 # Integration evidence and strategy
 
+The [Basic Pitch inference candidate](BASIC_PITCH.zh-CN.md) is a concrete isolated model
+integration, not model qualification: audited Apache code/model evidence, exact wheel
+and source correspondence, trusted current application Python, local fixed ONNX path
+and actual CPU inference. Preparation reads only the fixed local artifacts; no implicit
+network/model download or source build is invoked. `-I -S -B` children have bounded
+captured diagnostics, owned-process cancellation and a fixed CPU provider/thread recipe.
+Fresh verification re-runs complete source-bound inference, compares all raw windows,
+derived waveform, estimated notes and per-note bends, and checks full current payload
+membership. The declared row/sample anchors replace upstream default MIDI/time
+conversion; neural onset accuracy remains unqualified. No original MIDI/FLP/template
+operation or canonical job-stage completion is introduced. Separation, inference
+arrangements, confidence calibration and real host acceptance remain separate gates.
+
 The [qualified compressed-audio adapter](COMPRESSED_AUDIO.zh-CN.md) uses explicit
 private fixed-wheel preparation, trusted current app Python and a bounded `-I -S -B`
 worker. Its public pin metadata maps SoundFile0.14.0 to libsndfile1.2.2 native payloads

@@ -1,5 +1,16 @@
 # Risk register
 
+[Basic Pitch candidates](BASIC_PITCH.zh-CN.md) retain every raw window and explicit
+source-sample anchor; the upstream integer86FPS/time heuristic and MIDI defaults are
+not exact source clocks. Model onset accuracy, activation calibration and mixed-song
+instrument separation remain unproven. Actual CPU inference/replay is an integrity
+check, not a musical truth oracle. Complete F1/corpus/drum/stem/host/installer and
+performance acceptance remain blocked; no existing MIDI/writer restriction is relaxed.
+The curated no-TF recipe must keep all native notices and the real undeclared
+pkg_resources prerequisite. Full current model/decoder membership, linked-file refusal,
+bounded processes/tree passes and fresh raw-data replay guard stale/rehash-only reports;
+these checks do not constitute an OS sandbox or hostile same-user race guarantee.
+
 Recomputed MP3 CRCs do not prove valid reservoir references: the pinned decoder can
 silently replace unavailable main data with silence while preserving frame count and
 reporting zero error. Complete side-info/main-data extent checks now run before native
