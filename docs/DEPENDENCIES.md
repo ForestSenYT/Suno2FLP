@@ -1,5 +1,13 @@
 # Dependencies
 
+The [audio FLP candidate](AUDIO_FLP_CANDIDATE.zh-CN.md) adds no package, downloaded
+model, sample bank or upstream implementation. Its percussion DSP is original;
+generation captures current source, Python and math/struct/wave file identities
+(built-in Windows math is bound to the current Python DLL). Exact proprietary
+reference FLPs, plugin states and FL Studio remain private, separately installed
+inputs, absent from Git and distributions. GPL/AGPL alternatives were researched,
+not adopted: see [path audit](research/2026-10-17-flp-backend-paths.zh-CN.md).
+
 The [Spleeter local graph runtime](SPLEETER_RUNTIME.zh-CN.md) pins50 official wheels,
 the official v1.4.0 4stems archive and four supplemental notices in
 `integrations/spleeter_pins.json`. Spleeter2.4.2 maps to

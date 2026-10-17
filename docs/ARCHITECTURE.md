@@ -112,6 +112,16 @@ Offscreen rendering/controller tests do not establish real desktop or release ac
 
 ## Current design — foundations, MIDI import/cleanup and faithful arrangements
 
+`core.audio_flp` defines a separate candidate-only twelve-channel projection;
+`flp_builder.audio_profile` pins complete observed component bytes and
+`audio_preview` preserves every inferred projected occurrence. Original deterministic
+percussion requires no new dependency. `validator.audio_flp` checks full record/header
+budgets independently of the encoder. `validator.audio_midi_source` establishes
+complete current numeric lineage once, retaining its invocation-owned recheck for
+`pipeline.audio_flp` publication. Thin opt-in CLI commands never launch a host or
+promote blocked legacy writer/model/job/release states. See
+[candidate scope](AUDIO_FLP_CANDIDATE.zh-CN.md).
+
 Official Suno MIDI is the primary musical source; stems provide future references
 for timing, instruments, and validation. Deterministic processing is independent
 of optional AI inference. Core operations run without a DAW or network connection.
