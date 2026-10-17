@@ -3,6 +3,7 @@
 *.md text eol=lf
 *.yaml text eol=lf
 *.toml text eol=lf
+src/suno2flp/integrations/notices/*.txt text eol=lf
 *.ps1 text eol=crlf
 *.mid binary
 *.midi binary
