@@ -52,6 +52,7 @@ def separation_recipe() -> ScoringRecipe:
         "core/errors.py",
         "core/offline_files.py",
         "core/file_tree.py",
+        "core/inference_snapshot.py",
         "core/report_publication.py",
         "core/note_scoring.py",
         "core/separation.py",
@@ -86,7 +87,12 @@ def verify_separation_witnesses(
         if read_runtime_context(native) != report.runtime_context:
             raise ValueError("Current runtime configuration differs from candidate snapshot")
         declared = report.native_witnesses()
-        InferenceSnapshot.capture([], [(native, declared)], should_cancel=should_cancel)
+        InferenceSnapshot.capture(
+            [],
+            [(native, declared)],
+            payload_byte_limits={native: max(1, sum(i.size_bytes for i in declared))},
+            should_cancel=should_cancel,
+        )
         paths.update(i.path for i in declared)
     verify_inputs([i for i in report.witnesses() if i.path not in paths])
     verify_decoder_payload(report.decode_dependencies, report.decoder_payload_root)

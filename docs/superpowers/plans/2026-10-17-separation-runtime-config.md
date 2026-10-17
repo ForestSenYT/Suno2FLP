@@ -29,6 +29,10 @@ proof of the historical environment of an old producer.
    synthetic process boundary generates synthetic configuration.
    Downstream receipt readers compare the same complete bytes; stem/drum owned
    evidence retains v2 native membership through its final recheck.
+   Keep the model's 3GiB budget separate from each native tree's complete declared
+   byte total, frozen with the guard. Bind the membership implementation in the
+   separation recipe. Cover the supported 360s/192kHz >3GiB boundary without a large
+   fixture, plus real small-tree budget, mutation and consumer checks.
 4. Update separation/version/provisioning documentation and the observed host status.
    Four new background references exited normally after output restoration; this
    does not establish resave, listening, exact MIDI timing or receiver qualification.

@@ -80,3 +80,10 @@ def test_unsupported_settings_are_not_defaults(field, value):
 def test_missing_setting_is_rejected():
     with pytest.raises(ValueError):
         KerasRuntimeSettings(**{k: v for k, v in SETTINGS.items() if k != "epsilon"})
+
+
+def test_separation_recipe_binds_complete_membership_implementation():
+    from suno2flp.validator.separation import separation_recipe
+
+    recipe = separation_recipe()
+    assert any(i.path.as_posix().endswith("core/inference_snapshot.py") for i in recipe.files)

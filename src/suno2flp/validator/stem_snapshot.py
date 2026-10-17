@@ -53,13 +53,16 @@ def capture_stem_evidence(
     """Caller must already own full validated reports, never just a receipt boolean."""
     files = list(identities)
     payloads = []
+    byte_limits: dict[Path, int] = {}
     if original.recipe != replay.recipe:
         raise ValueError("Separation numeric proof recipes differ")
     for report in (original, replay):
         files.extend(report.witnesses())
         payloads.append((report.backend.root / "packages", report.model_dependencies))
         if report.runtime_context is not None:
-            payloads.append((report.native_result.path.parent, report.native_witnesses()))
+            native, members = report.native_result.path.parent, report.native_witnesses()
+            payloads.append((native, members))
+            byte_limits[native] = max(1, sum(i.size_bytes for i in members))
         if report.decoder_payload_root is not None:
             root = report.decoder_payload_root
             payloads.append(
@@ -89,7 +92,9 @@ def capture_stem_evidence(
     if len(runtimes) != 1:
         raise ValueError("Numeric proof runtime declarations differ")
     guard = StemEvidence(
-        InferenceSnapshot.capture(files, payloads, should_cancel=should_cancel),
+        InferenceSnapshot.capture(
+            files, payloads, payload_byte_limits=byte_limits, should_cancel=should_cancel
+        ),
         next(iter(runtimes)),
     )
     guard._check_recipes()

@@ -102,3 +102,51 @@ def test_stale_inputs_and_cancellation_never_establish_or_reuse_a_guard(evidence
     source.write_bytes(b"changed before capture")
     with pytest.raises((ValueError, Suno2FLPError)):
         snapshot_type().capture([identity], [(payload, members)])
+
+
+def test_native_output_budget_is_distinct_from_model_budget(evidence, monkeypatch):
+    source, payload = evidence
+    module = importlib.import_module("suno2flp.core.inference_snapshot")
+    member = capture_file_tree(payload)[0]
+    # The supported 360s/192kHz geometry exceeds 3GiB. Avoid allocating that data:
+    # this boundary double enforces the same aggregate byte check as the real walker.
+    size = 3_485_897_192
+    member = member.model_copy(update={"size_bytes": size})
+    observed = []
+
+    def tree(root, *, max_bytes, **kwargs):
+        observed.append(max_bytes)
+        if size > max_bytes:
+            raise ValueError("Payload tree exceeds budget")
+        return [member]
+
+    monkeypatch.setattr(module, "capture_file_tree", tree)
+    with pytest.raises(ValueError, match="exceeds budget"):
+        module.InferenceSnapshot.capture([], [(payload, [member])])
+    limits = {payload: size}
+    guard = module.InferenceSnapshot.capture([], [(payload, [member])], payload_byte_limits=limits)
+    limits[payload] = 1  # Later caller mutation cannot change the captured budget.
+    guard.recheck()
+    assert observed == [3 * 1024**3, size, size]
+
+
+def test_real_tree_still_enforces_explicit_native_budget(evidence):
+    source, payload = evidence
+    members = capture_file_tree(payload)
+    size = sum(i.size_bytes for i in members)
+    with pytest.raises(ValueError, match="exceeds budget"):
+        snapshot_type().capture([], [(payload, members)], payload_byte_limits={payload: size - 1})
+    guard = snapshot_type().capture([], [(payload, members)], payload_byte_limits={payload: size})
+    (payload / "extra.bin").write_bytes(b"unlisted")
+    with pytest.raises(ValueError):
+        guard.recheck()
+
+
+@pytest.mark.parametrize("limit", [0, -1, True, 1.5])
+def test_invalid_or_unbound_tree_budget_is_rejected(evidence, limit):
+    source, payload = evidence
+    members = capture_file_tree(payload)
+    with pytest.raises(ValueError, match="budget"):
+        snapshot_type().capture([], [(payload, members)], payload_byte_limits={payload: limit})
+    with pytest.raises(ValueError, match="budget"):
+        snapshot_type().capture([], [(payload, members)], payload_byte_limits={source: 10})

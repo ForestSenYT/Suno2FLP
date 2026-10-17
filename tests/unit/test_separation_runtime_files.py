@@ -136,13 +136,24 @@ def test_consumers_reject_rebound_receipt_with_changed_config_bytes(protocol, tm
 
 @pytest.mark.parametrize("consumer", ["stem", "drum"])
 @pytest.mark.parametrize("changed", ["candidate", "replay"])
-def test_v2_owned_proofs_retain_complete_native_membership(protocol, tmp_path, consumer, changed):
+def test_v2_owned_proofs_retain_complete_native_membership(
+    protocol, tmp_path, monkeypatch, consumer, changed
+):
+    import suno2flp.core.inference_snapshot as snapshot
     from suno2flp.validator.drum_source import load_drum_source
     from suno2flp.validator.drum_transcription import drum_recipe
     from suno2flp.validator.stem_snapshot import capture_stem_evidence
     from suno2flp.validator.stem_transcription import read_separation, stem_recipe
     from suno2flp.validator.transcription import transcription_recipe
 
+    tree = snapshot.capture_file_tree
+    observed = {}
+
+    def capture(root, *, max_bytes, **kwargs):
+        observed[root] = max_bytes
+        return tree(root, max_bytes=max_bytes, **kwargs)
+
+    monkeypatch.setattr(snapshot, "capture_file_tree", capture)
     original = separate_audio(protocol.decode, protocol.backend, tmp_path / "candidate")
     path = tmp_path / "candidate/separation.json"
     verify_separation(path, tmp_path / "replay")
@@ -164,6 +175,9 @@ def test_v2_owned_proofs_retain_complete_native_membership(protocol, tmp_path, c
         def recheck():
             return guard.recheck(recipe)
 
+    for directory in ("candidate", "replay"):
+        native = tmp_path / directory / "native"
+        assert observed[native] == sum(i.size_bytes for i in tree(native))
     (tmp_path / changed / "native/keras-cache/extra.json").write_text("{}", encoding="utf-8")
-    with pytest.raises(ValueError, match="complete inference payload changed"):
+    with pytest.raises(ValueError, match="complete inference payload changed|exceeds budget"):
         recheck()

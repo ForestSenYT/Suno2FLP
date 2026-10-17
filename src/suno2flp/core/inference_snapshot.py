@@ -33,7 +33,7 @@ def _cancel(callback: Callable[[], bool] | None) -> None:
 @dataclass(frozen=True, slots=True)
 class InferenceSnapshot:
     _files: tuple[FileStamp, ...]
-    _payloads: tuple[tuple[Path, tuple[FileStamp, ...]], ...]
+    _payloads: tuple[tuple[Path, tuple[FileStamp, ...], int], ...]
 
     @classmethod
     def capture(
@@ -41,6 +41,7 @@ class InferenceSnapshot:
         files: list[FileIdentity],
         payloads: list[tuple[Path, list[FileIdentity]]],
         *,
+        payload_byte_limits: dict[Path, int] | None = None,
         should_cancel: Callable[[], bool] | None = None,
     ) -> "InferenceSnapshot":
         _cancel(should_cancel)
@@ -54,19 +55,29 @@ class InferenceSnapshot:
             if root in roots and roots[root] != expected:
                 raise ValueError("Conflicting complete payload declarations")
             roots[root] = expected
+        limits = dict(payload_byte_limits or {})
+        if set(limits) - roots.keys() or any(
+            type(limit) is not int or limit <= 0 for limit in limits.values()
+        ):
+            raise ValueError("Each explicit tree budget must be positive and bound to a payload")
         for stamp in [*map(_stamp, files), *[i for entries in roots.values() for i in entries]]:
             if stamp[0] in unique and unique[stamp[0]] != stamp:
                 raise ValueError("Conflicting expected file identities")
             unique[stamp[0]] = stamp
-        result = cls(tuple(unique.values()), tuple(roots.items()))
+        result = cls(
+            tuple(unique.values()),
+            tuple(
+                (root, entries, limits.get(root, 3 * 1024**3)) for root, entries in roots.items()
+            ),
+        )
         result.recheck(should_cancel=should_cancel)
         return result
 
     def recheck(self, *, should_cancel: Callable[[], bool] | None = None) -> None:
         _cancel(should_cancel)
         payload_paths: set[Path] = set()
-        for root, expected in self._payloads:
-            current = capture_file_tree(root, max_bytes=3 * 1024**3, should_cancel=should_cancel)
+        for root, expected, byte_limit in self._payloads:
+            current = capture_file_tree(root, max_bytes=byte_limit, should_cancel=should_cancel)
             if tuple(_stamp(i) for i in current) != expected:
                 raise ValueError("Current complete inference payload changed")
             payload_paths.update(i.path for i in current)
