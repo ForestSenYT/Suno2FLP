@@ -66,7 +66,11 @@ def test_every_occurrence_keeps_projected_ticks_and_source_audit():
     inv = scan_template_inventory(raw)
     assert inv.ppq == 960 and inv.channel_count == 12 and len(inv.notes) == 5
     assert [(n.position_ticks, n.length_ticks) for n in inv.notes] == [
-        (n.start_tick, n.end_tick - n.start_tick) for n in plan.notes
+        (n.start_tick, n.end_tick - n.start_tick)
+        for n in sorted(
+            plan.notes,
+            key=lambda n: (n.start_tick, n.channel, n.source_part, n.source_occurrence),
+        )
     ]
     assert inv.clips[0].length_ticks >= score.end_tick + 3840
     assert inv.clips[0].raw_hex[144:160] == b"opaque!!".hex()

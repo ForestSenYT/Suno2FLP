@@ -9,6 +9,13 @@ do not replace actual-song relocation, host reserialization/reopen, listening or
 release benchmarks. Third-party writers may round/merge/mute source data; MCPs may
 send prohibited hotkeys. Research alone never authorizes those paths or new dependencies.
 
+Native playback needs chronological note storage: an earlier complete but unordered real-song
+candidate rendered mostly silence despite nonzero peak, normal exit and repeated PCM equality.
+The v2 profile preserves the source audit but orders complete records by source time/channel
+and explicit occurrence selectors. Raw5000 has separate actual-song/voice controls; it is not
+a general no-clipping guarantee. Each required isolated route needs real signal evidence;
+duration/hash/repeatability or reference-stem playback cannot substitute for audible notes.
+
 [Windows output discovery](HOST_READINESS.zh-CN.md) is volatile point-in-time evidence,
 not current device availability or host compatibility. API errors/partial snapshots must
 not become zero-device success; changing defaults require a new complete observation.

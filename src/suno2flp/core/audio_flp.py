@@ -39,14 +39,17 @@ class AudioPreviewNote(Contract):
 
 
 class AudioPreviewPlan(Contract):
-    profile: Literal["fl26-audio-candidate-v1"] = "fl26-audio-candidate-v1"
+    profile: Literal["fl26-audio-candidate-v2"] = "fl26-audio-candidate-v2"
     status: Literal["unqualified_candidate"] = "unqualified_candidate"
     source_score_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     notes: list[AudioPreviewNote] = Field(max_length=80000)
     end_tick: int = Field(gt=3840, le=2**31 - 1, strict=True)
     ppq: Literal[960] = 960
     tempo_us: Literal[500000] = 500000
-    channel_gain: Literal[1280] = 1280
+    channel_gain: Literal[5000] = 5000
+    note_storage_order: Literal["start-tick-channel-source-part-occurrence-v1"] = (
+        "start-tick-channel-source-part-occurrence-v1"
+    )
     legacy_writer_eligibility: Literal["blocked"] = "blocked"
     musical_quality: Literal["not_assessed"] = "not_assessed"
 
@@ -61,7 +64,7 @@ class AudioPreviewPlan(Contract):
 
 
 class AudioFlpExport(Contract):
-    profile: Literal["audio-flp-export-v1"] = "audio-flp-export-v1"
+    profile: Literal["audio-flp-export-v2"] = "audio-flp-export-v2"
     root: Path
     source_report: FileIdentity
     source_midi: FileIdentity
