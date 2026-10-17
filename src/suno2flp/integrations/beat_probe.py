@@ -28,7 +28,7 @@ def probe_beat_backend(
 
     package = Path(__file__).parent.parent
     recipe = ScoringRecipe(
-        python_executable=capture_stream_input(Path(sys.executable)),
+        python_executable=capture_stream_input(Path(sys.executable).resolve()),
         python_version=platform.python_version(),
         pydantic_version=pydantic.__version__,
         files=[

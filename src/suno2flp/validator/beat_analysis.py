@@ -47,7 +47,7 @@ def beat_recipe() -> ScoringRecipe:
         "pipeline/beat_analysis.py",
     )
     return ScoringRecipe(
-        python_executable=capture_stream_input(Path(sys.executable)),
+        python_executable=capture_stream_input(Path(sys.executable).resolve()),
         python_version=platform.python_version(),
         pydantic_version=pydantic.__version__,
         files=[capture_stream_input(root / name) for name in names],
