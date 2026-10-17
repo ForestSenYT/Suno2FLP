@@ -2,7 +2,6 @@
 
 import hashlib
 import json
-import os
 import platform
 import shutil
 import sys
@@ -20,12 +19,16 @@ from suno2flp.core.offline_files import (
     verify_inputs,
 )
 from suno2flp.core.offline_models import FileIdentity
+from suno2flp.core.report_publication import publish_verified_report
+from suno2flp.core.separation import NativeSeparationResult
+from suno2flp.core.separation_clock import model_frame_count
 from suno2flp.core.separation_probe import check_fixture, fixture_bytes
 from suno2flp.core.separation_runtime import (
     PROBE_FRAMES,
     NativeSeparationProbe,
     SeparationArtifactPin,
     SpleeterBackend,
+    SpleeterExecution,
     SpleeterPins,
     SpleeterProbe,
 )
@@ -64,11 +67,16 @@ def model_adapters() -> list[FileIdentity]:
     files = [
         here,
         here.with_name("spleeter_worker.py"),
+        here.with_name("spleeter_separation_worker.py"),
+        here.with_name("process_metrics.py"),
         here.with_name("spleeter_pins.json"),
         here.with_name("basic_pitch_archives.py"),
         here.with_name("basic_pitch_backend.py"),
         here.with_name("codec_process.py"),
         here.parent.parent / "core/separation_runtime.py",
+        here.parent.parent / "core/separation.py",
+        here.parent.parent / "core/separation_clock.py",
+        here.parent.parent / "core/report_publication.py",
         here.parent.parent / "core/separation_probe.py",
         here.parent.parent / "core/file_tree.py",
         here.parent.parent / "core/offline_files.py",
@@ -254,7 +262,7 @@ def read_spleeter(root: Path) -> SpleeterBackend:
     return record
 
 
-def _validate_native(probe: NativeSeparationProbe, record: SpleeterBackend) -> None:
+def validate_spleeter_execution(probe: SpleeterExecution, record: SpleeterBackend) -> None:
     expected_versions = {pin.distribution: pin.version for pin in load_spleeter_pins().artifacts}
     if probe.versions != expected_versions:
         raise ValueError("Native versions differ from the complete fixed recipe")
@@ -281,8 +289,8 @@ def verify_spleeter(
         with (attempt / f"{name}.input.f32").open("xb") as stream:
             stream.write(fixture_bytes(name))
     request = attempt / "request.json"
-    with request.open("x", encoding="utf-8") as stream:
-        json.dump({"operation": "probe", "packages": str(record.root / "packages")}, stream)
+    with request.open("x", encoding="utf-8") as request_stream:
+        json.dump({"operation": "probe", "packages": str(record.root / "packages")}, request_stream)
     request_identity = capture_stream_input(request)
     try:
         stdout, stderr = run_bounded_process(
@@ -312,7 +320,7 @@ def verify_spleeter(
         raise ValueError("Native handshake exceeds budget")
     result_identity, result_bytes = capture_input(path)
     native = NativeSeparationProbe.model_validate(load_unique_json(result_bytes))
-    _validate_native(native, record)
+    validate_spleeter_execution(native, record)
     evidence = [check_fixture(attempt, result) for result in native.fixtures]
     report = SpleeterProbe(
         backend_record=backend_identity,
@@ -329,16 +337,95 @@ def verify_spleeter(
         witnesses.extend([item.source, *item.outputs, item.residual])
     verify_inputs(witnesses)
     _verify_payload(record)
-    provisional = attempt / "probe.pending.json"
-    serialized = report.model_dump_json(indent=2).encode("utf-8")
-    with provisional.open("xb") as stream:
-        stream.write(serialized)
-    provisional_identity, actual = capture_input(provisional)
-    if actual != serialized:
-        raise ValueError("Provisional probe bytes changed during serialization")
-    _verify_payload(record)
-    verify_inputs([*witnesses, provisional_identity])
-    # Exclusive atomic commit point; failure preserves only provisional evidence.
-    # Keep both names immutable: they share bytes after successful publication.
-    os.link(guarded_path(provisional), guarded_path(attempt / "probe.json"))
+
+    def verify_current() -> None:
+        _verify_payload(record)
+        verify_inputs(witnesses)
+
+    publish_verified_report(
+        attempt / "probe.json",
+        report.model_dump_json(indent=2),
+        [identity.path for identity in witnesses],
+        verify_current,
+    )
     return report
+
+
+def call_spleeter_separation(
+    record: SpleeterBackend,
+    attempt: Path,
+    request: dict[str, object],
+    *,
+    should_cancel: Callable[[], bool] | None = None,
+) -> tuple[FileIdentity, NativeSeparationResult]:
+    names = {"operation", "pcm", "frames", "sample_rate", "channels"}
+    if set(request) != names or request.get("operation") != "separate":
+        raise ValueError("Unsupported fixed separation request")
+    frames, rate, channels = (request[name] for name in ("frames", "sample_rate", "channels"))
+    if type(frames) is not int or type(rate) is not int or type(channels) is not int:
+        raise ValueError("Separation source geometry must use exact integers")
+    model_frame_count(frames, rate)
+    if channels not in (1, 2) or not isinstance(request["pcm"], str):
+        raise ValueError("Separation requires a complete mono/stereo source PCM path")
+    source = capture_stream_input(Path(request["pcm"]))
+    attempt = guarded_path(attempt)
+    if not attempt.is_dir() or any(attempt.iterdir()):
+        raise ValueError("Separation requires a new empty owned native attempt")
+    protected = [
+        record.root,
+        source.path,
+        *[item.path.parent for item in record.artifacts],
+        *[item.path for item in record.adapters],
+    ]
+    if any(
+        attempt == path or attempt.is_relative_to(path) or path.is_relative_to(attempt)
+        for path in protected
+    ):
+        raise ValueError("Native separation attempt overlaps protected inputs")
+    if record != read_spleeter(record.root):
+        raise ValueError("Current separation backend differs from the requested snapshot")
+    backend_identity = capture_stream_input(record.root / "backend.json")
+    path = attempt / "request.json"
+    with path.open("x", encoding="utf-8") as request_stream:
+        json.dump(
+            {**request, "pcm": str(source.path), "packages": str(record.root / "packages")},
+            request_stream,
+        )
+    request_identity = capture_stream_input(path)
+    try:
+        stdout, stderr = run_bounded_process(
+            [
+                str(record.python.path),
+                "-I",
+                "-S",
+                "-B",
+                str(Path(__file__).with_name("spleeter_separation_worker.py")),
+                str(path),
+            ],
+            should_cancel=should_cancel,
+            timeout=1800,
+        )
+    except Exception as error:
+        for name in ("stdout", "stderr"):
+            with (attempt / f"{name}.bin").open("xb") as stream:
+                stream.write(getattr(error, name, b""))
+        raise
+    for name, raw in (("stdout", stdout), ("stderr", stderr)):
+        with (attempt / f"{name}.bin").open("xb") as stream:
+            stream.write(raw)
+    _verify_payload(record)
+    verify_inputs([source, backend_identity, request_identity])
+    result_path = guarded_path(attempt / "result.json")
+    if result_path.stat().st_size > 2 * 1024**2:
+        raise ValueError("Native separation result exceeds its metadata budget")
+    result_identity, raw = capture_input(result_path)
+    result = NativeSeparationResult.model_validate(load_unique_json(raw))
+    if (result.source_frames, result.sample_rate, result.source_channels) != (
+        frames,
+        rate,
+        channels,
+    ):
+        raise ValueError("Native separation result disagrees with the requested source clock")
+    validate_spleeter_execution(result.execution, record)
+    verify_inputs([source, backend_identity, request_identity, result_identity])
+    return result_identity, result

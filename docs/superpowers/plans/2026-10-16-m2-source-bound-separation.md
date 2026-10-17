@@ -56,12 +56,12 @@
 
 **Files:** `integrations/spleeter_worker.py`, new `integrations/spleeter_separation_worker.py`; `integrations/spleeter_backend.py`; worker boundary tests.
 
-**Interfaces:** `native(..., partitioned:bool=False)` keeps the original full-waveform probe and adds fixed partition analysis/synthesis. `call_spleeter_separation(record:SpleeterBackend,attempt:Path,request:dict[str,object],should_cancel:Callable[[],bool]|None=None)->None` invokes only the fixed child with exact source metadata and retains logs. The child emits the canonical raw files and bounded result JSON; it imports no application Pydantic/native packages into the parent.
+**Interfaces:** `native(..., partitioned:bool=False)` keeps the original full-waveform probe and adds fixed partition analysis/synthesis. `call_spleeter_separation(record:SpleeterBackend,attempt:Path,request:dict[str,object],should_cancel:Callable[[],bool]|None=None)->tuple[FileIdentity,NativeSeparationResult]` invokes only the fixed child with exact source metadata, retains logs, validates native proof/source geometry and returns identity plus parsed result from one read. The child emits the canonical raw files and bounded result JSON; it imports no application Pydantic/native packages into the parent.
 
-- [ ] RED: malformed operation/source geometry, invalid float samples, incomplete outputs, reordered input partitions and wrong native proof fail explicitly. Validate request type and owned-process timeout/cancellation behavior.
-- [ ] GREEN: map verified float64 WAV at offset58; explicit mono duplication and fixed rational resampling; one globally anchored STFT partition per model call; preserve partial inputs/outputs and overlap-add onto model-grid files; resample each stem to source-grid WAV with separately retained tail. Never normalize or clip.
-- [ ] Bind the new worker/helper/contracts in current adapter hashes. Factor shared native proof validation; old probes keep their existing meaning.
-- [ ] Focused offline checks and commit. Run real probes only after attested source bytes stop changing; use new private backend/attempts.
+- [x] RED: malformed operation/source geometry, changed source/request/payload and wrong native proof/result count fail explicitly; typed results return paired identity. Invalid numeric/missing/reordered raw artifacts are additionally exercised by the consuming independent validator in Task4.
+- [x] GREEN: map verified float64 WAV at offset58; explicit mono duplication and fixed rational resampling; one globally anchored STFT partition per model call; preserve partial inputs/outputs and overlap-add onto model-grid files; resample each stem to source-grid WAV with separately retained tail. Never normalize or clip.
+- [x] Bind the new worker/helper/contracts in current adapter hashes. Factor shared native proof validation; old probes keep their existing meaning.
+- [x] Initial18 RED, additional4 typed-result RED; focused44 GREEN; full1374 passed34 skipped139.77s; Ruff306 formatted/mypy138 passed. Native mathematical comparison is still a Task5 gate and begins only on committed stable adapter bytes in new directories.
 
 ### Task4: Source-bound pipeline, independent checks and replay
 

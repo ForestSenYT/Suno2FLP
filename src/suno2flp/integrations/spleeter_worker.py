@@ -34,7 +34,9 @@ def isolate_environment(packages: Path, attempt: Path) -> None:
     )
 
 
-def native(packages: Path, attempt: Path) -> tuple[Any, Any, Any, Any, dict[str, Any]]:
+def native(
+    packages: Path, attempt: Path, *, partitioned: bool = False
+) -> tuple[Any, Any, Any, Any, dict[str, Any]]:
     if not (sys.flags.isolated and sys.flags.no_site and sys.dont_write_bytecode):
         raise ValueError("Worker requires -I -S -B")
     if (
@@ -59,7 +61,40 @@ def native(packages: Path, attempt: Path) -> tuple[Any, Any, Any, Any, dict[str,
         tf.compat.v1.set_random_seed(3)
         tf.keras.backend.set_learning_phase(0)
         waveform = tf.compat.v1.placeholder(tf.float32, shape=(None, 2), name="waveform")
-        outputs = builder_module.EstimatorSpecBuilder({"waveform": waveform}, parameters).outputs
+        if partitioned:
+            spectrum = tf.transpose(
+                tf.signal.stft(
+                    tf.transpose(waveform),
+                    4096,
+                    1024,
+                    pad_end=False,
+                    window_fn=lambda length, dtype: tf.signal.hann_window(
+                        length, periodic=True, dtype=dtype
+                    ),
+                ),
+                perm=[1, 2, 0],
+            )
+            builder = builder_module.EstimatorSpecBuilder(
+                {f"{parameters['mix_name']}_stft": spectrum}, parameters
+            )
+            outputs = {
+                name: tf.transpose(
+                    tf.signal.inverse_stft(
+                        tf.transpose(masked, perm=[2, 0, 1]),
+                        4096,
+                        1024,
+                        window_fn=lambda length, dtype: tf.signal.hann_window(
+                            length, periodic=True, dtype=dtype
+                        ),
+                    )
+                )
+                * (2.0 / 3.0)
+                for name, masked in builder.masked_stfts.items()
+            }
+        else:
+            outputs = builder_module.EstimatorSpecBuilder(
+                {"waveform": waveform}, parameters
+            ).outputs
         variables = tf.compat.v1.global_variables()
         saver = tf.compat.v1.train.Saver()
     options = tf.compat.v1.ConfigProto(
