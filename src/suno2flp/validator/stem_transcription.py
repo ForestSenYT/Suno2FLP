@@ -26,6 +26,7 @@ from suno2flp.core.stem_transcription import (
 from suno2flp.importer.note_annotations import bounded_snapshot
 from suno2flp.validator.separation import validate_separation_artifacts, verify_separation_witnesses
 from suno2flp.validator.stem_audio import verify_stem_wave
+from suno2flp.validator.stem_snapshot import StemEvidence, capture_stem_evidence
 from suno2flp.validator.transcription import check_cancel, validate_pitch_artifacts
 
 
@@ -39,9 +40,11 @@ def stem_recipe() -> ScoringRecipe:
             capture_stream_input(root / name)
             for name in (
                 "core/stem_transcription.py",
+                "core/inference_snapshot.py",
                 "importer/stem_audio.py",
                 "validator/stem_audio.py",
                 "validator/stem_transcription.py",
+                "validator/stem_snapshot.py",
                 "pipeline/stem_transcription.py",
             )
         ],
@@ -60,7 +63,7 @@ def read_separation(path: Path) -> tuple[FileIdentity, SeparationCandidate]:
     return identity, report
 
 
-def read_lineage(
+def read_lineage_snapshots(
     separation: FileIdentity,
     receipt: FileIdentity,
     *,
@@ -80,10 +83,9 @@ def read_lineage(
     replay_id, replay = read_separation(declared.replay_report.path)
     if original_id != separation or replay_id != declared.replay_report:
         raise ValueError("Current complete separation snapshots differ from their receipt")
-    # A receipt is a structural witness, not proof against rehashed forgeries. The
-    # owning batch always executes verify_separation first; replay repeats it again.
-    for report in (original, replay):
-        validate_separation_artifacts(report, should_cancel=should_cancel)
+    # Structural/current metadata only. Numeric authority must come from the
+    # caller's full validation or actual owned fresh native invocation.
+    check_cancel(should_cancel)
     fields = (
         "decode_report",
         "source_audio",
@@ -121,6 +123,23 @@ def read_lineage(
     ):
         raise ValueError("Complete separation replay evidence differs")
     verify_inputs([separation, receipt, replay_id])
+    return original, replay
+
+
+def read_lineage(
+    separation: FileIdentity,
+    receipt: FileIdentity,
+    *,
+    should_cancel: Callable[[], bool] | None = None,
+) -> tuple[SeparationCandidate, SeparationCandidate]:
+    receipt_id, raw = bounded_snapshot(receipt.path, 1024**2)
+    expected = SeparationReplayReceipt.model_validate(load_unique_json(raw))
+    if receipt_id != receipt:
+        raise ValueError("Separation receipt changed before numeric validation")
+    original, replay = read_lineage_snapshots(separation, receipt, should_cancel=should_cancel)
+    for report in (original, replay):
+        validate_separation_artifacts(report, should_cancel=should_cancel)
+    verify_inputs([separation, receipt, expected.replay_report])
     return original, replay
 
 
@@ -186,7 +205,7 @@ def read_batch(path: Path) -> tuple[FileIdentity, StemTranscriptionBatch]:
     return identity, report
 
 
-def validate_batch(
+def read_stem_candidates(
     report: StemTranscriptionBatch,
     root: Path,
     *,
@@ -198,9 +217,6 @@ def validate_batch(
         or report.separation_replay.path != root / "separation-replay/replay.json"
     ):
         raise ValueError("Batch recipe or owned separation replay address differs")
-    original, replay = read_lineage(
-        report.separation_report, report.separation_replay, should_cancel=should_cancel
-    )
     results = []
     for entry in report.stems:
         expected = root / entry.stem / "pitch/transcription.json"
@@ -225,12 +241,56 @@ def validate_batch(
             report.backend_record,
         ):
             raise ValueError("Stem prediction snapshot differs from batch ancestry")
-        validate_source(candidate.source, original, replay, should_cancel=should_cancel)
-        validate_pitch_artifacts(candidate, should_cancel=should_cancel)
         results.append(candidate)
     verify_inputs([report.backend_record, *[entry.transcription for entry in report.stems]])
     check_cancel(should_cancel)
     return results
+
+
+def validate_batch(
+    report: StemTranscriptionBatch,
+    root: Path,
+    *,
+    should_cancel: Callable[[], bool] | None = None,
+) -> list[StemTranscriptionCandidate]:
+    results = read_stem_candidates(report, root, should_cancel=should_cancel)
+    original, replay = read_lineage(
+        report.separation_report, report.separation_replay, should_cancel=should_cancel
+    )
+    for candidate in results:
+        validate_source(candidate.source, original, replay, should_cancel=should_cancel)
+        validate_pitch_artifacts(candidate, should_cancel=should_cancel)
+    verify_inputs([report.backend_record, *[entry.transcription for entry in report.stems]])
+    check_cancel(should_cancel)
+    return results
+
+
+def batch_evidence(
+    report: StemTranscriptionBatch,
+    candidates: list[StemTranscriptionCandidate],
+    *,
+    identities: list[FileIdentity],
+    should_cancel: Callable[[], bool] | None = None,
+) -> StemEvidence:
+    """Only after full validation or a trusted live producer returned this exact batch."""
+    original, replay = read_lineage_snapshots(
+        report.separation_report, report.separation_replay, should_cancel=should_cancel
+    )
+    return capture_stem_evidence(
+        original,
+        replay,
+        candidates,
+        recipe=report.recipe,
+        pitch_recipe=candidates[0].recipe,
+        identities=[
+            report.separation_report,
+            report.separation_replay,
+            report.backend_record,
+            *[entry.transcription for entry in report.stems],
+            *identities,
+        ],
+        should_cancel=should_cancel,
+    )
 
 
 def verify_stem_batch(
@@ -248,6 +308,9 @@ def verify_stem_batch(
     ):
         raise ValueError("Use new replay outside the original stem batch")
     before = validate_batch(original, report.parent, should_cancel=should_cancel)
+    before_evidence = batch_evidence(
+        original, before, identities=[identity], should_cancel=should_cancel
+    )
     from suno2flp.pipeline.stem_transcription import transcribe_stems
 
     current = transcribe_stems(
@@ -260,7 +323,13 @@ def verify_stem_batch(
     current_id, serialized = read_batch(output / "stem-transcription.json")
     if current != serialized:
         raise ValueError("Serialized stem replay differs from actual completed batch")
-    after = validate_batch(current, output, should_cancel=should_cancel)
+    # The actual producer just validated every relationship before publication.
+    # Re-read its exact serialized snapshots and current bytes without recomputing
+    # the same numeric relationships or accepting a standalone saved receipt.
+    after = read_stem_candidates(current, output, should_cancel=should_cancel)
+    after_evidence = batch_evidence(
+        current, after, identities=[current_id], should_cancel=should_cancel
+    )
     for a, b in zip(before, after, strict=True):
         fields = (
             "frames",
@@ -285,8 +354,8 @@ def verify_stem_batch(
 
     def verify_current() -> None:
         verify_inputs([identity, current_id])
-        validate_batch(original, report.parent, should_cancel=should_cancel)
-        validate_batch(current, output, should_cancel=should_cancel)
+        before_evidence.recheck(should_cancel=should_cancel)
+        after_evidence.recheck(should_cancel=should_cancel)
 
     publish_verified_report(
         output / "replay.json",

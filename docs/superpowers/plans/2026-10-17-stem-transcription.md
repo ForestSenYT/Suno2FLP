@@ -63,3 +63,23 @@
 - [ ] After source stabilizes and is committed, use new isolated backend/evidence directories and readonly prior song/separation. Save complete execution source identities; run real pitched inference and fresh full replay. Preserve failures and actual outputs; do not lower budgets or musical gates to pass.
 - [ ] Run `uv sync --locked`, full pytest, Ruff check/format, mypy, build and genuinely noneditable CLI smoke; audit public package contents. Record native limits/skips honestly.
 - [ ] One fresh strongest-model whole-branch review bound to full SHA, resolve substantive findings with RED/GREEN, rebind changed head per repository policy. Publish public files only; all eight current-head CI checks and merge gates precede exact-head squash. Verify merged tree/main CI; freeze phase and proceed to next independent work.
+
+### Task 4: Remove repeated numeric reconstruction within an owned invocation
+
+The 175s private run has passed fresh separation replay and a first pitched candidate,
+but spends most time repeating completed source/relationship checks. Measure the bounded
+run before changing implementation; preserve all failures and source snapshots.
+
+- [ ] Add `core/inference_snapshot.py`: an explicitly invocation-local read-only guard
+  with detached immutable expected file identities and complete current payload membership.
+  It grants no inference/quality authority and is never persisted or accepted from a receipt.
+- [ ] RED/GREEN tests cover caller rehashing, stale inputs, conflicting declarations,
+  complete payload additions/deletions, late report replacement and cancellation.
+- [ ] After the live native run ends, retain one full independent numeric validation per
+  input snapshot and use fresh complete identity/membership rechecks at later consumption
+  and publication boundaries. An owned actual fresh replay remains mandatory; no boolean
+  shortcut, cross-invocation cache, source event changes or qualification relaxation.
+- [ ] Preserve canonical/serialized-report binding and all mutation/forgery tests; rerun
+  full native proof in new outputs on the fixed head. Reuse only currently valid unchanged
+  model/source prerequisites, never mutate partial or old evidence. Rebind the same reviewer
+  and current CI before merging PR12.

@@ -87,6 +87,13 @@ replay per batch before pitched inference. Its validator re-reads complete refer
 snapshots and repeats the full batch for replay, without qualifying music, jobs or writes.
 See [stem transcription](STEM_TRANSCRIPTION.zh-CN.md).
 
+Within an owning stem invocation, `core.inference_snapshot` detaches immutable expected
+file identities. `validator.stem_snapshot` rechecks complete current payload membership,
+all bytes and runtime metadata to preserve already established numeric relationships.
+Publication does not repeatedly reconstruct identical waveforms. Saved untrusted batches
+still receive full independent numeric validation and actual fresh model replay; these
+guards are never serialized as qualification or reused across invocations.
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service

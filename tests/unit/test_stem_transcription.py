@@ -154,17 +154,46 @@ def test_invalid_or_noncanonical_selection_cannot_run_or_create_output(batch, tm
 
 
 @pytest.mark.parametrize(
-    "changed", ["original", "stem", "separation", "model", "extra", "receipt", "pending", "cancel"]
+    "changed",
+    [
+        "original",
+        "stem",
+        "separation",
+        "model",
+        "extra",
+        "receipt",
+        "pending",
+        "cancel",
+        "metadata",
+        "recipe",
+    ],
 )
 def test_late_mutation_does_not_publish_batch(batch, tmp_path, monkeypatch, changed):
-    pipeline, _ = services()
+    pipeline, validator = services()
     publication = importlib.import_module("suno2flp.core.report_publication")
     original = publication.new_report
     pending = tmp_path / "batch/stem-transcription.pending.json"
+    recipe_file = tmp_path / "declared-recipe.py"
+    if changed == "recipe":
+        recipe_file.write_bytes(b"original declared recipe")
+        current_recipe = pipeline.stem_recipe
+
+        def declared_recipe():
+            result = current_recipe()
+            result.files.append(capture_stream_input(recipe_file))
+            return result
+
+        monkeypatch.setattr(pipeline, "stem_recipe", declared_recipe)
+        monkeypatch.setattr(validator, "stem_recipe", declared_recipe)
 
     def mutate(path, *args, **kwargs):
         original(path, *args, **kwargs)
         if path == pending and changed != "cancel":
+            if changed == "metadata":
+                import pydantic
+
+                monkeypatch.setattr(pydantic, "__version__", "changed after serialization")
+                return
             targets = dict(
                 original=batch.source.source,
                 stem=tmp_path / "separation/native/bass.wav",
@@ -173,6 +202,7 @@ def test_late_mutation_does_not_publish_batch(batch, tmp_path, monkeypatch, chan
                 extra=batch.backend / "packages/extra.pth",
                 receipt=tmp_path / "batch/separation-replay/replay.json",
                 pending=pending,
+                recipe=recipe_file,
             )
             with targets[changed].open("ab") as stream:
                 stream.write(b"changed after serialization")
@@ -257,3 +287,24 @@ def test_valid_relative_separation_is_accepted_by_api_and_cli(batch, tmp_path, m
     assert completed.exit_code == 0, completed.output
     assert "unqualified_candidate" in completed.output
     assert (tmp_path / "relative-batch/stem-transcription.json").exists()
+
+
+def test_lineage_replay_report_cannot_change_after_its_numeric_validation(
+    batch, tmp_path, monkeypatch
+):
+    _, validator = services()
+    from suno2flp.validator.separation import verify_separation
+
+    verify_separation(batch.separation, tmp_path / "separation-replay")
+    replay = tmp_path / "separation-replay/separation.json"
+    receipt = capture_stream_input(tmp_path / "separation-replay/replay.json")
+    original = validator.validate_separation_artifacts
+
+    def change_after_validation(report, **kwargs):
+        original(report, **kwargs)
+        if report.native_result.path == replay.parent / "native/result.json":
+            replay.write_bytes(replay.read_bytes() + b"\n")
+
+    monkeypatch.setattr(validator, "validate_separation_artifacts", change_after_validation)
+    with pytest.raises((ValueError, Suno2FLPError)):
+        validator.read_lineage(capture_stream_input(batch.separation), receipt)
