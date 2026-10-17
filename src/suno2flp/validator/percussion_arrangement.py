@@ -4,6 +4,7 @@ from collections.abc import Callable
 from pathlib import Path
 
 from suno2flp.arrangement.percussion import build_percussion_arrangement
+from suno2flp.core.inference_snapshot import InferenceSnapshot
 from suno2flp.core.note_scoring import ScoringRecipe
 from suno2flp.core.offline_files import (
     capture_stream_input,
@@ -20,7 +21,7 @@ from suno2flp.core.percussion_arrangement import (
 from suno2flp.importer.note_annotations import bounded_snapshot
 from suno2flp.validator.drum_transcription import drum_guard, drum_recipe, read_drum_candidate
 from suno2flp.validator.estimated_arrangement import estimated_recipe, load_estimated_inputs
-from suno2flp.validator.stem_transcription import read_batch
+from suno2flp.validator.stem_transcription import read_batch, read_stem_candidates
 from suno2flp.validator.transcription import check_cancel
 
 Cancel = Callable[[], bool] | None
@@ -105,6 +106,24 @@ def load_percussion_inputs(
             postprocessing_profile=record.postprocessing_profile,
         ),
     )
+    candidates = read_stem_candidates(batch, batch_id.path.parent, should_cancel=should_cancel)
+    native_producers = [
+        (parent.native_result.path.parent, parent.witnesses())
+        for parent in (original, record.source.replay)
+    ] + [(item.native_result.path.parent, item.pitch_witnesses()) for item in candidates]
+    frozen_ancestors = InferenceSnapshot.capture(
+        [],
+        [
+            (
+                root,
+                list(
+                    {file.path: file for file in entries if file.path.is_relative_to(root)}.values()
+                ),
+            )
+            for root, entries in native_producers
+        ],
+        should_cancel=should_cancel,
+    )
     protected.extend(
         [
             drum_id.path.parent,
@@ -127,6 +146,7 @@ def load_percussion_inputs(
         recheck_pitched()
         source.recheck(drum_recipe(), should_cancel=should_cancel)
         frozen_drums.recheck(should_cancel=should_cancel)
+        frozen_ancestors.recheck(should_cancel=should_cancel)
         verify_inputs([batch_id, drum_id, recipe.python_executable, *recipe.files])
         if percussion_recipe().model_dump_json() != frozen_recipe:
             raise ValueError("Percussion arrangement execution recipe changed")
