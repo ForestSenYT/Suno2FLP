@@ -24,7 +24,11 @@ from suno2flp.core.stem_transcription import (
     StemTranscriptionCandidate,
 )
 from suno2flp.importer.note_annotations import bounded_snapshot
-from suno2flp.validator.separation import validate_separation_artifacts, verify_separation_witnesses
+from suno2flp.validator.separation import (
+    separation_replay_data,
+    validate_separation_artifacts,
+    verify_separation_witnesses,
+)
 from suno2flp.validator.stem_audio import verify_stem_wave
 from suno2flp.validator.stem_snapshot import StemEvidence, capture_stem_evidence
 from suno2flp.validator.transcription import check_cancel, validate_pitch_artifacts
@@ -87,6 +91,8 @@ def read_lineage_snapshots(
     # caller's full validation or actual owned fresh native invocation.
     check_cancel(should_cancel)
     fields = (
+        "schema_version",
+        "profile",
         "decode_report",
         "source_audio",
         "pcm",
@@ -104,22 +110,11 @@ def read_lineage_snapshots(
     )
     observations = {"elapsed_seconds", "peak_working_set_bytes", "peak_commit_bytes"}
 
-    def signals(report: SeparationCandidate) -> list[tuple[str, int]]:
-        return [
-            (i.sha256, i.size_bytes)
-            for i in [
-                report.model_input,
-                *[f for p in report.partitions for f in [p.input, *[o.file for o in p.outputs]]],
-                *[f for s in report.stems for f in (s.model, s.source, s.tail)],
-                report.residual,
-            ]
-        ]
-
     if (
         any(getattr(original, f) != getattr(replay, f) for f in fields)
         or original.result.model_dump(exclude=observations)
         != replay.result.model_dump(exclude=observations)
-        or signals(original) != signals(replay)
+        or separation_replay_data(original) != separation_replay_data(replay)
     ):
         raise ValueError("Complete separation replay evidence differs")
     verify_inputs([separation, receipt, replay_id])

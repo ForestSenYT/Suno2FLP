@@ -61,7 +61,9 @@ model quality or job/writer qualification is granted by these commands.
 anchored STFT partitions, retained partial outputs and resampling tails, source-rate
 four-stem WAVs and an explicit unassigned residual. Standard-library checks reconstruct
 every overlap-add sample; fresh native replay compares complete signals before publishing
-a separate receipt. These are unqualified inference candidates, not canonical job success,
+a separate receipt. New v2 candidates also retain the owned generated Keras configuration,
+strict settings and complete native membership; legacy records need new generation for
+current replay. These are unqualified inference candidates, not canonical job success,
 editable notes, host acceptance or an end-user conversion. Existing source MIDI is unchanged.
 
 [Estimated stem transcription](docs/STEM_TRANSCRIPTION.zh-CN.md) connects vocals/bass/other

@@ -93,6 +93,20 @@ def protocol(recipe, tmp_path, monkeypatch, request):
             raise RuntimeError("cancelled synthetic owned process")
         runs.append(request_path.parent)
         attempt = request_path.parent
+        config = attempt / "keras-cache/keras.json"
+        config.parent.mkdir()
+        config.write_text(
+            json.dumps(
+                dict(
+                    floatx="float32",
+                    epsilon=1e-7,
+                    backend="tensorflow",
+                    image_data_format="channels_last",
+                ),
+                indent=4,
+            ),
+            encoding="utf-8",
+        )
         with decoded.pcm.path.open("rb") as stream:
             stream.seek(58)
             original = [value[0] for value in struct.iter_unpack("<d", stream.read())]

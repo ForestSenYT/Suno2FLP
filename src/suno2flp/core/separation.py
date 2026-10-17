@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Literal, Self
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 
 from suno2flp.core.models import Contract
 from suno2flp.core.note_scoring import ScoringRecipe
@@ -95,11 +95,34 @@ class SeparationStemArtifact(Contract):
     tail: FileIdentity
 
 
-class SeparationCandidate(Contract):
-    schema_version: Literal[1] = 1
-    profile: Literal["source-bound-spleeter-four-stem-candidate-v1"] = (
-        "source-bound-spleeter-four-stem-candidate-v1"
+class KerasRuntimeSettings(Contract):
+    floatx: Literal["float32"]
+    epsilon: float = Field(strict=True, allow_inf_nan=False)
+    backend: Literal["tensorflow"]
+    image_data_format: Literal["channels_last"]
+
+    @field_validator("epsilon")
+    @classmethod
+    def fixed_epsilon(cls, value: float) -> float:
+        if value != 1e-7:
+            raise ValueError("Unsupported fixed Keras epsilon")
+        return value
+
+
+class SeparationRuntimeContext(Contract):
+    profile: Literal["native-import-generated-keras-config-v1"] = (
+        "native-import-generated-keras-config-v1"
     )
+    file: FileIdentity
+    settings: KerasRuntimeSettings
+
+
+class SeparationCandidate(Contract):
+    schema_version: Literal[1, 2] = 1
+    profile: Literal[
+        "source-bound-spleeter-four-stem-candidate-v1",
+        "source-bound-spleeter-four-stem-candidate-v2",
+    ] = "source-bound-spleeter-four-stem-candidate-v1"
     origin: Literal["inferred_candidate"] = "inferred_candidate"
     decode_report: FileIdentity
     source_audio: FileIdentity
@@ -124,6 +147,7 @@ class SeparationCandidate(Contract):
     native_request: FileIdentity
     stdout: FileIdentity
     stderr: FileIdentity
+    runtime_context: SeparationRuntimeContext | None = None
     output_channels: Literal[2] = 2
     clock_profile: Literal["rational-44100-source-origin-zero-v1"] = (
         "rational-44100-source-origin-zero-v1"
@@ -150,6 +174,19 @@ class SeparationCandidate(Contract):
 
     @model_validator(mode="after")
     def complete_evidence(self) -> Self:
+        v2 = self.schema_version == 2
+        if v2 != (self.profile == "source-bound-spleeter-four-stem-candidate-v2") or v2 != (
+            self.runtime_context is not None
+        ):
+            raise ValueError("Separation version/profile/runtime context must agree")
+        if self.runtime_context is not None and (
+            self.runtime_context.file.path
+            != self.native_result.path.parent / "keras-cache/keras.json"
+            or not 0 < self.runtime_context.file.size_bytes <= 65536
+        ):
+            raise ValueError(
+                "Runtime configuration must be bounded and owned by this native attempt"
+            )
         result = self.result
         if (self.frames, self.sample_rate, self.channels) != (
             result.source_frames,
@@ -217,7 +254,19 @@ class SeparationCandidate(Contract):
             self.native_request,
             self.stdout,
             self.stderr,
+            *([self.runtime_context.file] if self.runtime_context is not None else []),
         ]
+
+    def native_witnesses(self) -> list[FileIdentity]:
+        """Declared members only; numeric/current authority belongs to the caller."""
+        root = self.native_result.path.parent
+        declared: dict[Path, FileIdentity] = {}
+        for identity in self.witnesses():
+            if identity.path.is_relative_to(root):
+                if identity.path in declared and declared[identity.path] != identity:
+                    raise ValueError("Conflicting native witness identities")
+                declared[identity.path] = identity
+        return list(declared.values())
 
 
 class SeparationReplayReceipt(Contract):

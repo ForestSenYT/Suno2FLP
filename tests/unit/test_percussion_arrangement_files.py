@@ -143,10 +143,10 @@ def test_existing_and_post_completion_unlisted_native_members_are_refused(curren
     for name, root in source.native_roots.items():
         extra = root / "extra.json"
         extra.write_text("{}", encoding="utf-8")
-        with pytest.raises(ValueError, match="complete inference payload changed"):
+        with pytest.raises(ValueError, match="complete inference payload changed|exceeds budget"):
             verify_percussion_arrangement(output / "percussion-arrangement.json")
         destination = tmp_path / f"unlisted-{name}"
-        with pytest.raises(ValueError, match="complete inference payload changed"):
+        with pytest.raises(ValueError, match="complete inference payload changed|exceeds budget"):
             compose_percussion_arrangement(source.batch, source.drums, destination)
         assert not destination.exists()
         extra.unlink()  # Only this test's new synthetic file, never producer evidence.

@@ -54,8 +54,13 @@ def load_drum_source(
     )
     files = [*source.witnesses(), recipe.python_executable, *recipe.files]
     payloads = []
+    byte_limits: dict[Path, int] = {}
     for report in (original, replay):
         payloads.append((report.backend.root / "packages", report.model_dependencies))
+        if report.runtime_context is not None:
+            native, members = report.native_result.path.parent, report.native_witnesses()
+            payloads.append((native, members))
+            byte_limits[native] = max(1, sum(i.size_bytes for i in members))
         if report.decoder_payload_root is not None:
             root = report.decoder_payload_root
             payloads.append(
@@ -64,7 +69,9 @@ def load_drum_source(
     proof = DrumSourceEvidence(
         source.model_dump_json(),
         recipe.model_dump_json(),
-        InferenceSnapshot.capture(files, payloads, should_cancel=should_cancel),
+        InferenceSnapshot.capture(
+            files, payloads, payload_byte_limits=byte_limits, should_cancel=should_cancel
+        ),
     )
     proof.recheck(recipe, should_cancel=should_cancel)
     return proof
