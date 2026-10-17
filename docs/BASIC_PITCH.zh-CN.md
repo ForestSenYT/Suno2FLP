@@ -125,5 +125,6 @@ Basic Pitch 最适合单乐器，整曲混音候选不代表已经分离出乐�
 鼓与节拍、分离、校准、10次稳定性、完整性能／峰值内存、宿主、GUI／安装和试听
 仍未通过；`model_qualification=not_assessed`、`ground_truth_metrics=unavailable`、
 `musical_correctness=not_proven_per_song`、`writer_eligibility=blocked`、
-`execution_allowed=false` 始终保留。下一切片先接有明确权重许可的分离模型，随后
-接共享作业／推断编排；未知或不足的音乐和宿主证据继续阻断交付。
+`execution_allowed=false` 始终保留。[来源绑定分轨候选](SEPARATION.zh-CN.md)已有独立开发
+入口；尚须明确的分轨来源／精度桥接才能供转写消费，不能把分离估计伪装为原始解码。
+后续再接共享作业／推断编排；未知或不足的音乐和宿主证据继续阻断交付。

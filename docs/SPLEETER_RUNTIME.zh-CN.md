@@ -2,8 +2,9 @@
 
 这是 M2 的运行前提切片。它提供 `prepare-spleeter` 和 `verify-spleeter`，在独立
 Windows CPU 子进程中加载固定模型，保存原创合成信号的原始输出并独立核对。
-**它尚未提供完整歌曲分轨、合格模型、完整转换作业或 FLP 交付。**
-音频分离质量、完整歌曲的分块／重采样／残差、共享作业接入仍是后续切片；
+**这两个运行前提命令不提供合格模型、完整转换作业或 FLP 交付。**
+独立的[完整来源绑定分轨候选](SEPARATION.zh-CN.md)已增加分块／重采样／残差和新进程
+重放入口；这里的旧探针语义保持原样。音频分离质量、共享作业接入仍待验收；
 参见[批准设计](superpowers/specs/2026-10-16-deliverable-audio-to-flp-design.zh-CN.md)
 和[持续路线](DELIVERY_ROADMAP.zh-CN.md)。
 

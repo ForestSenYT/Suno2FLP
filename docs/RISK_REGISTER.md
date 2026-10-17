@@ -13,6 +13,16 @@ memory/performance and installer licensing remain open. Existing files and old w
 restrictions are unaffected; neither preparation nor a native probe can advance a job
 to succeeded or enable an FLP write.
 
+[Complete separation candidates](SEPARATION.zh-CN.md) now retain every globally anchored
+partition and tail and check exact float32 assembly, source-grid geometry, residual and
+fresh native replay. Original boundary signals agree with a separate full graph, and
+small multi-rate signals pass an independent scalar FIR reference. These observations
+do not qualify arbitrary songs or 600-second resource use. Working-set/commit are observed
+child peaks, not an OS memory sandbox or whole-job budget. Four estimates plus residual
+can conserve a forged signal, so complete current-model replay is necessary and still
+cannot establish instrument truth. Stem-to-transcription lineage, quality corpus,
+canonical job cancellation/recovery, host and installer acceptance remain open.
+
 [Basic Pitch candidates](BASIC_PITCH.zh-CN.md) retain every raw window and explicit
 source-sample anchor; the upstream integer86FPS/time heuristic and MIDI defaults are
 not exact source clocks. Model onset accuracy, activation calibration and mixed-song

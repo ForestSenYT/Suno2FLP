@@ -141,12 +141,22 @@ def test_cancel_cannot_publish(protocol, tmp_path):
     assert not (tmp_path / "cancelled/transcription.json").exists()
 
 
-@pytest.mark.parametrize("when", ["after_child", "after_publication"])
+def test_cancellation_after_serialization_retains_only_provisional_report(protocol, tmp_path):
+    _, decode, backend = protocol
+    pending = tmp_path / "cancelled/transcription.pending.json"
+    with pytest.raises(Suno2FLPError, match="cancel"):
+        transcribe_audio(decode, backend, tmp_path / "cancelled", should_cancel=pending.exists)
+    assert pending.exists()
+    assert not (tmp_path / "cancelled/transcription.json").exists()
+
+
+@pytest.mark.parametrize("when", ["after_child", "after_serialization"])
 @pytest.mark.parametrize("changed", ["source", "runtime", "module", "extra", "backend_record"])
 def test_changed_witnesses_cannot_return_a_successful_candidate(
     protocol, tmp_path, monkeypatch, when, changed
 ):
     source, decode, backend = protocol
+    import suno2flp.core.report_publication as publication
     import suno2flp.pipeline.transcription as pipeline
 
     target = {
@@ -156,7 +166,8 @@ def test_changed_witnesses_cannot_return_a_successful_candidate(
         "extra": backend / "packages/extra.pth",
         "backend_record": backend / "backend.json",
     }[changed]
-    original = getattr(pipeline, "call_basic_pitch" if when == "after_child" else "new_report")
+    owner = pipeline if when == "after_child" else publication
+    original = getattr(owner, "call_basic_pitch" if when == "after_child" else "new_report")
 
     def alter(*args, **kwargs):
         result = original(*args, **kwargs)
@@ -164,19 +175,14 @@ def test_changed_witnesses_cannot_return_a_successful_candidate(
             stream.write(b"changed during candidate processing")
         return result
 
-    monkeypatch.setattr(
-        pipeline, "call_basic_pitch" if when == "after_child" else "new_report", alter
-    )
+    monkeypatch.setattr(owner, "call_basic_pitch" if when == "after_child" else "new_report", alter)
     with pytest.raises((ValueError, Suno2FLPError)):
         transcribe_audio(decode, backend, tmp_path / "changed")
     report = tmp_path / "changed/transcription.json"
-    if when == "after_child":
-        assert not report.exists()
-    else:
-        # Preserve the failed attempt; even a written candidate cannot pass replay.
-        assert report.exists()
-        with pytest.raises((ValueError, Suno2FLPError)):
-            verify_transcription(report, tmp_path / "replay-changed")
+    assert not report.exists()
+    if when == "after_serialization":
+        assert (tmp_path / "changed/transcription.pending.json").exists()
+    assert (tmp_path / "changed/native/result.json").exists()
 
 
 @pytest.mark.parametrize("corruption", ["nonfinite", "negative", "over-one", "truncated", "bend"])
@@ -260,3 +266,51 @@ def test_recipe_change_after_child_refuses_publication(protocol, tmp_path, monke
     with pytest.raises(ValueError, match="recipe/backend changed"):
         transcribe_audio(decode, backend, tmp_path / "recipe-change")
     assert not (tmp_path / "recipe-change/transcription.json").exists()
+
+
+def test_native_result_snapshot_rejects_semantically_equal_replacement(
+    protocol, tmp_path, monkeypatch
+):
+    _, decode, backend = protocol
+    import suno2flp.pipeline.transcription as pipeline
+
+    native_result = tmp_path / "candidate/native/result.json"
+    original = pipeline.load_unique_json
+
+    def replace_after_parse(raw):
+        value = original(raw)
+        if isinstance(value, dict) and "probe" in value and "notes" in value:
+            native_result.write_bytes(native_result.read_bytes() + b"\n")
+        return value
+
+    monkeypatch.setattr(pipeline, "load_unique_json", replace_after_parse)
+    with pytest.raises((ValueError, Suno2FLPError)):
+        transcribe_audio(decode, backend, tmp_path / "candidate")
+    assert not (tmp_path / "candidate/transcription.json").exists()
+
+
+@pytest.mark.parametrize("destination", ["nested", "provisional", "foreign"])
+def test_replay_rejects_provisional_reports_and_original_candidate_overlap(
+    protocol, tmp_path, destination
+):
+    _, decode, backend = protocol
+    transcribe_audio(decode, backend, tmp_path / "candidate")
+    report = tmp_path / "candidate/transcription.json"
+    if destination == "provisional":
+        provisional = report.with_name("transcription.pending.json")
+        if not provisional.exists():
+            provisional.write_bytes(report.read_bytes())
+        report = provisional
+        output = tmp_path / "replay"
+    elif destination == "foreign":
+        copied = tmp_path / "copied"
+        copied.mkdir()
+        foreign = copied / "transcription.json"
+        foreign.write_bytes(report.read_bytes())
+        report = foreign
+        output = tmp_path / "candidate/nested-foreign-replay"
+    else:
+        output = tmp_path / "candidate/nested-replay"
+    with pytest.raises(ValueError):
+        verify_transcription(report, output)
+    assert not output.exists()

@@ -37,13 +37,21 @@ preparation and actual ONNX CPU inference on Windows x64/CPython3.11.16. Candida
 all raw windows, source sample anchors and per-note bends; fresh native replay detects
 rehash-only forgeries. `prepare-basic-pitch`, `verify-basic-pitch`, `transcribe-audio` and
 `verify-transcription` are development commands. The core imports/downloads no model;
-separation, role/tempo inference, corpus qualification, jobs and FLP delivery remain blocked.
+qualified separation, role/tempo inference, corpus qualification, jobs and FLP delivery remain blocked.
 
 [Isolated Spleeter runtime preparation](docs/SPLEETER_RUNTIME.zh-CN.md) adds a fixed local
 graph recipe and explicit CPU checkpoint probes. `prepare-spleeter` and `verify-spleeter`
 retain current artifact/payload identities and complete original signal outputs. The
 Windows recipe explicitly differs from upstream CLI dependencies; no automatic download,
-whole-song separation, model quality or job/writer qualification is granted by these commands.
+model quality or job/writer qualification is granted by these commands.
+
+[Complete source-bound separation candidates](docs/SEPARATION.zh-CN.md) now add
+`separate-audio` and `verify-separation`: exact rational source/model clocks, globally
+anchored STFT partitions, retained partial outputs and resampling tails, source-rate
+four-stem WAVs and an explicit unassigned residual. Standard-library checks reconstruct
+every overlap-add sample; fresh native replay compares complete signals before publishing
+a separate receipt. These are unqualified inference candidates, not canonical job success,
+editable notes, host acceptance or an end-user conversion. Existing source MIDI is unchanged.
 
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,

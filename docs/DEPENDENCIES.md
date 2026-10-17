@@ -7,6 +7,10 @@ the official v1.4.0 4stems archive and four supplemental notices in
 `3adb4a50ad4eb18c7c4d65fcf4cf2367a07d48408a5eb7d03cd20067429dfaa8`.
 The explicit Windows CPU recipe uses TensorFlow/Intel2.12.1, NumPy1.24.3,
 SciPy1.15.3 and pandas1.5.3 in a separate payload, without core lock changes.
+The [complete source-bound separation route](SEPARATION.zh-CN.md) reuses this same
+payload; its parent validation/overlap-add/residual checks use only the standard library.
+Observed Windows child memory metrics add no package dependency. No model or native
+runtime enters the application wheel/sdist or the default offline test environment.
 Default Spleeter's mandatory TFIO0.32.0 has no Windows wheel. This local-graph recipe
 retains TensorFlow's metadata-compatible0.31.0 but disables its native plugin; it does
 not claim the upstream Spleeter closure or TFIO compatibility. CLI/FFmpeg/MWF/cloud
