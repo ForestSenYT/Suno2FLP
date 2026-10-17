@@ -1,5 +1,6 @@
 """A bounded immutable tree pass rejects file/directory changes and linked payloads."""
 
+import os
 from pathlib import Path
 
 import pytest
@@ -32,6 +33,29 @@ def test_tree_change_during_a_callback_fails(tmp_path: Path) -> None:
         calls += 1
         if calls == 2:
             (tmp_path / "extra.py").write_bytes(b"new")
+        return False
+
+    with pytest.raises(ValueError, match="changed"):
+        capture_file_tree(tmp_path, should_cancel=mutate)
+
+
+@pytest.mark.parametrize("added_kind", ["file", "directory"])
+def test_tree_membership_change_with_unchanged_directory_time_fails(tmp_path, added_kind):
+    (tmp_path / "a.py").write_bytes(b"code")
+    before = tmp_path.stat()
+    calls = 0
+
+    def mutate():
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            added = tmp_path / "extra"
+            if added_kind == "file":
+                added.write_bytes(b"new")
+            else:
+                added.mkdir()
+            # Windows may not immediately update this directory timestamp.
+            os.utime(tmp_path, ns=(before.st_atime_ns, before.st_mtime_ns))
         return False
 
     with pytest.raises(ValueError, match="changed"):

@@ -39,7 +39,7 @@ def capture_file_tree(
     deadline = time.monotonic() + timeout
     result: list[FileIdentity] = []
     length = 0
-    directories: list[tuple[Path, os.stat_result]] = []
+    directories: list[tuple[Path, os.stat_result, tuple[str, ...]]] = []
 
     def check() -> None:
         if should_cancel is not None and should_cancel():
@@ -53,9 +53,9 @@ def capture_file_tree(
         directory = guarded_path(directory)
         before = directory.stat(follow_symlinks=False)
         _regular(before)
-        directories.append((directory, before))
         with os.scandir(directory) as scan:
             entries = sorted(scan, key=lambda e: e.name)
+        directories.append((directory, before, tuple(entry.name for entry in entries)))
         for entry in entries:
             check()
             path = directory / entry.name
@@ -93,10 +93,19 @@ def capture_file_tree(
             )
 
     visit(root)
-    for directory, before in directories:
+    for directory, before, names in directories:
+        check()
+        directory = guarded_path(directory)
+        current_names = []
+        with os.scandir(directory) as scan:
+            for entry in scan:
+                check()
+                current_names.append(entry.name)
+                if len(current_names) > len(names):
+                    raise ValueError("Payload directory membership changed during tree capture")
         current = directory.stat(follow_symlinks=False)
         _regular(current)
-        if _signature(before) != _signature(current):
+        if tuple(sorted(current_names)) != names or _signature(before) != _signature(current):
             raise ValueError("Payload directory changed during tree capture")
     if guarded_path(root) != root:
         raise ValueError("Payload root changed during tree capture")
