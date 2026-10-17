@@ -40,6 +40,21 @@ def test_seam_has_a_short_real_gap_and_keeps_raw_addresses() -> None:
     assert owned_prediction_rows(1) == [PredictionRow(window=0, row=15, source_sample=0)]
 
 
+@pytest.mark.parametrize("frames, count, last", [(44100, 173, 43844), (44101, 174, 44100)])
+def test_exact_two_second_endpoint_is_excluded_until_it_contains_a_sample(
+    frames: int, count: int, last: int
+) -> None:
+    # First window contributes 142 rows. Second starts at sample36164; its
+    # row46 anchor is44100, exactly outside the two-second half-open source.
+    rows = owned_prediction_rows(frames)
+    assert len(rows) == count
+    assert sum(row.window == 0 for row in rows) == 142
+    assert sum(row.window == 1 for row in rows) == count - 142
+    assert rows[-1].source_sample == last
+    assert rows[-1].row == (45 if frames == 44100 else 46)
+    assert len(plan_prediction_windows(frames)) == 2
+
+
 @pytest.mark.parametrize("frames", [0, -1, True, 1.5, 22050 * 600 + 1, 10**100])
 def test_window_budget_rejects_invalid_input(frames: int) -> None:
     with pytest.raises(ValueError):

@@ -11,7 +11,8 @@ Actual import failure established the undeclared `pkg_resources` dependency of r
 setuptools80.9.0 is fixed for that runtime, without running a build/setup entry point.
 The Pretty MIDI source archive contributes only seven reviewed Python files and MIT
 license; its soundfont and setup scripts are not installed. Two exact startup/cache
-members are omitted. All remaining wheel/native/bundled notices stay private, including
+members plus the setuptools `distutils-precedence.pth` hook are omitted (three in total).
+All remaining wheel/native/bundled notices stay private, including
 NumPy/SciPy bundled terms and SoundFile/soxr LGPL obligations. Local use is not installer
 redistribution acceptance. In particular, setuptools' vendored autocommand2.2.2 includes
 LGPLv3 terms despite the distribution's MIT metadata; all actual notices are retained.

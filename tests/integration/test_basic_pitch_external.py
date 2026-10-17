@@ -44,7 +44,8 @@ def test_actual_private_model_and_current_source_replay(tmp_path):
     candidate = transcribe_audio(
         tmp_path / "decode/decode.json", backend.root, tmp_path / "candidate"
     )
-    assert candidate.result.windows == 2 and candidate.result.owned_rows == 174
+    # 142 first-window rows plus31 second-window anchors below sample44100.
+    assert candidate.result.windows == 2 and candidate.result.owned_rows == 173
     assert any(note.pitch == 69 for note in candidate.result.notes)
     assert (
         verify_transcription(tmp_path / "candidate/transcription.json", tmp_path / "replay")

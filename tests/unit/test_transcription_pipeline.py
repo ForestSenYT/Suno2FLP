@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+from suno2flp.core.errors import Suno2FLPError
 from suno2flp.core.offline_files import capture_stream_input
 from suno2flp.core.transcription import BasicPitchBackend
 from suno2flp.importer.pcm_decode import decode_pcm_wave
@@ -27,11 +28,13 @@ def protocol(tmp_path: Path, monkeypatch):
     module = backend / "packages/pkg/__init__.py"
     module.write_bytes(b"# explicitly simulated protocol")
     module_id = capture_stream_input(module)
+    runtime = tmp_path / "simulated-runtime.bin"
+    runtime.write_bytes(b"explicitly simulated runtime identity")
     (backend / "backend.json").write_text("{}", encoding="utf-8")
     record = BasicPitchBackend(
         root=backend,
         python=module_id,
-        runtime=[],
+        runtime=[capture_stream_input(runtime)],
         artifacts=[],
         adapters=[],
         payload={"pkg/__init__.py": module_id.sha256},
@@ -138,6 +141,44 @@ def test_cancel_cannot_publish(protocol, tmp_path):
     assert not (tmp_path / "cancelled/transcription.json").exists()
 
 
+@pytest.mark.parametrize("when", ["after_child", "after_publication"])
+@pytest.mark.parametrize("changed", ["source", "runtime", "module", "extra", "backend_record"])
+def test_changed_witnesses_cannot_return_a_successful_candidate(
+    protocol, tmp_path, monkeypatch, when, changed
+):
+    source, decode, backend = protocol
+    import suno2flp.pipeline.transcription as pipeline
+
+    target = {
+        "source": source,
+        "runtime": tmp_path / "simulated-runtime.bin",
+        "module": backend / "packages/pkg/__init__.py",
+        "extra": backend / "packages/extra.pth",
+        "backend_record": backend / "backend.json",
+    }[changed]
+    original = getattr(pipeline, "call_basic_pitch" if when == "after_child" else "new_report")
+
+    def alter(*args, **kwargs):
+        result = original(*args, **kwargs)
+        with target.open("ab") as stream:
+            stream.write(b"changed during candidate processing")
+        return result
+
+    monkeypatch.setattr(
+        pipeline, "call_basic_pitch" if when == "after_child" else "new_report", alter
+    )
+    with pytest.raises((ValueError, Suno2FLPError)):
+        transcribe_audio(decode, backend, tmp_path / "changed")
+    report = tmp_path / "changed/transcription.json"
+    if when == "after_child":
+        assert not report.exists()
+    else:
+        # Preserve the failed attempt; even a written candidate cannot pass replay.
+        assert report.exists()
+        with pytest.raises((ValueError, Suno2FLPError)):
+            verify_transcription(report, tmp_path / "replay-changed")
+
+
 @pytest.mark.parametrize("corruption", ["nonfinite", "negative", "over-one", "truncated", "bend"])
 def test_incomplete_or_invalid_numeric_evidence_cannot_publish(
     protocol, tmp_path, monkeypatch, corruption
@@ -164,3 +205,58 @@ def test_incomplete_or_invalid_numeric_evidence_cannot_publish(
     with pytest.raises(ValueError):
         transcribe_audio(decode, backend, tmp_path / "invalid")
     assert not (tmp_path / "invalid/transcription.json").exists()
+
+
+@pytest.mark.parametrize("count", [0, 10001])
+def test_complete_empty_result_is_kept_but_excess_notes_are_never_truncated(
+    protocol, tmp_path, monkeypatch, count
+):
+    _, decode, backend = protocol
+    import suno2flp.pipeline.transcription as pipeline
+
+    original = pipeline.call_basic_pitch
+
+    def sized_result(record, attempt, request, **kwargs):
+        returned = original(record, attempt, request, **kwargs)
+        path = attempt / "result.json"
+        raw = json.loads(path.read_bytes())
+        template = raw["notes"][0]
+        raw["notes"] = [{**template, "bend_offset": 10 * i} for i in range(count)]
+        raw["bend_bytes"] = count * 10
+        path.write_text(json.dumps(raw), encoding="utf-8")
+        (attempt / "bends.i8").write_bytes(b"\0" * (count * 10))
+        return returned
+
+    monkeypatch.setattr(pipeline, "call_basic_pitch", sized_result)
+    if count:
+        with pytest.raises(ValueError, match="10000"):
+            transcribe_audio(decode, backend, tmp_path / "oversized")
+        assert not (tmp_path / "oversized/transcription.json").exists()
+    else:
+        candidate = transcribe_audio(decode, backend, tmp_path / "empty")
+        assert candidate.result.notes == [] and candidate.bends.size_bytes == 0
+        assert candidate.model_qualification == "not_assessed"
+        assert (
+            verify_transcription(tmp_path / "empty/transcription.json", tmp_path / "empty-replay")
+            == candidate
+        )
+
+
+def test_recipe_change_after_child_refuses_publication(protocol, tmp_path, monkeypatch):
+    _, decode, backend = protocol
+    import suno2flp.pipeline.transcription as pipeline
+    import suno2flp.validator.transcription as validator
+
+    original = pipeline.call_basic_pitch
+    current_recipe = validator.transcription_recipe
+
+    def change_recipe(*args, **kwargs):
+        result = original(*args, **kwargs)
+        changed = current_recipe().model_copy(update={"pydantic_version": "changed-runtime"})
+        monkeypatch.setattr(validator, "transcription_recipe", lambda: changed)
+        return result
+
+    monkeypatch.setattr(pipeline, "call_basic_pitch", change_recipe)
+    with pytest.raises(ValueError, match="recipe/backend changed"):
+        transcribe_audio(decode, backend, tmp_path / "recipe-change")
+    assert not (tmp_path / "recipe-change/transcription.json").exists()
