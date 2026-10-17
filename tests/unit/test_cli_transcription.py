@@ -25,3 +25,14 @@ def test_missing_backend_reports_failure_and_never_claims_delivery(tmp_path) -> 
     assert result.exit_code == 1
     assert "Error:" in result.output
     assert not (tmp_path / "attempt").exists()
+
+
+def test_excessively_nested_backend_json_has_an_explicit_cli_failure(tmp_path) -> None:
+    backend = tmp_path / "backend"
+    backend.mkdir()
+    (backend / "backend.json").write_bytes(b"[" * 2000 + b"0" + b"]" * 2000)
+    result = CliRunner().invoke(
+        app, ["verify-basic-pitch", str(backend), "--output", str(tmp_path / "probe")]
+    )
+    assert result.exit_code == 1 and "Error:" in result.output
+    assert not (tmp_path / "probe").exists()

@@ -6,8 +6,9 @@ project with notes, stems, playback and measured quality. The
 [branch/PR workflow](docs/GITHUB_WORKFLOW.zh-CN.md). This target is not complete.
 
 Current implementation is an AI-assisted pipeline foundation from official Suno MIDI
-and reference audio stems. Python 3.11+, Windows first. Audio-only inference and the
-installable end-user product are not yet implemented. The optional
+and reference audio stems. Python 3.11+, Windows first. A fixed local transcription
+candidate is available; the complete audio-only pipeline and installable end-user
+product are not yet implemented. The optional
 [Chinese desktop workbench](docs/GUI.zh-CN.md) now presents real jobs, input checks,
 cancellation/recovery, history and diagnostics. It is a development preview: later
 conversion stages remain blocked, without simulated progress or playable-project claims.
@@ -31,6 +32,13 @@ duplicate-aware one-to-one F1 against declared reference annotations, with indep
 decode verification and current-input replay. Missing/empty truth is explicitly unscored.
 This is a benchmark tool; it does not certify truth, qualify models or advance job/writer gates.
 
+[Isolated Basic Pitch transcription](docs/BASIC_PITCH.zh-CN.md) adds explicit fixed-artifact
+preparation and actual ONNX CPU inference on Windows x64/CPython3.11.16. Candidates retain
+all raw windows, source sample anchors and per-note bends; fresh native replay detects
+rehash-only forgeries. `prepare-basic-pitch`, `verify-basic-pitch`, `transcribe-audio` and
+`verify-transcription` are development commands. The core imports/downloads no model;
+separation, role/tempo inference, corpus qualification, jobs and FLP delivery remain blocked.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2
@@ -49,7 +57,7 @@ declarations, unresolved-semantic findings and local binding/PPQ checks. A separ
 clip/tempo encoding, structural round-trip checks and exclusive new Windows bundles.
 The current private FL26 template remains blocked by unresolved evidence. Host/playback
 compatibility is unverified; synthetic byte fixtures do not establish audible results.
-Transcription, reinterpretation and live DAW control remain planned. No music/model/
+Complete model-qualified transcription, reinterpretation and live DAW control remain planned. No music/model/
 template or optional backend binary is bundled; project defaults remain disabled.
 
 An original [discovery-only MCP component](docs/MCP_DISCOVERY.md) now supports pinned

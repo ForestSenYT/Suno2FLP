@@ -48,7 +48,7 @@ def register_transcription(app: typer.Typer) -> None:
         """Prepare audited local files explicitly; no download, source build or model inference."""
         try:
             record = provision_basic_pitch(output, artifacts)
-        except (OSError, ValueError, Suno2FLPError) as error:
+        except (OSError, ValueError, RecursionError, Suno2FLPError) as error:
             _fail(error)
         typer.echo(f"prepared_not_probed: {record.root}; model_qualification=not_assessed")
 
@@ -62,7 +62,7 @@ def register_transcription(app: typer.Typer) -> None:
         """Load the fixed private CPU model and verify actual dimensions and repeatability."""
         try:
             verify_basic_pitch(backend, output)
-        except (OSError, ValueError, Suno2FLPError) as error:
+        except (OSError, ValueError, RecursionError, Suno2FLPError) as error:
             _fail(error)
         typer.echo(
             "native_runtime_verified; model_qualification=not_assessed; writer_eligibility=blocked"
@@ -77,7 +77,7 @@ def register_transcription(app: typer.Typer) -> None:
         """Retain complete source-bound raw predictions and estimated notes; no MIDI/FLP writes."""
         try:
             report = transcribe_audio(decode_report, backend, output)
-        except (OSError, ValueError, Suno2FLPError) as error:
+        except (OSError, ValueError, RecursionError, Suno2FLPError) as error:
             _fail(error)
         _candidate(report)
 
@@ -91,6 +91,6 @@ def register_transcription(app: typer.Typer) -> None:
         """Replay complete native inference in new files without modifying the candidate."""
         try:
             result = verify_transcription(report, output)
-        except (OSError, ValueError, Suno2FLPError) as error:
+        except (OSError, ValueError, RecursionError, Suno2FLPError) as error:
             _fail(error)
         _candidate(result)

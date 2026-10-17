@@ -1,5 +1,24 @@
 # Dependencies
 
+The [Basic Pitch candidate adapter](BASIC_PITCH.zh-CN.md) uses an explicitly prepared
+private Windows x64/CPython3.11.16 CPU runtime: Basic Pitch0.4.0 at
+`9991303bba609a3b93089d13ec80d1d495083596`, ONNX Runtime1.23.2 and 40 other fixed PyPI
+archives, plus a separately pinned official FlatBuffers license. Full URLs, sizes,
+SHA-256s, notices and source-to-wheel hashes are in `integrations/basic_pitch_pins.json`.
+There is no core dependency/lock change or vendor/model content in distributions.
+This curated no-TensorFlow recipe deliberately differs from upstream Python3.11 defaults.
+Actual import failure established the undeclared `pkg_resources` dependency of resampy;
+setuptools80.9.0 is fixed for that runtime, without running a build/setup entry point.
+The Pretty MIDI source archive contributes only seven reviewed Python files and MIT
+license; its soundfont and setup scripts are not installed. Two exact startup/cache
+members are omitted. All remaining wheel/native/bundled notices stay private, including
+NumPy/SciPy bundled terms and SoundFile/soxr LGPL obligations. Local use is not installer
+redistribution acceptance. In particular, setuptools' vendored autocommand2.2.2 includes
+LGPLv3 terms despite the distribution's MIT metadata; all actual notices are retained.
+The pin's license label is a distribution declaration, not a replacement for those terms.
+The source/license/model decision trail is in the
+[primary-source audit](research/2026-10-16-audio-model-backends.zh-CN.md).
+
 The [compressed-audio integration](COMPRESSED_AUDIO.zh-CN.md) explicitly provisions
 SoundFile 0.14.0 / libsndfile 1.2.2, NumPy 2.3.5, CFFI 2.0.0, pycparser 2.23 and
 typing_extensions 4.16.0 into a private wheel tree, never the core environment.
