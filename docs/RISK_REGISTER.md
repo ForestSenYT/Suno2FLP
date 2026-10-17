@@ -1,5 +1,14 @@
 # Risk register
 
+[Beat This! rhythm inference](BEAT_ANALYSIS.zh-CN.md) is not model or song
+qualification. Minimal postprocessing averages adjacent peaks and moves downbeats;
+full raw logits, half-frame source anchors and binary64 alignment must remain
+auditable. Stereo mean can cancel audible anti-phase input. Neither silence nor
+missing predictions establish reliable absence of rhythm; meter denominator,
+drum classes, calibrated confidence, complete corpus and job gates remain open.
+Official MIT code/weight terms are distinct from upstream restricted training
+audio rights; retain bundled dependency notices without claiming legal clearance.
+
 Spleeter fused CPU execution produced unequal full-song float bytes across fresh
 processes despite matching source/weights/graphs. Exact replay correctly blocks them.
 The current fixed graph policy disables TensorFlow remapping with eight compute

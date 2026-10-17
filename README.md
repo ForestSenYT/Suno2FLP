@@ -59,6 +59,11 @@ owns a fresh full separation replay; `verify-stem-transcription` repeats separat
 pitched predictions in new files. Drums, musical qualification, arrangement, jobs and FLP
 delivery remain blocked. No model runtime enters the core or download occurs implicitly.
 
+The [beat/downbeat development commands](docs/BEAT_ANALYSIS.zh-CN.md) provide
+fixed local runtime preparation/probes, source-bound complete raw arrays, exact
+half-frame coordinates, fresh native replay and conditional labelled timing scores.
+They do not qualify music or complete a user conversion; job/writer gates remain blocked.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2

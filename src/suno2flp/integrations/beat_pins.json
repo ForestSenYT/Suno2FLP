@@ -1,0 +1,1370 @@
+{
+  "profile": "beat-this-final0-cpu-windows-cp311-v1",
+  "python_version": "3.11.16",
+  "beat_this_commit": "b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c",
+  "source_correspondence": {
+    "beat_this/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "beat_this/cli.py": "3a3073057cafc809de01310f50dcf60f65ffe09db2f6d6e26b6f794bb0d056b4",
+    "beat_this/dataset/__init__.py": "2e7b302c23bd1b02b493063db371a9b2acd3b0e653e6855f0f088e2838966590",
+    "beat_this/dataset/augment.py": "2daa46ec5a6671c3d31271d417f1215112e0bac8abde2e78111452bcbc221031",
+    "beat_this/dataset/dataset.py": "a62e9d18d6c5b996dae10ce7f9158bced355b52a7dcdc2b78844cfb893cbc87a",
+    "beat_this/dataset/mmnpz.py": "3ce7dede3e637e375151d45e91b52a11c01f8fa90fe01dae1be4c1e84a6f5a80",
+    "beat_this/inference.py": "ccccff4665399b931ebf181b73d264a6ad64fc1fe8acb4d3b950df825c47ce2d",
+    "beat_this/model/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "beat_this/model/beat_tracker.py": "bfa2fd212b4d6bf00b007eb0e606a6b11f1f7fc44c95bd1121ef5d2a934a923f",
+    "beat_this/model/loss.py": "28ab2d045e61ab2fd1cfa0901650ba31c1cfb550240adc41bbf88fc03cc5ce71",
+    "beat_this/model/pl_module.py": "db751cea6e2501e0a6f2ff5f9d443df07911bd5c879446ecd060b3e4deae41ec",
+    "beat_this/model/postprocessor.py": "431d6aeef41a8e9e9e63ee2577e895a5e214e0dbbcd2d505458cdfec02a611ee",
+    "beat_this/model/roformer.py": "c83fa0047fe726bbfdb33658f40a0f9e721c5796067bfda560092e5969d50722",
+    "beat_this/preprocessing.py": "5aaeefa811c2fd1340c8a45233af4c2e814720b65c2124e59e78538fed03b3bc",
+    "beat_this/utils.py": "779d6102ea28bdf94c8227157790191f5abbbb4564d0c36ce5ce0859e067cfab"
+  },
+  "artifacts": [
+    {
+      "distribution": "beartype",
+      "version": "0.18.5",
+      "filename": "beartype-0.18.5-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/64/43/7a1259741bd989723272ac7d381a43be932422abcff09a1d9f7ba212cb74/beartype-0.18.5-py3-none-any.whl",
+      "size_bytes": 917762,
+      "sha256": "5301a14f2a9a5540fe47ec6d34d758e9cd8331d36c4760fc7a5499ab86310089",
+      "notices": {
+        "beartype-0.18.5.dist-info/LICENSE": "c3e5f3d24346a4129b6b00966361e5494376a335d4fc9eb7dbc40d886f2735f1"
+      },
+      "license": "MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "beat-this",
+      "version": "1.1.0",
+      "filename": "beat_this-1.1.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/ce/0e/e23cbbe6e3efcd54e84dec22b6d88954655036a993cc3843ab741bc24de4/beat_this-1.1.0-py3-none-any.whl",
+      "size_bytes": 40060,
+      "sha256": "3f2b2d1e027c6dac380bf80c71555e3c28a4036a7f1af20129a945915a72a645",
+      "notices": {
+        "beat_this-1.1.0.dist-info/licenses/LICENSE": "909ab6549794a18e9bb243aacfadda4a5f308436fc2846f350755c53c4f06ae1"
+      },
+      "license": "MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "colorama",
+      "version": "0.4.6",
+      "filename": "colorama-0.4.6-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl",
+      "size_bytes": 25335,
+      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "notices": {
+        "colorama-0.4.6.dist-info/licenses/LICENSE.txt": "cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318"
+      },
+      "license": "License :: OSI Approved :: BSD License",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "einops",
+      "version": "0.8.0",
+      "filename": "einops-0.8.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/44/5a/f0b9ad6c0a9017e62d4735daaeb11ba3b6c009d69a26141b258cd37b5588/einops-0.8.0-py3-none-any.whl",
+      "size_bytes": 43223,
+      "sha256": "9572fb63046264a862693b0a87088af3bdc8c068fde03de63453cbbde245465f",
+      "notices": {
+        "einops-0.8.0.dist-info/licenses/LICENSE": "30d984364296f51ffaecad4b01ee127e95250c5068918d4b66fc96206723e434"
+      },
+      "license": "MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "filelock",
+      "version": "4.2.0",
+      "filename": "filelock-4.2.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/8e/a3/9bc26acff301fe1aaea1cc3d82a1d57e0a34df3e1cadbfa91ac2dbcdde5c/filelock-4.2.0-py3-none-any.whl",
+      "size_bytes": 135032,
+      "sha256": "2ff5690882e8cdb00ef31fb3d01a3094c29f30985426c59495afb1733f3b7238",
+      "notices": {
+        "filelock-4.2.0.dist-info/licenses/LICENSE": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
+      },
+      "license": "MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "fsspec",
+      "version": "2026.9.0",
+      "filename": "fsspec-2026.9.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/6c/c0/a98505f18594f1bce828bb159cec0fcf9860562f1a2c85913409fc8f3d9e/fsspec-2026.9.0-py3-none-any.whl",
+      "size_bytes": 221738,
+      "sha256": "8dd6e646e99ea382bd85f97a45e6b526a442d79423a7dc673f1e2756d05fcb5f",
+      "notices": {
+        "fsspec-2026.9.0.dist-info/licenses/LICENSE": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "jinja2",
+      "version": "3.1.6",
+      "filename": "jinja2-3.1.6-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl",
+      "size_bytes": 134899,
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "notices": {
+        "jinja2-3.1.6.dist-info/licenses/LICENSE.txt": "3b49dcee4105eb37bac10faf1be260408fe85d252b8e9df2e0979fc1e094437b"
+      },
+      "license": "License :: OSI Approved :: BSD License",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "markupsafe",
+      "version": "3.0.4",
+      "filename": "markupsafe-3.0.4-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/91/89/f2b509f7bf79352e40117824c1070dbeafd4df67031d3fa98165a3134228/markupsafe-3.0.4-cp311-cp311-win_amd64.whl",
+      "size_bytes": 14328,
+      "sha256": "fdb4ca07ab75ffadab4a8b135ad59cdbb3156b99310f3d565370da74a15d6bd3",
+      "notices": {
+        "markupsafe-3.0.4.dist-info/licenses/LICENSE.txt": "4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "mpmath",
+      "version": "1.3.0",
+      "filename": "mpmath-1.3.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl",
+      "size_bytes": 536198,
+      "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+      "notices": {
+        "mpmath-1.3.0.dist-info/LICENSE": "c26cae81da4508e5e249985777a33821f183223ebb74d7f8cfbf90fe7eef2fb7"
+      },
+      "license": "BSD",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "networkx",
+      "version": "3.6.1",
+      "filename": "networkx-3.6.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/9e/c9/b2622292ea83fbb4ec318f5b9ab867d0a28ab43c5717bb85b0a5f6b3b0a4/networkx-3.6.1-py3-none-any.whl",
+      "size_bytes": 2068504,
+      "sha256": "d47fbf302e7d9cbbb9e2555a0d267983d2aa476bac30e90dfbe5669bd57f3762",
+      "notices": {
+        "networkx-3.6.1.dist-info/licenses/LICENSE.txt": "3cf7c3a179d817b23b8b8568211769fefdf93797d207d984b8b2fa24d0220b33"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "numpy",
+      "version": "1.26.4",
+      "filename": "numpy-1.26.4-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/3f/6b/5610004206cf7f8e7ad91c5a85a8c71b2f2f8051a0c0c4d5916b76d6cbb2/numpy-1.26.4-cp311-cp311-win_amd64.whl",
+      "size_bytes": 15811913,
+      "sha256": "cd25bcecc4974d09257ffcd1f098ee778f7834c3ad767fe5db785be9a4aa9cb2",
+      "notices": {
+        "numpy/core/include/numpy/random/LICENSE.txt": "d544761558b510866c21f7e8a2d5716fca76e0b98117e3b6b86314db7244d150",
+        "numpy/ma/LICENSE": "d78dbb208b80d92b4d333e41a4baae50d12444f46e53199fa7726a91de6e2da7",
+        "numpy/random/LICENSE.md": "b4bc2f4fa1c95778f1ed3dd8f14706bece399475b978f9f34b5d3cd72521b48a",
+        "numpy-1.26.4.dist-info/LICENSE.txt": "e261222a74adff28f88160dac1c5cb302d93b67e9ca989eb83bf311e11a9970a"
+      },
+      "license": "BSD-3-Clause; bundled component notices retained",
+      "omitted_members": {
+        "numpy/distutils/__pycache__/conv_template.cpython-311.pyc": "4851f990b1ff1df195b09cce8304beaba4056aceed5614909b8ab78df70afa4b"
+      }
+    },
+    {
+      "distribution": "rotary-embedding-torch",
+      "version": "0.6.4",
+      "filename": "rotary_embedding_torch-0.6.4-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/20/65/4d3e6e5f30023924b7dce78d457b0e1a6550980be397c0dc136d2ebdc03a/rotary_embedding_torch-0.6.4-py3-none-any.whl",
+      "size_bytes": 5366,
+      "sha256": "ad51d8a4a43a3c9ff78b70da49e7f5c267b92eca44553dd83f7ccfe456a80147",
+      "notices": {
+        "rotary_embedding_torch-0.6.4.dist-info/LICENSE": "fe74654058fe2ba069808dbf36defd6e207baf8859f36366a6a3ceae5aa6ecc5"
+      },
+      "license": "MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "setuptools",
+      "version": "81.0.0",
+      "filename": "setuptools-81.0.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/e1/e3/c164c88b2e5ce7b24d667b9bd83589cf4f3520d97cad01534cd3c4f55fdb/setuptools-81.0.0-py3-none-any.whl",
+      "size_bytes": 1062021,
+      "sha256": "fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6",
+      "notices": {
+        "setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04",
+        "setuptools/_vendor/jaraco_context-6.1.0.dist-info/licenses/LICENSE": "9755a18519666e5f0f4cae3daad3d7012bcae48a600b31237d75e9fe134e6683",
+        "setuptools/_vendor/jaraco_functools-4.4.0.dist-info/licenses/LICENSE": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d",
+        "setuptools/_vendor/more_itertools-10.8.0.dist-info/licenses/LICENSE": "09f1c8c9e941af3e584d59641ea9b87d83c0cb0fd007eb5ef391a7e2643c1a46",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.APACHE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.BSD": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5",
+        "setuptools/_vendor/platformdirs-4.4.0.dist-info/licenses/LICENSE": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6",
+        "setuptools/_vendor/tomli-2.4.0.dist-info/licenses/LICENSE": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
+        "setuptools/_vendor/wheel-0.46.3.dist-info/licenses/LICENSE.txt": "30c23618679108f3e8ea1d2a658c7ca417bdfc891c98ef1a89fa4ff0c9828654",
+        "setuptools/_vendor/zipp-3.23.0.dist-info/licenses/LICENSE": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d",
+        "setuptools/config/NOTICE": "2dddf08818297a3b89d43d95ff659d8da85741108c9136dfa3a4d856c0623bd8",
+        "setuptools/config/_validate_pyproject/NOTICE": "5d300dbfa643138b013b75ac9caeee591f951b8b0ee24288c34ccd926c4780c8",
+        "setuptools-81.0.0.dist-info/licenses/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+        "setuptools/_vendor/autocommand-2.2.2.dist-info/LICENSE": "ade78d04982d69972d444a8e14a94f87a2334dd3855cc80348ea8e240aa0df2d",
+        "setuptools/_vendor/backports.tarfile-1.2.0.dist-info/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+        "setuptools/_vendor/jaraco.text-4.0.0.dist-info/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
+      },
+      "license": "MIT",
+      "omitted_members": {
+        "distutils-precedence.pth": "2638ce9e2500e572a5e0de7faed6661eb569d1b696fcba07b0dd223da5f5d224"
+      }
+    },
+    {
+      "distribution": "soxr",
+      "version": "0.3.7",
+      "filename": "soxr-0.3.7-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/0d/95/8398287a3a00d006ebbe5fcada88bb2536acde2beecce892ff091e1c1a3b/soxr-0.3.7-cp311-cp311-win_amd64.whl",
+      "size_bytes": 184720,
+      "sha256": "54985ff33292192d2937be80df3e5f3a44d6d53e6835f727d6b99b7cdd3f1611",
+      "notices": {
+        "soxr-0.3.7.dist-info/COPYING.LGPL": "317dfba8116739654c8c2d8acbc9c7edfcf34e3932e7a4b15307435228f98c3a",
+        "soxr-0.3.7.dist-info/LICENSE.txt": "cf752ee6d66b45fbf3c2ee497803a81f8b7cfb0410b54916c4961db697268d26"
+      },
+      "license": "LGPLv2.1+",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "sympy",
+      "version": "1.14.0",
+      "filename": "sympy-1.14.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl",
+      "size_bytes": 6299353,
+      "sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+      "notices": {
+        "sympy/parsing/latex/LICENSE.txt": "007bc30a58fa40a996e772047120de4eaf31f5110e4f9c3b5f93fcdfbe2eaca1",
+        "sympy-1.14.0.dist-info/licenses/LICENSE": "07a5e9819f727b4986ad2829c7a29a6320d42575f720eb24d71b7fef573a0286"
+      },
+      "license": "BSD",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "torch",
+      "version": "2.11.0+cpu",
+      "filename": "torch-2.11.0+cpu-cp311-cp311-win_amd64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cpu/torch-2.11.0%2Bcpu-cp311-cp311-win_amd64.whl",
+      "size_bytes": 114432833,
+      "sha256": "51a221769d4a316f4b47a786c12e67c3f4807db8ed13c7b8817ebe73786acbbc",
+      "notices": {
+        "torch-2.11.0+cpu.dist-info/LICENSE": "cf5ec789ea8e9fcaba4766fcde2d6804312a1295e55b176a31c7a2982efc6090",
+        "torch-2.11.0+cpu.dist-info/NOTICE": "1c3dec6c0342c7ed9e12af59b296c7bb1d394af5cf881db74191cc8299efce5c"
+      },
+      "license": "BSD-3-Clause",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "torchaudio",
+      "version": "2.11.0+cpu",
+      "filename": "torchaudio-2.11.0+cpu-cp311-cp311-win_amd64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cpu/torchaudio-2.11.0%2Bcpu-cp311-cp311-win_amd64.whl",
+      "size_bytes": 326399,
+      "sha256": "abbff04127caf6e16e3a7c3e1ca2739b68899e14926d7cbec4bd8b40f72375d5",
+      "notices": {
+        "torchaudio-2.11.0+cpu.dist-info/licenses/LICENSE": "32638e179931bfe551eabf67b0e67a13b483e166b58dd7263634ab7f89f396f5"
+      },
+      "license": "License :: OSI Approved :: BSD License",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "tqdm",
+      "version": "4.66.4",
+      "filename": "tqdm-4.66.4-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/18/eb/fdb7eb9e48b7b02554e1664afd3bd3f117f6b6d6c5881438a0b055554f9b/tqdm-4.66.4-py3-none-any.whl",
+      "size_bytes": 78275,
+      "sha256": "b75ca56b413b030bc3f00af51fd2c1a1a5eac6a0c1cca83cbb37a5c52abce644",
+      "notices": {
+        "tqdm-4.66.4.dist-info/LICENCE": "dc33252e829015e3b150086fb9b3a40f6ad6fb32c2f4610ce812fa677d35986a"
+      },
+      "license": "MPL-2.0 AND MIT",
+      "omitted_members": {}
+    },
+    {
+      "distribution": "typing-extensions",
+      "version": "4.15.0",
+      "filename": "typing_extensions-4.15.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl",
+      "size_bytes": 44614,
+      "sha256": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
+      "notices": {
+        "typing_extensions-4.15.0.dist-info/licenses/LICENSE": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      },
+      "license": "PSF-2.0",
+      "omitted_members": {}
+    }
+  ],
+  "model": {
+    "distribution": "beat-this-final0",
+    "version": "1.1.0",
+    "filename": "final0.ckpt",
+    "url": "https://cloud.cp.jku.at/public.php/dav/files/7ik4RrBKTS273gp/final0.ckpt",
+    "size_bytes": 81058141,
+    "sha256": "8c328b45f59d8dd3dff219253ff6a8d6482be57d0133a29140e2febbf8eb8331",
+    "license": "MIT; upstream training-data rights caveat",
+    "notices": {}
+  },
+  "model_geometry": {
+    "frontend.blocks.0.conv2d.weight": {
+      "shape": [
+        64,
+        32,
+        2,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.norm.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.norm.num_batches_tracked": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "frontend.blocks.0.norm.running_mean": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.norm.running_var": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.norm.weight": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnF.norm.gamma": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnF.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnF.to_gates.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnF.to_gates.weight": {
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnF.to_out.0.weight": {
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnF.to_qkv.weight": {
+      "shape": [
+        96,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnT.norm.gamma": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnT.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnT.to_gates.bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnT.to_gates.weight": {
+      "shape": [
+        1,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnT.to_out.0.weight": {
+      "shape": [
+        32,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.attnT.to_qkv.weight": {
+      "shape": [
+        96,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffF.net.0.gamma": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffF.net.1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffF.net.1.weight": {
+      "shape": [
+        128,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffF.net.4.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffF.net.4.weight": {
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffT.net.0.gamma": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffT.net.1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffT.net.1.weight": {
+      "shape": [
+        128,
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffT.net.4.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.0.partial.ffT.net.4.weight": {
+      "shape": [
+        32,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.conv2d.weight": {
+      "shape": [
+        128,
+        64,
+        2,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.norm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.norm.num_batches_tracked": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "frontend.blocks.1.norm.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.norm.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.norm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnF.norm.gamma": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnF.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnF.to_gates.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnF.to_gates.weight": {
+      "shape": [
+        2,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnF.to_out.0.weight": {
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnF.to_qkv.weight": {
+      "shape": [
+        192,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnT.norm.gamma": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnT.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnT.to_gates.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnT.to_gates.weight": {
+      "shape": [
+        2,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnT.to_out.0.weight": {
+      "shape": [
+        64,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.attnT.to_qkv.weight": {
+      "shape": [
+        192,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffF.net.0.gamma": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffF.net.1.bias": {
+      "shape": [
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffF.net.1.weight": {
+      "shape": [
+        256,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffF.net.4.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffF.net.4.weight": {
+      "shape": [
+        64,
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffT.net.0.gamma": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffT.net.1.bias": {
+      "shape": [
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffT.net.1.weight": {
+      "shape": [
+        256,
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffT.net.4.bias": {
+      "shape": [
+        64
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.1.partial.ffT.net.4.weight": {
+      "shape": [
+        64,
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.conv2d.weight": {
+      "shape": [
+        256,
+        128,
+        2,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.norm.bias": {
+      "shape": [
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.norm.num_batches_tracked": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "frontend.blocks.2.norm.running_mean": {
+      "shape": [
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.norm.running_var": {
+      "shape": [
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.norm.weight": {
+      "shape": [
+        256
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnF.norm.gamma": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnF.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnF.to_gates.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnF.to_gates.weight": {
+      "shape": [
+        4,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnF.to_out.0.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnF.to_qkv.weight": {
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnT.norm.gamma": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnT.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnT.to_gates.bias": {
+      "shape": [
+        4
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnT.to_gates.weight": {
+      "shape": [
+        4,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnT.to_out.0.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.attnT.to_qkv.weight": {
+      "shape": [
+        384,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffF.net.0.gamma": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffF.net.1.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffF.net.1.weight": {
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffF.net.4.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffF.net.4.weight": {
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffT.net.0.gamma": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffT.net.1.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffT.net.1.weight": {
+      "shape": [
+        512,
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffT.net.4.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.blocks.2.partial.ffT.net.4.weight": {
+      "shape": [
+        128,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "frontend.linear.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "frontend.linear.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn1d.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn1d.num_batches_tracked": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "frontend.stem.bn1d.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn1d.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn1d.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn2d.bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn2d.num_batches_tracked": {
+      "shape": [],
+      "dtype": "int64"
+    },
+    "frontend.stem.bn2d.running_mean": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn2d.running_var": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.bn2d.weight": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32"
+    },
+    "frontend.stem.conv2d.weight": {
+      "shape": [
+        32,
+        1,
+        4,
+        3
+      ],
+      "dtype": "float32"
+    },
+    "task_heads.beat_downbeat_lin.bias": {
+      "shape": [
+        2
+      ],
+      "dtype": "float32"
+    },
+    "task_heads.beat_downbeat_lin.weight": {
+      "shape": [
+        2,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.0.norm.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.0.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.0.to_gates.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.0.to_gates.weight": {
+      "shape": [
+        16,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.0.to_out.0.weight": {
+      "shape": [
+        512,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.0.to_qkv.weight": {
+      "shape": [
+        1536,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.1.net.0.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.1.net.1.bias": {
+      "shape": [
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.1.net.1.weight": {
+      "shape": [
+        2048,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.1.net.4.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.0.1.net.4.weight": {
+      "shape": [
+        512,
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.0.norm.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.0.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.0.to_gates.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.0.to_gates.weight": {
+      "shape": [
+        16,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.0.to_out.0.weight": {
+      "shape": [
+        512,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.0.to_qkv.weight": {
+      "shape": [
+        1536,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.1.net.0.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.1.net.1.bias": {
+      "shape": [
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.1.net.1.weight": {
+      "shape": [
+        2048,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.1.net.4.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.1.1.net.4.weight": {
+      "shape": [
+        512,
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.0.norm.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.0.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.0.to_gates.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.0.to_gates.weight": {
+      "shape": [
+        16,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.0.to_out.0.weight": {
+      "shape": [
+        512,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.0.to_qkv.weight": {
+      "shape": [
+        1536,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.1.net.0.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.1.net.1.bias": {
+      "shape": [
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.1.net.1.weight": {
+      "shape": [
+        2048,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.1.net.4.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.2.1.net.4.weight": {
+      "shape": [
+        512,
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.0.norm.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.0.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.0.to_gates.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.0.to_gates.weight": {
+      "shape": [
+        16,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.0.to_out.0.weight": {
+      "shape": [
+        512,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.0.to_qkv.weight": {
+      "shape": [
+        1536,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.1.net.0.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.1.net.1.bias": {
+      "shape": [
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.1.net.1.weight": {
+      "shape": [
+        2048,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.1.net.4.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.3.1.net.4.weight": {
+      "shape": [
+        512,
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.0.norm.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.0.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.0.to_gates.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.0.to_gates.weight": {
+      "shape": [
+        16,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.0.to_out.0.weight": {
+      "shape": [
+        512,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.0.to_qkv.weight": {
+      "shape": [
+        1536,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.1.net.0.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.1.net.1.bias": {
+      "shape": [
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.1.net.1.weight": {
+      "shape": [
+        2048,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.1.net.4.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.4.1.net.4.weight": {
+      "shape": [
+        512,
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.0.norm.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.0.rotary_embed.freqs": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.0.to_gates.bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.0.to_gates.weight": {
+      "shape": [
+        16,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.0.to_out.0.weight": {
+      "shape": [
+        512,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.0.to_qkv.weight": {
+      "shape": [
+        1536,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.1.net.0.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.1.net.1.bias": {
+      "shape": [
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.1.net.1.weight": {
+      "shape": [
+        2048,
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.1.net.4.bias": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.layers.5.1.net.4.weight": {
+      "shape": [
+        512,
+        2048
+      ],
+      "dtype": "float32"
+    },
+    "transformer_blocks.norm.gamma": {
+      "shape": [
+        512
+      ],
+      "dtype": "float32"
+    }
+  },
+  "model_state_sha256": "b7d16917d755944f81f83fbfe9e1ae098afac2106d42a3304868ec935a963ac2"
+}
