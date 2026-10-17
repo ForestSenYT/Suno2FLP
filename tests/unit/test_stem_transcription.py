@@ -3,11 +3,13 @@
 import importlib
 import json
 import struct
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 from test_separation_pipeline import protocol as protocol
 from test_separation_pipeline import recipe as recipe
+from typer.testing import CliRunner
 
 from suno2flp.core.errors import Suno2FLPError
 from suno2flp.core.offline_files import capture_stream_input
@@ -231,3 +233,26 @@ def test_missing_pitch_prerequisite_fails_before_separation_replay_or_new_output
     with pytest.raises(ValueError, match="backend"):
         pipeline.transcribe_stems(batch.separation, tmp_path / "missing", tmp_path / "attempt")
     assert not (tmp_path / "attempt").exists() and not batch.calls
+
+
+def test_valid_relative_separation_is_accepted_by_api_and_cli(batch, tmp_path):
+    _, validator = services()
+    relative = batch.separation.relative_to(Path.cwd())
+    identity, _ = validator.read_separation(relative)
+    assert identity == capture_stream_input(batch.separation)
+    from suno2flp.cli import app
+
+    completed = CliRunner().invoke(
+        app,
+        [
+            "transcribe-stems",
+            str(relative),
+            "--backend",
+            str(batch.backend),
+            "--output",
+            str(tmp_path / "relative-batch"),
+        ],
+    )
+    assert completed.exit_code == 0, completed.output
+    assert "unqualified_candidate" in completed.output
+    assert (tmp_path / "relative-batch/stem-transcription.json").exists()

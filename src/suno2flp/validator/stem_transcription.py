@@ -49,6 +49,7 @@ def stem_recipe() -> ScoringRecipe:
 
 
 def read_separation(path: Path) -> tuple[FileIdentity, SeparationCandidate]:
+    path = guarded_path(path)
     identity, raw = bounded_snapshot(path, 16 * 1024**2)
     report = SeparationCandidate.model_validate(load_unique_json(raw))
     if (
