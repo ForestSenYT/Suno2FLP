@@ -18,7 +18,7 @@ from suno2flp.core.offline_files import (
     load_unique_json,
     verify_inputs,
 )
-from suno2flp.core.transcription import TranscriptionCandidate
+from suno2flp.core.transcription import PitchCandidate, TranscriptionCandidate
 from suno2flp.importer.note_annotations import bounded_snapshot
 from suno2flp.integrations.basic_pitch_backend import read_basic_pitch, validate_basic_pitch_probe
 from suno2flp.validator.note_decode_evidence import verify_decoder_payload
@@ -56,24 +56,35 @@ def check_cancel(should_cancel: Callable[[], bool] | None) -> None:
         raise DecodeCancelled()
 
 
-def verify_transcription_witnesses(
-    report: TranscriptionCandidate, *, should_cancel: Callable[[], bool] | None = None
+def verify_pitch_witnesses(
+    report: PitchCandidate, *, should_cancel: Callable[[], bool] | None = None
 ) -> None:
     current = capture_file_tree(report.backend.root / "packages", should_cancel=should_cancel)
     if current != sorted(report.model_dependencies, key=lambda identity: identity.path):
         raise ValueError("Complete current model payload identities changed")
     model_paths = {identity.path for identity in current}
-    verify_inputs([identity for identity in report.witnesses() if identity.path not in model_paths])
+    verify_inputs(
+        [identity for identity in report.pitch_witnesses() if identity.path not in model_paths]
+    )
+
+
+def verify_transcription_witnesses(
+    report: TranscriptionCandidate, *, should_cancel: Callable[[], bool] | None = None
+) -> None:
+    verify_pitch_witnesses(report, should_cancel=should_cancel)
+    verify_inputs([report.decode_report, report.source_audio, *report.decode_dependencies])
     verify_decoder_payload(report.decode_dependencies, report.decoder_payload_root)
 
 
-def validate_transcription_artifacts(
-    report: TranscriptionCandidate, *, should_cancel: Callable[[], bool] | None = None
+def validate_pitch_artifacts(
+    report: PitchCandidate, *, should_cancel: Callable[[], bool] | None = None
 ) -> None:
-    report = TranscriptionCandidate.model_validate(report.model_dump())
+    report = PitchCandidate.model_validate(
+        {name: getattr(report, name) for name in PitchCandidate.model_fields}
+    )
     validate_basic_pitch_probe(report.result.probe, report.backend.root)
     check_cancel(should_cancel)
-    verify_transcription_witnesses(report, should_cancel=should_cancel)
+    verify_pitch_witnesses(report, should_cancel=should_cancel)
     if report.recipe != transcription_recipe() or report.backend != read_basic_pitch(
         report.backend.root
     ):
@@ -125,6 +136,15 @@ def validate_transcription_artifacts(
             check_cancel(should_cancel)
             if any(not -25 <= value[0] <= 25 for value in struct.iter_unpack("<b", block)):
                 raise ValueError("Bend artifact contains invalid third-semitone bins")
+    verify_pitch_witnesses(report, should_cancel=should_cancel)
+
+
+def validate_transcription_artifacts(
+    report: TranscriptionCandidate, *, should_cancel: Callable[[], bool] | None = None
+) -> None:
+    report = TranscriptionCandidate.model_validate(report.model_dump())
+    verify_transcription_witnesses(report, should_cancel=should_cancel)
+    validate_pitch_artifacts(report, should_cancel=should_cancel)
     verify_transcription_witnesses(report, should_cancel=should_cancel)
 
 
