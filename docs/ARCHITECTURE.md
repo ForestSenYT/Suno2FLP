@@ -62,8 +62,21 @@ payloads before/after the bounded `spleeter_worker`. The worker builds the pinne
 restores only an explicit local checkpoint and returns full original probe signals.
 `core.separation_probe` independently checks source bytes, complete numeric outputs,
 repeats, impulse origin and an explicit unassigned residual. Thin prepare/verify commands
-provide runtime evidence only. Whole-song separation and canonical job-stage integration
-remain unavailable; see [dependency deviations and limits](SPLEETER_RUNTIME.zh-CN.md).
+provide runtime evidence only; see [dependency deviations and limits](SPLEETER_RUNTIME.zh-CN.md).
+
+`core.separation_clock` and `core.separation` separately define complete inferred source,
+model and partition clocks and evidence. `spleeter_separation_worker` uses global STFT
+coordinates and preserves all partial inputs/outputs, full model waveforms, source-rate
+WAVs and resampling tails. `pipeline.separation` composes independently decoded sources
+and an explicit residual. `validator.separation_signal` reconstructs float32 overlap-add
+and complete conservation using only the standard library; `validator.separation` checks
+current provenance and repeats the entire native run in new files. The native result
+identity and parsed bytes travel together. Replay compares complete signal bytes and
+semantic model/source results, retaining per-run resource observations separately.
+`core.report_publication` publishes transcription, probes and separation/replay completion
+names only after provisional bytes and final current evidence pass. No rejecting work
+follows the exclusive hard-link commit point. These development commands do not complete
+canonical jobs or grant musical/writer/host qualification. See [separation](SEPARATION.zh-CN.md).
 
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,

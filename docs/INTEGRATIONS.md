@@ -13,6 +13,13 @@ and host/writer acceptance remain distinct statuses. The
 [independent research](research/2026-10-16-spleeter-runtime.zh-CN.md) records default
 dependency failure and the limited scope of TF1 Session repeatability.
 
+The separate [source-bound separation candidate](SEPARATION.zh-CN.md) adds bounded,
+globally anchored partitions with explicit rational resampling, complete raw artifacts
+and source-grid residuals. Native result identity/bytes are captured together. Independent
+standard-library reconstruction and fresh full replay guard coherent rehashed forgeries;
+per-run resource observations remain separate from musical clocks. No dependencies or
+license assumptions changed. Shared jobs, model/corpus quality and host/writer gates remain blocked.
+
 The [Basic Pitch inference candidate](BASIC_PITCH.zh-CN.md) is a concrete isolated model
 integration, not model qualification: audited Apache code/model evidence, exact wheel
 and source correspondence, trusted current application Python, local fixed ONNX path
