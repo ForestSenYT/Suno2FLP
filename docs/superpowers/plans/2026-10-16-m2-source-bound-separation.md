@@ -69,10 +69,10 @@
 
 **Interfaces:** `separate_audio(decode_report:Path,backend:Path,output:Path,*,should_cancel:Callable[[],bool]|None=None)->SeparationCandidate`; `validate_separation_artifacts(report:SeparationCandidate,...)->None`; `verify_separation(report_path:Path,replay_directory:Path,...)->SeparationCandidate`.
 
-- [ ] RED: source/decode/model/recipe changes, malformed WAV/length/nonfinite data, missing/reordered chunks, forged rehashed assembly/residual and invalid final marker fail. Cancellation and late validation never publish a candidate. Replay output overlapping any original candidate root fails before creating files.
-- [ ] GREEN: reuse independently verified decoded-source evidence; capture native result identity and bytes once. Independently reconstruct global overlap-add with standard-library float32 operations, verify every partial input against model PCM, source-grid geometry, resampling tail and residual conservation. Verify all current dependencies at publication.
-- [ ] Fresh replay compares all source/model/result semantics (excluding only the retained per-run elapsed/peak-memory observations), all partial/intermediate/WAV bytes and residual, then publishes a separate replay receipt only on complete match. Logs and derived paths/mtimes are retained per run rather than equated; every current identity is still verified. Preserve original and failed replay attempts.
-- [ ] Focused tests and commit.
+- [x] RED: source/decode/model changes, malformed WAV/length/nonfinite data, missing/reordered chunks, forged rehashed assembly/residual and invalid final marker fail. Cancellation and late validation never publish a candidate. Replay output overlapping any original candidate root fails before creating files.
+- [x] GREEN: reuse independently verified decoded-source evidence; capture native result identity and bytes once. Independently reconstruct global overlap-add with standard-library float32 operations, verify every partial input against model PCM, source-grid geometry, resampling tail and residual conservation. Verify all current dependencies and recipe at publication.
+- [x] Fresh replay compares all source/model/result semantics (excluding only the retained per-run elapsed/peak-memory observations), all partial/intermediate/WAV bytes and residual, then publishes a separate replay receipt only on complete match. Logs and derived paths/mtimes are retained per run rather than equated; every current identity is still verified. Preserve original and failed replay attempts.
+- [x] Initial17RED ->17GREEN; coherent-forgery rejected by fresh replay; serialized replay replacement1RED ->fixed. Final26targetedGREEN including CLI/smoke; full1396passed37skipped299.33s, Ruff314formatted/mypy141pass. Commit follows this verified result.
 
 ### Task5: Thin CLI and genuine engineering evidence
 
@@ -80,9 +80,9 @@
 
 **Interfaces:** `separate-audio <decode-report> <backend> --output <new-directory>` and `verify-separation <candidate> --replay-output <new-directory>`.
 
-- [ ] RED/GREEN: CLI reports current prerequisite failures and unqualified candidate status, installed smoke sees commands without importing native dependencies.
-- [ ] Compare bounded native output to a separate full-graph process on an original nonzero stereo fixture crossing two partition boundaries with awkward tail and impulses; fixed tolerance above, complete dimensions and peak positions checked.
-- [ ] Independently test the declared polyphase alignment/filter recipe on original small signals and multiple rates; no hidden fallback or rate reinterpretation.
+- [x] RED/GREEN: CLI3missingcommandRED ->GREEN; current prerequisite failures and unqualified candidate status, genuinely installed smoke sees commands without importing native dependencies. Wheel149members/sdist334members audited against public files; no private payload.
+- [x] Compare bounded native output to a separate full-graph process on an original nonzero stereo fixture crossing two partition boundaries with awkward tail and impulses; fixed tolerance above, complete dimensions and peak positions checked. Maxabs2.235e-8 below1e-5; all four impulsepositions exact; source/helper/backend unchanged. Public opt-in reproduction added.
+- [x] Independently test the declared polyphase alignment/filter recipe on original small signals and multiple rates; no hidden fallback or rate reinterpretation.14cases/7rates/mono-stereo/37frames pass the frozen2e-6 scalar sinc/Kaiser reference including complete retained tails.
 - [ ] In a new ignored delivery directory, decode the existing real song read-only, generate complete source-bound stems and fresh replay; retain all raw evidence and source identities. Record native CPU/memory/timing, not music acceptance. Any unsupported evidence remains blocked.
 
 ### Task6: Documentation and reviewed integration
