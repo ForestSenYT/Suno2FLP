@@ -99,3 +99,35 @@ def test_source_archive_requires_exact_inventory_and_regular_files(tmp_path: Pat
         },
     )
     assert not (target / "setup.py").exists()
+
+
+@pytest.mark.parametrize("archive_kind", ["wheel", "source"])
+def test_explicit_member_budget_keeps_aggregate_limit(tmp_path: Path, archive_kind: str) -> None:
+    # Raising a native-library member limit must never disable total expansion checks.
+    path = tmp_path / ("native.whl" if archive_kind == "wheel" else "native.tar.gz")
+    names = ["library.bin", "notice.txt"]
+    if archive_kind == "wheel":
+        wheel(path, [(name, b"12345", stat.S_IFREG) for name in names])
+        inventory = None
+    else:
+        with tarfile.open(path, "w:gz") as archive:
+            for name in names:
+                entry = tarfile.TarInfo(name)
+                entry.size = 5
+                archive.addfile(entry, io.BytesIO(b"12345"))
+        inventory = names
+    with pytest.raises(ValueError, match="budget"):
+        archive_members(path, source_inventory=inventory, max_member_bytes=4)
+    with pytest.raises(ValueError, match="budget"):
+        archive_members(path, source_inventory=inventory, max_member_bytes=5, max_expanded=9)
+    assert set(
+        archive_members(path, source_inventory=inventory, max_member_bytes=5, max_expanded=10)
+    ) == set(names)
+
+
+@pytest.mark.parametrize("limit", [0, -1, 1024**3 + 1, True, 1.5])
+def test_explicit_member_budget_cannot_be_unbounded(tmp_path: Path, limit: int) -> None:
+    path = tmp_path / "tiny.whl"
+    wheel(path, [("a.py", b"x", stat.S_IFREG)])
+    with pytest.raises(ValueError, match="budget"):
+        archive_members(path, max_member_bytes=limit)
