@@ -64,6 +64,12 @@ fixed local runtime preparation/probes, source-bound complete raw arrays, exact
 half-frame coordinates, fresh native replay and conditional labelled timing scores.
 They do not qualify music or complete a user conversion; job/writer gates remain blocked.
 
+[Read-only Windows output discovery](docs/HOST_READINESS.zh-CN.md) adds
+`inspect-windows-audio`: isolated Core Audio queries, complete endpoint/default-role
+facts and source/runtime fingerprints in an exclusive new report directory. Missing
+outputs and API failures are distinct. Observations never authorize host/writer execution;
+the current FL26 render stall and device-restoration control remain unresolved.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2

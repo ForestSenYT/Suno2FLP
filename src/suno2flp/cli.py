@@ -16,6 +16,7 @@ from suno2flp.cli_note_scoring import register_note_scoring
 from suno2flp.cli_separation import register_separation
 from suno2flp.cli_stem_transcription import register_stem_transcription
 from suno2flp.cli_transcription import register_transcription
+from suno2flp.cli_windows_audio import register_windows_audio
 from suno2flp.core.config import MidiPreferences, load_config
 from suno2flp.core.doctor import check_environment
 from suno2flp.core.errors import (
@@ -58,6 +59,7 @@ register_transcription(app)
 register_separation(app)
 register_stem_transcription(app)
 register_beat_analysis(app)
+register_windows_audio(app)
 
 
 @app.callback()

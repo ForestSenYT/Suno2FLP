@@ -276,6 +276,22 @@ training audio. This does not establish training/downstream music rights. See
 [rhythm scope and limitations](BEAT_ANALYSIS.zh-CN.md). Model qualification,
 corpus/music quality, jobs, writer and host acceptance remain blocked.
 
+## Windows Core Audio output discovery
+
+Original read-only interop uses the versioned IMMDeviceEnumerator IID and documented
+[MMDevice interface](https://learn.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nn-mmdeviceapi-immdeviceenumerator),
+[states](https://learn.microsoft.com/en-us/windows/win32/coreaudio/device-state-xxx-constants)
+and default roles. It is a stock OS API, not an adopted downloadable backend or vendored
+SDK implementation. Runtime is ordinary Windows x64 CPython3.11.16/3.14.7 in an isolated
+bounded worker. Selected actual OS library file fingerprints are retained; proprietary
+Windows DLLs/drivers stay in the user's licensed installation and are never bundled.
+
+Actual local handshake enumerated16registered/0active outputs and three E_NOTFOUND
+defaults, separately corroborating the missing endpoint observation. This does not prove
+the cause of the observed FL26 stall, available playback, or a successful host lifecycle.
+No stream activation, device/registry edits or FL Studio call occurs. See
+[inspection/failure scope](HOST_READINESS.zh-CN.md); every host/writer/release gate remains.
+
 ## Adoption gates
 
 Isolation manages dependencies; it does not automatically settle license obligations.
