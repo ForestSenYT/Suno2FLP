@@ -235,9 +235,10 @@ def test_missing_pitch_prerequisite_fails_before_separation_replay_or_new_output
     assert not (tmp_path / "attempt").exists() and not batch.calls
 
 
-def test_valid_relative_separation_is_accepted_by_api_and_cli(batch, tmp_path):
+def test_valid_relative_separation_is_accepted_by_api_and_cli(batch, tmp_path, monkeypatch):
     _, validator = services()
-    relative = batch.separation.relative_to(Path.cwd())
+    monkeypatch.chdir(tmp_path)
+    relative = Path("separation/separation.json")
     identity, _ = validator.read_separation(relative)
     assert identity == capture_stream_input(batch.separation)
     from suno2flp.cli import app
