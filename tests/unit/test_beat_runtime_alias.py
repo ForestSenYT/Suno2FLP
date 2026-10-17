@@ -12,7 +12,9 @@ from suno2flp.validator.beat_annotations import beat_scoring_recipe
 
 
 @pytest.mark.parametrize("recipe", [beat_recipe, beat_scoring_recipe])
-def test_interpreter_alias_resolves_without_allowing_linked_assets(recipe, tmp_path: Path, monkeypatch):
+def test_interpreter_alias_resolves_without_allowing_linked_assets(
+    recipe, tmp_path: Path, monkeypatch
+):
     target = tmp_path / "trusted-runtime.bin"
     target.write_bytes(b"original synthetic runtime identity; never executed")
     alias = tmp_path / "python-alias"
