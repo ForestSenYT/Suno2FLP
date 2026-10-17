@@ -9,6 +9,7 @@ import pydantic
 
 from suno2flp.core.audio_decode import DecodeCancelled
 from suno2flp.core.file_tree import capture_file_tree
+from suno2flp.core.inference_snapshot import InferenceSnapshot
 from suno2flp.core.note_scoring import ScoringRecipe
 from suno2flp.core.offline_files import (
     capture_stream_input,
@@ -19,9 +20,11 @@ from suno2flp.core.offline_files import (
 from suno2flp.core.offline_models import FileIdentity
 from suno2flp.core.report_publication import publish_verified_report
 from suno2flp.core.separation import (
+    KerasRuntimeSettings,
     NativeSeparationResult,
     SeparationCandidate,
     SeparationReplayReceipt,
+    SeparationRuntimeContext,
 )
 from suno2flp.importer.note_annotations import bounded_snapshot
 from suno2flp.integrations.spleeter_backend import read_spleeter, validate_spleeter_execution
@@ -72,14 +75,30 @@ def separation_recipe() -> ScoringRecipe:
 def verify_separation_witnesses(
     report: SeparationCandidate, *, should_cancel: Callable[[], bool] | None = None
 ) -> None:
+    report = SeparationCandidate.model_validate(report.model_dump())
     check_cancel(should_cancel)
     current = separation_payload(report.backend.root, should_cancel=should_cancel)
     if current != sorted(report.model_dependencies, key=lambda i: i.path):
         raise ValueError("Current complete separation model payload changed")
     paths = {identity.path for identity in current}
+    if report.runtime_context is not None:
+        native = guarded_path(report.native_result.path.parent)
+        if read_runtime_context(native) != report.runtime_context:
+            raise ValueError("Current runtime configuration differs from candidate snapshot")
+        declared = report.native_witnesses()
+        InferenceSnapshot.capture([], [(native, declared)], should_cancel=should_cancel)
+        paths.update(i.path for i in declared)
     verify_inputs([i for i in report.witnesses() if i.path not in paths])
     verify_decoder_payload(report.decode_dependencies, report.decoder_payload_root)
     check_cancel(should_cancel)
+
+
+def read_runtime_context(native: Path) -> SeparationRuntimeContext:
+    identity, raw = bounded_snapshot(guarded_path(native) / "keras-cache/keras.json", 65536)
+    return SeparationRuntimeContext(
+        file=identity,
+        settings=KerasRuntimeSettings.model_validate(load_unique_json(raw)),
+    )
 
 
 def validate_separation_artifacts(
@@ -166,12 +185,13 @@ def validate_separation_artifacts(
     verify_separation_witnesses(report, should_cancel=should_cancel)
 
 
-def _data(report: SeparationCandidate) -> list[tuple[str, int]]:
+def separation_replay_data(report: SeparationCandidate) -> list[tuple[str, int]]:
     files = [
         report.model_input,
         *[i for p in report.partitions for i in [p.input, *[o.file for o in p.outputs]]],
         *[i for s in report.stems for i in (s.model, s.source, s.tail)],
         report.residual,
+        *([report.runtime_context.file] if report.runtime_context is not None else []),
     ]
     return [(i.sha256, i.size_bytes) for i in files]
 
@@ -194,6 +214,8 @@ def verify_separation(
     report = SeparationCandidate.model_validate(load_unique_json(raw))
     if report.native_result.path != root / "native/result.json":
         raise ValueError("Completion report must remain with its own native artifacts")
+    if report.schema_version != 2:
+        raise ValueError("Legacy separation metadata needs new v2 generation; no context backfill")
     validate_separation_artifacts(report, should_cancel=should_cancel)
     from suno2flp.pipeline.separation import separate_audio
 
@@ -204,6 +226,8 @@ def verify_separation(
     if SeparationCandidate.model_validate(load_unique_json(raw)) != current:
         raise ValueError("Serialized replay report differs from the verified candidate")
     fields = (
+        "schema_version",
+        "profile",
         "decode_report",
         "source_audio",
         "pcm",
@@ -224,7 +248,7 @@ def verify_separation(
         any(getattr(report, f) != getattr(current, f) for f in fields)
         or report.result.model_dump(exclude=observations)
         != current.result.model_dump(exclude=observations)
-        or _data(report) != _data(current)
+        or separation_replay_data(report) != separation_replay_data(current)
     ):
         raise ValueError("Fresh separation replay disagrees with complete candidate evidence")
     receipt = SeparationReplayReceipt(

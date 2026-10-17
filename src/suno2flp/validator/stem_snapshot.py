@@ -58,6 +58,8 @@ def capture_stem_evidence(
     for report in (original, replay):
         files.extend(report.witnesses())
         payloads.append((report.backend.root / "packages", report.model_dependencies))
+        if report.runtime_context is not None:
+            payloads.append((report.native_result.path.parent, report.native_witnesses()))
         if report.decoder_payload_root is not None:
             root = report.decoder_payload_root
             payloads.append(

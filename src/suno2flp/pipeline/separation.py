@@ -19,6 +19,7 @@ from suno2flp.integrations.basic_pitch_backend import new_model_directory
 from suno2flp.integrations.spleeter_backend import call_spleeter_separation, read_spleeter
 from suno2flp.validator.separation import (
     check_cancel,
+    read_runtime_context,
     separation_payload,
     separation_recipe,
     validate_separation_artifacts,
@@ -104,6 +105,7 @@ def separate_audio(
         ),
         should_cancel=should_cancel,
     )
+    runtime_context = read_runtime_context(native)
     partitions = [
         SeparationPartArtifact(
             partition=part.partition,
@@ -134,6 +136,9 @@ def separate_audio(
         source.pcm.path, stems, residual, source.frames, source.channels, should_cancel
     )
     report = SeparationCandidate(
+        schema_version=2,
+        profile="source-bound-spleeter-four-stem-candidate-v2",
+        runtime_context=runtime_context,
         decode_report=source.decode_report,
         source_audio=source.source,
         pcm=source.pcm,
@@ -164,8 +169,9 @@ def separate_audio(
     def verify_current() -> None:
         # Numeric checks ran against these exact witnesses. Recheck all bytes and
         # membership after serialization; do not repeat the expensive DSP walk.
-        verify_separation_witnesses(report, should_cancel=should_cancel)
-        if report.recipe != separation_recipe():
+        snapshot = SeparationCandidate.model_validate_json(content)
+        verify_separation_witnesses(snapshot, should_cancel=should_cancel)
+        if snapshot.recipe != separation_recipe():
             raise ValueError("Separation recipe changed before publication")
         check_cancel(should_cancel)
 
