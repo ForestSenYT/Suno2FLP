@@ -236,6 +236,9 @@ def test_probe_rechecks_native_evidence_and_dependency_boundaries(
     else:
         report = backend.verify_spleeter(record.root, attempt)
         assert len(report.evidence) == 3 and (attempt / "probe.json").is_file()
+        assert (attempt / "probe.json").read_bytes() == (
+            attempt / "probe.pending.json"
+        ).read_bytes()
         assert report.model_qualification == "not_assessed" and not report.execution_allowed
 
 
@@ -262,3 +265,76 @@ def test_result_identity_must_describe_the_bytes_actually_parsed(recipe, tmp_pat
     with pytest.raises((ValueError, Suno2FLPError)):
         backend.verify_spleeter(record.root, attempt)
     assert not (attempt / "probe.json").exists()
+
+
+@pytest.mark.parametrize("mutation", ["payload", "witness", "provisional"])
+def test_final_validation_failure_retains_only_provisional_report(
+    recipe, tmp_path, monkeypatch, mutation
+):
+    backend, artifacts, pins, _, _ = recipe
+    record = backend.provision_spleeter(tmp_path / "backend", artifacts)
+    attempt = tmp_path / "probe"
+
+    def process(*args, **kwargs):
+        _native_protocol(record, pins, attempt)
+        return b"synthetic process", b"retained diagnostics"
+
+    original = backend._verify_payload
+
+    def mutate_after_serialization(value):
+        provisional = attempt / "probe.pending.json"
+        serialized = provisional if provisional.exists() else attempt / "probe.json"
+        if serialized.exists():
+            target = {
+                "payload": record.root / "packages/model/model.index",
+                "witness": attempt / "impulses.bass.2.f32",
+                "provisional": serialized,
+            }[mutation]
+            target.write_bytes(b"concurrent replacement")
+        return original(value)
+
+    monkeypatch.setattr(backend, "run_bounded_process", process)
+    monkeypatch.setattr(backend, "_verify_payload", mutate_after_serialization)
+    with pytest.raises((ValueError, Suno2FLPError)):
+        backend.verify_spleeter(record.root, attempt)
+    assert not (attempt / "probe.json").exists()
+    assert (attempt / "probe.pending.json").exists()
+    assert (attempt / "result.json").exists()
+    assert (attempt / "stderr.bin").read_bytes() == b"retained diagnostics"
+
+
+@pytest.mark.parametrize("failure", ["competing-output", "unsupported-link"])
+def test_report_publication_is_exclusive_and_preserves_failed_attempt(
+    recipe, tmp_path, monkeypatch, failure
+):
+    backend, artifacts, pins, _, _ = recipe
+    record = backend.provision_spleeter(tmp_path / "backend", artifacts)
+    attempt = tmp_path / "probe"
+
+    def process(*args, **kwargs):
+        _native_protocol(record, pins, attempt)
+        return b"synthetic process", b""
+
+    original = backend._verify_payload
+
+    def create_competitor(value):
+        if (attempt / "probe.pending.json").exists():
+            (attempt / "probe.json").write_bytes(b"independent competing output")
+        return original(value)
+
+    def unsupported(*args, **kwargs):
+        raise OSError("Filesystem does not support exclusive hard-link publication")
+
+    monkeypatch.setattr(backend, "run_bounded_process", process)
+    if failure == "competing-output":
+        monkeypatch.setattr(backend, "_verify_payload", create_competitor)
+    else:
+        monkeypatch.setattr("os.link", unsupported)
+    with pytest.raises(OSError):
+        backend.verify_spleeter(record.root, attempt)
+    assert (attempt / "probe.pending.json").exists()
+    assert (attempt / "result.json").exists()
+    if failure == "competing-output":
+        assert (attempt / "probe.json").read_bytes() == b"independent competing output"
+    else:
+        assert not (attempt / "probe.json").exists()

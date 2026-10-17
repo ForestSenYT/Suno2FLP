@@ -47,8 +47,8 @@
 **Produces:** `provision_spleeter(output, artifacts) -> SpleeterBackend`, `read_spleeter(root) -> SpleeterBackend`, `verify_spleeter(root, output, should_cancel=None) -> SpleeterProbe`. Reuse established guarded paths/current file-tree and bounded process boundaries; no model import in core.
 
 - [x] RED: missing or altered artifacts, changed/extra payload, wrong current runtime/adapter, output overlap/existence, malicious archive members and invalid probe provenance. Implement exact immutable recipe validation and exclusive installation.
-- [x] Preparation consumes already downloaded files; probe is separate. Keep every native attempt/log and check payload/current dependencies before and after child and result publication. A reproduced result-parse/hash race now uses one captured read and retained failure evidence.
-- [x] Focused tests and commit; ledger exact result (18 backend cases, including reproduced parse/identity mutation).
+- [x] Preparation consumes already downloaded files; probe is separate. Keep every native attempt/log and check payload/current dependencies before and after child and report serialization, before exclusive publication. A reproduced result-parse/hash race now uses one captured read and retained failure evidence.
+- [x] Focused tests and commit; ledger exact result (23 backend cases, including reproduced parse/identity mutation and five final-publication rejection paths). Review P2 reproduced before correction: reports now remain provisional until validation and exclusive publication; hard-link failure stays explicit.
 
 ### Task 3: Real graph handshake and thin CLI
 
@@ -66,6 +66,6 @@
 **Files:** dedicated runtime guide, README, ARCHITECTURE, INTEGRATIONS, DEPENDENCIES, RISK_REGISTER, DELIVERY_ROADMAP; research evidence and this plan.
 
 - [x] Document exact artifacts/licenses/dependency deviation, observed native evidence and outstanding source-bound chunk/resample/residual/quality work; update Basic Pitch as PR9 merged.
-- [x] Locked sync, full1273passed35skipped, Ruff295formatted/mypy133, build and installed CLI smoke passed. Legacy protected records and55,411previous-phase identities unchanged. Final-adapter native replay and reviewed-head CI remain required before merge.
+- [x] Locked sync, final full1279passed34skipped in155.16s, Ruff295formatted/mypy133, build and genuinely installed CLI smoke passed. Final regression uses ordinary-user permissions for hard-link publication; the restricted sandbox refusal is retained separately. Legacy protected records and55,411previous-phase identities unchanged. Final-adapter native replay and reviewed-head CI remain required before merge.
 - [ ] One fresh strongest-model whole-branch review; resolve significant findings and bind any new head. Create/attach new M2 PR, validate current-head eight CI results/latestmain/protection/threads, merge only reviewed head and confirm merge/main CI.
 - [ ] Freeze this slice's private evidence; goal remains active. Next short branch implements full source-bound separation candidates and independent replay using this runtime, with source-rate timing and explicit residual.

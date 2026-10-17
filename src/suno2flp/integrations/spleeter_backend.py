@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import os
 import platform
 import shutil
 import sys
@@ -328,8 +329,16 @@ def verify_spleeter(
         witnesses.extend([item.source, *item.outputs, item.residual])
     verify_inputs(witnesses)
     _verify_payload(record)
-    with (attempt / "probe.json").open("x", encoding="utf-8") as stream:
-        stream.write(report.model_dump_json(indent=2))
-    verify_inputs(witnesses)
+    provisional = attempt / "probe.pending.json"
+    serialized = report.model_dump_json(indent=2).encode("utf-8")
+    with provisional.open("xb") as stream:
+        stream.write(serialized)
+    provisional_identity, actual = capture_input(provisional)
+    if actual != serialized:
+        raise ValueError("Provisional probe bytes changed during serialization")
     _verify_payload(record)
+    verify_inputs([*witnesses, provisional_identity])
+    # Exclusive atomic commit point; failure preserves only provisional evidence.
+    # Keep both names immutable: they share bytes after successful publication.
+    os.link(guarded_path(provisional), guarded_path(attempt / "probe.json"))
     return report
