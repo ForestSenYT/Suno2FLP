@@ -11,10 +11,10 @@ from pydantic import Field, model_validator
 from suno2flp.core.models import Contract
 
 MODEL_RATE = 22050
-WINDOW_SAMPLES = 43844
+WINDOW_SAMPLES: Literal[43844] = 43844
 STEP_SAMPLES = 36164
 LEFT_PAD = 3840
-OUTPUT_ROWS = 172
+OUTPUT_ROWS: Literal[172] = 172
 MAX_MODEL_FRAMES = MODEL_RATE * 600
 
 

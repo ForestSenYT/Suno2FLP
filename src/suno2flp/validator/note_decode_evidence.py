@@ -59,13 +59,15 @@ def decode_dependencies(
 
 def verify_note_witnesses(report: NoteScoreReport) -> None:
     verify_inputs(report.witnesses())
-    root = report.decoder_payload_root
+    verify_decoder_payload(report.decode_dependencies, report.decoder_payload_root)
+
+
+def verify_decoder_payload(dependencies: list[FileIdentity], root: Path | None) -> None:
+    """Both scoring and transcription retain exact verified decoder payload membership."""
     if root is not None:
         guarded_path(root)
         expected = {
-            identity.path
-            for identity in report.decode_dependencies
-            if identity.path.is_relative_to(root)
+            identity.path for identity in dependencies if identity.path.is_relative_to(root)
         }
         actual = set()
         for path in root.rglob("*"):
