@@ -198,3 +198,22 @@ def test_measured_and_error_cli_paths(files):
     assert runner.invoke(app, ["verify-drum-score", str(output)]).exit_code == 0
     assert runner.invoke(app, ["score-drums", str(c), "--output", str(output)]).exit_code == 1
     assert runner.invoke(app, ["verify-drum-score", str(c)]).exit_code == 1
+
+
+def test_cancellation_during_final_witness_check_never_publishes(files, monkeypatch):
+    import suno2flp.pipeline.drum_scoring as pipeline
+
+    c, r, output, *_ = files
+    cancelled = False
+    verify = pipeline.verify_drum_witnesses
+
+    def cancel_during_verification(report):
+        nonlocal cancelled
+        verify(report)
+        cancelled = True
+
+    monkeypatch.setattr(pipeline, "verify_drum_witnesses", cancel_during_verification)
+    with pytest.raises(OfflineError, match="cancel"):
+        score_drum_files(c, r, output, should_cancel=lambda: cancelled)
+    assert not output.exists()
+    assert output.with_name("score.pending.json").exists()

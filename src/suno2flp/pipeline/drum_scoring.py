@@ -30,6 +30,7 @@ def score_drum_files(
     def verify() -> None:
         check_cancel(should_cancel)
         verify_drum_witnesses(report)
+        check_cancel(should_cancel)
 
     publish_verified_report(
         destination,
