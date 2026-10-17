@@ -31,6 +31,7 @@ def transcription_recipe() -> ScoringRecipe:
         "core/offline_models.py",
         "core/performance.py",
         "core/offline_files.py",
+        "core/report_publication.py",
         "core/errors.py",
         "core/file_tree.py",
         "core/note_scoring.py",
@@ -133,8 +134,21 @@ def verify_transcription(
     *,
     should_cancel: Callable[[], bool] | None = None,
 ) -> TranscriptionCandidate:
+    report_path = guarded_path(report_path)
+    replay = guarded_path(replay_directory)
+    original_root = report_path.parent
+    if report_path.name != "transcription.json" or (
+        replay == original_root
+        or replay.is_relative_to(original_root)
+        or original_root.is_relative_to(replay)
+    ):
+        raise ValueError(
+            "Use a completed transcription report and replay outside its original root"
+        )
     identity, raw = bounded_snapshot(report_path, 16 * 1024**2)
     report = TranscriptionCandidate.model_validate(load_unique_json(raw))
+    if report.native_result.path != original_root / "native/result.json":
+        raise ValueError("Completion report must remain with its own native artifacts")
     validate_transcription_artifacts(report, should_cancel=should_cancel)
     from suno2flp.pipeline.transcription import transcribe_audio
 

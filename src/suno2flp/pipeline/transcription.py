@@ -8,8 +8,8 @@ from suno2flp.core.file_tree import capture_file_tree
 from suno2flp.core.offline_files import (
     capture_stream_input,
     load_unique_json,
-    new_report,
 )
+from suno2flp.core.report_publication import publish_verified_report
 from suno2flp.core.transcription import (
     NativeTranscriptionResult,
     RawPredictionArtifact,
@@ -67,7 +67,7 @@ def transcribe_audio(
         },
         should_cancel=should_cancel,
     )
-    _, raw = bounded_snapshot(attempt / "result.json", 16 * 1024**2)
+    native_result, raw = bounded_snapshot(attempt / "result.json", 16 * 1024**2)
     result = NativeTranscriptionResult.model_validate(load_unique_json(raw))
     kinds: tuple[Literal["note", "onset", "contour"], ...] = ("note", "onset", "contour")
     report = TranscriptionCandidate(
@@ -94,7 +94,7 @@ def transcribe_audio(
             for name in kinds
         ],
         bends=capture_stream_input(attempt / "bends.i8"),
-        native_result=capture_stream_input(attempt / "result.json"),
+        native_result=native_result,
         native_request=capture_stream_input(attempt / "request.json"),
         stdout=capture_stream_input(attempt / "stdout.bin"),
         stderr=capture_stream_input(attempt / "stderr.bin"),
@@ -105,12 +105,17 @@ def transcribe_audio(
         raise ValueError("Complete candidate exceeds the metadata budget; no truncation allowed")
     check_cancel(should_cancel)
     verify_transcription_witnesses(report, should_cancel=should_cancel)
+
     # The entire exclusive root was checked against all source/recipe/model roots
     # before creation; no need to resolve 7816 payload ancestors again here.
-    new_report(
+    def verify_current() -> None:
+        validate_transcription_artifacts(report, should_cancel=should_cancel)
+        check_cancel(should_cancel)
+
+    publish_verified_report(
         root / "transcription.json",
         content,
         [source.decode_report.path, source.source.path, source.pcm.path, backend_record.path],
+        verify_current,
     )
-    validate_transcription_artifacts(report, should_cancel=should_cancel)
     return report
