@@ -10,6 +10,7 @@ import yaml
 from pydantic import ValidationError
 
 from suno2flp.arrangement import ExplicitInstrumentMapper, FaithfulArrangementEngine
+from suno2flp.cli_audio_flp import register_audio_flp
 from suno2flp.cli_audio_jobs import register_audio_jobs
 from suno2flp.cli_beat_analysis import register_beat_analysis
 from suno2flp.cli_drum_scoring import register_drum_scoring
@@ -70,6 +71,7 @@ register_beat_analysis(app)
 register_windows_audio(app)
 register_estimated_arrangement(app)
 register_estimated_midi(app)
+register_audio_flp(app)
 
 
 @app.callback()

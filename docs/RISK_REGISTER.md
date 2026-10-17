@@ -1,5 +1,14 @@
 # Risk register
 
+[Audio FLP candidates](AUDIO_FLP_CANDIDATE.zh-CN.md) are not qualified reconstructions:
+technical tempo, fixed velocity, approximate synth/percussion, unresolved bend and
+model/structure quality, and absent reference-stem playlist content remain explicit.
+Exact reference hashes constrain opaque-state reuse; arbitrary same-build templates
+are not eligible. Volume raw values are not assumed linear. Small native controls
+do not replace actual-song relocation, host reserialization/reopen, listening or
+release benchmarks. Third-party writers may round/merge/mute source data; MCPs may
+send prohibited hotkeys. Research alone never authorizes those paths or new dependencies.
+
 [Windows output discovery](HOST_READINESS.zh-CN.md) is volatile point-in-time evidence,
 not current device availability or host compatibility. API errors/partial snapshots must
 not become zero-device success; changing defaults require a new complete observation.

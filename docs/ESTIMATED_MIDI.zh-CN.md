@@ -1,5 +1,9 @@
 # 音频推断的可编辑 MIDI 候选
 
+后续独立的[固定参考 FLP 候选入口](AUDIO_FLP_CANDIDATE.zh-CN.md)可读取本报告并
+重建完整当前来源。它不修改本报告、投影误差或原有 blocked 字段，也不把本命令
+升级为宿主／音乐验收。既有 MIDI 的严格事件保真仍走原路径。
+
 `export-estimated-midi` 把当前完整三声部和鼓生产者组合为新的可编辑 MIDI，供首首
 真实歌曲的新 FLP 使用。它不重新运行模型、不读取既有 MIDI、不启动 FL Studio，
 也不解除音乐质量或 FLP 写入限制。输出始终为 `unqualified_candidate`。

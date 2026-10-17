@@ -88,14 +88,20 @@ both distinct model clocks and complete producer references. The new
 `export-estimated-midi` / `verify-estimated-midi` commands export and independently
 reconstruct an editable **unqualified MIDI candidate** with a declared technical clock,
 complete occurrence/timing audits and preserved native bend references. See the
-[preview policy and limitations](docs/ESTIMATED_MIDI.zh-CN.md). Playable instrument
-routing, FLP serialization, music qualification and canonical conversion jobs remain blocked.
+[preview policy and limitations](docs/ESTIMATED_MIDI.zh-CN.md). The separate opt-in
+`export-audio-flp` / `verify-audio-flp` workflow builds an **unqualified FL26 candidate**
+only from two exact, separately observed reference components. It retains projected
+timing, explicit twelve-channel routing, original synthetic one-shot percussion and
+independent complete output checks. See [scope and prerequisites](docs/AUDIO_FLP_CANDIDATE.zh-CN.md).
+Reference stems are not yet in its playlist; music/host/release qualification and
+canonical conversion jobs remain blocked. Commands do not launch FL Studio.
 
 [Read-only Windows output discovery](docs/HOST_READINESS.zh-CN.md) adds
 `inspect-windows-audio`: isolated Core Audio queries, complete endpoint/default-role
 facts and source/runtime fingerprints in an exclusive new report directory. Missing
 outputs and API failures are distinct. Observations never authorize host/writer execution;
-the current FL26 render stall and device-restoration control remain unresolved.
+old FL26 stalls remain recorded separately from later restored-output controls;
+real-song lifecycle and release qualification still require their own evidence.
 
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,

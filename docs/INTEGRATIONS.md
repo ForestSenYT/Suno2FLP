@@ -294,6 +294,16 @@ No stream activation, device/registry edits or FL Studio call occurs. See
 
 ## Adoption gates
 
+The separate [audio FLP candidate](AUDIO_FLP_CANDIDATE.zh-CN.md) uses original encoding
+and sample synthesis, not an adopted backend. The new
+[fixed-source comparison](research/2026-10-17-flp-backend-paths.zh-CN.md) audits DawVert,
+PyFLP, Music2DAW, demixer and an additional MCP; the
+[delivery path decision](research/2026-10-17-noninteractive-delivery-paths.zh-CN.md)
+also covers official CLI/script APIs and optional FluidSynth audition. No upstream
+runtime/code or SoundFont was installed, executed, vendored or qualified by that research.
+The sampler scope rule is used only after independent local native evidence;
+GPL source is not copied into first-party code. Existing backend pins remain unchanged.
+
 Isolation manages dependencies; it does not automatically settle license obligations.
 Before adoption, verify the pinned component's terms and intended distribution,
 install separately, run read-only synthetic/template tests, negotiate capabilities,
