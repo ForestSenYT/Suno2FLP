@@ -43,7 +43,8 @@ def batch(protocol, tmp_path, monkeypatch):
     calls = []
 
     def read(root):
-        assert root == backend
+        if root != backend:
+            raise ValueError("Missing synthetic backend")
         return record.model_copy(deep=True)
 
     def call(record, attempt, request, **kwargs):
@@ -101,6 +102,7 @@ def batch(protocol, tmp_path, monkeypatch):
         )
 
     monkeypatch.setattr("suno2flp.pipeline.transcription.read_basic_pitch", read)
+    monkeypatch.setattr("suno2flp.pipeline.stem_transcription.read_basic_pitch", read)
     monkeypatch.setattr("suno2flp.pipeline.transcription.call_basic_pitch", call)
     monkeypatch.setattr("suno2flp.validator.transcription.read_basic_pitch", read)
     return SimpleNamespace(
@@ -222,3 +224,10 @@ def test_provisional_foreign_and_overlapping_separation_are_not_consumed(batch, 
     with pytest.raises((ValueError, Suno2FLPError)):
         pipeline.transcribe_stems(source, batch.backend, output)
     assert not output.exists() and not batch.calls
+
+
+def test_missing_pitch_prerequisite_fails_before_separation_replay_or_new_outputs(batch, tmp_path):
+    pipeline, _ = services()
+    with pytest.raises(ValueError, match="backend"):
+        pipeline.transcribe_stems(batch.separation, tmp_path / "missing", tmp_path / "attempt")
+    assert not (tmp_path / "attempt").exists() and not batch.calls

@@ -14,7 +14,7 @@ from suno2flp.core.stem_transcription import (
     StemTranscriptionEntry,
 )
 from suno2flp.importer.stem_audio import widen_stem_wave
-from suno2flp.integrations.basic_pitch_backend import new_model_directory
+from suno2flp.integrations.basic_pitch_backend import new_model_directory, read_basic_pitch
 from suno2flp.pipeline.transcription import run_pitch_candidate
 from suno2flp.validator.separation import verify_separation
 from suno2flp.validator.stem_transcription import (
@@ -41,6 +41,7 @@ def transcribe_stems(
         )
     check_cancel(should_cancel)
     separation_id, original = read_separation(separation_report)
+    backend = read_basic_pitch(backend).root
     protected = [
         original.backend.root,
         separation_id.path.parent,
