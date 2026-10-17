@@ -37,6 +37,25 @@ def main() -> None:
         (["--help"], 0),
         (["verify-spleeter", str(root / "missing"), "--output", str(root / "probe")], 1),
         (["prepare-spleeter", "--artifacts", str(root), "--output", str(root)], 1),
+        (
+            [
+                "separate-audio",
+                str(root / "missing.json"),
+                str(root / "backend"),
+                "--output",
+                str(root / "candidate"),
+            ],
+            1,
+        ),
+        (
+            [
+                "verify-separation",
+                str(root / "missing.json"),
+                "--replay-output",
+                str(root / "replay"),
+            ],
+            1,
+        ),
     ):
         result = subprocess.run(
             [sys.executable, "-m", "suno2flp.cli", *command],
@@ -50,6 +69,8 @@ def main() -> None:
         assert result.returncode == expected, result.stderr
         if expected == 1:
             assert "Error:" in result.stderr and not (root / "probe").exists()
+            assert not (root / "candidate").exists() and not (root / "replay").exists()
+    assert all(name not in sys.modules for name in ("numpy", "tensorflow", "spleeter", "pandas"))
     (root / "smoke.json").write_text(
         json.dumps(
             {

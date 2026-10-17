@@ -1,4 +1,4 @@
-"""Explicit preparation and native probe commands; no full-song or writer route."""
+"""Explicit preparation, probes and complete inferred candidates; no writer route."""
 
 import json
 from pathlib import Path
@@ -8,6 +8,8 @@ import typer
 
 from suno2flp.core.errors import Suno2FLPError
 from suno2flp.integrations.spleeter_backend import provision_spleeter, verify_spleeter
+from suno2flp.pipeline.separation import separate_audio
+from suno2flp.validator.separation import verify_separation
 
 
 def _fail(error: Exception) -> None:
@@ -16,6 +18,59 @@ def _fail(error: Exception) -> None:
 
 
 def register_separation(app: typer.Typer) -> None:
+    @app.command("separate-audio")
+    def separate(
+        decode_report: Path,
+        backend: Path,
+        output: Annotated[Path, typer.Option("--output", help="New private candidate directory")],
+    ) -> None:
+        """Separate complete verified audio into four source-bound, unqualified stems."""
+        try:
+            report = separate_audio(decode_report, backend, output)
+        except (OSError, ValueError, RecursionError, Suno2FLPError) as error:
+            _fail(error)
+        typer.echo(
+            json.dumps(
+                dict(
+                    status=report.origin,
+                    frames=report.frames,
+                    sample_rate=report.sample_rate,
+                    stems=len(report.stems),
+                    partitions=len(report.partitions),
+                    model_qualification=report.model_qualification,
+                    musical_correctness=report.musical_correctness,
+                    writer_eligibility=report.writer_eligibility,
+                    execution_allowed=False,
+                ),
+                indent=2,
+            )
+        )
+
+    @app.command("verify-separation")
+    def replay(
+        candidate: Path,
+        replay_output: Annotated[
+            Path, typer.Option("--replay-output", help="New native replay directory")
+        ],
+    ) -> None:
+        """Run the model again and match every complete signal before publishing a receipt."""
+        try:
+            report = verify_separation(candidate, replay_output)
+        except (OSError, ValueError, RecursionError, Suno2FLPError) as error:
+            _fail(error)
+        typer.echo(
+            json.dumps(
+                dict(
+                    status="complete_native_replay_matched",
+                    model_qualification=report.model_qualification,
+                    musical_correctness=report.musical_correctness,
+                    writer_eligibility=report.writer_eligibility,
+                    execution_allowed=False,
+                ),
+                indent=2,
+            )
+        )
+
     @app.command("prepare-spleeter")
     def prepare(
         artifacts: Annotated[
