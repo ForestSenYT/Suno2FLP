@@ -94,6 +94,14 @@ Publication does not repeatedly reconstruct identical waveforms. Saved untrusted
 still receive full independent numeric validation and actual fresh model replay; these
 guards are never serialized as qualification or reused across invocations.
 
+`core.estimated_arrangement` and the pure `arrangement.inferred` assembler define a
+separate source-clock candidate: all pitched notes/bend addresses, four reference
+stems/residual and optional complete rhythm keep their estimated ancestry. The
+file workflow reuses current full validators and immutable invocation guards,
+then exclusively publishes a reconstruction-checked report. It invokes no model
+or DAW and never grants job, music or writer qualification. See
+[estimated arrangement](ESTIMATED_ARRANGEMENT.zh-CN.md).
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service

@@ -42,7 +42,7 @@
 - [x] RED: non-Windows, isolation/version mismatch, native API failure, malformed output, interpreter/source changes, cancellation and exclusive publication.
 - [x] Worker requires -I/-S/-B; only EnumAudioEndpoints/GetDefaultAudioEndpoint/GetId/GetState and COM lifetime APIs. Explicit checked HRESULTs, complete bounded membership, released interfaces/allocated strings and CoUninitialize only for its own initialization.
 - [x] Use the existing bounded process runner. Retain actual complete stdout/stderr, recipe and loaded OS-library hashes; reject inconsistent snapshots. Current absence is a valid discovery result, not a launch permission. Save the complete request before launching; failures retain it without a completed result.
-- [ ] Actually execute current-source discovery on this machine in new private output. Do not start FL Studio while the needed output is absent; pending user connection is an external prerequisite, not approval inferred from elapsed time.
+- [x] Actually execute current-source discovery on this machine in new private output. The genuinely installed, byte-matched reviewed build observed no active output/default. No FL Studio launch; pending physical connection remains an external prerequisite.
 
 ## Task 3: CLI, documentation and integration gate
 
@@ -50,7 +50,14 @@
 
 - [x] RED/GREEN thin command with explicit absent-output versus API-error messages. No fake compatibility/quality status or shared-job success.
 - [x] Cite official Microsoft API/state documentation and current pinned FL26 scope. Explain point-in-time validity, physical output prerequisite, unconfirmed causality and untouched old gates. No proprietary logs, registry IDs, dump bytes, projects or backends in Git/packages.
-- [ ] After changes stabilize: locked full tests/static checks/build/actual installed CLI, one exact-head independent review, current8CI/latest-main/protection/files/discussions, matching-head squash and actual merged-tree/mainCI verification. No redundant whole-suite/native reruns for unchanged source.
+- [x] After changes stabilize: locked full tests/static checks/build/actual installed CLI, one exact-head independent review, current8CI/latest-main/protection/files/discussions, matching-head squash and actual merged-tree/mainCI verification. No redundant whole-suite/native reruns for unchanged source.
+
+PR #14: reviewed head `32e815b3219e9091078510ab59f7b145656fe7d6`, 1,574 tests passed,
+42 skipped, all static/build/installed checks passed; independent whole-branch manual review
+found no actionable issues. Eight current CI checks passed before squash
+`9f3edad11fa904654fece5d075dfff549b6cd61b`; merged tree and source identities matched.
+All four actual main CI checks subsequently passed. All 568 protected identities
+remained unchanged; host, music and whole-product acceptance remain pending.
 
 ## Native continuation after hardware change
 

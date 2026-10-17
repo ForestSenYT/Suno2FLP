@@ -64,6 +64,12 @@ fixed local runtime preparation/probes, source-bound complete raw arrays, exact
 half-frame coordinates, fresh native replay and conditional labelled timing scores.
 They do not qualify music or complete a user conversion; job/writer gates remain blocked.
 
+[Estimated arrangement composition](docs/ESTIMATED_ARRANGEMENT.zh-CN.md) combines
+complete pitched stems, four reference stems/residual and optional rhythm in the
+exact original audio clock. It preserves note/bend addresses and explicit estimated
+roles, with current-file reconstruction checks. Drums, playable routing, MIDI/FLP
+serialization, music qualification and canonical conversion jobs remain blocked.
+
 [Read-only Windows output discovery](docs/HOST_READINESS.zh-CN.md) adds
 `inspect-windows-audio`: isolated Core Audio queries, complete endpoint/default-role
 facts and source/runtime fingerprints in an exclusive new report directory. Missing
