@@ -66,7 +66,7 @@ def verify_audio_preview(raw: bytes, profile: AudioComponents, plan: AudioPrevie
             elif e.event_id == 0:
                 expected = b"\1"
             elif e.event_id == 219:
-                expected = b[:4] + struct.pack("<I", 1280) + b[8:]
+                expected = b[:4] + struct.pack("<I", 5000) + b[8:]
             elif e.event_id == 203:
                 label = (
                     ("vocals", "bass", "other")[channel]
@@ -91,7 +91,11 @@ def verify_audio_preview(raw: bytes, profile: AudioComponents, plan: AudioPrevie
             raise ValueError("Global event order changed")
         if e.event_id not in (224, 233) and record(raw, e) != record(profile.base, global_event):
             raise ValueError("Opaque/global bytes changed")
-    for candidate_note, n in zip(inv.notes, plan.notes, strict=True):
+    source_order = sorted(
+        plan.notes,
+        key=lambda n: (n.start_tick, n.channel, n.source_part, n.source_occurrence),
+    )
+    for candidate_note, n in zip(inv.notes, source_order, strict=True):
         a = bytes.fromhex(candidate_note.raw_hex)
         b = bytes.fromhex(profile.inventory.notes[0].raw_hex)
         if (

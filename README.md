@@ -92,7 +92,10 @@ complete occurrence/timing audits and preserved native bend references. See the
 `export-audio-flp` / `verify-audio-flp` workflow builds an **unqualified FL26 candidate**
 only from two exact, separately observed reference components. It retains projected
 timing, explicit twelve-channel routing, original synthetic one-shot percussion and
-independent complete output checks. See [scope and prerequisites](docs/AUDIO_FLP_CANDIDATE.zh-CN.md).
+independent complete output checks. Its v2 profile stores native note records chronologically
+while retaining source occurrence order/ticks, and uses a separately observed audible preview
+gain. Earlier repeatable but mostly silent v1 renders are not valid playback acceptance.
+See [scope and prerequisites](docs/AUDIO_FLP_CANDIDATE.zh-CN.md).
 Reference stems are not yet in its playlist; music/host/release qualification and
 canonical conversion jobs remain blocked. Commands do not launch FL Studio.
 

@@ -84,7 +84,10 @@ def encode_audio_preview(profile: AudioComponents, plan: AudioPreviewPlan) -> by
             blocks.extend(record(raw, e) if new == value else _event(e.event_id, new))
     original = profile.inventory
     notes = bytearray()
-    for n in plan.notes:
+    for n in sorted(
+        plan.notes,
+        key=lambda n: (n.start_tick, n.channel, n.source_part, n.source_occurrence),
+    ):
         data = bytearray.fromhex(original.notes[0].raw_hex)
         struct.pack_into("<I", data, 0, n.start_tick)
         struct.pack_into("<H", data, 6, n.channel)
