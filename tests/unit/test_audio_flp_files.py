@@ -76,6 +76,52 @@ def test_current_recipe_includes_executed_parser_dependencies():
         assert package / name in files
 
 
+@pytest.mark.parametrize("alias_kind", ["traversal", "symlink"])
+def test_builtin_runtime_uses_real_executable_identity(tmp_path, monkeypatch, alias_kind):
+    import errno
+    import sys
+    from importlib.machinery import ModuleSpec
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    import suno2flp.pipeline.audio_flp as service
+
+    runtime = Path(sys.executable).resolve(strict=True)
+    before = capture_stream_input(runtime)
+    if alias_kind == "traversal":
+        alias = runtime.parent / ".." / runtime.parent.name / runtime.name
+    else:
+        alias = tmp_path / "runtime-alias"
+        try:
+            alias.symlink_to(runtime)
+        except OSError as error:
+            if getattr(error, "winerror", None) != 1314 and error.errno not in (
+                errno.EPERM,
+                errno.EACCES,
+                errno.ENOSYS,
+            ):
+                raise
+            pytest.skip(f"Synthetic runtime symlink unavailable: {error}")
+    monkeypatch.setattr(
+        service,
+        "sys",
+        SimpleNamespace(
+            platform="linux",
+            executable=str(alias),
+            base_prefix=sys.base_prefix,
+            version_info=sys.version_info,
+        ),
+    )
+    monkeypatch.setattr(
+        service,
+        "math",
+        SimpleNamespace(__spec__=ModuleSpec("math", loader=None, origin="built-in")),
+    )
+    paths = {i.path for i in service.audio_flp_recipe().files}
+    assert runtime in paths and alias not in paths
+    assert capture_stream_input(runtime) == before
+
+
 @pytest.mark.parametrize("protocol", [(1025, 2)], indirect=True)
 @pytest.mark.parametrize("mutation", ["artifact", "membership"])
 @pytest.mark.parametrize("boundary", ["publication", "verification"])

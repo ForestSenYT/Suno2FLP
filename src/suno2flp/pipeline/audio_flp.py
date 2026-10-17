@@ -75,7 +75,7 @@ def audio_flp_recipe() -> ScoringRecipe:
                 if sys.platform == "win32"
                 else Path(sys.executable)
             )
-            paths.append(runtime)
+            paths.append(runtime.resolve(strict=True))
         else:
             raise ValueError("Preview runtime module has no current file identity")
     identities = {i.path: i for i in base.files}
