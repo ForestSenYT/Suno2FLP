@@ -46,11 +46,11 @@
 
 **Files:** new `core/separation_clock.py`, `core/separation.py`; factor shared `SpleeterExecution` fields in `core/separation_runtime.py`; tests for clock/contracts.
 
-**Interfaces:** `model_frame_count(frames:int,sample_rate:int)->int`, `plan_separation_partitions(model_frames:int)->list[SeparationPartition]`. Partition fields: index, global STFT start/count, virtual waveform start/count. `NativeSeparationResult` covers execution proof, complete canonical partitions, source geometry and observed native resource use. `SeparationCandidate` binds decoder, full model, current recipe and every intermediate/output identity; `SeparationReplayReceipt` records a complete fresh match and stays unqualified.
+**Interfaces:** `model_frame_count(frames:int,sample_rate:int)->int`, `back_frame_count(model_frames:int,sample_rate:int)->int`, `plan_separation_partitions(model_frames:int)->list[SeparationPartition]`. Partition fields: index, global STFT start/count, virtual waveform start/count. `NativeSeparationResult` covers execution proof, complete canonical partitions, source geometry and observed native resource use. `SeparationCandidate` binds decoder, full model, current recipe and every intermediate/output identity; `SeparationReplayReceipt` records a complete fresh match and stays unqualified.
 
-- [ ] RED: N=1,1023/1024/1025,4095/4096/4097,512-hop partition boundaries on both sides; rates8000/22050/44100/48000/96000/192000, odd lengths and600-second endpoints; reject bools, missing/reordered/duplicate partitions and wrong sizes.
-- [ ] GREEN: integer-only clocks, complete artifact geometry and permanently unqualified quality/writer fields. Preserve old probe JSON shape.
-- [ ] Focused checks, record results and commit.
+- [x] RED: N=1,1023/1024/1025,4095/4096/4097,512-hop partition boundaries on both sides; rates8000/22050/44100/48000/96000/192000, odd lengths and600-second endpoints; reject bools, missing/reordered/duplicate partitions and wrong sizes.
+- [x] GREEN: integer-only clocks, complete artifact geometry and permanently unqualified quality/writer fields. Preserve old probe JSON shape.
+- [x] New57 RED; focused60 GREEN including old probe contracts. Full1353 passed34 skipped129.31s; Ruff302 formatted/mypy136 passed. Commit and ledger record the clock/contracts.
 
 ### Task3: Bounded native source processing
 
@@ -71,7 +71,7 @@
 
 - [ ] RED: source/decode/model/recipe changes, malformed WAV/length/nonfinite data, missing/reordered chunks, forged rehashed assembly/residual and invalid final marker fail. Cancellation and late validation never publish a candidate. Replay output overlapping any original candidate root fails before creating files.
 - [ ] GREEN: reuse independently verified decoded-source evidence; capture native result identity and bytes once. Independently reconstruct global overlap-add with standard-library float32 operations, verify every partial input against model PCM, source-grid geometry, resampling tail and residual conservation. Verify all current dependencies at publication.
-- [ ] Fresh replay compares the full canonical result, all partial/intermediate/WAV bytes and residual, then publishes a separate replay receipt only on complete match. Preserve original and failed replay attempts.
+- [ ] Fresh replay compares all source/model/result semantics (excluding only the retained per-run elapsed/peak-memory observations), all partial/intermediate/WAV bytes and residual, then publishes a separate replay receipt only on complete match. Logs and derived paths/mtimes are retained per run rather than equated; every current identity is still verified. Preserve original and failed replay attempts.
 - [ ] Focused tests and commit.
 
 ### Task5: Thin CLI and genuine engineering evidence

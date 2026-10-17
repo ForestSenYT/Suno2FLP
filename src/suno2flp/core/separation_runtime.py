@@ -72,8 +72,7 @@ class SeparationFixtureResult(Contract):
         return self
 
 
-class NativeSeparationProbe(Contract):
-    profile: Literal["spleeter4-native-probe-v1"]
+class SpleeterExecution(Contract):
     device_types: list[Literal["CPU"]] = Field(min_length=1, max_length=1)
     intra_op_threads: Literal[8]
     inter_op_threads: Literal[1]
@@ -81,10 +80,14 @@ class NativeSeparationProbe(Contract):
     modules: dict[str, Path]
     restored_variables: dict[str, list[int]] = Field(min_length=1, max_length=1024)
     restored_values_sha256: Digest
-    fixtures: list[SeparationFixtureResult] = Field(min_length=3, max_length=3)
-    repeatability_scope: Literal["observed-two-runs-per-fixture"]
     tfio_loaded: Literal[False]
     ambient_plugins_enabled: Literal[False]
+
+
+class NativeSeparationProbe(SpleeterExecution):
+    profile: Literal["spleeter4-native-probe-v1"]
+    fixtures: list[SeparationFixtureResult] = Field(min_length=3, max_length=3)
+    repeatability_scope: Literal["observed-two-runs-per-fixture"]
 
     @model_validator(mode="after")
     def complete_fixtures(self) -> Self:
