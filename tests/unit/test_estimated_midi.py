@@ -170,3 +170,25 @@ def test_empty_candidates_keep_trailing_source_duration_without_fake_notes():
     assert score.end_tick == 80
     assert time_fraction(score.source_end_us) == Fraction(2000 * 1000000, 48000)
     verify_estimated_midi(encode_estimated_midi(score), score)
+
+
+@pytest.mark.parametrize("change", ["eot-payload", "five-byte-delta"])
+def test_malformed_events_cannot_hide_behind_decoder_normalization(change):
+    score = project_estimated_midi(build_percussion_arrangement(inputs()))
+    raw = encode_estimated_midi(score)
+    length = int.from_bytes(raw[18:22], "big")
+    conductor = raw[22 : 22 + length]
+    if change == "eot-payload":
+        assert conductor.endswith(b"\xff\x2f\x00")
+        altered = conductor[:-3] + b"\xff\x2f\x01\xff"
+    else:
+        assert conductor[0] == 0
+        altered = b"\x80\x80\x80\x80\x00" + conductor[1:]
+    corrupted = raw[:18] + len(altered).to_bytes(4, "big") + altered + raw[22 + length :]
+    # mido sees equal messages; the independent verifier must still reject the bytes.
+    normalized = mido.MidiFile(file=BytesIO(corrupted))
+    assert [m.dict() for m in normalized.tracks[0]] == [
+        m.dict() for m in mido.MidiFile(file=BytesIO(raw)).tracks[0]
+    ]
+    with pytest.raises(ValueError):
+        verify_estimated_midi(corrupted, score)
