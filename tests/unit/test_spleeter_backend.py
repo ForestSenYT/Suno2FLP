@@ -176,6 +176,7 @@ def _native_protocol(record, pins, attempt):
         fixtures.append(dict(fixture=fixture, frames=frames, hashes=hashes))
     data = {
         "profile": "spleeter4-native-probe-v1",
+        "graph_profile": "spleeter4-cpu-no-remapping-v1",
         "device_types": ["CPU"],
         "intra_op_threads": 8,
         "inter_op_threads": 1,

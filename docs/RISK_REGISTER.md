@@ -1,5 +1,13 @@
 # Risk register
 
+Spleeter fused CPU execution produced unequal full-song float bytes across fresh
+processes despite matching source/weights/graphs. Exact replay correctly blocks them.
+The current fixed graph policy disables TensorFlow remapping with eight compute
+threads and requires explicit execution evidence; copied short diagnostics support
+this mitigation but do not establish the complete cause, full-song repeatability,
+performance or music quality. Reprovision into new directories and collect fresh
+native evidence; never patch old reports or introduce a numeric tolerance to pass.
+
 [Spleeter runtime probes](SPLEETER_RUNTIME.zh-CN.md) cannot establish separation quality:
 the default model zeros high-frequency masks, and sum-to-source conservation through
 an explicit residual is not correct instrument assignment. TF1 Session determinism

@@ -52,6 +52,7 @@ def test_separation_call_binds_request_source_and_current_backend(
         elif mutation == "cancel":
             raise RuntimeError("cancelled owned process")
         proof = dict(
+            graph_profile="spleeter4-cpu-no-remapping-v1",
             device_types=["CPU"],
             intra_op_threads=8,
             inter_op_threads=1,

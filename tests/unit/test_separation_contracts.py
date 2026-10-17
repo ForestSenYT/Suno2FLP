@@ -24,6 +24,7 @@ def candidate_values(root: Path):
     hashes = dict(zip(STEMS, [str(index) * 64 for index in range(2, 6)], strict=True))
     result = dict(
         execution=dict(
+            graph_profile="spleeter4-cpu-no-remapping-v1",
             device_types=["CPU"],
             intra_op_threads=8,
             inter_op_threads=1,
@@ -111,6 +112,18 @@ def test_candidate_retains_source_grid_and_unqualified_status(tmp_path):
     assert report.origin == "inferred_candidate" and not report.execution_allowed
     assert report.model_qualification == "not_assessed" and report.writer_eligibility == "blocked"
     assert report.ground_truth_metrics == "unavailable"
+
+
+@pytest.mark.parametrize("profile", [None, "spleeter4-cpu-default-v1"])
+def test_execution_without_fixed_graph_policy_is_rejected(tmp_path, profile):
+    from suno2flp.core.separation_runtime import SpleeterExecution
+
+    execution = candidate_values(tmp_path)["result"]["execution"]
+    execution.pop("graph_profile", None)
+    if profile is not None:
+        execution["graph_profile"] = profile
+    with pytest.raises(ValueError, match="graph_profile"):
+        SpleeterExecution.model_validate(execution)
 
 
 @pytest.mark.parametrize(

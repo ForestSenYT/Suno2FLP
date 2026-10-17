@@ -143,20 +143,15 @@ class NativeTranscriptionResult(Contract):
         return self
 
 
-class TranscriptionCandidate(Contract):
+class PitchCandidate(Contract):
+    """Source-neutral complete pitch inference evidence; never qualification."""
+
     schema_version: Literal[1] = 1
-    profile: Literal["source-bound-basic-pitch-candidate-v1"] = (
-        "source-bound-basic-pitch-candidate-v1"
-    )
     origin: Literal["inferred_candidate"] = "inferred_candidate"
-    decode_report: FileIdentity
-    source_audio: FileIdentity
     pcm: FileIdentity
     frames: int = Field(gt=0, strict=True)
     sample_rate: int = Field(ge=8000, le=192000, strict=True)
     channels: int = Field(ge=1, le=2, strict=True)
-    decode_dependencies: list[FileIdentity]
-    decoder_payload_root: Path | None
     backend_record: FileIdentity
     backend: BasicPitchBackend
     model_dependencies: list[FileIdentity]
@@ -201,12 +196,9 @@ class TranscriptionCandidate(Contract):
             raise ValueError("Prediction/bend evidence does not cover native output")
         return self
 
-    def witnesses(self) -> list[FileIdentity]:
+    def pitch_witnesses(self) -> list[FileIdentity]:
         return [
-            self.decode_report,
-            self.source_audio,
             self.pcm,
-            *self.decode_dependencies,
             self.backend_record,
             self.backend.python,
             *self.backend.runtime,
@@ -222,4 +214,24 @@ class TranscriptionCandidate(Contract):
             self.native_request,
             self.stdout,
             self.stderr,
+        ]
+
+
+class TranscriptionCandidate(PitchCandidate):
+    """Original-audio v1 semantics remain distinct from estimated stem sources."""
+
+    profile: Literal["source-bound-basic-pitch-candidate-v1"] = (
+        "source-bound-basic-pitch-candidate-v1"
+    )
+    decode_report: FileIdentity
+    source_audio: FileIdentity
+    decode_dependencies: list[FileIdentity]
+    decoder_payload_root: Path | None
+
+    def witnesses(self) -> list[FileIdentity]:
+        return [
+            self.decode_report,
+            self.source_audio,
+            *self.decode_dependencies,
+            *self.pitch_witnesses(),
         ]

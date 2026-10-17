@@ -100,7 +100,13 @@ def native(
     options = tf.compat.v1.ConfigProto(
         device_count={"GPU": 0}, intra_op_parallelism_threads=8, inter_op_parallelism_threads=1
     )
+    # Preserve separate arithmetic operations: fused CPU kernels produced different
+    # float32 bytes across observed import/preparation contexts on this fixed runtime.
+    rewriter = importlib.import_module("tensorflow.core.protobuf.rewriter_config_pb2")
+    options.graph_options.rewrite_options.remapping = rewriter.RewriterConfig.OFF
     session = tf.compat.v1.Session(graph=graph, config=options)
+    if session._config.graph_options.rewrite_options.remapping != rewriter.RewriterConfig.OFF:
+        raise ValueError("Fixed separation graph requires remapping to remain disabled")
     # Never import a serialized meta graph or follow the archive's checkpoint file.
     saver.restore(session, str(packages / "model/model"))
     checkpoint_shapes = dict(tf.train.list_variables(str(packages / "model/model")))
@@ -131,6 +137,7 @@ def native(
             raise ValueError("Ambiguous installed native distribution")
         versions[name] = distribution.version
     probe = {
+        "graph_profile": "spleeter4-cpu-no-remapping-v1",
         "profile": "spleeter4-native-probe-v1",
         "device_types": [device.device_type for device in session.list_devices()],
         "intra_op_threads": session._config.intra_op_parallelism_threads,

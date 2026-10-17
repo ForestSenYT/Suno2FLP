@@ -9,9 +9,11 @@ from suno2flp.core.offline_files import (
     capture_stream_input,
     load_unique_json,
 )
+from suno2flp.core.offline_models import FileIdentity
 from suno2flp.core.report_publication import publish_verified_report
 from suno2flp.core.transcription import (
     NativeTranscriptionResult,
+    PitchCandidate,
     RawPredictionArtifact,
     TranscriptionCandidate,
 )
@@ -39,6 +41,40 @@ def transcribe_audio(
 ) -> TranscriptionCandidate:
     check_cancel(should_cancel)
     source = verified_transcription_source(decode_report, should_cancel=should_cancel)
+    pitch = run_pitch_candidate(
+        source.pcm,
+        source.frames,
+        source.sample_rate,
+        source.channels,
+        backend,
+        output,
+        protected=[i.path for i in source.dependencies],
+        should_cancel=should_cancel,
+    )
+    report = TranscriptionCandidate(
+        **pitch.model_dump(),
+        decode_report=source.decode_report,
+        source_audio=source.source,
+        decode_dependencies=source.dependencies,
+        decoder_payload_root=source.decoder_payload_root,
+    )
+    publish_transcription(report, should_cancel=should_cancel)
+    return report
+
+
+def run_pitch_candidate(
+    pcm: FileIdentity,
+    frames: int,
+    sample_rate: int,
+    channels: int,
+    backend: Path,
+    output: Path,
+    *,
+    protected: list[Path],
+    should_cancel: Callable[[], bool] | None = None,
+) -> PitchCandidate:
+    """Shared native mechanics; callers must validate source authority before publishing."""
+    check_cancel(should_cancel)
     model = read_basic_pitch(backend)
     backend_record = capture_stream_input(model.root / "backend.json")
     recipe = transcription_recipe()
@@ -47,8 +83,8 @@ def transcribe_audio(
         output,
         [
             model.root,
-            *[i.path for i in source.dependencies],
-            source.pcm.path,
+            *protected,
+            pcm.path,
             *[i.path for i in model.artifacts],
             *[i.path for i in recipe.files],
         ],
@@ -60,25 +96,21 @@ def transcribe_audio(
         attempt,
         {
             "operation": "transcribe",
-            "pcm": str(source.pcm.path),
-            "frames": source.frames,
-            "sample_rate": source.sample_rate,
-            "channels": source.channels,
+            "pcm": str(pcm.path),
+            "frames": frames,
+            "sample_rate": sample_rate,
+            "channels": channels,
         },
         should_cancel=should_cancel,
     )
     native_result, raw = bounded_snapshot(attempt / "result.json", 16 * 1024**2)
     result = NativeTranscriptionResult.model_validate(load_unique_json(raw))
     kinds: tuple[Literal["note", "onset", "contour"], ...] = ("note", "onset", "contour")
-    report = TranscriptionCandidate(
-        decode_report=source.decode_report,
-        source_audio=source.source,
-        pcm=source.pcm,
-        frames=source.frames,
-        sample_rate=source.sample_rate,
-        channels=source.channels,
-        decode_dependencies=source.dependencies,
-        decoder_payload_root=source.decoder_payload_root,
+    return PitchCandidate(
+        pcm=pcm,
+        frames=frames,
+        sample_rate=sample_rate,
+        channels=channels,
         backend_record=backend_record,
         backend=model,
         model_dependencies=dependencies,
@@ -99,6 +131,11 @@ def transcribe_audio(
         stdout=capture_stream_input(attempt / "stdout.bin"),
         stderr=capture_stream_input(attempt / "stderr.bin"),
     )
+
+
+def publish_transcription(
+    report: TranscriptionCandidate, *, should_cancel: Callable[[], bool] | None = None
+) -> None:
     validate_transcription_artifacts(report, should_cancel=should_cancel)
     content = report.model_dump_json(indent=2)
     if len(content.encode("utf-8")) > 16 * 1024**2:
@@ -113,9 +150,13 @@ def transcribe_audio(
         check_cancel(should_cancel)
 
     publish_verified_report(
-        root / "transcription.json",
+        report.native_result.path.parent.parent / "transcription.json",
         content,
-        [source.decode_report.path, source.source.path, source.pcm.path, backend_record.path],
+        [
+            report.decode_report.path,
+            report.source_audio.path,
+            report.pcm.path,
+            report.backend_record.path,
+        ],
         verify_current,
     )
-    return report

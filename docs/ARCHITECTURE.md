@@ -78,6 +78,22 @@ names only after provisional bytes and final current evidence pass. No rejecting
 follows the exclusive hard-link commit point. These development commands do not complete
 canonical jobs or grant musical/writer/host qualification. See [separation](SEPARATION.zh-CN.md).
 
+`core.transcription.PitchCandidate` factors source-neutral raw inference evidence; original
+`TranscriptionCandidate` v1 decoder semantics remain separate. `core.stem_transcription`
+declares explicitly estimated lineage with thin identities for complete current reports.
+`importer.stem_audio` widens finite float32 values exactly; `validator.stem_audio` independently
+derives IEEE bits with integers. `pipeline.stem_transcription` owns one fresh separation
+replay per batch before pitched inference. Its validator re-reads complete referenced
+snapshots and repeats the full batch for replay, without qualifying music, jobs or writes.
+See [stem transcription](STEM_TRANSCRIPTION.zh-CN.md).
+
+Within an owning stem invocation, `core.inference_snapshot` detaches immutable expected
+file identities. `validator.stem_snapshot` rechecks complete current payload membership,
+all bytes and runtime metadata to preserve already established numeric relationships.
+Publication does not repeatedly reconstruct identical waveforms. Saved untrusted batches
+still receive full independent numeric validation and actual fresh model replay; these
+guards are never serialized as qualification or reused across invocations.
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service

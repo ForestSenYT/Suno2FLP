@@ -53,6 +53,12 @@ every overlap-add sample; fresh native replay compares complete signals before p
 a separate receipt. These are unqualified inference candidates, not canonical job success,
 editable notes, host acceptance or an end-user conversion. Existing source MIDI is unchanged.
 
+[Estimated stem transcription](docs/STEM_TRANSCRIPTION.zh-CN.md) connects vocals/bass/other
+through exact finite float widening and explicit original-song ancestry. `transcribe-stems`
+owns a fresh full separation replay; `verify-stem-transcription` repeats separation and all
+pitched predictions in new files. Drums, musical qualification, arrangement, jobs and FLP
+delivery remain blocked. No model runtime enters the core or download occurs implicitly.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2
