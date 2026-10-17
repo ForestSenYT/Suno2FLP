@@ -1,5 +1,18 @@
 # Risk register
 
+[Spleeter runtime probes](SPLEETER_RUNTIME.zh-CN.md) cannot establish separation quality:
+the default model zeros high-frequency masks, and sum-to-source conservation through
+an explicit residual is not correct instrument assignment. TF1 Session determinism
+is observed per attempt, not promised universally. Windows upstream TFIO0.32.0 has no
+wheel; the reduced local graph recipe disables the metadata-selected0.31.0 plugin and
+does not qualify its native compatibility. Fixed source/checkpoint/member hashes,
+safe explicit AppleDouble relocation, retained notices, CPU/plugin environment control,
+complete payload checks and independent source/shape/repeat/impulse tests bound the new
+surface. Native/OS vulnerabilities, long-song chunk boundaries, resampling, SI-SDR,
+memory/performance and installer licensing remain open. Existing files and old writer
+restrictions are unaffected; neither preparation nor a native probe can advance a job
+to succeeded or enable an FLP write.
+
 [Basic Pitch candidates](BASIC_PITCH.zh-CN.md) retain every raw window and explicit
 source-sample anchor; the upstream integer86FPS/time heuristic and MIDI defaults are
 not exact source clocks. Model onset accuracy, activation calibration and mixed-song

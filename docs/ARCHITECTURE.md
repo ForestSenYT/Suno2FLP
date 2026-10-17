@@ -56,6 +56,15 @@ development surface while canonical separation/analyze/transcribe stages remain 
 There is no model-metadata shortcut to job/quality/writer success. See [model recipe,
 clock and limits](BASIC_PITCH.zh-CN.md).
 
+`core.separation_runtime` describes a separate fixed local graph backend;
+`integrations.spleeter_backend` installs only audited regular members and rechecks current
+payloads before/after the bounded `spleeter_worker`. The worker builds the pinned graph,
+restores only an explicit local checkpoint and returns full original probe signals.
+`core.separation_probe` independently checks source bytes, complete numeric outputs,
+repeats, impulse origin and an explicit unassigned residual. Thin prepare/verify commands
+provide runtime evidence only. Whole-song separation and canonical job-stage integration
+remain unavailable; see [dependency deviations and limits](SPLEETER_RUNTIME.zh-CN.md).
+
 The optional `gui` package presents that same service using Qt Essentials 6.12.0.
 `gui.model` is Qt-independent; `gui.worker` runs a single operation in a Qt thread pool,
 and queued signals update `gui.window`. Cooperative cancellation is checked at service

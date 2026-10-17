@@ -48,7 +48,10 @@ def archive_members(
     source_inventory: list[str] | None = None,
     omitted_members: dict[str, str] | None = None,
     max_expanded: int = 1024**3,
+    max_member_bytes: int = 128 * 1024**2,
 ) -> dict[str, ArchiveMember]:
+    if type(max_member_bytes) is not int or not 0 < max_member_bytes <= 1024**3:
+        raise ValueError("Archive member budget must be an integer between 1 byte and 1 GiB")
     result: dict[str, ArchiveMember] = {}
     seen: set[str] = set()
     expanded = 0
@@ -61,7 +64,7 @@ def archive_members(
         if name.casefold() in seen:
             raise ValueError("Case-insensitive duplicate archive member")
         expanded += size
-        if size > 128 * 1024**2 or expanded > max_expanded or len(seen) >= 20_000:
+        if size > max_member_bytes or expanded > max_expanded or len(seen) >= 20_000:
             raise ValueError("Archive expansion exceeds budget")
         seen.add(name.casefold())
         if name in omitted:
@@ -82,7 +85,7 @@ def archive_members(
                     raise ValueError("Linked or special archive member")
                 if entry.is_dir():
                     continue
-                if entry.file_size > min(max_expanded, 128 * 1024**2):
+                if entry.file_size > min(max_expanded, max_member_bytes):
                     raise ValueError("Archive member exceeds budget")
                 with archive.open(entry) as stream:
                     digest = _digest(stream)
@@ -97,7 +100,7 @@ def archive_members(
                     continue
                 if not tar_entry.isfile():
                     raise ValueError("Linked or special archive member")
-                if tar_entry.size > min(max_expanded, 128 * 1024**2):
+                if tar_entry.size > min(max_expanded, max_member_bytes):
                     raise ValueError("Archive member exceeds budget")
                 tar_stream = source_archive.extractfile(tar_entry)
                 assert tar_stream is not None
