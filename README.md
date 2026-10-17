@@ -84,8 +84,12 @@ exact original audio clock. It preserves note/bend addresses and explicit estima
 roles, with current-file reconstruction checks. Separate v2 commands
 `compose-percussion-arrangement` / `verify-percussion-arrangement` join a current drum
 candidate with all peaks/rejections and exact original sample positions. They retain
-both distinct model clocks and complete producer references. Playable routing, MIDI/FLP
-serialization, music qualification and canonical conversion jobs remain blocked.
+both distinct model clocks and complete producer references. The new
+`export-estimated-midi` / `verify-estimated-midi` commands export and independently
+reconstruct an editable **unqualified MIDI candidate** with a declared technical clock,
+complete occurrence/timing audits and preserved native bend references. See the
+[preview policy and limitations](docs/ESTIMATED_MIDI.zh-CN.md). Playable instrument
+routing, FLP serialization, music qualification and canonical conversion jobs remain blocked.
 
 [Read-only Windows output discovery](docs/HOST_READINESS.zh-CN.md) adds
 `inspect-windows-audio`: isolated Core Audio queries, complete endpoint/default-role
