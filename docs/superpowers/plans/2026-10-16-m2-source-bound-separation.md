@@ -83,13 +83,13 @@
 - [x] RED/GREEN: CLI3missingcommandRED ->GREEN; current prerequisite failures and unqualified candidate status, genuinely installed smoke sees commands without importing native dependencies. Wheel149members/sdist334members audited against public files; no private payload.
 - [x] Compare bounded native output to a separate full-graph process on an original nonzero stereo fixture crossing two partition boundaries with awkward tail and impulses; fixed tolerance above, complete dimensions and peak positions checked. Maxabs2.235e-8 below1e-5; all four impulsepositions exact; source/helper/backend unchanged. Public opt-in reproduction added.
 - [x] Independently test the declared polyphase alignment/filter recipe on original small signals and multiple rates; no hidden fallback or rate reinterpretation.14cases/7rates/mono-stereo/37frames pass the frozen2e-6 scalar sinc/Kaiser reference including complete retained tails.
-- [ ] In a new ignored delivery directory, decode the existing real song read-only, generate complete source-bound stems and fresh replay; retain all raw evidence and source identities. Record native CPU/memory/timing, not music acceptance. Any unsupported evidence remains blocked.
+- [x] In a new ignored delivery directory, decoded the existing175s48000Hzstereo song read-only, generated complete source-bound stems and fresh replay.15partitions/allrawsignalbytesmatched; original/sourceimplementation unchanged; conservation2.78e-17. Native39.16s/~998MiBworking-set, candidate356s/replay513s including complete checks. Raw evidence remains local; no music/host/writer qualification.
 
 ### Task6: Documentation and reviewed integration
 
 **Files:** new `docs/SEPARATION.zh-CN.md`; README, ARCHITECTURE, DELIVERY_ROADMAP, BASIC_PITCH/SPLEETER_RUNTIME and risks/integration docs as affected.
 
-- [ ] Document exact sample/partition/resampling/overlap/residual rules, completion marker semantics, genuine results and remaining quality/job/host/GUI gates. Mark PR10 merged without rewriting the approved design.
-- [ ] Locked sync, full tests, Ruff check/format, mypy; build and genuine installed CLI smoke, public package inventory only. Native and private assets stay excluded.
+- [x] Document exact sample/partition/resampling/overlap/residual rules, completion marker semantics, genuine results and remaining quality/job/host/GUI gates. Marked PR10 merged without rewriting the approved design.
+- [x] Locked sync/full1396passed37skipped/Ruff314formatted/mypy141; wheel/sdist built from offlinecachedbuilddependencies after initial restrictedDNSfailure. Genuine noneditable installed CLI smokes pass; package inventory149/334members public-only. Final docs require final archive refresh, no code changes since native source snapshot.
 - [ ] One fresh strongest-model full-branch review bound to actual head; fix significant findings, rebind changed head per repository rule. New M2 PR with public-only file inventory; eight current checks/latest main/protection/threads before exact-head squash merge. Confirm actual merge, identical tree and main CI.
 - [ ] Freeze this slice's new private evidence and protect earlier checkpoints unchanged. Keep the overall goal active until all product requirements pass.
