@@ -45,9 +45,20 @@ def audio_flp_recipe() -> ScoringRecipe:
         package / p
         for p in (
             "core/audio_flp.py",
+            "core/backend_models.py",
+            "core/evidence.py",
+            "core/errors.py",
+            "core/models.py",
+            "core/offline_files.py",
+            "core/offline_models.py",
+            "core/report_publication.py",
+            "core/template_inventory.py",
+            "core/template_profiles.py",
             "flp_builder/audio_profile.py",
             "flp_builder/audio_preview.py",
             "flp_builder/preview_samples.py",
+            "integrations/basic_pitch_backend.py",
+            "integrations/template_inventory.py",
             "validator/audio_flp.py",
             "validator/audio_midi_source.py",
             "pipeline/audio_flp.py",
@@ -147,6 +158,8 @@ def export_audio_flp(
     frozen_plan = plan.model_dump_json()
 
     def verify() -> None:
+        recheck()
+        check_cancel(should_cancel)
         current = AudioFlpExport.model_validate_json(serialized)
         if current.plan.model_dump_json() != frozen_plan or current.recipe != audio_flp_recipe():
             raise ValueError("Candidate plan/recipe changed before publication")
@@ -169,8 +182,6 @@ def export_audio_flp(
                 raise ValueError("Candidate artifact changed")
         verify_audio_preview((root / "project.flp").read_bytes(), profile, plan)
         _verify_members(root, set(assets), complete=False)
-        recheck()
-        check_cancel(should_cancel)
 
     publish_verified_report(root / "audio-flp.json", serialized, protected, verify)
     return result
@@ -196,6 +207,8 @@ def verify_audio_flp_export(report: Path, *, should_cancel: Cancel = None) -> Au
     ):
         raise ValueError("Candidate source/plan changed")
     a, b = saved.components
+    recheck()
+    check_cancel(should_cancel)
     verify_inputs(
         [identity, a, b, *saved.files, saved.recipe.python_executable, *saved.recipe.files]
     )
@@ -212,7 +225,5 @@ def verify_audio_flp_export(report: Path, *, should_cancel: Cancel = None) -> Au
     _verify_members(root, expected_paths, complete=True)
     if (root / "audio-flp.pending.json").read_bytes() != raw:
         raise ValueError("Publication documents differ")
-    recheck()
     verify_inputs([identity, a, b, *saved.files])
-    check_cancel(should_cancel)
     return saved

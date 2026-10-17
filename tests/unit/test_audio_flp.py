@@ -150,3 +150,20 @@ def test_noncanonical_replacement_header_is_rejected():
     struct.pack_into("<I", changed, 18, len(changed) - 22)
     with pytest.raises((ValueError, Suno2FLPError)):
         verify_audio_preview(bytes(changed), profile, plan)
+
+
+def test_channel_blocks_cannot_move_after_global_suffix():
+    profile, _, plan = case()
+    raw = encode_audio_preview(profile, plan)
+    inv = scan_template_inventory(raw)
+    first = next(j for j, e in enumerate(inv.events) if e.event_id == 64)
+    count = 3 * len(profile.synth) + 9 * len(profile.sample)
+    sequence = [
+        *inv.events[:first],
+        *inv.events[first + count :],
+        *inv.events[first : first + count],
+    ]
+    body = b"".join(raw[e.file_offset : e.payload_offset + e.payload_size] for e in sequence)
+    reordered = raw[:18] + struct.pack("<I", len(body)) + body
+    with pytest.raises((ValueError, Suno2FLPError)):
+        verify_audio_preview(reordered, profile, plan)

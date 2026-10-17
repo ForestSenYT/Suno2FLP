@@ -29,6 +29,16 @@ def verify_audio_preview(raw: bytes, profile: AudioComponents, plan: AudioPrevie
     header[10:14] = struct.pack("<HH", 12, 960)
     if raw[:18] != bytes(header) or len(raw) != 22 + int.from_bytes(raw[18:22], "little"):
         raise ValueError("Candidate header/framing changed")
+    insertion = profile.synth[0].event_index
+    reference_ids = [e.event_id for e in profile.inventory.events]
+    expected_ids = (
+        reference_ids[:insertion]
+        + [e.event_id for e in profile.synth] * 3
+        + [e.event_id for e in profile.sample] * 9
+        + reference_ids[insertion + len(profile.synth) :]
+    )
+    if [e.event_id for e in inv.events] != expected_ids:
+        raise ValueError("Complete event order differs from the assessed reference scope")
     starts = [j for j, e in enumerate(inv.events) if e.event_id == 64]
     if (
         len(starts) != 12

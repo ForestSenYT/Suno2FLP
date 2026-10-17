@@ -59,3 +59,69 @@ def test_missing_components_and_existing_destination_fail_before_source_load(tmp
     output.mkdir()
     with pytest.raises(ValueError):
         export_audio_flp(tmp_path / "no.json", tmp_path / "a", tmp_path / "b", output)
+
+
+def test_current_recipe_includes_executed_parser_dependencies():
+    from pathlib import Path
+
+    from suno2flp.pipeline.audio_flp import audio_flp_recipe
+
+    package = Path(audio_profile.__file__).resolve().parent.parent
+    files = {i.path for i in audio_flp_recipe().files}
+    for name in (
+        "integrations/template_inventory.py",
+        "core/template_inventory.py",
+        "core/template_profiles.py",
+    ):
+        assert package / name in files
+
+
+@pytest.mark.parametrize("protocol", [(1025, 2)], indirect=True)
+@pytest.mark.parametrize("mutation", ["artifact", "membership"])
+@pytest.mark.parametrize("boundary", ["publication", "verification"])
+def test_final_source_guard_cannot_accept_changed_outputs(
+    current_inputs, tmp_path, monkeypatch, mutation, boundary
+):
+    import hashlib
+
+    import suno2flp.pipeline.audio_flp as service
+
+    base, sample = fixtures()
+    monkeypatch.setattr(audio_profile, "BASE_SHA256", hashlib.sha256(base).hexdigest())
+    monkeypatch.setattr(audio_profile, "SAMPLER_SHA256", hashlib.sha256(sample).hexdigest())
+    component_root = tmp_path / "components"
+    component_root.mkdir()
+    a = component_root / "base.flp"
+    b = component_root / "sampler.flp"
+    a.write_bytes(base)
+    b.write_bytes(sample)
+    source = tmp_path / "midi"
+    export_estimated_midi(current_inputs.batch, current_inputs.drums, source)
+    root = tmp_path / "candidate"
+    original = service.load_audio_midi
+    if boundary == "verification":
+        service.export_audio_flp(source / "estimated-midi.json", a, b, root)
+        completion = capture_stream_input(root / "audio-flp.json")
+
+    def load(*args, **kwargs):
+        saved, identity, raw, protected, recheck = original(*args, **kwargs)
+
+        def late():
+            recheck()
+            if mutation == "artifact":
+                (root / "project.flp").write_bytes(b"changed during source guard")
+            else:
+                (root / "unlisted.txt").write_text("late extra member")
+
+        return saved, identity, raw, protected, late
+
+    monkeypatch.setattr(service, "load_audio_midi", load)
+    with pytest.raises((ValueError, Suno2FLPError)):
+        if boundary == "publication":
+            service.export_audio_flp(source / "estimated-midi.json", a, b, root)
+        else:
+            service.verify_audio_flp_export(root / "audio-flp.json")
+    if boundary == "publication":
+        assert not (root / "audio-flp.json").exists()
+    else:
+        assert capture_stream_input(root / "audio-flp.json") == completion
