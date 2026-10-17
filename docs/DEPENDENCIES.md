@@ -1,5 +1,26 @@
 # Dependencies
 
+The [Spleeter local graph runtime](SPLEETER_RUNTIME.zh-CN.md) pins50 official wheels,
+the official v1.4.0 4stems archive and four supplemental notices in
+`integrations/spleeter_pins.json`. Spleeter2.4.2 maps to
+`c8854001ac8acad34a9bc2bd15f28475541828b1`; model archive SHA256 is
+`3adb4a50ad4eb18c7c4d65fcf4cf2367a07d48408a5eb7d03cd20067429dfaa8`.
+The explicit Windows CPU recipe uses TensorFlow/Intel2.12.1, NumPy1.24.3,
+SciPy1.15.3 and pandas1.5.3 in a separate payload, without core lock changes.
+Default Spleeter's mandatory TFIO0.32.0 has no Windows wheel. This local-graph recipe
+retains TensorFlow's metadata-compatible0.31.0 but disables its native plugin; it does
+not claim the upstream Spleeter closure or TFIO compatibility. CLI/FFmpeg/MWF/cloud
+paths remain unsupported. Pandas is a real top-level import even for inference.
+
+All50 wheel notices/native terms and four exact official source licenses are retained.
+Supplemental notices cover FlatBuffers25.12.19, TensorFlow2.12.1's Windows meta-package,
+Estimator2.12.0 and TensorBoard data-server0.7.2 (its own data-server tag). Spleeter code
+and model MIT attribution follows the authors' published JOSS statement, with the
+README/question ambiguity preserved. Main distribution labels do not replace bundled
+GCC/LLVM/OpenBLAS/other notices or future installer obligations. No wheels, weights,
+private signals or vendor code are shipped in Git or either application distribution.
+See [primary evidence and fixed notice links](research/2026-10-16-spleeter-runtime.zh-CN.md).
+
 The [Basic Pitch candidate adapter](BASIC_PITCH.zh-CN.md) uses an explicitly prepared
 private Windows x64/CPython3.11.16 CPU runtime: Basic Pitch0.4.0 at
 `9991303bba609a3b93089d13ec80d1d495083596`, ONNX Runtime1.23.2 and 40 other fixed PyPI

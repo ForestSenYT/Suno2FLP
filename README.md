@@ -39,6 +39,12 @@ rehash-only forgeries. `prepare-basic-pitch`, `verify-basic-pitch`, `transcribe-
 `verify-transcription` are development commands. The core imports/downloads no model;
 separation, role/tempo inference, corpus qualification, jobs and FLP delivery remain blocked.
 
+[Isolated Spleeter runtime preparation](docs/SPLEETER_RUNTIME.zh-CN.md) adds a fixed local
+graph recipe and explicit CPU checkpoint probes. `prepare-spleeter` and `verify-spleeter`
+retain current artifact/payload identities and complete original signal outputs. The
+Windows recipe explicitly differs from upstream CLI dependencies; no automatic download,
+whole-song separation, model quality or job/writer qualification is granted by these commands.
+
 Implemented: safe workspace creation, strict YAML configuration, recursive MIDI/WAV
 discovery, basic metadata, conservative filename matching, validation, environment checks,
 Phase 1 track-aware MIDI import plus opt-in deterministic note cleanup, and Phase 2

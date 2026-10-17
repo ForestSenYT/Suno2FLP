@@ -1,5 +1,18 @@
 # Integration evidence and strategy
 
+The [Spleeter runtime slice](SPLEETER_RUNTIME.zh-CN.md) introduces explicit private
+preparation and original signal probes, not full-song separation. It audits code/model
+license evidence and exact source-to-wheel correspondence, safely installs the fixed
+regular members and restores an explicit local TensorFlow checkpoint in a bounded
+CPU child. The Windows graph recipe deliberately differs from upstream CLI dependencies;
+TFIO/plugin discovery/downloads/FFmpeg/MWF are disabled. Complete current payload and
+native output readback are checked at publication boundaries. Four stems' default
+bandwidth limitation is visible through an unassigned residual, never hidden as another
+instrument. Actual runtime verification, full-song timing/quality, canonical job support
+and host/writer acceptance remain distinct statuses. The
+[independent research](research/2026-10-16-spleeter-runtime.zh-CN.md) records default
+dependency failure and the limited scope of TF1 Session repeatability.
+
 The [Basic Pitch inference candidate](BASIC_PITCH.zh-CN.md) is a concrete isolated model
 integration, not model qualification: audited Apache code/model evidence, exact wheel
 and source correspondence, trusted current application Python, local fixed ONNX path

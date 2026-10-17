@@ -38,7 +38,7 @@
 - [x] Finish official downloads, inspect actual member sizes/hashes/notices and source correspondence. Record default resolution failure and reduced recipe. Preserve failures.
 - [x] RED: oversized/aggregate archives and new schema reject wrong fixed profile, incomplete probe evidence and fake qualification. Implement GREEN with unchanged old archive defaults and meaningful small synthetic budget tests.
 - [x] Freeze complete fixed recipe; confirm model members and retain license references. No setup scripts or unreviewed pickle/meta-graph execution.
-- [ ] Focused tests and commit; ledger exact result.
+- [x] Focused tests and commit; ledger exact result (110ce10; archive20/contract3, full1239passed34skipped).
 
 ### Task 2: Explicit preparation and current runtime verification
 
@@ -46,9 +46,9 @@
 
 **Produces:** `provision_spleeter(output, artifacts) -> SpleeterBackend`, `read_spleeter(root) -> SpleeterBackend`, `verify_spleeter(root, output, should_cancel=None) -> SpleeterProbe`. Reuse established guarded paths/current file-tree and bounded process boundaries; no model import in core.
 
-- [ ] RED: missing or altered artifacts, changed/extra payload, wrong current runtime/adapter, output overlap/existence, malicious archive members and invalid probe provenance. Implement exact immutable recipe validation and exclusive installation.
-- [ ] Preparation consumes already downloaded files; probe is separate. Keep every native attempt/log and check payload/current dependencies before and after child and result publication.
-- [ ] Focused tests and commit; ledger exact result.
+- [x] RED: missing or altered artifacts, changed/extra payload, wrong current runtime/adapter, output overlap/existence, malicious archive members and invalid probe provenance. Implement exact immutable recipe validation and exclusive installation.
+- [x] Preparation consumes already downloaded files; probe is separate. Keep every native attempt/log and check payload/current dependencies before and after child and result publication. A reproduced result-parse/hash race now uses one captured read and retained failure evidence.
+- [x] Focused tests and commit; ledger exact result (18 backend cases, including reproduced parse/identity mutation).
 
 ### Task 3: Real graph handshake and thin CLI
 
@@ -56,16 +56,16 @@
 
 **Produces:** Only fixed `probe` operation with authored array fixtures and retained raw outputs/report. Unsupported operations/environments fail explicitly.
 
-- [ ] RED: wrong output length/dtype/nonfinite values, missing stems, changed repeated bytes, invalid restore/loaded modules, malformed input and timeout/cancellation protocol. Native dependencies are opt-in; default tests remain offline.
-- [ ] Build fixed graph and restore exact checkpoint. Run real native fixtures twice, compare bytes and retain complete artifacts. Measure actual geometry/residual; no blanket deterministic or music-quality claim.
-- [ ] CLI distinguishes prepared, native verified and model unqualified. Installed-wheel smoke checks public commands and explicit prerequisite failures.
-- [ ] Actual native integration and focused tests; commit and ledger results.
+- [x] RED: wrong output length/nonfinite values, missing stems, changed repeated bytes, invalid loaded modules, malformed startup and native protocol. Timeout/cancellation use the already tested owned-process boundary; actual output dtype is checked by the worker. Native dependencies are opt-in; default tests remain offline.
+- [x] Build fixed graph and restore exact checkpoint. First real native test passed with two independent processes, each fixture twice,296 variables and exact impulse positions; retain all evidence. Final-adapter native replay remains a Task4 merge prerequisite. No blanket deterministic or music-quality claim.
+- [x] CLI distinguishes prepared, native verified and model unqualified. Installed-wheel smoke checks public commands and explicit prerequisite failures; added CI smoke.
+- [x] First actual native integration and focused tests; retain source snapshot and ledger. Final adapter replay is running separately and required before merge.
 
 ### Task 4: Documentation, verification and reviewed integration
 
 **Files:** dedicated runtime guide, README, ARCHITECTURE, INTEGRATIONS, DEPENDENCIES, RISK_REGISTER, DELIVERY_ROADMAP; research evidence and this plan.
 
-- [ ] Document exact artifacts/licenses/dependency deviation, observed native evidence and outstanding source-bound chunk/resample/residual/quality work; update Basic Pitch as PR9 merged.
-- [ ] Run `uv sync --locked`, full pytest, Ruff, format, mypy; build and installed CLI smoke. No private/vendor files in Git or distributions; original/old protected records remain unchanged.
+- [x] Document exact artifacts/licenses/dependency deviation, observed native evidence and outstanding source-bound chunk/resample/residual/quality work; update Basic Pitch as PR9 merged.
+- [x] Locked sync, full1273passed35skipped, Ruff295formatted/mypy133, build and installed CLI smoke passed. Legacy protected records and55,411previous-phase identities unchanged. Final-adapter native replay and reviewed-head CI remain required before merge.
 - [ ] One fresh strongest-model whole-branch review; resolve significant findings and bind any new head. Create/attach new M2 PR, validate current-head eight CI results/latestmain/protection/threads, merge only reviewed head and confirm merge/main CI.
 - [ ] Freeze this slice's private evidence; goal remains active. Next short branch implements full source-bound separation candidates and independent replay using this runtime, with source-rate timing and explicit residual.
