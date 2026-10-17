@@ -160,7 +160,10 @@ def drum_guard(
         )
     return InferenceSnapshot.capture(
         record.witnesses(),
-        [(record.backend.root / "packages", record.model_dependencies)],
+        [
+            (record.backend.root / "packages", record.model_dependencies),
+            (record.root / "native", record.native_witnesses),
+        ],
         should_cancel=should_cancel,
     )
 
@@ -231,6 +234,7 @@ def verify_drum_transcription(
         raise ValueError("Complete fresh native drum replay differs from saved candidate")
     frozen.recheck(should_cancel=should_cancel)
     verify_inputs([identity])
+    replay_guard = drum_guard(replay, source, should_cancel=should_cancel)
     _publish_drums(replay, source, should_cancel=should_cancel)
     replay_id = capture_stream_input(replay.root / "drum-transcription.json")
     receipt = DrumReplayReceipt(original_report=identity, replay_report=replay_id)
@@ -238,6 +242,7 @@ def verify_drum_transcription(
     def verify() -> None:
         source.recheck(drum_recipe(), should_cancel=should_cancel)
         frozen.recheck(should_cancel=should_cancel)
+        replay_guard.recheck(should_cancel=should_cancel)
         verify_inputs([identity, replay_id])
         cancelled(should_cancel)
 

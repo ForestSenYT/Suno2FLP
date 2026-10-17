@@ -5,7 +5,7 @@ from pathlib import Path
 from suno2flp.core.drum_scoring import DrumAnnotation
 from suno2flp.core.drum_transcription import DrumTranscriptionCandidate
 from suno2flp.core.file_tree import capture_file_tree
-from suno2flp.core.offline_files import capture_stream_input
+from suno2flp.core.offline_files import capture_stream_input, guarded_path
 from suno2flp.core.report_publication import publish_verified_report
 from suno2flp.integrations.basic_pitch_backend import new_model_directory
 from suno2flp.integrations.beat_backend import Cancel, cancelled
@@ -125,6 +125,23 @@ def export_drum_annotation(
 ) -> DrumAnnotation:
     identity, report, source = read_drum_candidate(path, should_cancel=should_cancel)
     original = report.source.original
+    destination = guarded_path(output)
+    producer_roots = [
+        report.root,
+        report.backend.root,
+        report.source.separation_report.path.parent,
+        report.source.separation_replay.path.parent,
+        original.backend.root,
+        report.source.replay.backend.root,
+        original.decode_report.path.parent,
+    ]
+    producer_roots.extend(
+        s.decoder_payload_root
+        for s in (original, report.source.replay)
+        if s.decoder_payload_root is not None
+    )
+    if any(destination.is_relative_to(guarded_path(root)) for root in producer_roots):
+        raise ValueError("Export drum annotations outside all immutable producer directories")
     annotation = DrumAnnotation(
         role="candidate",
         origin="inferred_candidate",

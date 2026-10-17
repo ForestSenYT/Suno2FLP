@@ -251,3 +251,64 @@ def test_forged_input_peak_observation_rejected_from_current_samples(drums, tmp_
     path.write_text(json.dumps(data), encoding="utf-8")
     with pytest.raises(ValueError, match="peak"):
         read_drum_candidate(path)
+
+
+@pytest.mark.parametrize("protocol", [(1025, 2)], indirect=True)
+@pytest.mark.parametrize("mutation", ["changed-array", "new-member"])
+def test_receipt_rechecks_complete_fresh_native_tree(drums, tmp_path, monkeypatch, mutation):
+    import suno2flp.validator.drum_transcription as validator
+
+    report = transcribe_drums(drums.separation, drums.receipt, drums.backend, tmp_path / "drums")
+    output = tmp_path / "replay"
+    publish = validator.publish_verified_report
+
+    def late(path, content, protected, verify):
+        def mutate_then_verify():
+            if mutation == "changed-array":
+                target = output / "native/onsets.f32"
+                target.write_bytes(target.read_bytes()[:-4])
+            else:
+                (output / "native/unexpected.json").write_text("{}", encoding="utf-8")
+            verify()
+
+        return publish(path, content, protected, mutate_then_verify)
+
+    monkeypatch.setattr(validator, "publish_verified_report", late)
+    with pytest.raises((ValueError, Suno2FLPError)):
+        verify_drum_transcription(report.root / "drum-transcription.json", output)
+    assert (output / "drum-transcription.json").exists()
+    assert not (output / "replay.json").exists()
+
+
+@pytest.mark.parametrize("protocol", [(1025, 2)], indirect=True)
+@pytest.mark.parametrize("producer", ["candidate", "native", "source", "source-replay"])
+def test_annotation_rejects_producer_roots_before_any_write(drums, tmp_path, producer):
+    report = transcribe_drums(drums.separation, drums.receipt, drums.backend, tmp_path / "drums")
+    roots = {
+        "candidate": report.root,
+        "native": report.root / "native",
+        "source": drums.separation.parent / "native",
+        "source-replay": drums.receipt.parent / "native",
+    }
+    root = roots[producer]
+    before = capture_file_tree(root)
+    with pytest.raises((ValueError, Suno2FLPError)):
+        export_drum_annotation(report.root / "drum-transcription.json", root / "annotation.json")
+    assert capture_file_tree(root) == before
+
+
+@pytest.mark.parametrize("protocol", [(1025, 2)], indirect=True)
+def test_candidate_publication_rechecks_native_membership(drums, tmp_path, monkeypatch):
+    import suno2flp.pipeline.drum_transcription as pipeline
+
+    output = tmp_path / "drums"
+    publish = pipeline.publish_verified_report
+
+    def late(path, content, protected, verify):
+        (output / "native/unexpected.json").write_text("{}", encoding="utf-8")
+        return publish(path, content, protected, verify)
+
+    monkeypatch.setattr(pipeline, "publish_verified_report", late)
+    with pytest.raises(ValueError, match="payload changed"):
+        transcribe_drums(drums.separation, drums.receipt, drums.backend, output)
+    assert not (output / "drum-transcription.json").exists()
