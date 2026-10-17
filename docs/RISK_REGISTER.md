@@ -1,5 +1,13 @@
 # Risk register
 
+[Windows output discovery](HOST_READINESS.zh-CN.md) is volatile point-in-time evidence,
+not current device availability or host compatibility. API errors/partial snapshots must
+not become zero-device success; changing defaults require a new complete observation.
+Selected OS-file hashes do not authenticate every mapped page, service, driver or native
+dependency. Two different new FL26 reference copies still stall without active outputs;
+causality and successful device-restoration controls remain unverified. Do not retry
+unchanged failed host experiments, alter settings or promote cached reports into execution.
+
 [Beat This! rhythm inference](BEAT_ANALYSIS.zh-CN.md) is not model or song
 qualification. Minimal postprocessing averages adjacent peaks and moves downbeats;
 full raw logits, half-frame source anchors and binary64 alignment must remain

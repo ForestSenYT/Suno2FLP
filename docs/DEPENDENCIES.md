@@ -230,6 +230,14 @@ used installed proprietary MIDI Out/Fruity LSD and Windows DirectMusic/GM resour
 none of those presets, plugins, banks or experiment files are distributed. Local file
 presence does not establish redistribution rights. See [evidence and scope](MIDI_EVENT_COMPARISON.zh-CN.md).
 
+The [Windows output prerequisite](HOST_READINESS.zh-CN.md) uses original standard-library
+ctypes/COM interop in a separate ordinary Windows x64 CPython3.11.16/3.14.7 process.
+It adds no package/lock dependency, downloaded driver or redistributed implementation.
+Selected loaded Windows System32 API files (kernel32/ole32/MMDevApi) are identified and
+hashed per invocation; these Windows components remain in the user's OS installation,
+not the distribution. Their identity is local evidence, not one universal Windows pin
+or a complete native dependency/driver audit. No audio streams or settings are changed.
+
 The [rhythm backend](BEAT_ANALYSIS.zh-CN.md) separately pins19 Windows CPython3.11.16
 wheels and official final0 weights; no core or lock dependency changes. Versions:
 beat-this1.1.0, torch/torchaudio2.11.0+cpu, numpy1.26.4, soxr0.3.7,
