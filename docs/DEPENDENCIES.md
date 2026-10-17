@@ -230,6 +230,17 @@ used installed proprietary MIDI Out/Fruity LSD and Windows DirectMusic/GM resour
 none of those presets, plugins, banks or experiment files are distributed. Local file
 presence does not establish redistribution rights. See [evidence and scope](MIDI_EVENT_COMPARISON.zh-CN.md).
 
+The [rhythm backend](BEAT_ANALYSIS.zh-CN.md) separately pins19 Windows CPython3.11.16
+wheels and official final0 weights; no core or lock dependency changes. Versions:
+beat-this1.1.0, torch/torchaudio2.11.0+cpu, numpy1.26.4, soxr0.3.7,
+rotary-embedding-torch0.6.4, einops0.8.0, beartype0.18.5, colorama0.4.6,
+filelock4.2.0, fsspec2026.9.0, jinja2 3.1.6, markupsafe3.0.4, mpmath1.3.0,
+networkx3.6.1, setuptools81.0.0, sympy1.14.0, tqdm4.66.4, typing-extensions4.15.0.
+Code/weights are MIT; dependencies include BSD variants, Soxr LGPL2.1+,
+tqdm MPL2.0/MIT and typing-extensions PSF2.0. Complete actual bundled notices
+and artifact hashes are retained in `integrations/beat_pins.json`; wheels/models
+are not distributed. Training-data rights are separate from code licensing.
+
 The [isolated MCP adoption audit](FLSTUDIO_MCP_AUDIT.zh-CN.md) separately builds the
 original Music2DAW MCP at the existing pin with SDK10.0.401/runtime10.0.12/MCP1.4.1,
 and installs live candidate e6eff37 with Python3.11.16/FastMCP2.14.5/MCP1.30.0 into a

@@ -262,6 +262,20 @@ Evidence: [metadata](https://github.com/revoydotdev/demixer/blob/7865ce616d4f8d3
 [License](https://github.com/revoydotdev/demixer/blob/7865ce616d4f8d3755078bbc30d4bd2da5b0a70a/LICENSE): AGPL-3.0-or-later;
 model/data/library terms are separate. No bundling or copied implementation.
 
+## Beat This! isolated rhythm runtime
+
+[Beat This!1.1.0](https://github.com/CPJKU/beat_this/tree/b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c),
+source pin `b95c8ab0c58c2d9fcfd40508ae8dffbc05ac4f5c`, uses fixed official final0
+weights and19 separately supplied wheels. Windows x64 CPython3.11.16 with matched
+CPU Torch/Torchaudio2.11.0 is isolated from core. No download/build/URL fallback:
+weights-only loading, audited tensor state, complete payload and actual repeated
+native signal probes are required. Source-wheel correspondence is pinned.
+
+Code/published weights have an MIT grant; upstream separately notes restrictions on
+training audio. This does not establish training/downstream music rights. See
+[rhythm scope and limitations](BEAT_ANALYSIS.zh-CN.md). Model qualification,
+corpus/music quality, jobs, writer and host acceptance remain blocked.
+
 ## Adoption gates
 
 Isolation manages dependencies; it does not automatically settle license obligations.
