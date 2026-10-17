@@ -13,7 +13,12 @@ from suno2flp.core.note_scoring import ScoringRecipe
 from suno2flp.core.offline_files import capture_stream_input, load_unique_json, verify_inputs
 from suno2flp.core.report_publication import publish_verified_report
 from suno2flp.importer.note_annotations import bounded_snapshot
-from suno2flp.integrations.beat_backend import Cancel, cancelled, read_beat_backend
+from suno2flp.integrations.beat_backend import (
+    Cancel,
+    cancelled,
+    read_beat_backend,
+    verify_beat_request,
+)
 from suno2flp.validator.beat_native import validate_native_beats
 from suno2flp.validator.note_decode_evidence import verify_decoder_payload
 from suno2flp.validator.transcription_source import verified_transcription_source
@@ -28,6 +33,8 @@ def beat_recipe() -> ScoringRecipe:
         "core/beat_runtime.py",
         "core/models.py",
         "core/offline_models.py",
+        "core/note_scoring.py",
+        "importer/note_annotations.py",
         "core/performance.py",
         "core/offline_files.py",
         "core/report_publication.py",
@@ -120,6 +127,14 @@ def verify_beat_witnesses(record: BeatCandidate, *, should_cancel: Cancel = None
     ):
         raise ValueError("Beat analysis no longer matches original source/decode geometry")
     result_path = record.root / "native/result.json"
+    verify_beat_request(
+        record.backend,
+        record.root / "native",
+        record.pcm,
+        record.native.frames,
+        record.native.sample_rate,
+        record.native.channels,
+    )
     _, raw = bounded_snapshot(result_path, 1024**2)
     if record.native.model_dump(mode="json") != load_unique_json(raw):
         raise ValueError("Beat native result snapshot changed")

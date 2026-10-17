@@ -122,7 +122,9 @@ def score_beats(
         matches=matches,
         unmatched_candidate_ids=sorted(b.id for b in candidates if b.id not in candidate_ids),
         unmatched_reference_ids=sorted(b.id for b in refs if b.id not in ref_ids),
-        precision=ExactRatio.exact(Fraction(count, len(candidates) or 1)) if refs else None,
+        precision=ExactRatio.exact(Fraction(count, len(candidates)))
+        if refs and candidates
+        else None,
         recall=ExactRatio.exact(Fraction(count, len(refs))) if refs else None,
         median_error_microseconds=RationalTime.exact(median) if median is not None else None,
         p95_error_microseconds=RationalTime.exact(p95) if p95 is not None else None,

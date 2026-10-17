@@ -13,6 +13,7 @@ from suno2flp.integrations.beat_backend import (
     call_beat_backend,
     cancelled,
     read_beat_backend,
+    verify_beat_request,
 )
 from suno2flp.validator.beat_native import validate_native_beats
 
@@ -34,6 +35,9 @@ def probe_beat_backend(
             capture_stream_input(package / n)
             for n in (
                 "core/beat_probe.py",
+                "core/note_scoring.py",
+                "core/models.py",
+                "core/offline_models.py",
                 "integrations/beat_probe.py",
                 "validator/beat_native.py",
                 "validator/beat_postprocessing.py",
@@ -85,6 +89,14 @@ def probe_beat_backend(
             if fixture.source.path.read_bytes() != beat_fixture_wave(fixture.fixture):
                 raise ValueError("Original probe fixture changed")
             for attempt, result in zip(fixture.attempts, fixture.results, strict=True):
+                verify_beat_request(
+                    backend,
+                    attempt,
+                    fixture.source,
+                    result.frames,
+                    result.sample_rate,
+                    result.channels,
+                )
                 validate_native_beats(
                     attempt, result, fixture.source.path, should_cancel=should_cancel
                 )

@@ -3,7 +3,7 @@
 from fractions import Fraction
 from typing import Literal, Self
 
-from pydantic import Field, model_validator
+from pydantic import Field, field_validator, model_validator
 
 from suno2flp.core.models import Contract
 from suno2flp.core.note_scoring import ExactRatio, time_fraction
@@ -19,6 +19,13 @@ class ScoredBeat(Contract):
     label: Literal["beat", "downbeat"]
     microseconds: RationalTime
     domain: Literal["source", "padding"] = "source"
+
+    @field_validator("microseconds")
+    @classmethod
+    def bounded_time(cls, value: RationalTime) -> RationalTime:
+        if value.numerator.bit_length() > 128 or value.denominator.bit_length() > 64:
+            raise ValueError("Time rational exceeds the fixed integer budget")
+        return value
 
 
 class BeatMatch(Contract):
@@ -68,7 +75,9 @@ class BeatScore(Contract):
         expected_ratios: tuple[ExactRatio | None, ExactRatio | None]
         if self.status == "measured":
             expected_ratios = (
-                ExactRatio.exact(Fraction(count, self.candidate_count or 1)),
+                ExactRatio.exact(Fraction(count, self.candidate_count))
+                if self.candidate_count
+                else None,
                 ExactRatio.exact(Fraction(count, self.reference_count or 1)),
             )
         else:

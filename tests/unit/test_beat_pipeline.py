@@ -13,6 +13,7 @@ from suno2flp.core.beat_runtime import BeatBackend
 from suno2flp.core.file_tree import capture_file_tree
 from suno2flp.core.offline_files import capture_stream_input
 from suno2flp.importer.pcm_decode import decode_pcm_wave
+from suno2flp.integrations.beat_backend import beat_request
 from suno2flp.pipeline.beat_analysis import analyze_beats
 from suno2flp.validator.beat_analysis import verify_beat_analysis
 
@@ -43,6 +44,11 @@ def protocol(native, tmp_path, monkeypatch):
         assert (frames, rate, channels) == (1025, 22050, 1)
         for path in native_root.iterdir():
             shutil.copyfile(path, attempt / path.name)
+        import json
+
+        (attempt / "request.json").write_text(
+            json.dumps(beat_request(backend, pcm, frames, rate, channels)), encoding="utf-8"
+        )
         (attempt / "result.json").write_text(native_result.model_dump_json(), encoding="utf-8")
         return native_result.model_copy(deep=True)
 

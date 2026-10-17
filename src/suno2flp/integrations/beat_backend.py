@@ -68,6 +68,15 @@ def beat_adapters() -> list[FileIdentity]:
             here.with_name("process_metrics.py"),
             here.parent.parent / "core/beat_runtime.py",
             here.parent.parent / "core/beat_native.py",
+            here.parent.parent / "core/audio_decode.py",
+            here.parent.parent / "core/codec_backend.py",
+            here.parent.parent / "core/models.py",
+            here.parent.parent / "core/offline_models.py",
+            here.parent.parent / "core/errors.py",
+            here.parent.parent / "core/transcription.py",
+            here.parent.parent / "core/transcription_clock.py",
+            here.parent.parent / "core/note_scoring.py",
+            here.parent.parent / "core/performance.py",
             here.parent.parent / "core/file_tree.py",
             here.parent.parent / "core/offline_files.py",
             here.parent.parent / "core/report_publication.py",
@@ -213,6 +222,46 @@ def read_beat_backend(root: Path, *, should_cancel: Cancel = None) -> BeatBacken
     return record
 
 
+def beat_request(
+    record: BeatBackend, pcm: FileIdentity, frames: int, sample_rate: int, channels: int
+) -> dict[str, object]:
+    if any(type(v) is not int for v in (frames, sample_rate, channels)) or not (
+        8000 <= sample_rate <= 192000 and 1 <= frames <= sample_rate * 600 and channels in (1, 2)
+    ):
+        raise ValueError("Invalid native beat request source geometry")
+    return dict(
+        packages=str(record.root / "packages"),
+        pins=str(Path(__file__).with_name("beat_pins.json")),
+        pcm=str(pcm.path),
+        frames=frames,
+        sample_rate=sample_rate,
+        channels=channels,
+    )
+
+
+def verify_beat_request(
+    record: BeatBackend,
+    attempt: Path,
+    pcm: FileIdentity,
+    frames: int,
+    sample_rate: int,
+    channels: int,
+) -> None:
+    path = guarded_path(attempt / "request.json")
+    if path.stat().st_size > 64 * 1024:
+        raise ValueError("Native beat request exceeds budget")
+    actual = load_unique_json(path.read_bytes())
+    expected = beat_request(record, pcm, frames, sample_rate, channels)
+    if (
+        not isinstance(actual, dict)
+        or set(actual) != set(expected)
+        or any(type(actual[k]) is not type(v) or actual[k] != v for k, v in expected.items())
+    ):
+        raise ValueError(
+            "Native beat request disagrees with fixed backend/pins/PCM/source geometry"
+        )
+
+
 def call_beat_backend(
     record: BeatBackend,
     attempt: Path,
@@ -232,14 +281,7 @@ def call_beat_backend(
     attempt = guarded_path(attempt)
     if not attempt.is_dir() or list(attempt.iterdir()):
         raise ValueError("Native beat attempt must be an empty exclusive directory")
-    request = dict(
-        packages=str(record.root / "packages"),
-        pins=str(Path(__file__).with_name("beat_pins.json")),
-        pcm=str(pcm.path),
-        frames=frames,
-        sample_rate=sample_rate,
-        channels=channels,
-    )
+    request = beat_request(record, pcm, frames, sample_rate, channels)
     with (attempt / "request.json").open("x", encoding="utf-8") as stream:
         json.dump(request, stream, allow_nan=False)
     worker = Path(__file__).with_name("beat_worker.py")
@@ -258,6 +300,7 @@ def call_beat_backend(
         with (attempt / f"{name}.bin").open("xb") as log:
             log.write(raw)
     verify_inputs([pcm])
+    verify_beat_request(record, attempt, pcm, frames, sample_rate, channels)
     if record != read_beat_backend(record.root, should_cancel=should_cancel):
         raise ValueError("Beat backend changed during inference")
     path = guarded_path(attempt / "result.json")
