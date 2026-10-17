@@ -74,6 +74,8 @@ def main():
         "transcribe-drums",
         "verify-drum-transcription",
         "export-drum-annotation",
+        "compose-percussion-arrangement",
+        "verify-percussion-arrangement",
     ):
         cli(command, "--help")
     cli("init-project", "song", "--directory", root)

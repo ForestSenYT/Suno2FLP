@@ -16,6 +16,7 @@ from suno2flp.cli_drum_scoring import register_drum_scoring
 from suno2flp.cli_drum_transcription import register_drum_transcription
 from suno2flp.cli_estimated_arrangement import register_estimated_arrangement
 from suno2flp.cli_note_scoring import register_note_scoring
+from suno2flp.cli_percussion_arrangement import register_percussion_arrangement
 from suno2flp.cli_separation import register_separation
 from suno2flp.cli_stem_transcription import register_stem_transcription
 from suno2flp.cli_transcription import register_transcription
@@ -60,6 +61,7 @@ register_audio_jobs(app)
 register_note_scoring(app)
 register_drum_scoring(app)
 register_drum_transcription(app)
+register_percussion_arrangement(app)
 register_transcription(app)
 register_separation(app)
 register_stem_transcription(app)

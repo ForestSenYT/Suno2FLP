@@ -51,12 +51,14 @@ def batch(protocol, tmp_path, monkeypatch):
 
     def call(record, attempt, request, **kwargs):
         calls.append(attempt)
-        assert request["frames"] == 37 and request["sample_rate"] == 44100
+        assert request["sample_rate"] == 44100
         assert request["channels"] == 2
+        # Two tiny independently specified fixtures, both wholly inside one window.
+        model_frames, rows = {37: (19, 1), 1025: (513, 3)}[request["frames"]]
         (attempt / "request.json").write_text(
             json.dumps({**request, "packages": str(backend / "packages")}), encoding="utf-8"
         )
-        (attempt / "mono.f32").write_bytes(b"\0" * 19 * 4)
+        (attempt / "mono.f32").write_bytes(b"\0" * model_frames * 4)
         for name, width in (("note", 88), ("onset", 88), ("contour", 264)):
             (attempt / f"{name}.f32").write_bytes(b"\0" * 172 * width * 4)
         for name in ("bends.i8", "stdout.bin", "stderr.bin"):
@@ -93,9 +95,9 @@ def batch(protocol, tmp_path, monkeypatch):
             json.dumps(
                 dict(
                     probe=probe,
-                    resampled_frames=19,
+                    resampled_frames=model_frames,
                     windows=1,
-                    owned_rows=1,
+                    owned_rows=rows,
                     notes=[],
                     bend_bytes=0,
                 )

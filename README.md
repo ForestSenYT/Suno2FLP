@@ -34,8 +34,8 @@ This is a benchmark tool; it does not certify truth, qualify models or advance j
 
 [Source-bound drum scoring](docs/DRUM_SCORING.zh-CN.md) adds `score-drums` and
 `verify-drum-score`: exact class/onset maximum matching within50ms, complete current
-decode/producer evidence and exclusive reports. No drum model, GM routing or release
-qualification is introduced; missing/empty truth remains explicitly unscored.
+decode/producer evidence and exclusive reports. Scoring grants no GM routing or release
+qualification; missing/empty truth remains explicitly unscored.
 
 [Source-bound drum inference](docs/DRUM_INFERENCE.zh-CN.md) adds an explicit isolated
 fixed encoder, complete nine-class raw arrays, signed padding coordinates, exact
@@ -67,8 +67,9 @@ editable notes, host acceptance or an end-user conversion. Existing source MIDI 
 [Estimated stem transcription](docs/STEM_TRANSCRIPTION.zh-CN.md) connects vocals/bass/other
 through exact finite float widening and explicit original-song ancestry. `transcribe-stems`
 owns a fresh full separation replay; `verify-stem-transcription` repeats separation and all
-pitched predictions in new files. Drums, musical qualification, arrangement, jobs and FLP
-delivery remain blocked. No model runtime enters the core or download occurs implicitly.
+pitched predictions in new files. This pitched model excludes drums; musical qualification,
+playable routing, jobs and FLP delivery remain blocked. No model runtime enters the core
+or download occurs implicitly.
 
 The [beat/downbeat development commands](docs/BEAT_ANALYSIS.zh-CN.md) provide
 fixed local runtime preparation/probes, source-bound complete raw arrays, exact
@@ -78,7 +79,10 @@ They do not qualify music or complete a user conversion; job/writer gates remain
 [Estimated arrangement composition](docs/ESTIMATED_ARRANGEMENT.zh-CN.md) combines
 complete pitched stems, four reference stems/residual and optional rhythm in the
 exact original audio clock. It preserves note/bend addresses and explicit estimated
-roles, with current-file reconstruction checks. Drums, playable routing, MIDI/FLP
+roles, with current-file reconstruction checks. Separate v2 commands
+`compose-percussion-arrangement` / `verify-percussion-arrangement` join a current drum
+candidate with all peaks/rejections and exact original sample positions. They retain
+both distinct model clocks and complete producer references. Playable routing, MIDI/FLP
 serialization, music qualification and canonical conversion jobs remain blocked.
 
 [Read-only Windows output discovery](docs/HOST_READINESS.zh-CN.md) adds

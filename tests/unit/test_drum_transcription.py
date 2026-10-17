@@ -22,10 +22,8 @@ from suno2flp.validator.drum_transcription import read_drum_candidate, verify_dr
 from suno2flp.validator.separation import verify_separation
 
 
-@pytest.fixture
-def drums(protocol, tmp_path, monkeypatch):
-    separate_audio(protocol.decode, protocol.backend, tmp_path / "separation")
-    verify_separation(tmp_path / "separation/separation.json", tmp_path / "separation-replay")
+def drum_boundary(tmp_path, monkeypatch):
+    """Share only the explicitly synthetic native boundary, never source validation."""
     backend = tmp_path / "drum-backend"
     (backend / "packages/pkg").mkdir(parents=True)
     module = backend / "packages/pkg/__init__.py"
@@ -111,11 +109,19 @@ def drums(protocol, tmp_path, monkeypatch):
     ):
         monkeypatch.setattr(module_name + ".read_drum_backend", read)
     monkeypatch.setattr("suno2flp.pipeline.drum_transcription.call_drum_backend", call)
+    return SimpleNamespace(backend=backend, calls=calls)
+
+
+@pytest.fixture
+def drums(protocol, tmp_path, monkeypatch):
+    separate_audio(protocol.decode, protocol.backend, tmp_path / "separation")
+    verify_separation(tmp_path / "separation/separation.json", tmp_path / "separation-replay")
+    boundary = drum_boundary(tmp_path, monkeypatch)
     return SimpleNamespace(
         separation=tmp_path / "separation/separation.json",
         receipt=tmp_path / "separation-replay/replay.json",
-        backend=backend,
-        calls=calls,
+        backend=boundary.backend,
+        calls=boundary.calls,
         original=protocol.source,
     )
 

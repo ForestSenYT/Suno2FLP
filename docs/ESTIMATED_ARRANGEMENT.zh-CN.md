@@ -61,5 +61,37 @@ meter、structure 仍为 unavailable；本切片不进行 PPQ 或目标 MIDI 坐
 断言覆盖窗口间隙、重叠、尾部和分数采样。候选始终显示 unqualified_candidate，
 model_qualification=not_assessed、ground_truth_metrics=unavailable、
 writer_eligibility=blocked、execution_allowed=false；全无 pitched 音符时另列明确
-阻塞。鼓／角色独立识别、24片段／6曲质量及校准、推断速度／结构、可播放序列化、
+阻塞。鼓音源映射／角色独立识别、24片段／6曲质量及校准、推断速度／结构、可播放序列化、
 共享作业接入和完整 GUI／安装仍未完成。真实宿主继续等待可用音频输出及独立验收。
+
+## 含鼓候选的独立 v2
+
+```powershell
+uv run suno2flp compose-percussion-arrangement D:\private\batch\stem-transcription.json --drums D:\private\drums\drum-transcription.json --output D:\private\new-percussion-arrangement
+uv run suno2flp verify-percussion-arrangement D:\private\new-percussion-arrangement\percussion-arrangement.json
+```
+
+可选 `--beats` 沿用同一来源的节拍报告。v1 及其文件保持原有行为。新报告使用
+`source-clock-estimated-arrangement-v2`，要求完整三声部批次和当前完整鼓候选，
+原音频、解码、PCM、分离报告、分离重放凭据、帧数、采样率、声道及鼓参考文件的
+身份逐项相同；同名、同长度不能代替共同来源。消费原有完整数值验证器，复核时从
+当前生产者重新构造全部字段，不运行新的模型，也不凭完成收据跳过数值验证。
+
+音高声部继续使用原 owned-row 坐标；鼓使用44100Hz图的几何中心 `(row-6)*256`，
+转换为原采样坐标 `model_sample*original_rate/44100` 及精确微秒分数。鼓位置只含
+源 event/peak 索引、原采样和微秒，没有推断 note-off、MIDI velocity、音高或通道。
+保留生产者原有类别／顺序、全部 logit/velocity 浮点位和负／尾部填充排除记录；
+排除峰留在输入快照中，不移入源区域。音高尾部的不足一采样 padding 也不裁剪。
+这些坐标不是音乐 onset 延迟校准，九类标签不是经验证的 GM／音源路由。
+
+报告引用完整不可变鼓生产者及全部原生见证文件身份，并保留全部峰／事件／排除
+快照，不重复嵌入生产者较大的分离／后端快照。重新读取生产者时仍完整验证这些
+上游内容。发布前复查全部生产者、配方、负载和原生目录成员；变更、额外成员、
+取消、移动／伪造报告及与生产者目录重叠均拒绝。完成 JSON 和 pending 名称均独占。
+完整16MiB／列表预算超限时失败，不截掉峰或来源。
+
+四份参考继续静音。v2 仅移除它新解决的 `drums-not-transcribed`，另列鼓延迟未校准、
+GM 路由不可用及空鼓候选等阻塞；原模型质量、可发声路由、速度／结构、宿主与写入
+限制继续保留。`status=unqualified_candidate`、`execution_allowed=false`；CLI 退出0
+只表示候选 JSON 已完整发布／重建。原生重放、真实音乐质量、共享作业与 FLP 交付
+仍是独立门槛，不能用这份编排将旧阻断计划升级为可写。
