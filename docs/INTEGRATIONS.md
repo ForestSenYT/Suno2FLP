@@ -300,3 +300,23 @@ install separately, run read-only synthetic/template tests, negotiate capabiliti
 and record runtime evidence. Only then enable a narrowly scoped adapter. No integration
 is enabled by default or auto-installed. Agent clients use the CLI today; there is no
 Suno2FLP MCP server or agent-specific production skill yet.
+
+## Selected IDM drum encoder
+
+The optional [source-bound drum path](DRUM_INFERENCE.zh-CN.md) pins inverse-drum-machine
+456656868538205ef756912c7cf5b0fd936de8af, archiveSHA7ed64f8cc064055e80a694bba1013c15a23dc6d962b8a91b08fadb1e47b95bef
+and checkpointSHA5856a9bee7c6d503842795756d238dc8470f6f3e010e9e4f33ede0362850cb4c.
+Only the audited encoder/source subset runs, with all194encoder tensors strictly loaded,
+136other tensors unused, restricted weights_only loader and no upstream convenience loader,
+Hydra or decoder. Apache-2.0 and full supplementary ConvNeXt Meta MIT notices accompany
+private payloads; training-audio/downstream rights and full-model licensing are not inferred.
+
+The isolated Windows CPython3.11.16 CPU recipe reuses13 already audited wheels: Torch /
+Torchaudio2.11.0+cpu, NumPy1.26.4, einops0.8.0 and fixed transitive dependencies, all in
+drum_pins.json. This differs from upstream training requirements; actual selected-graph
+handshake and authored stereo/impulse/tail/repeat checks attest runtime/raw geometry,
+not paper accuracy or musical qualification. No automatic network/model download,
+plugin/host action or native core import occurs. The application bundles only its narrow
+Apache-derived activation helper, full Apache grant and modification notice; first-party
+MIT stays intact. Distribution SPDX records both components. Source/model/wheel payloads
+are not distributed. All model/corpus/calibration/job/writer/host/release gates remain.

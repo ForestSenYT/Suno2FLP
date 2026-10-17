@@ -29,6 +29,24 @@ def main():
     )
     if args.require_installed and not installed:
         raise RuntimeError(f"Expected installed wheel, got {module_path}")
+    if args.require_installed:
+        # The distribution includes an Apache-derived isolated helper; first-party
+        # files retain their MIT grant. Verify actual installed notices, not config alone.
+        assert distribution.metadata["License-Expression"] == "MIT AND Apache-2.0"
+        required = {
+            "LICENSE",
+            "src/suno2flp/integrations/notices/IDM-Apache-2.0.txt",
+            "src/suno2flp/integrations/notices/IDM-NOTICE.txt",
+        }
+        assert set(distribution.metadata.get_all("License-File") or []) == required
+        paths = list(distribution.files or [])
+        for name in required:
+            matching = [p for p in paths if str(p).endswith(".dist-info/licenses/" + name)]
+            assert len(matching) == 1 and distribution.locate_file(matching[0]).is_file()
+        notice = module_path.parent / "integrations/notices/IDM-Apache-2.0.txt"
+        assert hashlib.sha256(notice.read_bytes()).hexdigest() == (
+            "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+        )
     root = args.workspace.absolute()
     root.parent.mkdir(parents=True, exist_ok=True)
     root.mkdir(exist_ok=False)
@@ -50,6 +68,14 @@ def main():
         return result.stdout
 
     cli("--help")
+    for command in (
+        "prepare-drum-backend",
+        "verify-drum-backend",
+        "transcribe-drums",
+        "verify-drum-transcription",
+        "export-drum-annotation",
+    ):
+        cli(command, "--help")
     cli("init-project", "song", "--directory", root)
     project = root / "song"
     midi = mido.MidiFile(type=1, ticks_per_beat=480)

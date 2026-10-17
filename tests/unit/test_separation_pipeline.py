@@ -109,6 +109,12 @@ def protocol(recipe, tmp_path, monkeypatch, request):
             if frames == 37
             else [
                 dict(
+                    index=0, stft_start=0, stft_frames=6, virtual_start=-4096, waveform_frames=9216
+                )
+            ]
+            if frames == 1025
+            else [
+                dict(
                     index=0,
                     stft_start=0,
                     stft_frames=512,
@@ -124,7 +130,7 @@ def protocol(recipe, tmp_path, monkeypatch, request):
                 ),
             ]
         )
-        assert frames in (37, 524289)
+        assert frames in (37, 1025, 524289)
         parts = attempt / "parts"
         parts.mkdir()
         part_results = []

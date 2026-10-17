@@ -37,6 +37,12 @@ This is a benchmark tool; it does not certify truth, qualify models or advance j
 decode/producer evidence and exclusive reports. No drum model, GM routing or release
 qualification is introduced; missing/empty truth remains explicitly unscored.
 
+[Source-bound drum inference](docs/DRUM_INFERENCE.zh-CN.md) adds an explicit isolated
+fixed encoder, complete nine-class raw arrays, signed padding coordinates, exact
+original-clock peak/rejection audits and fresh native replay. Separate inferred
+annotations feed conditional scoring. This development surface grants no music,
+job, arrangement, writer or host qualification and produces no MIDI/FLP.
+
 [Isolated Basic Pitch transcription](docs/BASIC_PITCH.zh-CN.md) adds explicit fixed-artifact
 preparation and actual ONNX CPU inference on Windows x64/CPython3.11.16. Candidates retain
 all raw windows, source sample anchors and per-note bends; fresh native replay detects
@@ -348,5 +354,7 @@ uv cache. CI covers Windows/Linux and Python 3.11/3.14.
 See [architecture](docs/ARCHITECTURE.md), [roadmap](docs/DEVELOPMENT_ROADMAP.md),
 [dependencies](docs/DEPENDENCIES.md), [integration evidence](docs/INTEGRATIONS.md),
 and [risks](docs/RISK_REGISTER.md). Keep credentials in environment variables outside
-version control. Existing MIT license applies to this code; optional upstream projects
-have their own licenses and are not bundled.
+version control. First-party code retains its MIT license. The isolated drum activation
+helper is Apache-2.0 derived and ships with its full license/attribution; the distribution
+declares `MIT AND Apache-2.0`. External models/native runtimes retain their own terms
+and are not bundled; see [dependencies](docs/DEPENDENCIES.md).

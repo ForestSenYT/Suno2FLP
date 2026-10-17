@@ -156,3 +156,17 @@ package1.0.0/module0.3.0 discrepancy, missing open/save/zoom/crop/reopen coverag
 Python audit-hook/native-FFI limits and incomplete redistribution notices remain
 explicit blockers for broader adoption. No tools/resources/bridge calls occurred;
 all host and writer gates remain unchanged.
+
+## Estimated drum timing and source trust
+
+The selected drum encoder expands time by12rows and has six leading geometric context
+rows. Native raw arrays preserve all rows and signed anchors; derived candidates audit
+all padding rejection, never clamp/shift to sourcezero. Geometric coordinates do not
+prove learned musical onset latency. Fixed positive-logit peaks are explicitly uncalibrated,
+head velocities are not MIDI velocity/confidence, labels are not GM/instrument routing,
+and corpus/model/job/writer qualification stays blocked. Paired separation receipts are
+not numeric authority: current full source numerics and payloads are revalidated before
+invocation-local guards can be reused; fresh drum replay must recompute all model arrays.
+Music/separation authenticity and ground-truth correctness cannot be inferred from raw
+hash agreement. Licensing/CPU-runtime deviations and package notices are separately
+tracked in DRUM_INFERENCE.zh-CN.md; actual probes do not prove music/FLP acceptance.
