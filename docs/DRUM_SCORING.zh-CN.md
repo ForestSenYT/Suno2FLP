@@ -1,6 +1,6 @@
 # 鼓点类别与原时钟评分
 
-这是开发用的条件评分工具，尚未接入鼓点模型或完整转换作业。
+这是开发用的条件评分工具，仅消费当前来源标注，尚未接入完整转换作业。
 `score-drums` 比较用户声明的候选和参考，`verify-drum-score` 从当前原音频、
 解码结果、标注和生产者文件重新计算。不会生成 MIDI、FLP 或调用 FL Studio。
 
@@ -61,5 +61,6 @@ suno2flp verify-drum-score new-score.json
 `human_review=not_performed`、`model_qualification=not_assessed`、
 `host_compatibility=unverified`、`writer_eligibility=blocked`、`execution_allowed=false`。
 不改变已有 estimated-arrangement-v1、严格 MIDI、精确变速、控制路由、crop/flag、
-宿主、GUI 安装或发布验收门槛。下一步是独立审计鼓点模型运行时并取得真实推理证据，
-再准备固定曲库、校准和发布保留集；本工具不授予这些资格。
+宿主、GUI 安装或发布验收门槛。
+独立的[鼓推理入口](DRUM_INFERENCE.zh-CN.md)现已完成固定运行时和真实原生推理验证，
+可导出本工具消费的候选；固定曲库、校准和发布保留集仍待准备，本工具不授予这些资格。

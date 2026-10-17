@@ -424,3 +424,16 @@ pipeline/validator.drum_transcription exclusively publish candidates, independen
 recompute current raw derivations and run complete native replays in new directories.
 Thin CLI adds separate inferred annotation export for conditional scoring. No arrangement,
 job, writer, host or release gate is promoted. See DRUM_INFERENCE.zh-CN.md.
+
+`core/percussion_arrangement.py` and `arrangement/percussion.py` define a separate
+source-clock-estimated-arrangement-v2. They fuse complete pitched inputs and drum
+producer references/peaks/rejections using exact original sample fractions, preserving
+distinct pitched owned rows and drum geometric centers. Drum positions are onset-only;
+no GM, velocity, duration or playable routing is inferred from raw class/head values.
+
+`validator/percussion_arrangement.py` consumes both existing complete numeric readers,
+requires identical original/decode/separation/replay/clock/reference identities and
+reconstructs every derived field. Owned guards recheck recipes, producers, complete
+native/payload membership and report bytes; `pipeline/percussion_arrangement.py`
+publishes only exclusive JSON outside all producer roots. Thin commands never run
+models or authorize jobs, writer/host execution or music/release qualification.
