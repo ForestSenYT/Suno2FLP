@@ -379,6 +379,13 @@ binary writing. The separate PCM decoder is described in the delivery architectu
 Very large/untrusted files are not resource-isolated; use trusted local exports.
 
 Domain failures inherit `Suno2FLPError`. Discovery reports per-file errors and continues.
+
+`core.drum_scoring` defines separate onset-only class annotations and conditional scores;
+`validator.drum_matching` maximizes exact-time matching within50ms without inventing
+offsets. `validator.drum_scoring` reuses current independent decoder verification and
+producer/recipe witnesses; `pipeline.drum_scoring` publishes exclusive path-bound reports.
+Thin CLI commands do not run models or advance jobs/writer gates. See
+[drum score contracts and limits](DRUM_SCORING.zh-CN.md).
 Track-aware MIDI parsing failures/unsupported timing raise `MidiImportError`; recoverable
 note/map issues appear in its result diagnostics with track/event indices.
 `MidiProcessingError` rejects error-bearing imports, missing/modified original timing,
