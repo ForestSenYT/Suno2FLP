@@ -12,6 +12,7 @@ from pydantic import ValidationError
 from suno2flp.arrangement import ExplicitInstrumentMapper, FaithfulArrangementEngine
 from suno2flp.cli_audio_jobs import register_audio_jobs
 from suno2flp.cli_beat_analysis import register_beat_analysis
+from suno2flp.cli_drum_scoring import register_drum_scoring
 from suno2flp.cli_estimated_arrangement import register_estimated_arrangement
 from suno2flp.cli_note_scoring import register_note_scoring
 from suno2flp.cli_separation import register_separation
@@ -56,6 +57,7 @@ app = typer.Typer(
 )
 register_audio_jobs(app)
 register_note_scoring(app)
+register_drum_scoring(app)
 register_transcription(app)
 register_separation(app)
 register_stem_transcription(app)

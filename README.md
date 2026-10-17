@@ -32,6 +32,11 @@ duplicate-aware one-to-one F1 against declared reference annotations, with indep
 decode verification and current-input replay. Missing/empty truth is explicitly unscored.
 This is a benchmark tool; it does not certify truth, qualify models or advance job/writer gates.
 
+[Source-bound drum scoring](docs/DRUM_SCORING.zh-CN.md) adds `score-drums` and
+`verify-drum-score`: exact class/onset maximum matching within50ms, complete current
+decode/producer evidence and exclusive reports. No drum model, GM routing or release
+qualification is introduced; missing/empty truth remains explicitly unscored.
+
 [Isolated Basic Pitch transcription](docs/BASIC_PITCH.zh-CN.md) adds explicit fixed-artifact
 preparation and actual ONNX CPU inference on Windows x64/CPython3.11.16. Candidates retain
 all raw windows, source sample anchors and per-note bends; fresh native replay detects
