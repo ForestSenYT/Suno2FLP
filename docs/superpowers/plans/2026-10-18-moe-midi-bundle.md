@@ -106,6 +106,10 @@ original synthetic installed smoke/opt-in tests as appropriate. No private asset
 Actual runtime evidence also requires additive per-root file budgets in
 src/suno2flp/core/inference_snapshot.py and tests/unit/test_inference_snapshot.py,
 with explicit30000 only in MoE's retained source collector; generic defaults unchanged.
+Actual Linux CI also requires canonical running-interpreter identity in
+pipeline/moe_midi.py; tests/unit/test_moe_midi_recipe.py covers a portable path alias
+and actual symlink. Do not relax linked asset/output guards. Requalify changed app
+source in a new installed backend; prior receipts must remain unchanged.
 
 - [ ] Freeze final appsource before native qualification. New backend in isolation using
   existing fixed100 local artifacts; no downloads. Old backend/results stay untouched.
