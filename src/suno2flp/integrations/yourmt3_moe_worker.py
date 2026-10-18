@@ -8,6 +8,7 @@ import math
 import socket
 import sys
 import time
+from collections.abc import Callable
 from copy import deepcopy
 from dataclasses import asdict, is_dataclass
 from numbers import Integral, Real
@@ -109,6 +110,49 @@ def _selected(window: dict[str, Any]) -> list[list[int]]:
         stream["tokens"]
         for stream in (window["retry"] if window["retry"] is not None else window["initial"])
     ]
+
+
+def infer_window(
+    generate: Callable[[int], Any],
+    attempt: Path,
+    *,
+    index: int,
+    start: int,
+    valid: int,
+) -> dict[str, Any]:
+    """Journal every returned array before retry execution or trace validation."""
+    if type(index) is not int or not 0 <= index <= 292:
+        raise ValueError("Invalid MoE generation journal address")
+    coordinates = dict(index=index, start_frame=start, valid_frames=valid)
+
+    def streams(maximum: int, phase: str) -> list[dict[str, Any]]:
+        raw = deepcopy(generate(maximum))
+        with (attempt / f"generation-{index:03}-{phase}.json").open(
+            "x", encoding="utf-8"
+        ) as output:
+            json.dump(
+                dict(**coordinates, max_token_length=maximum, tokens=raw),
+                output,
+                indent=2,
+                allow_nan=False,
+            )
+        if (
+            not isinstance(raw, list)
+            or len(raw) != 1
+            or not isinstance(raw[0], list)
+            or len(raw[0]) != 13
+            or any(not isinstance(tokens, list) for tokens in raw[0])
+        ):
+            raise ValueError("Unexpected MoE native dimensions")
+        return [dict(channel=channel, tokens=tokens) for channel, tokens in enumerate(raw[0])]
+
+    window: dict[str, Any] = dict(**coordinates, initial=streams(256, "initial"), retry=None)
+    if any(1 not in stream["tokens"] for stream in window["initial"]):
+        window["retry"] = streams(1024, "retry")
+    _selected(window)
+    with (attempt / f"window-{index:03}.json").open("x", encoding="utf-8") as output:
+        json.dump(window, output, indent=2, allow_nan=False)
+    return window
 
 
 def main() -> None:
@@ -295,25 +339,17 @@ def main() -> None:
                 chunk = torch.nn.functional.pad(
                     wave[:, start : start + valid], (0, 32767 - valid)
                 ).unsqueeze(1)
-                initial = net.inference(chunk, max_token_length=256).cpu().numpy()
-                if initial.ndim != 3 or initial.shape[:2] != (1, 13):
-                    raise ValueError("Unexpected MoE native dimensions")
-                window: dict[str, Any] = dict(
+
+                def generate(maximum: int, chunk: Any = chunk) -> Any:
+                    return net.inference(chunk, max_token_length=maximum).cpu().numpy().tolist()
+
+                window = infer_window(
+                    generate,
+                    attempt,
                     index=index,
-                    start_frame=start,
-                    valid_frames=valid,
-                    initial=[dict(channel=c, tokens=initial[0, c, :].tolist()) for c in range(13)],
-                    retry=None,
+                    start=start,
+                    valid=valid,
                 )
-                if any(1 not in stream["tokens"] for stream in window["initial"]):
-                    longer = net.inference(chunk, max_token_length=1024).cpu().numpy()
-                    if longer.ndim != 3 or longer.shape[:2] != (1, 13):
-                        raise ValueError("Unexpected MoE retry dimensions")
-                    window["retry"] = [
-                        dict(channel=c, tokens=longer[0, c, :].tolist()) for c in range(13)
-                    ]
-                _selected(window)
-                common.write_window_evidence(attempt, window)
                 windows.append(window)
                 print(f"window={index}; retry={window['retry'] is not None}", flush=True)
         verify_pcm()
