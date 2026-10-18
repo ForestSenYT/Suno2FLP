@@ -202,6 +202,9 @@ def export_moe_midi(report: Path, output: Path, *, should_cancel: Cancel = None)
             raise ValueError("Frozen source, MIDI projection or current recipe changed")
         _verify_outputs(saved, completed=False, should_cancel=should_cancel)
         receipt.recheck(should_cancel=should_cancel)
+        # The source/payload recheck can take minutes. Check the complete output
+        # inventory and semantics again after it, not just the known file hashes.
+        _verify_outputs(saved, completed=False, should_cancel=should_cancel)
         verify_inputs(
             [
                 saved.companion,
@@ -238,6 +241,7 @@ def verify_moe_midi_export(report: Path, *, should_cancel: Cancel = None) -> MoE
     if pending_raw != raw:
         raise ValueError("Pending and completed MIDI manifest bytes differ")
     receipt.recheck(should_cancel=should_cancel)
+    _verify_outputs(saved, completed=True, should_cancel=should_cancel)
     verify_inputs(
         [
             identity,

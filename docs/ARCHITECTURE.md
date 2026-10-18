@@ -435,6 +435,16 @@ recompute current raw derivations and run complete native replays in new directo
 Thin CLI adds separate inferred annotation export for conditional scoring. No arrangement,
 job, writer, host or release gate is promoted. See DRUM_INFERENCE.zh-CN.md.
 
+`core.moe_midi` / `arrangement.moe_midi` separately project current inferred model
+addresses/programs into per-program note-only SMFs with native binary64 and exact
+half-up boundary audits. `validator.smf_notes` shares strict raw framing with the old
+estimated-MIDI verifier; its recipe now includes that dependency. The MoE file workflow
+retains one independently replayed producer and immutable current source/runtime/payload
+witnesses through exclusive completion publication. Independent SMF semantic checks,
+complete directory inventories and companion-before-marker ordering guard outputs.
+No inferred MIDI is automatically routed through faithful-MIDI writers or GUI jobs.
+See [MoE MIDI](MOE_MIDI.zh-CN.md) for format, clock and qualification limits.
+
 `core/percussion_arrangement.py` and `arrangement/percussion.py` define a separate
 source-clock-estimated-arrangement-v2. They fuse complete pitched inputs and drum
 producer references/peaks/rejections using exact original sample fractions, preserving

@@ -197,3 +197,28 @@ def test_retained_receipt_rechecks_all_evidence(producer, change):
         path.write_bytes(path.read_bytes() + b"changed fixture")
     with pytest.raises((ValueError, OSError, Suno2FLPError)):
         receipt.recheck()
+
+
+@pytest.mark.parametrize("phase", ["export", "verify"])
+@pytest.mark.parametrize("extra", ["notes/extra.mid", "extra.txt"])
+def test_output_inventory_is_current_after_slow_source_recheck(
+    producer, tmp_path, monkeypatch, phase, extra
+):
+    record, _, _, _ = producer
+    output = tmp_path / "bundle"
+    if phase == "verify":
+        service.export_moe_midi(record.root / "yourmt3-moe.json", output)
+    original = source_validator.VerifiedMoESource.recheck
+
+    def late(self, *, should_cancel=None):
+        original(self, should_cancel=should_cancel)
+        (output / extra).write_bytes(b"unexpected synthetic output")
+
+    monkeypatch.setattr(source_validator.VerifiedMoESource, "recheck", late)
+    with pytest.raises(ValueError, match="inventory"):
+        if phase == "export":
+            service.export_moe_midi(record.root / "yourmt3-moe.json", output)
+        else:
+            service.verify_moe_midi_export(output / "moe-midi.json")
+    if phase == "export":
+        assert not (output / "moe-midi.json").exists()

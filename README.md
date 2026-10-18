@@ -64,6 +64,12 @@ independent per-channel replay verifies evidence without granting musical or FLP
 Fixed local preparation, transcription and verification commands remain opt-in and model-free
 at ordinary startup. The new profile does not inherit Single's runtime or quality qualification.
 
+[MoE model-program MIDI bundles](docs/MOE_MIDI.zh-CN.md) add explicit export/recheck
+commands for complete current MoE producers. Every nonempty model-channel/program gets
+its own editable two-track SMF; native order, float bits, errors and exact boundary audits
+remain in provenance. The technical audio clock and fixed velocity are declared; no GM
+program messages, audio routing, GUI job, music acceptance or FLP eligibility is granted.
+
 [Isolated Spleeter runtime preparation](docs/SPLEETER_RUNTIME.zh-CN.md) adds a fixed local
 graph recipe and explicit CPU checkpoint probes. `prepare-spleeter` and `verify-spleeter`
 retain current artifact/payload identities and complete original signal outputs. The
