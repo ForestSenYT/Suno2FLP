@@ -75,6 +75,8 @@ def main():
 
     cli("--help")
     for command in (
+        "export-yourmt3-moe-midi",
+        "verify-yourmt3-moe-midi",
         "prepare-drum-backend",
         "verify-drum-backend",
         "transcribe-drums",

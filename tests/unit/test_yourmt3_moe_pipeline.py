@@ -16,7 +16,7 @@ from suno2flp.pipeline import yourmt3_moe as pipeline
 from suno2flp.validator import yourmt3_moe as validator
 
 
-def setup(tmp_path, monkeypatch, failure=None):
+def setup(tmp_path, monkeypatch, failure=None, notes=None):
     source = tmp_path / "original.wav"
     with wave.open(str(source), "wb") as stream:
         stream.setparams((1, 2, 48000, 98304, "NONE", "not compressed"))
@@ -69,6 +69,9 @@ def setup(tmp_path, monkeypatch, failure=None):
         native["windows"][-1]["valid_frames"] = 2
     if failure == "versions":
         native["versions"]["torch"] = "unreviewed"
+    if notes is not None:
+        for channel, values in notes.items():
+            native["channels"][channel]["notes"] = deepcopy(values)
     calls = []
 
     def invoke(record, attempt, request):

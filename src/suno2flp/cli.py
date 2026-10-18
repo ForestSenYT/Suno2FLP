@@ -17,6 +17,7 @@ from suno2flp.cli_drum_scoring import register_drum_scoring
 from suno2flp.cli_drum_transcription import register_drum_transcription
 from suno2flp.cli_estimated_arrangement import register_estimated_arrangement
 from suno2flp.cli_estimated_midi import register_estimated_midi
+from suno2flp.cli_moe_midi import register_moe_midi
 from suno2flp.cli_note_scoring import register_note_scoring
 from suno2flp.cli_percussion_arrangement import register_percussion_arrangement
 from suno2flp.cli_separation import register_separation
@@ -73,6 +74,7 @@ register_beat_analysis(app)
 register_windows_audio(app)
 register_estimated_arrangement(app)
 register_estimated_midi(app)
+register_moe_midi(app)
 register_audio_flp(app)
 register_yourmt3(app)
 register_yourmt3_moe(app)

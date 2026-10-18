@@ -150,3 +150,57 @@ def test_invalid_or_unbound_tree_budget_is_rejected(evidence, limit):
         snapshot_type().capture([], [(payload, members)], payload_byte_limits={payload: limit})
     with pytest.raises(ValueError, match="budget"):
         snapshot_type().capture([], [(payload, members)], payload_byte_limits={source: 10})
+
+
+def test_model_file_count_budget_is_explicit_and_frozen(evidence, monkeypatch):
+    _, payload = evidence
+    module = importlib.import_module("suno2flp.core.inference_snapshot")
+    members = capture_file_tree(payload)
+    observed = []
+
+    # The real MoE payload has22738 members, above the generic20000 default.
+    # Exercise that boundary without generating tens of thousands of files.
+    def tree(root, *, max_files=20000, **kwargs):
+        observed.append(max_files)
+        if max_files < 22738:
+            raise ValueError("Payload tree exceeds budget")
+        return members
+
+    monkeypatch.setattr(module, "capture_file_tree", tree)
+    with pytest.raises(ValueError, match="exceeds budget"):
+        module.InferenceSnapshot.capture([], [(payload, members)])
+    limits = {payload: 30000}
+    guard = module.InferenceSnapshot.capture([], [(payload, members)], payload_file_limits=limits)
+    limits[payload] = 1
+    guard.recheck()
+    assert observed == [20000, 30000, 30000]
+
+
+def test_real_file_count_budget_keeps_membership_and_byte_guards(evidence):
+    _, payload = evidence
+    (payload / "second.bin").write_bytes(b"original second")
+    members = capture_file_tree(payload)
+    with pytest.raises(ValueError, match="exceeds budget"):
+        snapshot_type().capture([], [(payload, members)], payload_file_limits={payload: 1})
+    size = sum(i.size_bytes for i in members)
+    with pytest.raises(ValueError, match="exceeds budget"):
+        snapshot_type().capture(
+            [],
+            [(payload, members)],
+            payload_file_limits={payload: 3},
+            payload_byte_limits={payload: size - 1},
+        )
+    guard = snapshot_type().capture([], [(payload, members)], payload_file_limits={payload: 3})
+    (payload / "extra.bin").write_bytes(b"unlisted")
+    with pytest.raises(ValueError, match="complete inference payload"):
+        guard.recheck()
+
+
+@pytest.mark.parametrize("limit", [0, -1, True, 1.5])
+def test_invalid_or_foreign_file_count_budget_is_refused(evidence, limit):
+    source, payload = evidence
+    members = capture_file_tree(payload)
+    with pytest.raises(ValueError, match="budget"):
+        snapshot_type().capture([], [(payload, members)], payload_file_limits={payload: limit})
+    with pytest.raises(ValueError, match="budget"):
+        snapshot_type().capture([], [(payload, members)], payload_file_limits={source: 3})
