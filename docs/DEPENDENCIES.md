@@ -371,3 +371,15 @@ Lightning2.0.2; this adapter's separately observed2.4.0/Torch2.11 CPU configurat
 does not establish paper accuracy, GPU support or model/corpus/music qualification.
 MPL/CNRI/PSF and bundled binary notices remain distinct; deployment/model distribution
 and training-music rights still need their own acceptance.
+
+### Independent YourMT3+ MoE profile
+
+The [MoE investigation](YOURMT3_MOE.zh-CN.md) pins the same31 original author modules,
+59 exact wheels and complete notices, with a separately hashed561544628-byte checkpoint:
+SHA256ae38e415c79efd5592dcb9b658cdb99ddb11d4c4e1eaa364cab04a052473fc25.
+All655 state entries (649float32/6int64) load strictly with the audited safe loader.
+The Single386-entry profile and512MiB file boundary remain distinct. Only the new
+MoE file-pin contract permits its larger fixed checkpoint; hashes and exact recipes
+still control adoption. The explicit256-to1024 inference-length override requires
+separate resource/quality evidence; it is not the256-token training configuration.
+No native/model payload is bundled or uploaded; no new core dependency is introduced.

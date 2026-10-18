@@ -57,6 +57,13 @@ token replay checks current evidence. It grants no musical, routing, job or FLP 
 The current song's previous reconstruction failed human note/rhythm/section acceptance;
 more inferred notes do not establish improvement.
 
+[YourMT3+ MoE independent profile](docs/YOURMT3_MOE.zh-CN.md) retains all 13 model
+channels, original-clock windows and separate initial/retry token traces. The explicit
+256-to-1024 generation policy requires unchanged prefixes and records unfinished streams;
+independent per-channel replay verifies evidence without granting musical or FLP eligibility.
+Fixed local preparation, transcription and verification commands remain opt-in and model-free
+at ordinary startup. The new profile does not inherit Single's runtime or quality qualification.
+
 [Isolated Spleeter runtime preparation](docs/SPLEETER_RUNTIME.zh-CN.md) adds a fixed local
 graph recipe and explicit CPU checkpoint probes. `prepare-spleeter` and `verify-spleeter`
 retain current artifact/payload identities and complete original signal outputs. The
