@@ -1,11 +1,13 @@
 """Fixed local artifacts only; no model imports, network, setup or source patches."""
 
 import zipfile
+from collections.abc import Sequence
 from pathlib import Path, PurePosixPath
 
 from suno2flp.core.offline_files import load_unique_json, verify_inputs
 from suno2flp.core.offline_models import FileIdentity
-from suno2flp.core.yourmt3 import YourMT3Pins
+from suno2flp.core.yourmt3 import YourMT3FilePin, YourMT3Pins
+from suno2flp.core.yourmt3_moe import YourMT3MoEFilePin, YourMT3MoEPins
 from suno2flp.integrations.basic_pitch_archives import ArchiveMember, archive_members
 from suno2flp.integrations.basic_pitch_backend import check_artifact
 from suno2flp.integrations.beat_backend import _copy_member
@@ -14,6 +16,12 @@ from suno2flp.integrations.beat_backend import _copy_member
 def load_yourmt3_pins() -> YourMT3Pins:
     return YourMT3Pins.model_validate(
         load_unique_json(Path(__file__).with_name("yourmt3_pins.json").read_bytes())
+    )
+
+
+def load_yourmt3_moe_pins() -> YourMT3MoEPins:
+    return YourMT3MoEPins.model_validate(
+        load_unique_json(Path(__file__).with_name("yourmt3_moe_pins.json").read_bytes())
     )
 
 
@@ -40,7 +48,9 @@ def safe_relative(name: str) -> str:
 
 
 def yourmt3_payload(
-    pins: YourMT3Pins, inputs: list[FileIdentity], destination: Path | None = None
+    pins: YourMT3Pins | YourMT3MoEPins,
+    inputs: list[FileIdentity],
+    destination: Path | None = None,
 ) -> dict[str, str]:
     if len(inputs) != len(pins.wheels) + len(pins.files):
         raise ValueError("YourMT3 requires the complete fixed artifact count")
@@ -75,7 +85,8 @@ def yourmt3_payload(
                     with archive.open(member.source_name) as stream:
                         _copy_member(stream, destination / name, member, None)
 
-    for file_pin, identity in zip(pins.files, inputs[len(pins.wheels) :], strict=True):
+    file_pins: Sequence[YourMT3FilePin | YourMT3MoEFilePin] = pins.files
+    for file_pin, identity in zip(file_pins, inputs[len(pins.wheels) :], strict=True):
         safe_relative(file_pin.filename)
         target = safe_relative(file_pin.target)
         if (identity.size_bytes, identity.sha256) != (file_pin.size_bytes, file_pin.sha256):

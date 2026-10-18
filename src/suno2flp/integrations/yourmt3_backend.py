@@ -16,6 +16,7 @@ from suno2flp.core.offline_files import (
 from suno2flp.core.offline_models import FileIdentity
 from suno2flp.core.report_publication import publish_verified_report
 from suno2flp.core.yourmt3 import YourMT3Backend
+from suno2flp.core.yourmt3_moe import YourMT3MoEBackend
 from suno2flp.integrations.basic_pitch_backend import new_model_directory
 from suno2flp.integrations.beat_backend import _runtime
 from suno2flp.integrations.codec_process import run_bounded_process
@@ -30,7 +31,7 @@ def yourmt3_adapters() -> list[FileIdentity]:
     return [capture_stream_input(path) for path in paths]
 
 
-def verify_yourmt3_payload(record: YourMT3Backend) -> None:
+def verify_yourmt3_payload(record: YourMT3Backend | YourMT3MoEBackend) -> None:
     verify_inputs([record.python, *record.runtime, *record.artifacts, *record.adapters])
     packages = guarded_path(record.root / "packages")
     actual = {
