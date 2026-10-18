@@ -12,6 +12,7 @@ from pathlib import Path
 import mido
 
 import suno2flp
+from suno2flp.integrations.yourmt3_source import load_yourmt3_moe_pins, load_yourmt3_pins
 
 
 def main():
@@ -29,6 +30,11 @@ def main():
     )
     if args.require_installed and not installed:
         raise RuntimeError(f"Expected installed wheel, got {module_path}")
+    # Both installed metadata recipes are required, without importing native ML libraries.
+    moe, single = load_yourmt3_moe_pins(), load_yourmt3_pins()
+    assert len(moe.state) == 655 and len(single.state) == 386
+    assert moe.profile != single.profile and moe.generation_policy.retry_max_tokens == 1024
+    assert not {"torch", "torchaudio", "transformers"} & set(sys.modules)
     if args.require_installed:
         # The distribution includes an Apache-derived isolated helper; first-party
         # files retain their MIT grant. Verify actual installed notices, not config alone.

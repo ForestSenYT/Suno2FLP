@@ -104,3 +104,7 @@ uv run suno2flp verify-yourmt3 <新候选目录/yourmt3.json>
 或启动本曲后台宿主渲染。旧精确变速、控制送达、crop／flag、AudioClip、GUI 另存、
 曲库、安装与发布门槛继续阻断。本曲素材、完整词元、失败尝试与对照只保存在本地
 新的忽略目录，禁止上传。
+
+后续[独立 MoE 配置](YOURMT3_MOE.zh-CN.md)使用另一个固定 checkpoint、13 个模型
+通道及保留前缀的有界重试。它不修改或取代上述 Single 证据，不继承其资格，音乐
+改进另行验收；不能通过重命名 profile 把 Single 结果升级为 MoE。
