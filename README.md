@@ -50,6 +50,13 @@ rehash-only forgeries. `prepare-basic-pitch`, `verify-basic-pitch`, `transcribe-
 `verify-transcription` are development commands. The core imports/downloads no model;
 qualified separation, role/tempo inference, corpus qualification, jobs and FLP delivery remain blocked.
 
+[Pinned YourMT3+ transcription](docs/YOURMT3.zh-CN.md) adds a separate opt-in CPU
+candidate with estimated instrument labels, complete tokens, decoder/tie errors and
+original-frame interval observations. Preparation uses fixed local artifacts; independent
+token replay checks current evidence. It grants no musical, routing, job or FLP eligibility.
+The current song's previous reconstruction failed human note/rhythm/section acceptance;
+more inferred notes do not establish improvement.
+
 [Isolated Spleeter runtime preparation](docs/SPLEETER_RUNTIME.zh-CN.md) adds a fixed local
 graph recipe and explicit CPU checkpoint probes. `prepare-spleeter` and `verify-spleeter`
 retain current artifact/payload identities and complete original signal outputs. The

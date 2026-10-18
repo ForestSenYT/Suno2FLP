@@ -287,3 +287,87 @@ first-party files is unchanged. Installed-wheel smoke verifies the actual metada
 complete license bytes. This does not relicense external dependencies/training music or
 complete the independent installer/model redistribution audit. New artifact preparation,
 actual native handshake and all musical/job/writer qualifications remain distinct.
+
+## YourMT3+ optional isolated candidate
+
+The [fixed YourMT3+ workflow](YOURMT3.zh-CN.md) does not add core dependencies.
+It prepares the following exact59 Windows x64/CPython3.11 wheels into a new
+private payload. URLs, lengths, hashes, complete bundled notices and exact omitted
+startup members are in `integrations/yourmt3_pins.json`; the table is a summary,
+not a replacement for bundled third-party licenses. No source build, demo dependency
+installation, silent runtime fallback or model/backend redistribution is performed.
+
+| Distribution | Fixed version | License summary |
+| --- | --- | --- |
+| aiohappyeyeballs | 2.7.1 | PSF-2.0 |
+| aiohttp | 3.14.5 | Apache-2.0 AND MIT |
+| aiosignal | 1.4.0 | Apache 2.0 |
+| attrs | 26.1.0 | MIT |
+| certifi | 2026.7.22 | MPL-2.0 |
+| charset-normalizer | 3.5.2 | MIT |
+| click | 8.5.0 | BSD-3-Clause |
+| cloudpickle | 3.1.2 | BSD-3-Clause |
+| colorama | 0.4.6 | BSD-3-Clause |
+| decorator | 5.3.1 | BSD-2-Clause |
+| docker-pycreds | 0.4.0 | Apache License 2.0 |
+| einops | 0.8.0 | MIT |
+| filelock | 4.2.0 | MIT |
+| frozenlist | 1.8.0 | Apache-2.0 |
+| fsspec | 2026.9.0 | BSD-3-Clause |
+| gitdb | 4.0.12 | BSD-3-Clause |
+| gitpython | 3.2.1 | BSD-3-Clause |
+| hf-xet | 1.7.0 | Apache-2.0 |
+| huggingface-hub | 0.36.2 | Apache |
+| idna | 3.20 | BSD-3-Clause |
+| jinja2 | 3.1.6 | BSD-3-Clause |
+| joblib | 1.6.0 | BSD-3-Clause |
+| lightning-utilities | 0.15.3 | Apache-2.0 |
+| markupsafe | 3.0.4 | BSD-3-Clause |
+| mido | 1.3.3 | MIT |
+| mir-eval | 0.8.2 | MIT |
+| mpmath | 1.3.0 | BSD-3-Clause |
+| multidict | 7.1.0 | Apache-2.0 |
+| networkx | 3.6.1 | BSD-3-Clause |
+| numpy | 1.26.4 | BSD-3-Clause AND bundled notices |
+| packaging | 24.1 | Apache-2.0 OR BSD-2-Clause |
+| platformdirs | 4.13.4 | MIT |
+| propcache | 0.5.4 | Apache-2.0 |
+| protobuf | 5.29.6 | 3-Clause BSD License |
+| psutil | 7.2.2 | BSD-3-Clause |
+| pytorch-lightning | 2.4.0 | Apache-2.0 |
+| pyyaml | 6.0.3 | MIT |
+| regex | 2026.9.29 | Apache-2.0 AND CNRI-Python |
+| requests | 2.34.2 | Apache-2.0 |
+| safetensors | 0.8.0 | Apache-2.0 |
+| scikit-learn | 1.5.2 | BSD-3-Clause |
+| scipy | 1.14.1 | BSD-3-Clause AND bundled notices |
+| sentry-sdk | 2.72.0 | MIT |
+| setproctitle | 1.3.8 | BSD-3-Clause |
+| setuptools | 81.0.0 | MIT |
+| six | 1.17.0 | MIT |
+| smmap | 5.0.3 | BSD-3-Clause |
+| sympy | 1.14.0 | BSD-3-Clause |
+| threadpoolctl | 3.7.0 | BSD-3-Clause |
+| tokenizers | 0.20.3 | Apache-2.0 |
+| torch | 2.11.0+cpu | BSD-3-Clause |
+| torchaudio | 2.11.0+cpu | BSD-2-Clause |
+| torchmetrics | 1.4.2 | Apache-2.0 |
+| tqdm | 4.70.1 | MPL-2.0 AND MIT |
+| transformers | 4.45.1 | Apache 2.0 License |
+| typing-extensions | 4.15.0 | PSF-2.0 |
+| urllib3 | 2.8.0 | MIT |
+| wandb | 0.18.2 | MIT |
+| yarl | 1.25.1 | Apache-2.0 |
+
+The separate author Space and weight model cards declare Apache-2.0. They are
+pinned independently of the GPL-3.0 GitHub landing repository.31 selected original
+source files, six supplementary upstream notices, two model cards, the full Apache
+text and the361050039-byte checkpoint have separate fixed identities. All remain
+private inputs, not bundled package code. Audited narrow safe-global restoration
+retains `weights_only=True`;386complete model-state entries are strictly loaded.
+No model-state tensor is silently dropped. Optimizer/callback/training metadata
+remains in the fixed checkpoint and is not restored for inference. Upstream metadata records
+Lightning2.0.2; this adapter's separately observed2.4.0/Torch2.11 CPU configuration
+does not establish paper accuracy, GPU support or model/corpus/music qualification.
+MPL/CNRI/PSF and bundled binary notices remain distinct; deployment/model distribution
+and training-music rights still need their own acceptance.

@@ -1,5 +1,20 @@
 # Risk register
 
+[YourMT3+](YOURMT3.zh-CN.md) adds an unqualified comparison path. Exact checkpoint
+hashes, a narrow audited safe-global list and full strict state loading are mandatory;
+never expand globals automatically or accept arbitrary checkpoints. Fixed Space/model
+Apache declarations do not erase third-party MIT/Apache/MPL notices or prove training
+music rights, package redistribution readiness, or the GitHub repository's license.
+The CPU configuration differs from upstream training and proves no GPU/paper accuracy.
+
+Decoded labels100/101 are singing,128drums,129unannotated; velocity0/1 is not calibrated
+MIDI velocity/confidence. Window origins are quantized by the author decoder to10ms;
+retaining tokens/original-frame anchors does not make inferred notes exact source MIDI.
+Incomplete tails, missing programs, failed offsets and segment ties can hide or create
+notes. Preserve all errors and raw evidence, independently replay them and keep musical
+and writer acceptance blocked. Real-song observation intervals are not truth/calibration
+or held-out corpus; larger note counts/activity cannot reverse human-rejected music.
+
 [Audio FLP candidates](AUDIO_FLP_CANDIDATE.zh-CN.md) are not qualified reconstructions:
 technical tempo, fixed velocity, approximate synth/percussion, unresolved bend and
 model/structure quality, and absent reference-stem playlist content remain explicit.
