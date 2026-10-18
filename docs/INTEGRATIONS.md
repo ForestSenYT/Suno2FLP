@@ -1,5 +1,21 @@
 # Integration evidence and strategy
 
+The opt-in [YourMT3+ candidate](YOURMT3.zh-CN.md) pins author Space source
+5e66c1ea173a8186e0d20432b841d3180cc015b5 and model repository
+e45ebd70398682d54b7bb1901a5216e18f3b1824. Their separate model cards declare
+Apache-2.0; the GitHub landing repository's GPL grant is not substituted for either.
+Original selected files retain author/third-party notices, with fixed supplementary
+MIT/Apache texts and complete wheel licenses. No model/backend payload is distributed.
+
+YPTF+Single(noPS) uses59 fixed Windows CPython3.11 wheels,31 author modules and
+the361050039-byte checkpoint SHA507ff129bf68f65b3b3439368706fc413523fc729d994e4da2c3f50860b05dde.
+An isolated CPU worker checks every tensor/configuration/token meaning, strictly loads
+all386state entries and retains full continuous tokens, pre-merge events and errors.
+The demo, web/YouTube helpers, unsafe loader and permissive state loading are excluded.
+Independent replay verifies token decoding, not fresh neural inference or music accuracy.
+Current recipe hashes, explicit prerequisites and exclusive outputs are required.
+Music/model/corpus/routing/job/writer/host/GUI/release gates remain separate and blocked.
+
 The current Spleeter graph policy requires
 `graph_profile=spleeter4-cpu-no-remapping-v1`: TensorFlow remapping is disabled and
 the actual Session configuration is checked, retaining eight compute threads.

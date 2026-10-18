@@ -1,0 +1,3875 @@
+{
+  "profile": "yourmt3-single-cpu-windows-cp311-v1",
+  "python_version": "3.11.16",
+  "source_revision": "5e66c1ea173a8186e0d20432b841d3180cc015b5",
+  "weights_revision": "e45ebd70398682d54b7bb1901a5216e18f3b1824",
+  "wheels": [
+    {
+      "distribution": "aiohappyeyeballs",
+      "version": "2.7.1",
+      "filename": "aiohappyeyeballs-2.7.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/71/43/1947f06babed6b3f1d7f38b0c767f52df66bfb2bc10b468c4a7de9eceff2/aiohappyeyeballs-2.7.1-py3-none-any.whl",
+      "size_bytes": 15038,
+      "sha256": "9243213661e29250eb41368e5daa826fc017156c3b8a11440826b2e3ed376472",
+      "license": "PSF-2.0",
+      "notices": {
+        "aiohappyeyeballs-2.7.1.dist-info/licenses/LICENSE": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "aiohttp",
+      "version": "3.14.5",
+      "filename": "aiohttp-3.14.5-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/0f/15/52b5e65f02b33686ae49f1518548ae4f5a7adaf31d9d3c54fa12a143137b/aiohttp-3.14.5-cp311-cp311-win_amd64.whl",
+      "size_bytes": 512575,
+      "sha256": "6f275c11d1aa6d4c458e05a68be084efe3c55a113d99e3f46a318098e52948fc",
+      "license": "Apache-2.0 AND MIT",
+      "notices": {
+        "aiohttp-3.14.5.dist-info/licenses/LICENSE.txt": "2e4be5fc6c4c72a466fcb665d726e049a6891981fe536c4f04b6366749461d23",
+        "aiohttp-3.14.5.dist-info/licenses/vendor/llhttp/LICENSE": "628168d68bb5a8a17e0bbefb3bd74e326e1edc20583d76f52f457c82c921867d"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "aiosignal",
+      "version": "1.4.0",
+      "filename": "aiosignal-1.4.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/fb/76/641ae371508676492379f16e2fa48f4e2c11741bd63c48be4b12a6b09cba/aiosignal-1.4.0-py3-none-any.whl",
+      "size_bytes": 7490,
+      "sha256": "053243f8b92b990551949e63930a839ff0cf0b0ebbe0597b0f3fb19e1a0fe82e",
+      "license": "Apache 2.0",
+      "notices": {
+        "aiosignal-1.4.0.dist-info/licenses/LICENSE": "6fd5243e92dd7f98ec69c7ac377728e74905709ff527a5bf98d6d0263c04f5b6"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "attrs",
+      "version": "26.1.0",
+      "filename": "attrs-26.1.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/64/b4/17d4b0b2a2dc85a6df63d1157e028ed19f90d4cd97c36717afef2bc2f395/attrs-26.1.0-py3-none-any.whl",
+      "size_bytes": 67548,
+      "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309",
+      "license": "MIT",
+      "notices": {
+        "attrs-26.1.0.dist-info/licenses/LICENSE": "882115c95dfc2af1eeb6714f8ec6d5cbcabf667caff8729f42420da63f714e9f"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "certifi",
+      "version": "2026.7.22",
+      "filename": "certifi-2026.7.22-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/0b/a7/71ac2cff56fec219ed242bb11b8efb69fcc4bec75db06fb7bfe35de520e6/certifi-2026.7.22-py3-none-any.whl",
+      "size_bytes": 136983,
+      "sha256": "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775",
+      "license": "MPL-2.0",
+      "notices": {
+        "certifi-2026.7.22.dist-info/licenses/LICENSE": "e93716da6b9c0d5a4a1df60fe695b370f0695603d21f6f83f053e42cfc10caf7"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "charset-normalizer",
+      "version": "3.5.2",
+      "filename": "charset_normalizer-3.5.2-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/e8/fc/fdf8cf52ff21cd5bf158f20978991cf985325842f74283eb6df26c8a39d8/charset_normalizer-3.5.2-cp311-cp311-win_amd64.whl",
+      "size_bytes": 214932,
+      "sha256": "87e50a3e7cb90af586b6c5faf23e302a970415ac73bd7bd90a515a04b427ef96",
+      "license": "MIT",
+      "notices": {
+        "charset_normalizer-3.5.2.dist-info/licenses/LICENSE": "18577485d3704f1a479ded8e573c0976cfed315fd2fd17983fa988da4c2f70d1"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "click",
+      "version": "8.5.0",
+      "filename": "click-8.5.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/58/50/6c0d534c5f134586a8e1ba4e330569e32f057e33372ae556463212fb4cd3/click-8.5.0-py3-none-any.whl",
+      "size_bytes": 125251,
+      "sha256": "255bc9599cf7748b4b1a446ccc735421bd08a2ae529a8b88597d3de5664ee360",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "click-8.5.0.dist-info/licenses/LICENSE.txt": "9a8ad106a394e853bfe21f42f4e72d592819a22805d991b5f3275029292b658d"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "cloudpickle",
+      "version": "3.1.2",
+      "filename": "cloudpickle-3.1.2-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/88/39/799be3f2f0f38cc727ee3b4f1445fe6d5e4133064ec2e4115069418a5bb6/cloudpickle-3.1.2-py3-none-any.whl",
+      "size_bytes": 22228,
+      "sha256": "9acb47f6afd73f60dc1df93bb801b472f05ff42fa6c84167d25cb206be1fbf4a",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "cloudpickle-3.1.2.dist-info/licenses/LICENSE": "3029ea34173e9fdc233ad315dc6b100bd1ea71f529b1c1af97664a272fdc55f5"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "colorama",
+      "version": "0.4.6",
+      "filename": "colorama-0.4.6-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl",
+      "size_bytes": 25335,
+      "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "colorama-0.4.6.dist-info/licenses/LICENSE.txt": "cac35c02686e5d04a5a7140bfb3b36e73aed496656e891102e428886d7930318"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "decorator",
+      "version": "5.3.1",
+      "filename": "decorator-5.3.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/05/7f/798705f5296a58ca505d600456748d1be48078eac8a7050d8a98bc9edb89/decorator-5.3.1-py3-none-any.whl",
+      "size_bytes": 10365,
+      "sha256": "f47fe6fdbd2edd623ecfe36875d37aba411624e2670dd395dddae1358689bb3c",
+      "license": "BSD-2-Clause",
+      "notices": {
+        "decorator-5.3.1.dist-info/licenses/LICENSE.txt": "bd12cc51405c10872497c10ca21601f1d4abc50496595cc89e89ab5dad24fb62"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "docker-pycreds",
+      "version": "0.4.0",
+      "filename": "docker_pycreds-0.4.0-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/f5/e8/f6bd1eee09314e7e6dee49cbe2c5e22314ccdb38db16c9fc72d2fa80d054/docker_pycreds-0.4.0-py2.py3-none-any.whl",
+      "size_bytes": 8982,
+      "sha256": "7266112468627868005106ec19cd0d722702d2b7d5912a28e19b826c3d37af49",
+      "license": "Apache License 2.0",
+      "notices": {
+        "docker_pycreds-0.4.0.dist-info/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "einops",
+      "version": "0.8.0",
+      "filename": "einops-0.8.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/44/5a/f0b9ad6c0a9017e62d4735daaeb11ba3b6c009d69a26141b258cd37b5588/einops-0.8.0-py3-none-any.whl",
+      "size_bytes": 43223,
+      "sha256": "9572fb63046264a862693b0a87088af3bdc8c068fde03de63453cbbde245465f",
+      "license": "MIT",
+      "notices": {
+        "einops-0.8.0.dist-info/licenses/LICENSE": "30d984364296f51ffaecad4b01ee127e95250c5068918d4b66fc96206723e434"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "filelock",
+      "version": "4.2.0",
+      "filename": "filelock-4.2.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/8e/a3/9bc26acff301fe1aaea1cc3d82a1d57e0a34df3e1cadbfa91ac2dbcdde5c/filelock-4.2.0-py3-none-any.whl",
+      "size_bytes": 135032,
+      "sha256": "2ff5690882e8cdb00ef31fb3d01a3094c29f30985426c59495afb1733f3b7238",
+      "license": "MIT",
+      "notices": {
+        "filelock-4.2.0.dist-info/licenses/LICENSE": "608c89d5060ae9921adccf3236695bc654a9946e12323ef6c021dfa04e294d48"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "frozenlist",
+      "version": "1.8.0",
+      "filename": "frozenlist-1.8.0-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/0a/f5/603d0d6a02cfd4c8f2a095a54672b3cf967ad688a60fb9faf04fc4887f65/frozenlist-1.8.0-cp311-cp311-win_amd64.whl",
+      "size_bytes": 44064,
+      "sha256": "ac913f8403b36a2c8610bbfd25b8013488533e71e62b4b4adce9c86c8cea905b",
+      "license": "Apache-2.0",
+      "notices": {
+        "frozenlist-1.8.0.dist-info/licenses/LICENSE": "6fd5243e92dd7f98ec69c7ac377728e74905709ff527a5bf98d6d0263c04f5b6"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "fsspec",
+      "version": "2026.9.0",
+      "filename": "fsspec-2026.9.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/6c/c0/a98505f18594f1bce828bb159cec0fcf9860562f1a2c85913409fc8f3d9e/fsspec-2026.9.0-py3-none-any.whl",
+      "size_bytes": 221738,
+      "sha256": "8dd6e646e99ea382bd85f97a45e6b526a442d79423a7dc673f1e2756d05fcb5f",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "fsspec-2026.9.0.dist-info/licenses/LICENSE": "2dc35496ce53a7307915c008a844aad53e772b49b34cdd00445067691407ec94"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "gitdb",
+      "version": "4.0.12",
+      "filename": "gitdb-4.0.12-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/a0/61/5c78b91c3143ed5c14207f463aecfc8f9dbb5092fb2869baf37c273b2705/gitdb-4.0.12-py3-none-any.whl",
+      "size_bytes": 62794,
+      "sha256": "67073e15955400952c6565cc3e707c554a4eea2e428946f7a4c162fab9bd9bcf",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "gitdb-4.0.12.dist-info/LICENSE": "efd29f596a08e8857e68e7694a50bcda72839792da7c3f041bcbff5f18009239"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "gitpython",
+      "version": "3.2.1",
+      "filename": "gitpython-3.2.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/6b/50/2a923c4dc02522ff9567f07c67ed1deca6d5fa9474f4708168b8088dfa37/gitpython-3.2.1-py3-none-any.whl",
+      "size_bytes": 231548,
+      "sha256": "d66b0832aa8755c1a84892937282df0befb16c97e5a64aeebd68be9c5e323f53",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "gitpython-3.2.1.dist-info/licenses/LICENSE": "86fc94c321a9afbc11514713511bafded225f25100dcc0f7350e82bc231b8beb"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "hf-xet",
+      "version": "1.7.0",
+      "filename": "hf_xet-1.7.0-cp38-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/4d/59/b35106dfa71b6eef605dc88bd038fe99c7f86fb132a15b60d0bf2f235b2c/hf_xet-1.7.0-cp38-abi3-win_amd64.whl",
+      "size_bytes": 3822644,
+      "sha256": "2b7bb5727889b0f2436dbaaad8fc4c3e66b8240d992716989e0c086b4278b1bc",
+      "license": "Apache-2.0",
+      "notices": {
+        "hf_xet-1.7.0.dist-info/licenses/LICENSE": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "huggingface-hub",
+      "version": "0.36.2",
+      "filename": "huggingface_hub-0.36.2-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/a8/af/48ac8483240de756d2438c380746e7130d1c6f75802ef22f3c6d49982787/huggingface_hub-0.36.2-py3-none-any.whl",
+      "size_bytes": 566395,
+      "sha256": "48f0c8eac16145dfce371e9d2d7772854a4f591bcb56c9cf548accf531d54270",
+      "license": "Apache",
+      "notices": {
+        "huggingface_hub-0.36.2.dist-info/licenses/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "idna",
+      "version": "3.20",
+      "filename": "idna-3.20-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl",
+      "size_bytes": 69583,
+      "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "idna-3.20.dist-info/licenses/LICENSE.md": "1a9a4f0e3d479a27240ddd59a9137a66ab4a0f9dfdc8ca6188cc0bfd85187f04"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "jinja2",
+      "version": "3.1.6",
+      "filename": "jinja2-3.1.6-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/62/a1/3d680cbfd5f4b8f15abc1d571870c5fc3e594bb582bc3b64ea099db13e56/jinja2-3.1.6-py3-none-any.whl",
+      "size_bytes": 134899,
+      "sha256": "85ece4451f492d0c13c5dd7c13a64681a86afae63a5f347908daf103ce6d2f67",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "jinja2-3.1.6.dist-info/licenses/LICENSE.txt": "3b49dcee4105eb37bac10faf1be260408fe85d252b8e9df2e0979fc1e094437b"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "joblib",
+      "version": "1.6.0",
+      "filename": "joblib-1.6.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/18/53/84099323c2ec4be98d935f63c033ac4151ee83836ca1050ede3b3aadf155/joblib-1.6.0-py3-none-any.whl",
+      "size_bytes": 306115,
+      "sha256": "3dbbf9f6e4b592a2357b854608e980fe6390d131d7a82f011a377ef2ebef7aba",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "joblib-1.6.0.dist-info/licenses/LICENSE.txt": "42612911c1872c5e4b43f6ae0e8ee59467cd350332241cf72ce90640264fae6a"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "lightning-utilities",
+      "version": "0.15.3",
+      "filename": "lightning_utilities-0.15.3-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/25/f4/ead6e0e37209b07c9baa3e984ccdb0348ca370b77cea3aaea8ddbb097e00/lightning_utilities-0.15.3-py3-none-any.whl",
+      "size_bytes": 31906,
+      "sha256": "6c55f1bee70084a1cbeaa41ada96e4b3a0fea5909e844dd335bd80f5a73c5f91",
+      "license": "Apache-2.0",
+      "notices": {
+        "lightning_utilities-0.15.3.dist-info/licenses/LICENSE": "a41e2fae9915ae56028f8dbd0bf27995f1907613cbcd2d81a61b010ad34e9fe9"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "markupsafe",
+      "version": "3.0.4",
+      "filename": "markupsafe-3.0.4-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/91/89/f2b509f7bf79352e40117824c1070dbeafd4df67031d3fa98165a3134228/markupsafe-3.0.4-cp311-cp311-win_amd64.whl",
+      "size_bytes": 14328,
+      "sha256": "fdb4ca07ab75ffadab4a8b135ad59cdbb3156b99310f3d565370da74a15d6bd3",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "markupsafe-3.0.4.dist-info/licenses/LICENSE.txt": "4631ec0db5fd90a547e336817264c6798214338146f8ac94b4a57f96ee8c9ec4"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "mido",
+      "version": "1.3.3",
+      "filename": "mido-1.3.3-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/fd/28/45deb15c11859d2f10702b32e71de9328a9fa494f989626916db39a9617f/mido-1.3.3-py3-none-any.whl",
+      "size_bytes": 54614,
+      "sha256": "01033c9b10b049e4436fca2762194ca839b09a4334091dd3c34e7f4ae674fd8a",
+      "license": "MIT",
+      "notices": {
+        "mido-1.3.3.dist-info/LICENSE": "bd038e5ad24b8d703970b51c070669e8ab0d06f4efb008665261b0183af7eb1c"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "mir-eval",
+      "version": "0.8.2",
+      "filename": "mir_eval-0.8.2-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/1b/5a/69ce896a32ebc8c75deae00b1fba9837567405fa6ef37b377f2e85b856ae/mir_eval-0.8.2-py3-none-any.whl",
+      "size_bytes": 102794,
+      "sha256": "114cda33d8e17408c170598e0b36ed0d71ff4a2fee8eaf9e165b58ecf1c87170",
+      "license": "MIT",
+      "notices": {
+        "mir_eval-0.8.2.dist-info/LICENSE.txt": "220f461a41157a81832520a84d95bfa5c4616f553dbf3ef8ac1fb9562244c069"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "mpmath",
+      "version": "1.3.0",
+      "filename": "mpmath-1.3.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/43/e3/7d92a15f894aa0c9c4b49b8ee9ac9850d6e63b03c9c32c0367a13ae62209/mpmath-1.3.0-py3-none-any.whl",
+      "size_bytes": 536198,
+      "sha256": "a0b2b9fe80bbcd81a6647ff13108738cfb482d481d826cc0e02f5b35e5c88d2c",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "mpmath-1.3.0.dist-info/LICENSE": "c26cae81da4508e5e249985777a33821f183223ebb74d7f8cfbf90fe7eef2fb7"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "multidict",
+      "version": "7.1.0",
+      "filename": "multidict-7.1.0-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/37/fd/1ed7b7d206ef7a6918ac3de515543ca4b49bc50131325ca1814c005daf3f/multidict-7.1.0-cp311-cp311-win_amd64.whl",
+      "size_bytes": 93586,
+      "sha256": "396ba9917fe489ec3a5942ae3e29e91324c8b9956f371f7e124c971c71379e7a",
+      "license": "Apache-2.0",
+      "notices": {
+        "multidict-7.1.0.dist-info/licenses/LICENSE": "2e4be5fc6c4c72a466fcb665d726e049a6891981fe536c4f04b6366749461d23"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "networkx",
+      "version": "3.6.1",
+      "filename": "networkx-3.6.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/9e/c9/b2622292ea83fbb4ec318f5b9ab867d0a28ab43c5717bb85b0a5f6b3b0a4/networkx-3.6.1-py3-none-any.whl",
+      "size_bytes": 2068504,
+      "sha256": "d47fbf302e7d9cbbb9e2555a0d267983d2aa476bac30e90dfbe5669bd57f3762",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "networkx-3.6.1.dist-info/licenses/LICENSE.txt": "3cf7c3a179d817b23b8b8568211769fefdf93797d207d984b8b2fa24d0220b33"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "numpy",
+      "version": "1.26.4",
+      "filename": "numpy-1.26.4-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/3f/6b/5610004206cf7f8e7ad91c5a85a8c71b2f2f8051a0c0c4d5916b76d6cbb2/numpy-1.26.4-cp311-cp311-win_amd64.whl",
+      "size_bytes": 15811913,
+      "sha256": "cd25bcecc4974d09257ffcd1f098ee778f7834c3ad767fe5db785be9a4aa9cb2",
+      "license": "BSD-3-Clause AND bundled notices",
+      "notices": {
+        "numpy/core/include/numpy/random/LICENSE.txt": "d544761558b510866c21f7e8a2d5716fca76e0b98117e3b6b86314db7244d150",
+        "numpy/ma/LICENSE": "d78dbb208b80d92b4d333e41a4baae50d12444f46e53199fa7726a91de6e2da7",
+        "numpy/random/LICENSE.md": "b4bc2f4fa1c95778f1ed3dd8f14706bece399475b978f9f34b5d3cd72521b48a",
+        "numpy-1.26.4.dist-info/LICENSE.txt": "e261222a74adff28f88160dac1c5cb302d93b67e9ca989eb83bf311e11a9970a"
+      },
+      "omitted_members": {
+        "numpy/distutils/__pycache__/conv_template.cpython-311.pyc": "4851f990b1ff1df195b09cce8304beaba4056aceed5614909b8ab78df70afa4b"
+      }
+    },
+    {
+      "distribution": "packaging",
+      "version": "24.1",
+      "filename": "packaging-24.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/08/aa/cc0199a5f0ad350994d660967a8efb233fe0416e4639146c089643407ce6/packaging-24.1-py3-none-any.whl",
+      "size_bytes": 53985,
+      "sha256": "5b8f2217dbdbd2f7f384c41c628544e6d52f2d0f53c6d0c3ea61aa5d1d7ff124",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "notices": {
+        "packaging-24.1.dist-info/LICENSE": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
+        "packaging-24.1.dist-info/LICENSE.APACHE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "packaging-24.1.dist-info/LICENSE.BSD": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "platformdirs",
+      "version": "4.13.4",
+      "filename": "platformdirs-4.13.4-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/58/51/5614d0537dd830ca64d95a2f254bd66bdf3ac61d41cffcccaec62121fcfd/platformdirs-4.13.4-py3-none-any.whl",
+      "size_bytes": 32782,
+      "sha256": "502ce08e9d36cf90579ee44e1e764838842fa658e4975ef47344fd053011d2c8",
+      "license": "MIT",
+      "notices": {
+        "platformdirs-4.13.4.dist-info/licenses/LICENSE": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "propcache",
+      "version": "0.5.4",
+      "filename": "propcache-0.5.4-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/0a/8a/3db6a3543d8101263b4c52978b6276a04ead2caff2c5ab880d934f47bd89/propcache-0.5.4-cp311-cp311-win_amd64.whl",
+      "size_bytes": 46268,
+      "sha256": "e904d4d01f36bd6e197590be1533c44e06058771e0746dd073a8ebb3ef880858",
+      "license": "Apache-2.0",
+      "notices": {
+        "propcache-0.5.4.dist-info/licenses/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "propcache-0.5.4.dist-info/licenses/NOTICE": "56d6ac6c8105c0a51304c21db060e361af9a8ea0af9a75c239c28b5d13693838"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "protobuf",
+      "version": "5.29.6",
+      "filename": "protobuf-5.29.6-cp310-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/1c/66/2dc736a4d576847134fb6d80bd995c569b13cdc7b815d669050bf0ce2d2c/protobuf-5.29.6-cp310-abi3-win_amd64.whl",
+      "size_bytes": 435175,
+      "sha256": "7e6ad413275be172f67fdee0f43484b6de5a904cc1c3ea9804cb6fe2ff366eda",
+      "license": "3-Clause BSD License",
+      "notices": {
+        "protobuf-5.29.6.dist-info/LICENSE": "6e5e117324afd944dcf67f36cf329843bc1a92229a8cd9bb573d7a83130fea7d"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "psutil",
+      "version": "7.2.2",
+      "filename": "psutil-7.2.2-cp37-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/b4/90/e2159492b5426be0c1fef7acba807a03511f97c5f86b3caeda6ad92351a7/psutil-7.2.2-cp37-abi3-win_amd64.whl",
+      "size_bytes": 137737,
+      "sha256": "eb7e81434c8d223ec4a219b5fc1c47d0417b12be7ea866e24fb5ad6e84b3d988",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "psutil-7.2.2.dist-info/LICENSE": "c7adc4d5d1337a548b967421f1fbe258b93033a0417708fd6f4e38f8ecbceb80"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "pytorch-lightning",
+      "version": "2.4.0",
+      "filename": "pytorch_lightning-2.4.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/2b/d2/ecd65ff1e0b1ca79f9785dd65d5ced7ec2643a828068aaa24e47e4c84a14/pytorch_lightning-2.4.0-py3-none-any.whl",
+      "size_bytes": 815151,
+      "sha256": "9ac7935229ac022ef06994c928217ed37f525ac6700f7d4fc57009624570e655",
+      "license": "Apache-2.0",
+      "notices": {
+        "pytorch_lightning-2.4.0.dist-info/LICENSE": "a41e2fae9915ae56028f8dbd0bf27995f1907613cbcd2d81a61b010ad34e9fe9"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "pyyaml",
+      "version": "6.0.3",
+      "filename": "pyyaml-6.0.3-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/da/e3/ea007450a105ae919a72393cb06f122f288ef60bba2dc64b26e2646fa315/pyyaml-6.0.3-cp311-cp311-win_amd64.whl",
+      "size_bytes": 158763,
+      "sha256": "9f3bfb4965eb874431221a3ff3fdcddc7e74e3b07799e0e84ca4a0f867d449bf",
+      "license": "MIT",
+      "notices": {
+        "pyyaml-6.0.3.dist-info/licenses/LICENSE": "8d3928f9dc4490fd635707cb88eb26bd764102a7282954307d3e5167a577e8a4"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "regex",
+      "version": "2026.9.29",
+      "filename": "regex-2026.9.29-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/4d/4a/aab232183c70fdcf77bcf0c51819da02ec522e393e6a0bf00bcf2142e21f/regex-2026.9.29-cp311-cp311-win_amd64.whl",
+      "size_bytes": 280641,
+      "sha256": "1043aedf5917caa861bcb25a9c11460049656bdf0017a90a309fa8f255467725",
+      "license": "Apache-2.0 AND CNRI-Python",
+      "notices": {
+        "regex-2026.9.29.dist-info/licenses/LICENSE.txt": "3d220c06594b826bbabf110312f60f385f99e57e529fa4b9e536f79091f8b4c7"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "requests",
+      "version": "2.34.2",
+      "filename": "requests-2.34.2-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl",
+      "size_bytes": 73075,
+      "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0",
+      "license": "Apache-2.0",
+      "notices": {
+        "requests-2.34.2.dist-info/licenses/LICENSE": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+        "requests-2.34.2.dist-info/licenses/NOTICE": "f5110972dedad2b4e9d314518daf3b7d72d6e02e499acd802181de6f74571dcc"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "safetensors",
+      "version": "0.8.0",
+      "filename": "safetensors-0.8.0-cp310-abi3-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/1b/6d/3fba214c1e5e0f69991677ec3bc17023f0421776975e1de0c682dca475e2/safetensors-0.8.0-cp310-abi3-win_amd64.whl",
+      "size_bytes": 355540,
+      "sha256": "096ec1a98435df7beb08853bb5aa9081a84f23d0adc67ed1a0a10550f608373f",
+      "license": "Apache-2.0",
+      "notices": {
+        "safetensors-0.8.0.dist-info/licenses/LICENSE": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "scikit-learn",
+      "version": "1.5.2",
+      "filename": "scikit_learn-1.5.2-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/17/1c/ccdd103cfcc9435a18819856fbbe0c20b8fa60bfc3343580de4be13f0668/scikit_learn-1.5.2-cp311-cp311-win_amd64.whl",
+      "size_bytes": 11015224,
+      "sha256": "6c16d84a0d45e4894832b3c4d0bf73050939e21b99b01b6fd59cbb0cf39163b6",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "scikit_learn-1.5.2.dist-info/COPYING": "b26fc6f86528a75d5b122a24282eff751468545a78645da7b9a1319cfa66fc1e"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "scipy",
+      "version": "1.14.1",
+      "filename": "scipy-1.14.1-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/ea/c2/5ecadc5fcccefaece775feadcd795060adf5c3b29a883bff0e678cfe89af/scipy-1.14.1-cp311-cp311-win_amd64.whl",
+      "size_bytes": 44781033,
+      "sha256": "716e389b694c4bb564b4fc0c51bc84d381735e0d39d3f26ec1af2556ec6aad94",
+      "license": "BSD-3-Clause AND bundled notices",
+      "notices": {
+        "scipy/fft/_pocketfft/LICENSE.md": "c04661685cff9d8035fe1c4c3ab357e7f7633cafc06a73e9d90c3c5fede8a86a",
+        "scipy/sparse/linalg/_eigen/arpack/COPYING": "fcb3c6c7de1460cf7d0863c3c5996e518eb8015a2eced36911f3da178440b3df",
+        "scipy/spatial/qhull_src/COPYING.txt": "962452e737df7c743a3dc2744232071028b8c0450e7674a55057c330ea1977eb",
+        "scipy/_lib/_uarray/LICENSE": "e4c4acc31e8287066d7c995d26e3ef902ca1977ee187b260b11c278366503811",
+        "scipy-1.14.1.dist-info/LICENSE.txt": "52590289e7b452fbfd949dacf50e2813e3612abb7c116e5c7a0c27a496b9c5ef"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "sentry-sdk",
+      "version": "2.72.0",
+      "filename": "sentry_sdk-2.72.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/d0/0b/0dd9686842d9dc49c3ee84cced31c54bceb0fb52a826be7d3d4fe30d882a/sentry_sdk-2.72.0-py3-none-any.whl",
+      "size_bytes": 544754,
+      "sha256": "3e13ace4ffd0b3cc78288236edfc4e4bd90eb12a396cc5845fa10a58ff289f50",
+      "license": "MIT",
+      "notices": {
+        "sentry_sdk-2.72.0.dist-info/licenses/LICENSE": "2a140d660f462812fa290bc740d04633126c5ec45d84b79b569e127b0eeddd0b"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "setproctitle",
+      "version": "1.3.8",
+      "filename": "setproctitle-1.3.8-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/1c/2a/ef5aac7428f98385cbb065add9d2257d969600f1c2db489859e5d868689c/setproctitle-1.3.8-cp311-cp311-win_amd64.whl",
+      "size_bytes": 12943,
+      "sha256": "66aad6ca59e4197d8e49de384474d8b9ecc6e10989523ca7339cecf7ef2a34bf",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "setproctitle-1.3.8.dist-info/licenses/LICENSE": "1d3f6c835788afce09a7a3e151dbff8a27ad94b412db615f3b860ea781ec50e3"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "setuptools",
+      "version": "81.0.0",
+      "filename": "setuptools-81.0.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/e1/e3/c164c88b2e5ce7b24d667b9bd83589cf4f3520d97cad01534cd3c4f55fdb/setuptools-81.0.0-py3-none-any.whl",
+      "size_bytes": 1062021,
+      "sha256": "fdd925d5c5d9f62e4b74b30d6dd7828ce236fd6ed998a08d81de62ce5a6310d6",
+      "license": "MIT",
+      "notices": {
+        "setuptools/_vendor/importlib_metadata-8.7.1.dist-info/licenses/LICENSE": "458502e12d97bbf64438606a20044aa85eb05fb0a8a807bb35dbec253fd1fc04",
+        "setuptools/_vendor/jaraco_context-6.1.0.dist-info/licenses/LICENSE": "9755a18519666e5f0f4cae3daad3d7012bcae48a600b31237d75e9fe134e6683",
+        "setuptools/_vendor/jaraco_functools-4.4.0.dist-info/licenses/LICENSE": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d",
+        "setuptools/_vendor/more_itertools-10.8.0.dist-info/licenses/LICENSE": "09f1c8c9e941af3e584d59641ea9b87d83c0cb0fd007eb5ef391a7e2643c1a46",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE": "cad1ef5bd340d73e074ba614d26f7deaca5c7940c3d8c34852e65c4909686c48",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.APACHE": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+        "setuptools/_vendor/packaging-26.0.dist-info/licenses/LICENSE.BSD": "b70e7e9b742f1cc6f948b34c16aa39ffece94196364bc88ff0d2180f0028fac5",
+        "setuptools/_vendor/platformdirs-4.4.0.dist-info/licenses/LICENSE": "29e0fd62e929850e86eb28c3fdccf0cefdf4fa94879011cffb3d0d4bed6d4db6",
+        "setuptools/_vendor/tomli-2.4.0.dist-info/licenses/LICENSE": "b80816b0d530b8accb4c2211783790984a6e3b61922c2b5ee92f3372ab2742fe",
+        "setuptools/_vendor/wheel-0.46.3.dist-info/licenses/LICENSE.txt": "30c23618679108f3e8ea1d2a658c7ca417bdfc891c98ef1a89fa4ff0c9828654",
+        "setuptools/_vendor/zipp-3.23.0.dist-info/licenses/LICENSE": "5a57cb4db85e2a2dd88c290628908add57e3451449e0a9a71fdfb38776fd759d",
+        "setuptools/config/NOTICE": "2dddf08818297a3b89d43d95ff659d8da85741108c9136dfa3a4d856c0623bd8",
+        "setuptools/config/_validate_pyproject/NOTICE": "5d300dbfa643138b013b75ac9caeee591f951b8b0ee24288c34ccd926c4780c8",
+        "setuptools-81.0.0.dist-info/licenses/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+        "setuptools/_vendor/autocommand-2.2.2.dist-info/LICENSE": "ade78d04982d69972d444a8e14a94f87a2334dd3855cc80348ea8e240aa0df2d",
+        "setuptools/_vendor/backports.tarfile-1.2.0.dist-info/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741",
+        "setuptools/_vendor/jaraco.text-4.0.0.dist-info/LICENSE": "86da0f01aeae46348a3c3d465195dc1ceccde79f79e87769a64b8da04b2a4741"
+      },
+      "omitted_members": {
+        "distutils-precedence.pth": "2638ce9e2500e572a5e0de7faed6661eb569d1b696fcba07b0dd223da5f5d224"
+      }
+    },
+    {
+      "distribution": "six",
+      "version": "1.17.0",
+      "filename": "six-1.17.0-py2.py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl",
+      "size_bytes": 11050,
+      "sha256": "4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274",
+      "license": "MIT",
+      "notices": {
+        "six-1.17.0.dist-info/LICENSE": "4375ba20e2b9c6c4e7cad2940a628fd90e95cc3d50ee92aae755715d8ba1fbd0"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "smmap",
+      "version": "5.0.3",
+      "filename": "smmap-5.0.3-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/c1/d4/59e74daffcb57a07668852eeeb6035af9f32cbfd7a1d2511f17d2fe6a738/smmap-5.0.3-py3-none-any.whl",
+      "size_bytes": 24390,
+      "sha256": "c106e05d5a61449cf6ba9a1e650227ecfb141590d2a98412103ff35d89fc7b2f",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "smmap-5.0.3.dist-info/licenses/LICENSE": "88e9d93f708d110b328a834302dd1d5c6afbda530e7721d15d80b3511d86f235"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "sympy",
+      "version": "1.14.0",
+      "filename": "sympy-1.14.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/a2/09/77d55d46fd61b4a135c444fc97158ef34a095e5681d0a6c10b75bf356191/sympy-1.14.0-py3-none-any.whl",
+      "size_bytes": 6299353,
+      "sha256": "e091cc3e99d2141a0ba2847328f5479b05d94a6635cb96148ccb3f34671bd8f5",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "sympy/parsing/latex/LICENSE.txt": "007bc30a58fa40a996e772047120de4eaf31f5110e4f9c3b5f93fcdfbe2eaca1",
+        "sympy-1.14.0.dist-info/licenses/LICENSE": "07a5e9819f727b4986ad2829c7a29a6320d42575f720eb24d71b7fef573a0286"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "threadpoolctl",
+      "version": "3.7.0",
+      "filename": "threadpoolctl-3.7.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/43/3f/f88a53f60a472b46f4023f56d204dd7de33d34c5d2acbfa0d70a674e639e/threadpoolctl-3.7.0-py3-none-any.whl",
+      "size_bytes": 26362,
+      "sha256": "cd8b60b5641b45c67bbf73c64c843235fc2d8a480c87389f52f5dbee893b86be",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "threadpoolctl-3.7.0.dist-info/licenses/LICENSE": "81ac619075248b06e53660b652d10e485f4675f5d0ae0f97ea22370da1f7e23b"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "tokenizers",
+      "version": "0.20.3",
+      "filename": "tokenizers-0.20.3-cp311-none-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/75/68/1b4f928b15a36ed278332ac75d66d7eb65d865bf344d049c452c18447bf9/tokenizers-0.20.3-cp311-none-win_amd64.whl",
+      "size_bytes": 2381616,
+      "sha256": "88301aa0801f225725b6df5dea3d77c80365ff2362ca7e252583f2b4809c4cc0",
+      "license": "Apache-2.0",
+      "notices": {
+        "tokenizers-0.20.3.dist-info/METADATA": "06e2af186898ee4cf703840830108022e38871539720309bbc740df9a20a4b9f"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "torch",
+      "version": "2.11.0+cpu",
+      "filename": "torch-2.11.0+cpu-cp311-cp311-win_amd64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cpu/torch-2.11.0%2Bcpu-cp311-cp311-win_amd64.whl",
+      "size_bytes": 114432833,
+      "sha256": "51a221769d4a316f4b47a786c12e67c3f4807db8ed13c7b8817ebe73786acbbc",
+      "license": "BSD-3-Clause",
+      "notices": {
+        "torch-2.11.0+cpu.dist-info/LICENSE": "cf5ec789ea8e9fcaba4766fcde2d6804312a1295e55b176a31c7a2982efc6090",
+        "torch-2.11.0+cpu.dist-info/NOTICE": "1c3dec6c0342c7ed9e12af59b296c7bb1d394af5cf881db74191cc8299efce5c"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "torchaudio",
+      "version": "2.11.0+cpu",
+      "filename": "torchaudio-2.11.0+cpu-cp311-cp311-win_amd64.whl",
+      "url": "https://download-r2.pytorch.org/whl/cpu/torchaudio-2.11.0%2Bcpu-cp311-cp311-win_amd64.whl",
+      "size_bytes": 326399,
+      "sha256": "abbff04127caf6e16e3a7c3e1ca2739b68899e14926d7cbec4bd8b40f72375d5",
+      "license": "BSD-2-Clause",
+      "notices": {
+        "torchaudio-2.11.0+cpu.dist-info/licenses/LICENSE": "32638e179931bfe551eabf67b0e67a13b483e166b58dd7263634ab7f89f396f5"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "torchmetrics",
+      "version": "1.4.2",
+      "filename": "torchmetrics-1.4.2-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/01/11/ccac4393629bd51859fcfaaae479c06e7c37848811e8d0bcc736ae4ede76/torchmetrics-1.4.2-py3-none-any.whl",
+      "size_bytes": 869179,
+      "sha256": "87b9eca51ff6f93985a0f9db509f646cb45425b016f4d2f383d8c28d40dde5b6",
+      "license": "Apache-2.0",
+      "notices": {
+        "torchmetrics-1.4.2.dist-info/LICENSE": "fa31f433f5b4bc1fb730fb9c678f90182d93bf76b6d98ba4d00f40454ac8b832"
+      },
+      "omitted_members": {
+        "torchmetrics/functional/image/lpips_models/alex.pth": "df73285e35b22355a2df87cdb6b70b343713b667eddbda73e1977e0c860835c0",
+        "torchmetrics/functional/image/lpips_models/squeeze.pth": "4a5350f23600cb79923ce65bb07cbf57dca461329894153e05a1346bd531cf76",
+        "torchmetrics/functional/image/lpips_models/vgg.pth": "a78928a0af1e5f0fcb1f3b9e8f8c3a2a5a3de244d830ad5c1feddc79b8432868"
+      }
+    },
+    {
+      "distribution": "tqdm",
+      "version": "4.70.1",
+      "filename": "tqdm-4.70.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/a7/03/921a3d3c75785aca9ebfbfcabfbc3a1be12e2ab5265deb026d55a5a3f83e/tqdm-4.70.1-py3-none-any.whl",
+      "size_bytes": 80199,
+      "sha256": "c293e525e6fef9c20e8728fd4612df02a0aa31bb5fe91ecd93e123b1b7bffa73",
+      "license": "MPL-2.0 AND MIT",
+      "notices": {
+        "tqdm-4.70.1.dist-info/METADATA": "a5da70b966afea3a759716041bad7187f2ece02c22348cf9e7c0a512bbf15f57"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "transformers",
+      "version": "4.45.1",
+      "filename": "transformers-4.45.1-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/17/f2/f01ea29c8eff8e749d96525a17c2d3ec02656cec9a80c20fb3e74dba4b04/transformers-4.45.1-py3-none-any.whl",
+      "size_bytes": 9881041,
+      "sha256": "21e3f47aa7256dbbfb5215937a3168a984c94432ce3a16b7908265807d62aee8",
+      "license": "Apache 2.0 License",
+      "notices": {
+        "transformers-4.45.1.dist-info/LICENSE": "77fd4710def9ec3c0f6225800e0235f15a425abd4a8b03559127fcd782612049"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "typing-extensions",
+      "version": "4.15.0",
+      "filename": "typing_extensions-4.15.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl",
+      "size_bytes": 44614,
+      "sha256": "f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548",
+      "license": "PSF-2.0",
+      "notices": {
+        "typing_extensions-4.15.0.dist-info/licenses/LICENSE": "3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "urllib3",
+      "version": "2.8.0",
+      "filename": "urllib3-2.8.0-py3-none-any.whl",
+      "url": "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl",
+      "size_bytes": 135717,
+      "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+      "license": "MIT",
+      "notices": {
+        "urllib3-2.8.0.dist-info/licenses/LICENSE.txt": "130e3a64d5fdd5d096a752694634a7d9df284469de86e5732100268041e3d686"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "wandb",
+      "version": "0.18.2",
+      "filename": "wandb-0.18.2-py3-none-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/f6/69/f1a5f7879606522386304fe2448d0232f98c278c666e0ff2e490cfcc9be5/wandb-0.18.2-py3-none-win_amd64.whl",
+      "size_bytes": 10183539,
+      "sha256": "7cff3f0aa3619cec28bc5328c4763ae5e991741db09e52074deb42120863107c",
+      "license": "MIT",
+      "notices": {
+        "wandb-0.18.2.dist-info/licenses/LICENSE": "ac9ee9d5a72a362d7b58538027d5aab0899766d2990c0de2fe0cdd0d5191b854"
+      },
+      "omitted_members": {}
+    },
+    {
+      "distribution": "yarl",
+      "version": "1.25.1",
+      "filename": "yarl-1.25.1-cp311-cp311-win_amd64.whl",
+      "url": "https://files.pythonhosted.org/packages/aa/9d/8cdceec66a9b940700cb45931741403f045b162afd79bcb93c41cadd0972/yarl-1.25.1-cp311-cp311-win_amd64.whl",
+      "size_bytes": 102894,
+      "sha256": "d7306dee25b8a0e737363f347362b875094b4dc4e367311470656ae420fdbf8e",
+      "license": "Apache-2.0",
+      "notices": {
+        "yarl-1.25.1.dist-info/licenses/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "yarl-1.25.1.dist-info/licenses/NOTICE": "56d6ac6c8105c0a51304c21db060e361af9a8ea0af9a75c239c28b5d13693838"
+      },
+      "omitted_members": {}
+    }
+  ],
+  "files": [
+    {
+      "filename": "source/config/config.py",
+      "target": "upstream/config/config.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/config/config.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 13602,
+      "sha256": "6803e1479c77a9c5f5ddec145291ee9b17cd9a15fbcd5f1bcf7ba39297218838"
+    },
+    {
+      "filename": "source/config/task.py",
+      "target": "upstream/config/task.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/config/task.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 5706,
+      "sha256": "b04b75554de2771c9787e9d74b2d8b7d93707117c16be8814a18c7abf590b93c"
+    },
+    {
+      "filename": "source/config/vocabulary.py",
+      "target": "upstream/config/vocabulary.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/config/vocabulary.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 11942,
+      "sha256": "9d693c320d6d912f4e756b90c132a0999aa1aaf8a75fcb627a69935cf63aea36"
+    },
+    {
+      "filename": "source/model/RoPE/RoPE.py",
+      "target": "upstream/model/RoPE/RoPE.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/RoPE/RoPE.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 10401,
+      "sha256": "b8046efd8f898b1c3cc157819b0371e7823d447cf506bc68d7692bc9a7ce008a"
+    },
+    {
+      "filename": "source/model/conformer_helper.py",
+      "target": "upstream/model/conformer_helper.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/conformer_helper.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 8455,
+      "sha256": "ee1ecd79a1115bd8de114412261295f10d63984e4d4898d5fdf32ca983da6491"
+    },
+    {
+      "filename": "source/model/conformer_mod.py",
+      "target": "upstream/model/conformer_mod.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/conformer_mod.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 18482,
+      "sha256": "c15da582b655ac099bddfc114c246e570300fecaa142995145c210efedf18de7"
+    },
+    {
+      "filename": "source/model/conv_block.py",
+      "target": "upstream/model/conv_block.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/conv_block.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 9295,
+      "sha256": "f99cb054e1772c5c8ad882284c60ebdbdd196314f45129d496e277c9606ad0c4"
+    },
+    {
+      "filename": "source/model/ff_layer.py",
+      "target": "upstream/model/ff_layer.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/ff_layer.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 10376,
+      "sha256": "b098073babb815634f36587a7a944edf6b755c2b3bac11ba574a172cc09643e0"
+    },
+    {
+      "filename": "source/model/lm_head.py",
+      "target": "upstream/model/lm_head.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/lm_head.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 1498,
+      "sha256": "458891fcc0620c4b2b6aea1ed91d9dbb020f5dcb53aa09cbefa7a10cabb651f0"
+    },
+    {
+      "filename": "source/model/lr_scheduler.py",
+      "target": "upstream/model/lr_scheduler.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/lr_scheduler.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 2990,
+      "sha256": "8d38d649004e7f07e1ca6c807e84f8c45fb3a4da94e046004c4cf39094111162"
+    },
+    {
+      "filename": "source/model/ops.py",
+      "target": "upstream/model/ops.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/ops.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 3556,
+      "sha256": "c169ce23fcd0251354786313ba8409aaba918fcecf15cec8a94f7889916e6cc3"
+    },
+    {
+      "filename": "source/model/optimizers.py",
+      "target": "upstream/model/optimizers.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/optimizers.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 8679,
+      "sha256": "95b8bf82a1b0ef834a7ad492c96e120f78689395e0b148e71bbb5dfdef42d106"
+    },
+    {
+      "filename": "source/model/perceiver_helper.py",
+      "target": "upstream/model/perceiver_helper.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/perceiver_helper.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 16384,
+      "sha256": "c23aa7ec1fa368a0a17ed318891ae3967d798fcde9d210bd10fe864b1af17d4f"
+    },
+    {
+      "filename": "source/model/perceiver_mod.py",
+      "target": "upstream/model/perceiver_mod.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/perceiver_mod.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 40849,
+      "sha256": "68e899abc3d620d5913b0f0d336a8494b8211d0577e432386799b072ad5f1e2e"
+    },
+    {
+      "filename": "source/model/pitchshift_layer.py",
+      "target": "upstream/model/pitchshift_layer.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/pitchshift_layer.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 24312,
+      "sha256": "38a5be7559bfa18f0e90985e416ab6c9830050d68f35b854472f406d953360aa"
+    },
+    {
+      "filename": "source/model/positional_encoding.py",
+      "target": "upstream/model/positional_encoding.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/positional_encoding.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 11684,
+      "sha256": "f2edca87fdc418bc48bad1105733a56dea5d940f064d074db0b5fa19544b87fe"
+    },
+    {
+      "filename": "source/model/projection_layer.py",
+      "target": "upstream/model/projection_layer.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/projection_layer.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 13549,
+      "sha256": "cedc45baec4e112fc6f64d081aaf8cfe8764a5d767eaa07defc9c988dba1da1a"
+    },
+    {
+      "filename": "source/model/spectrogram.py",
+      "target": "upstream/model/spectrogram.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/spectrogram.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 8182,
+      "sha256": "772c8e32855ce9bc5990dec310cfdc35505629ce4f91da4d4276a1bed01216f6"
+    },
+    {
+      "filename": "source/model/t5mod.py",
+      "target": "upstream/model/t5mod.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/t5mod.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 29365,
+      "sha256": "2cedcbdc4d0abef869f99bff624508ca7e90a20f585f59f418af5ff19e25f147"
+    },
+    {
+      "filename": "source/model/t5mod_helper.py",
+      "target": "upstream/model/t5mod_helper.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/t5mod_helper.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 6720,
+      "sha256": "118d9aff99511d0e706d55eec27795c5fdaa84c6e62587377d4c982097e47dea"
+    },
+    {
+      "filename": "source/model/ymt3.py",
+      "target": "upstream/model/ymt3.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/model/ymt3.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 50131,
+      "sha256": "a7c83aa71ddfa0ac3b51fc7e98606a7416715a053f02c118a6c957dff4079c61"
+    },
+    {
+      "filename": "source/utils/event2note.py",
+      "target": "upstream/utils/event2note.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/event2note.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 11968,
+      "sha256": "039ff94e2b7cd022a1ac09dc215fccf6280cf656c1bce0fd16fbd63db187efea"
+    },
+    {
+      "filename": "source/utils/event_codec.py",
+      "target": "upstream/utils/event_codec.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/event_codec.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 12636,
+      "sha256": "c487e6c7ac855146dc81a9192efb35a4d45fc8cd42ddaa24a958c4675acbfe48"
+    },
+    {
+      "filename": "source/utils/metrics.py",
+      "target": "upstream/utils/metrics.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/metrics.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 21758,
+      "sha256": "244f2be91a51023081fa41f0537233b68df308e29daca5fc9a2d3e5f70c8076a"
+    },
+    {
+      "filename": "source/utils/metrics_helper.py",
+      "target": "upstream/utils/metrics_helper.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/metrics_helper.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 13742,
+      "sha256": "d7a83f42aff34f82f58e4f464be3e1c95e5145ad715c54742a06244c28897eff"
+    },
+    {
+      "filename": "source/utils/midi.py",
+      "target": "upstream/utils/midi.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/midi.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 17245,
+      "sha256": "5b8cb566bb47a2c94c171d507a071057a5434f944f8a2f4f05f4ab3b1245992f"
+    },
+    {
+      "filename": "source/utils/note2event.py",
+      "target": "upstream/utils/note2event.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/note2event.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 33109,
+      "sha256": "7aea803c628f98a26b248f8c6b886db48717aa8b0e68c89293b6bd6dfb94c7ed"
+    },
+    {
+      "filename": "source/utils/note_event_dataclasses.py",
+      "target": "upstream/utils/note_event_dataclasses.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/note_event_dataclasses.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 2528,
+      "sha256": "6ce49b909191178255fffcf539c01f1c8ec0e4f1adcb207cfd0c811a52bc1f40"
+    },
+    {
+      "filename": "source/utils/task_manager.py",
+      "target": "upstream/utils/task_manager.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/task_manager.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 20055,
+      "sha256": "5e480366febd0250e92eb25ca78f906cc0d61144814adce18ecce642412e5669"
+    },
+    {
+      "filename": "source/utils/tokenizer.py",
+      "target": "upstream/utils/tokenizer.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/tokenizer.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 17948,
+      "sha256": "81c691cdc49084b3e65f5a722686a61b769a2d3169830cf04c1fe6bbc97fa8a8"
+    },
+    {
+      "filename": "source/utils/utils.py",
+      "target": "upstream/utils/utils.py",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/amt/src/utils/utils.py",
+      "license": "Apache-2.0; retains cited third-party notices",
+      "size_bytes": 21763,
+      "sha256": "eb9412923ea9a7a194ab38d433f2f00b017daf1ac1181b3162a8d3bfe8c18872"
+    },
+    {
+      "filename": "notices/rotary-embedding-torch-LICENSE.txt",
+      "target": "licenses/rotary-embedding-torch-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/lucidrains/rotary-embedding-torch/9a46f1a58a40ad752a647b91b6003290249ef3b5/LICENSE",
+      "license": "upstream notice",
+      "size_bytes": 1066,
+      "sha256": "fe74654058fe2ba069808dbf36defd6e207baf8859f36366a6a3ceae5aa6ecc5"
+    },
+    {
+      "filename": "notices/x-transformers-LICENSE.txt",
+      "target": "licenses/x-transformers-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/lucidrains/x-transformers/f5cd459adcdf3b9115a903f7d5fae4d793817c4e/LICENSE",
+      "license": "upstream notice",
+      "size_bytes": 1066,
+      "sha256": "02cf6ed7df17f94fafa61e67a089ee51faac006db35ffa173c70e6763c253cf6"
+    },
+    {
+      "filename": "notices/nanoT5-LICENSE.txt",
+      "target": "licenses/nanoT5-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/PiotrNawrot/nanoT5/1375b389d33ab4f34754a9fca62e4cfa1dd52379/LICENSE",
+      "license": "upstream notice",
+      "size_bytes": 11410,
+      "sha256": "14eba4d9eca853e9750ef72837e893dbdd2ecb97ca8adf313c0ab24837610d4e"
+    },
+    {
+      "filename": "notices/dadaptation-LICENSE.txt",
+      "target": "licenses/dadaptation-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/facebookresearch/dadaptation/c984980213a989ff7cac1e3d68c19a2257bcd571/LICENSE",
+      "license": "upstream notice",
+      "size_bytes": 1091,
+      "sha256": "d68dbaaf4eee8b43c16f9586b12bcbe68e7d7e6f92a35ccbc0d00fe67beff7a6"
+    },
+    {
+      "filename": "notices/tokenizers-LICENSE.txt",
+      "target": "licenses/tokenizers-LICENSE.txt",
+      "url": "https://raw.githubusercontent.com/huggingface/tokenizers/b63262a481495453011bf7a3b27995d6611dfae7/LICENSE",
+      "license": "upstream notice",
+      "size_bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "filename": "notices/tqdm-LICENCE.txt",
+      "target": "licenses/tqdm-LICENCE.txt",
+      "url": "https://raw.githubusercontent.com/tqdm/tqdm/9cf5a12b1f955468a17f0ba3c59092b23e4258ac/LICENCE",
+      "license": "upstream notice",
+      "size_bytes": 1985,
+      "sha256": "fcff87c3a47ce8028a8512aa182d4fcf0ad1c90544ee75cf9b343684cac194de"
+    },
+    {
+      "filename": "notices/space-README.md",
+      "target": "licenses/space-README.md",
+      "url": "https://huggingface.co/spaces/mimbres/YourMT3/resolve/5e66c1ea173a8186e0d20432b841d3180cc015b5/README.md",
+      "license": "Apache-2.0",
+      "size_bytes": 301,
+      "sha256": "9a8468bd685eb0e9084566c5b6cca230481ea4e1c0a6212b4388c4b4618400b4"
+    },
+    {
+      "filename": "notices/weights-README.md",
+      "target": "licenses/weights-README.md",
+      "url": "https://huggingface.co/mimbres/YourMT3/resolve/e45ebd70398682d54b7bb1901a5216e18f3b1824/README.md",
+      "license": "Apache-2.0",
+      "size_bytes": 291,
+      "sha256": "b66c7743f197a0424b05185b353bfad714a26af90551b8a9306a1a7c4dc3d1bd"
+    },
+    {
+      "filename": "notices/Apache-2.0.txt",
+      "target": "licenses/Apache-2.0.txt",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "license": "Apache-2.0",
+      "size_bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "filename": "model.ckpt",
+      "target": "models/model.ckpt",
+      "url": "https://huggingface.co/mimbres/YourMT3/resolve/e45ebd70398682d54b7bb1901a5216e18f3b1824/logs/2024/ptf_all_cross_rebal5_mirst_xk2_edr005_attend_c_full_plus_b100/checkpoints/model.ckpt",
+      "license": "Apache-2.0",
+      "size_bytes": 361050039,
+      "sha256": "507ff129bf68f65b3b3439368706fc413523fc729d994e4da2c3f50860b05dde"
+    }
+  ],
+  "state": {
+    "spectrogram.stft.window": {
+      "shape": [
+        2048
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn1.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn1.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn1.num_batches_tracked": {
+      "shape": [],
+      "dtype": "torch.int64"
+    },
+    "pre_encoder.0.blocks.0.bn2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn2.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn2.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.bn2.num_batches_tracked": {
+      "shape": [],
+      "dtype": "torch.int64"
+    },
+    "pre_encoder.0.blocks.0.conv1.weight": {
+      "shape": [
+        128,
+        1,
+        3,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.conv2.weight": {
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.shortcut.weight": {
+      "shape": [
+        128,
+        1,
+        1,
+        1
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.0.shortcut.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn1.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn1.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn1.num_batches_tracked": {
+      "shape": [],
+      "dtype": "torch.int64"
+    },
+    "pre_encoder.0.blocks.1.bn2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn2.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn2.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.bn2.num_batches_tracked": {
+      "shape": [],
+      "dtype": "torch.int64"
+    },
+    "pre_encoder.0.blocks.1.conv1.weight": {
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.1.conv2.weight": {
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn1.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn1.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn1.num_batches_tracked": {
+      "shape": [],
+      "dtype": "torch.int64"
+    },
+    "pre_encoder.0.blocks.2.bn2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn2.running_mean": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn2.running_var": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.bn2.num_batches_tracked": {
+      "shape": [],
+      "dtype": "torch.int64"
+    },
+    "pre_encoder.0.blocks.2.conv1.weight": {
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_encoder.0.blocks.2.conv2.weight": {
+      "shape": [
+        128,
+        128,
+        3,
+        3
+      ],
+      "dtype": "torch.float32"
+    },
+    "pre_decoder.0.projection_layer.weight": {
+      "shape": [
+        512,
+        3072
+      ],
+      "dtype": "torch.float32"
+    },
+    "lm_head.lm_head.weight": {
+      "shape": [
+        596,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "embed_tokens.weight": {
+      "shape": [
+        596,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.latent_array.latents": {
+      "shape": [
+        24,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.pos_emb._pos_emb": {
+      "shape": [
+        120,
+        24,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.layernorm2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.layernorm2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.spectral_cross_attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.0.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.local_transformer.1.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.0.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.0.temporal_transformer.1.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.layernorm2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.layernorm2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.spectral_cross_attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.0.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.local_transformer.1.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.0.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.1.temporal_transformer.1.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.layernorm2.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.layernorm2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.spectral_cross_attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.0.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.local_transformer.1.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.0.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.layernorm1.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.layernorm1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.query.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.query.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.key.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.key.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.value.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.self.value.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.output.dense.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.attention.output.dense.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.layernorm.weight": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.layernorm.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.mlp.dense1.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.mlp.dense1.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.mlp.dense2.weight": {
+      "shape": [
+        128,
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "encoder.blocks.2.temporal_transformer.1.mlp.dense2.bias": {
+      "shape": [
+        128
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.additive_pe.weight": {
+      "shape": [
+        1034,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.0.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.1.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.2.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.3.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.4.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.5.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.6.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.0.SelfAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.0.SelfAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.0.SelfAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.0.SelfAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.0.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.1.EncDecAttention.q.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.1.EncDecAttention.k.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.1.EncDecAttention.v.weight": {
+      "shape": [
+        384,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.1.EncDecAttention.o.weight": {
+      "shape": [
+        512,
+        384
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.1.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.2.DenseReluDense.wi_0.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.2.DenseReluDense.wi_1.weight": {
+      "shape": [
+        1024,
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.2.DenseReluDense.wo.weight": {
+      "shape": [
+        512,
+        1024
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.block.7.layer.2.layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    },
+    "decoder.decoder.final_layer_norm.weight": {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.float32"
+    }
+  },
+  "configuration": {
+    "audio": {
+      "codec": "spec",
+      "hop_length": 300,
+      "audio_backend": "torchaudio",
+      "sample_rate": 16000,
+      "input_frames": 32767,
+      "n_fft": 2048,
+      "n_mels": 512,
+      "f_min": 50.0,
+      "f_max": 8000.0
+    },
+    "model": {
+      "encoder_type": "perceiver-tf",
+      "decoder_type": "t5",
+      "pre_encoder_type": "conv",
+      "pre_encoder_type_default": {
+        "t5": null,
+        "perceiver-tf": "conv",
+        "conformer": null
+      },
+      "pre_decoder_type": "linear",
+      "pre_decoder_type_default": {
+        "t5": {
+          "t5": null
+        },
+        "perceiver-tf": {
+          "t5": "linear",
+          "multi-t5": "mc_shared_linear"
+        },
+        "conformer": {
+          "t5": null
+        }
+      },
+      "conv_out_channels": 128,
+      "t5_basename": "google/t5-v1_1-small",
+      "pretrained": false,
+      "use_task_conditional_encoder": true,
+      "use_task_conditional_decoder": true,
+      "d_feat": 128,
+      "tie_word_embeddings": true,
+      "vocab_size": 596,
+      "num_max_positions": 1034,
+      "encoder": {
+        "t5": {
+          "d_model": 512,
+          "num_heads": 6,
+          "num_layers": 8,
+          "dropout_rate": 0.05,
+          "position_encoding_type": "sinusoidal",
+          "ff_widening_factor": 2,
+          "ff_layer_type": "t5_gmlp"
+        },
+        "perceiver-tf": {
+          "num_latents": 24,
+          "d_latent": 128,
+          "d_model": 128,
+          "num_blocks": 3,
+          "num_local_transformers_per_block": 2,
+          "num_temporal_transformers_per_block": 2,
+          "sca_use_query_residual": false,
+          "dropout_rate": 0.1,
+          "position_encoding_type": "trainable",
+          "attention_to_channel": true,
+          "layer_norm_type": "layer_norm",
+          "ff_layer_type": "mlp",
+          "ff_widening_factor": 1,
+          "moe_num_experts": 4,
+          "moe_topk": 2,
+          "hidden_act": "gelu",
+          "rotary_type_sca": "pixel",
+          "rotary_type_latent": "pixel",
+          "rotary_type_temporal": "lang",
+          "rotary_apply_to_keys": false,
+          "rotary_partial_pe": false,
+          "num_max_positions": 110,
+          "vocab_size": 596
+        },
+        "conformer": {
+          "d_model": 512,
+          "intermediate_size": 512,
+          "num_heads": 8,
+          "num_layers": 8,
+          "dropout_rate": 0.1,
+          "layerdrop": 0.1,
+          "position_encoding_type": "rotary",
+          "conv_dim": [
+            512,
+            512,
+            512,
+            512,
+            512,
+            512,
+            512
+          ],
+          "conv_stride": [
+            5,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "conv_kernel": [
+            10,
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "conv_depthwise_kernel_size": 31
+        }
+      },
+      "decoder": {
+        "t5": {
+          "d_model": 512,
+          "num_heads": 6,
+          "num_layers": 8,
+          "dropout_rate": 0.05,
+          "position_encoding_type": "sinusoidal",
+          "ff_widening_factor": 2,
+          "ff_layer_type": "t5_gmlp",
+          "num_max_positions": 1034,
+          "vocab_size": 596
+        },
+        "multi-t5": {
+          "d_model": 512,
+          "num_heads": 6,
+          "num_layers": 8,
+          "dropout_rate": 0.05,
+          "position_encoding_type": "sinusoidal",
+          "ff_widening_factor": 2,
+          "ff_layer_type": "t5_gmlp",
+          "num_channels": 13
+        }
+      },
+      "feat_length": 110,
+      "event_length": 1024,
+      "init_factor": 1.0
+    },
+    "shared": {
+      "PATH": {
+        "data_home": "../../data"
+      },
+      "BSZ": {
+        "train_sub": 12,
+        "train_local": 24,
+        "validation": 64,
+        "test": 16
+      },
+      "AUGMENTATION": {
+        "train_random_amp_range": [
+          0.8,
+          1.1
+        ],
+        "train_stem_iaug_prob": 0.7,
+        "train_stem_xaug_policy": {
+          "max_k": 3,
+          "tau": 0.3,
+          "alpha": 1.0,
+          "max_subunit_stems": 12,
+          "p_include_singing": null,
+          "no_instr_overlap": true,
+          "no_drum_overlap": true,
+          "uhat_intra_stem_augment": true
+        },
+        "train_pitch_shift_range": [
+          -2,
+          2
+        ]
+      },
+      "DATAIO": {
+        "num_workers": 4,
+        "prefetch_factor": 2,
+        "pin_memory": true,
+        "persistent_workers": false
+      },
+      "CHECKPOINT": {
+        "save_top_k": 4,
+        "monitor": "validation/macro_onset_f",
+        "mode": "max",
+        "save_last": true,
+        "filename": "{epoch}-{step}"
+      },
+      "TRAINER": {
+        "limit_train_batches": 1.0,
+        "limit_val_batches": 1.0,
+        "limit_test_batches": 1.0,
+        "gradient_clip_val": 1.0,
+        "accumulate_grad_batches": 1,
+        "check_val_every_n_epoch": 1,
+        "num_sanity_val_steps": 0
+      },
+      "WANDB": {
+        "save_dir": "amt/logs",
+        "cache_dir": "../logs/.wandb_cache",
+        "resume": "allow",
+        "anonymous": "allow",
+        "mode": "online"
+      },
+      "LR_SCHEDULE": {
+        "warmup_steps": 1000,
+        "total_steps": 100000,
+        "final_cosine": 1e-05
+      },
+      "TOKENIZER": {
+        "max_shift_steps": 206,
+        "shift_step_ms": 10
+      }
+    }
+  },
+  "unsafe_globals": [
+    "numpy.core.multiarray._reconstruct",
+    "numpy.core.multiarray.scalar",
+    "numpy.dtype",
+    "numpy.ndarray",
+    "utils.event_codec.FastCodec",
+    "utils.note_event_dataclasses.Event",
+    "utils.note_event_dataclasses.EventRange",
+    "utils.task_manager.TaskManager",
+    "utils.tokenizer.NoteEventTokenizer"
+  ]
+}

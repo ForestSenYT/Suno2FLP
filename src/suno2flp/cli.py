@@ -23,6 +23,7 @@ from suno2flp.cli_separation import register_separation
 from suno2flp.cli_stem_transcription import register_stem_transcription
 from suno2flp.cli_transcription import register_transcription
 from suno2flp.cli_windows_audio import register_windows_audio
+from suno2flp.cli_yourmt3 import register_yourmt3
 from suno2flp.core.config import MidiPreferences, load_config
 from suno2flp.core.doctor import check_environment
 from suno2flp.core.errors import (
@@ -72,6 +73,7 @@ register_windows_audio(app)
 register_estimated_arrangement(app)
 register_estimated_midi(app)
 register_audio_flp(app)
+register_yourmt3(app)
 
 
 @app.callback()
