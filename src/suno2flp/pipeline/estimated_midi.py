@@ -39,6 +39,7 @@ def midi_preview_recipe() -> ScoringRecipe:
             "core/estimated_midi.py",
             "arrangement/midi_preview.py",
             "validator/midi_preview.py",
+            "validator/smf_notes.py",
             "pipeline/estimated_midi.py",
         )
     ]
