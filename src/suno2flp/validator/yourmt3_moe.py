@@ -208,6 +208,7 @@ def collect_verified_moe(
         files,
         [(packages, members)],
         payload_byte_limits={packages: 4 * 1024**3},
+        payload_file_limits={packages: 30000},
         should_cancel=should_cancel,
     )
     return VerifiedMoESource(

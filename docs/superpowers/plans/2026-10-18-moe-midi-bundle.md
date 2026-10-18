@@ -34,6 +34,9 @@ from that current main on codex/m2-moe-midi-bundle.
 3. Same-key FIFO nesting or collapsed/over-source notes: reject; no trim/shift/drop.
 4. Cancellation or producer/backend/decoder/output change: no completion marker.
 5. Negativezero/binary64 provenance, empty13addresses, all decoder errors retained.
+6. Real MoE has22738 payload members; retained guards explicitly use backend30000/4GiB
+   bounds. Generic snapshot default20000 stays unchanged; both per-root budgets frozen,
+   full membership/hash checks retained. Payload-only probes never qualify stale backends.
 
 ### Task 1: Pure projection, per-program encoding and independent SMF checks
 
@@ -100,6 +103,9 @@ Commands export-yourmt3-moe-midi and verify-yourmt3-moe-midi.
 
 **Files:** docs/MOE_MIDI.zh-CN.md, ARCHITECTURE, README, roadmap and integration limits;
 original synthetic installed smoke/opt-in tests as appropriate. No private assets.
+Actual runtime evidence also requires additive per-root file budgets in
+src/suno2flp/core/inference_snapshot.py and tests/unit/test_inference_snapshot.py,
+with explicit30000 only in MoE's retained source collector; generic defaults unchanged.
 
 - [ ] Freeze final appsource before native qualification. New backend in isolation using
   existing fixed100 local artifacts; no downloads. Old backend/results stay untouched.
