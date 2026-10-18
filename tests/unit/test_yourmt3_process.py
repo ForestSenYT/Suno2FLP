@@ -72,7 +72,7 @@ def test_native_failure_preserves_complete_diagnostics_and_no_success_name(tmp_p
     root.mkdir()
     record = YourMT3Backend(
         root=root,
-        python=capture_stream_input(Path(sys.executable)),
+        python=capture_stream_input(Path(sys.executable).resolve(strict=True)),
         runtime=[],
         artifacts=[],
         adapters=[],

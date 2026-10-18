@@ -1,3 +1,5 @@
+import re
+
 from typer.testing import CliRunner
 
 from suno2flp.cli import app
@@ -12,4 +14,4 @@ def test_fixed_backend_commands_are_explicit_and_do_not_start_inference():
     ]:
         result = runner.invoke(app, [command, "--help"], color=False)
         assert result.exit_code == 0, result.output
-        assert flag in result.output
+        assert flag in re.sub(r"\x1b\[[0-9;]*m", "", result.output)
