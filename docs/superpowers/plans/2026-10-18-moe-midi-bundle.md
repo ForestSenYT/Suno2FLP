@@ -118,6 +118,12 @@ with explicit30000 only in MoE's retained source collector; generic defaults unc
   writer automatically or claim music/host/GUI acceptance from MIDI success.
 - [ ] uv sync --locked; pytest/Ruff/format/mypy; build and installed CLI/help/privacy
   smoke. Default suite offline; native test explicit opt-in with missing prerequisites skip.
+
+## Post-implementation integration gates
+
+These follow Task3 local implementation/qualification and are not implied by its
+completion line. Separating them avoids requiring final review to precede itself.
+
 - [ ] Fresh whole-head independent review, four current CI matrix names/all8runs green,
   currentmain/protection/discussion/whitelist checks then matched-head squash auto-merge.
   Read actual merge SHA/tree and preserve private experiment/source identities.
