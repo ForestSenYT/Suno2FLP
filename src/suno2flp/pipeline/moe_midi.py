@@ -45,7 +45,7 @@ def moe_midi_recipe() -> ScoringRecipe:
     paths = {i.path for i in yourmt3_adapters()}
     paths.update(Path(mido.__file__).resolve().parent.rglob("*.py"))
     return ScoringRecipe(
-        python_executable=capture_stream_input(Path(sys.executable)),
+        python_executable=capture_stream_input(Path(sys.executable).resolve()),
         python_version=platform.python_version(),
         pydantic_version=pydantic.__version__,
         files=[capture_stream_input(p) for p in sorted(paths)],
