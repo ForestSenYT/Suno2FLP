@@ -188,6 +188,18 @@ Python audit-hook/native-FFI limits and incomplete redistribution notices remain
 explicit blockers for broader adoption. No tools/resources/bridge calls occurred;
 all host and writer gates remain unchanged.
 
+## MoE generation limits and configuration identity
+
+The independent [MoE path](YOURMT3_MOE.zh-CN.md) changes encoder geometry,13 decoding
+streams and state655, not just a checkpoint filename. Similar `rope_partial_pe` and
+`rotary_partial_pe` keys differ; strict complete state checks exposed a private-probe
+mapping error, now preserved as a failed attempt. Never guess normalization from `rms`
+in the filename or silently load only matching state. Default256-token generation can
+stop without EOS; a bounded1024 retry must preserve every original prefix and retain
+all evidence. Unfinished streams stay incomplete. A larger inference budget is outside
+the trained256-token context and is not musical calibration. Counts, EOS, deterministic
+tokens and source-clock coverage never replace annotated pitch/onset scores or listening.
+
 ## Estimated drum timing and source trust
 
 The selected drum encoder expands time by12rows and has six leading geometric context

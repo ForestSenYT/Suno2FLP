@@ -310,6 +310,13 @@ No stream activation, device/registry edits or FL Studio call occurs. See
 
 ## Adoption gates
 
+The separate [YourMT3+ MoE profile](YOURMT3_MOE.zh-CN.md) has fixed source/model-card
+license evidence, actual checkpoint bytes, strict655-entry CPU loading and13-channel
+diagnostics. Default and bounded extended generation are retained separately; all
+initial tokens must remain identical prefixes. Native investigation is not product
+backend, musical, routing, host or release qualification. See its explicit current
+adoption status before invoking it; Single eligibility never transfers by relabeling.
+
 The separate [audio FLP candidate](AUDIO_FLP_CANDIDATE.zh-CN.md) uses original encoding
 and sample synthesis, not an adopted backend. The new
 [fixed-source comparison](research/2026-10-17-flp-backend-paths.zh-CN.md) audits DawVert,
