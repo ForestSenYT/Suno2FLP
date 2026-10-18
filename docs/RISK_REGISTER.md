@@ -200,6 +200,14 @@ all evidence. Unfinished streams stay incomplete. A larger inference budget is o
 the trained256-token context and is not musical calibration. Counts, EOS, deterministic
 tokens and source-clock coverage never replace annotated pitch/onset scores or listening.
 
+The [paired-reference audit](research/2026-10-18-reference-data-audit.zh-CN.md) also
+found BabySlakh metadata flags inconsistent with existing paired files. The author
+generator has a plausible repeat-run path, but that archive's history is unconfirmed.
+Keep original flags, conditional annotation status and possible Slakh training overlap;
+development scores are not held-out qualification or acceptance of the user's song.
+Key-release, sustain, acoustic decay, pitch bends and model-instrument attribution must
+not be silently conflated, or corrected by moving reference events to improve a score.
+
 ## Estimated drum timing and source trust
 
 The selected drum encoder expands time by12rows and has six leading geometric context
